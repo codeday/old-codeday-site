@@ -6,6 +6,8 @@
 
 <?php include 'faq.php'; ?>
 
+<?php include 'schedule.php'; ?>
+
 <?php include 'pitch.php'; ?>
 
 <?php include 'sponsors.php'; ?>

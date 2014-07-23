@@ -1,4 +1,4 @@
-<div id="sponsors">
+<section id="sponsors">
 
 	<h2 class="section-title text-center fadein">Sponsors</h2>
 
@@ -56,4 +56,4 @@
 	<div class="large-2 small-4 past-sponsor fadein sponsor-uw"></div>
 	<div class="large-2 small-4 past-sponsor fadein sponsor-geonetric"></div>
 
-</div>
+</section>

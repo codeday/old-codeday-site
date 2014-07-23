@@ -13,8 +13,55 @@ h1, h2, h3, h4, h4, h5, h6, a, span, p {
     font-family: 'Varela Round', 'Open Sans', Verdana, sans-serif !important;
 }
 
-a {
-    font-weight: bold;
+select, select:hover {
+    display: inline-block;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    outline: none;
+    border-color: #E6E6E6;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+
+section {
+    padding: 5em 0;
+}
+
+.subpage main {
+    padding: 3em 0;
+}
+
+input[type="text"], input[type="text"]:focus {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    font-size: 1em;
+}
+
+::-webkit-input-placeholder {
+    color: #CCCCCC;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #CCCCCC;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color: #CCCCCC;
+}
+
+:-ms-input-placeholder {  
+    color: #CCCCCC;
+}
+
+ul {
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
 }
 
 .column, .columns {
@@ -25,6 +72,7 @@ a {
 .section-title {
     margin-bottom: 1.5em;
     font-weight: bold;
+    color: #fff;
 }
 
 .round-corners {
@@ -117,6 +165,7 @@ Splash
 
     /* CITY-PICKER PANEL */
     #city-picker {
+        display: none;
         width: 250px;
         position: absolute;
         right: 10em;
@@ -138,38 +187,41 @@ Splash
             border-width: 7px 7px 9px 7px;
         }
 
-    #city-picker ul {
-        margin: 0;
-    }
-
     .city-panel-title {
         margin: 0;
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
-        font-size: 1.2em;
+        font-size: 1.1em;
         color: #fff;
         padding: 0.6em 0.7em 0.5em 0.7em;
         background-color: #C3B7D6;
     }
 
     .city-option {
-        list-style-type: none;
         color: #B3B3B3;
     }
+
+        .city-option:last-of-type, .city-option:last-of-type:hover {
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
 
         .city-option a {
             display: inline-block;
             padding: 0.7em 0.8em 0.6em 0.8em;
             width: 100%;
             color: #4D4D4D;
+            border-top: 1px solid #F7E8E8;
             border-bottom: 1px solid #F7E8E8;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
             transition: all 0.1s ease;
         }
 
             .city-option a:hover {
                 padding: 0.7em 0.8em 0.6em 0.8em;
-                border: none;
                 border-bottom: 1px solid #F7E8E8;
+                border-top: 1px solid #F7E8E8;
                 border-bottom-left-radius: 3px;
                 border-bottom-right-radius: 3px;
                 background-color: #FCF5F5;
@@ -187,14 +239,14 @@ Splash
     font-weight: normal;
 }
 
-.register {
+.register-button {
     margin-top: 1.2em;
     padding: 1.2em 3em 1.1em 3em;
     background-color: #DD5D5C;
     font-size: 1.2em;
 }
 
-    .register:hover {
+    .register-button:hover {
         background-color: #D35353;
     }
 
@@ -219,9 +271,13 @@ NAVIGATION
     color: #fff;
 }
 
-    .site-nav a:hover {
+    .site-nav a:hover, .site-nav .current-page {
         border-bottom: 1px solid #fff;
     }
+
+.current-page {
+    pointer-events: none;
+} 
 
 /* 
 ==========================================================================
@@ -230,17 +286,12 @@ FAQ
 
 #faq {
     position: relative;
-    padding: 5em 0;
     background-color: #DD5D5C;
     z-index: 100;
     color: #fff;
     -webkit-box-shadow: 0px -10px 15px 0px rgba(50, 50, 50, 0.4);
     -moz-box-shadow:    0px -10px 15px 0px rgba(50, 50, 50, 0.4);
     box-shadow:         0px -10px 15px 0px rgba(50, 50, 50, 0.4);
-}
-
-#faq .section-title {
-    color: #fff;
 }
 
 #faq .row {
@@ -260,13 +311,107 @@ FAQ
 
 /* 
 ==========================================================================
-Pitch
+SCHEDULE
+========================================================================== */
+
+#schedule {
+    background-color: #83BAC6;
+}
+
+#schedule .columns {
+    margin: 0;
+    padding: 0;
+}
+
+.schedule-panel {
+    background-color: #fff;
+}
+
+    .schedule-panel ul {
+        padding: 1em 2em;
+    }
+
+        .schedule-panel li {
+            border-bottom: 1px solid #F2F2F2;
+        }
+
+            .schedule-panel li:last-of-type {
+                border: none;
+            }
+
+
+.schedule-date {
+    margin: 0;
+    padding: 1em 0 0.7em 0;
+    font-size: 1.5em;
+    color: #fff;
+    background-color: #DD5D5C;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.schedule-time {
+    display: inline-block;
+    padding: 1.8em 1em 1.5em 0;
+    width: 6em;
+    vertical-align: top;
+    text-align: right;
+    color: #B3B3B3;
+}
+
+.schedule-task {
+    position: relative;
+    max-width: 14em;
+    margin: 1em 0 1em 1em;
+    padding: 0.6em 1em 0.4em 1em;
+    display: inline-block;
+    border-radius: 3px;
+    color: #666;
+    background-color: #F9F9F9;
+    -webkit-box-shadow: 3px 3px 0px 0px #E6E6E6;
+    -moz-box-shadow:    3px 3px 0px 0px #E6E6E6;
+    box-shadow:         3px 3px 0px 0px #E6E6E6;
+    transition: all 0.1s ease;
+}
+
+    .schedule-task:hover {
+        position: relative;
+        bottom: 3px;
+        left: -3px;
+        -webkit-box-shadow: 5px 5px 0px 0px #E6E6E6;
+        -moz-box-shadow:    5px 5px 0px 0px #E6E6E6;
+        box-shadow:         5px 5px 0px 0px #E6E6E6;
+        transition: all 0.1s ease;
+    }
+
+    .schedule-task a {
+        color: inherit;
+    }
+
+.red-tab, .purple-tab {
+    position: absolute;
+    display: inline-block;
+    width: 5px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background: #DD5D5C;
+}
+
+.purple-tab {
+    background: #C3B7D6;
+}
+
+/* 
+==========================================================================
+PITCH
 ========================================================================== */
 
 #pitch {
     position: relative;
-    padding: 5em 0;
-    background-color: #83BAC6;
+    background-color: #FFAE47;
     color: #fff;
     font-size: 1.3em;
 }
@@ -277,7 +422,7 @@ Pitch
 
 #pitch p {
     font-size: 1em;
-    color: #4C7C86;
+    color: #C27515;
 }
 
 #pitch .tag {
@@ -285,15 +430,15 @@ Pitch
     color: #fff;
 }
 
-#pitch .register {
+#pitch .register-button {
     margin-top: 1em;
     font-size: 1em;
     background-color: transparent;
     border: 2px solid #fff;
 }
 
-#pitch .register:hover {
-    color: #83BAC6;
+#pitch .register-button:hover {
+    color: #FFAE47;
     border-color: rgba(255, 255, 255, 0.8);
     background: rgba(255, 255, 255, 0.8);
 }
@@ -306,7 +451,7 @@ Sponsors
 #sponsors {
     background-color: #fff;
     overflow: auto;
-    padding-top: 5em;
+    padding-bottom: 0;
     position: relative;
 }
 
@@ -506,74 +651,290 @@ Sponsors
 
 /* 
 ==========================================================================
-Footer
+SUBPAGE
 ========================================================================== */
 
-footer {
-    height: 30em;
-    padding-top: 7em;
-    background-color: #D6D6D6;
+.header-subpage {
+    overflow: auto;
+    background-color: #AEA3CC;
+}
+
+.subpage {
+    background-color: #F2F2F2;
+}
+
+.subpage .site-title {
+    padding-left: 1.3em;
+    background-size: 18%;
+    font-size: 1.3em;
+}
+
+.subpage-title {
+    margin: 0.8em 0 1.1em 0;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.site-nav li {
+    margin-top: 1.2em;
+}
+
+    .subpage .site-nav li:last-of-type {
+        margin-right: 0;
+    }
+
+/* 
+==========================================================================
+REGISTRATION
+========================================================================== */
+
+.register-box {
+    margin-bottom: 3em;
+    border: 2px solid #E6E6E6;
+    background-color: #fff;
+    color: #4D4D4D;
+}
+
+.register-box form {
+    margin: 0;
+}
+
+.register-box h2 {
+    margin: 0;
+    padding: 1.2em 0 0.9em 0;
+    font-size: 1em;
+    text-align: center;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #C3B7D6;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.register-map {
+    margin-bottom: -20px;
+}
+
+.register-box p, .register-box span {
+    margin: 0;
+    padding: 0.9em 1em 0.6em 1em;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.register-box span {
+    display: inline-block;
+    padding: 0.1em 1em 0em 1em;
+}
+
+.register-box .ticket-type {
+    width: 20%;
+}
+
+.register-box .ticket-price {
+    width: 55%;
+}
+
+.register-box .dropdown {
+    padding: 0;
+    width: 25%;
+    position: relative;
+    top: -2px;
+}
+
+    .register-box .dropdown::after {
+        content: "\25BC";
+        padding: 0.2em 0.7em 0 0.7em;
+        position: absolute;
+        right: -1px;
+        pointer-events: none;
+        color: #999999;
+        font-size: .625em;
+        background-color: #E6E6E6;
+    }
+
+#ticket-amount {
+    height: 3.09em;
+    font-size: 1em;
+    border-right: none;
+    border-top: none;
+    position: relative;
+    top: 1px;
+}
+
+    #ticket-amount:hover {
+        cursor: pointer;
+    }
+
+#text-total, #total-cost {
+    width: 25%;
+}
+
+.dropdown+div {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+#promo-code {
+    width: 70%;
+}
+
+#promo-code-button {
+    display: inline-block;
+    padding: 0.2em 0 0em 0;
+    width: 30%;
+    position: relative;
+    right: -1px;
+    background-color: #A0D388;
+    border: 1px solid #A0D388;
+    border-left-color: #E6E6E6;
+    border-bottom-right-radius: 3px;
+    color: #fff;
+    text-transform: uppercase;
+    transition: background 0.2s ease-in-out;
+}
+
+    #promo-code-button:hover {
+        background-color: #9CCC83;
+        transition: background 0.2s ease-in-out;
+    }
+
+.register-box input[type="text"] {
+    height: 3.18em;
+    margin: 0;
+    padding: 1.1em 1em 1em 1em;
+    background-color: transparent;
+    border-bottom: 1px solid #E6E6E6;
+    display: inline-block;
+}
+
+    .register-box input[type="text"]:focus {
+        background-color: transparent;
+    }
+
+input.first-name, 
+input.first-name:focus,
+input.last-name,
+input.last-name:focus,
+input.email,
+input.email:focus,
+#credit-num,
+#expir-date
+{
+    border-right: 1px solid #E6E6E6;
+}
+
+p.register-date,
+span.dropdown,
+#text-total,
+#total-cost,
+#expir-date,
+#mm,
+#mm + span,
+#yy
+{
+    border-bottom: none;
+}
+
+.register-box input.first-name, .register-box input.last-name {
+    width: 40%;
+}
+
+.register-box input.age {
+    width: 20%;
+}
+
+.register-box input.email, .register-box input.confirm-email {
+    width: 50%;
+}
+
+/* checkbox */
+
+    .register-box input[type="checkbox"] {
+        margin-left: 1em;
+        display: none;
+    }
+
+    .register-box input[type="checkbox"] + label {
+        position: relative;
+        display: block;
+        padding: 1em 1em 0.8em 1em;
+        color: #CCCCCC;
+        font-size: 1em;
+    }
+
+    .register-box input[type="checkbox"]:checked + label {
+        background: url('../img/cross.png') no-repeat 9px 20px;
+        color: #808080;
+    }
+
+    .register-box label::before {
+        content: '';
+        display: inline-block;
+        position: relative;
+        width: 15px;
+        height: 15px;
+        right: 7px;
+        bottom: -2px;
+        border: 2px solid #E6E6E6;
+    }
+
+        .register-box input[type="checkbox"]:checked + label::before {
+            border-color: #808080;
+        }
+
+#credit-num {
+    width: 80%;
+}
+
+#csc {
+    width: 20%;
+}
+
+#expir-date {
+    width: 70%;
+}
+
+#mm {
+    width: 12%;
+    padding-right: 0;
+}
+
+#mm + span {
+    padding-left: 0.5em;
+}
+
+#yy {
+    width: 10%;
+    padding-left: 0;
+}
+
+#pay-button {
+    display: block;
+    padding: 0.6em 0 0.5em 0;
+    color: #fff;
+    text-transform: uppercase;
+    background-color: #A0D388;
+    transition: background 0.2s ease-in-out;
+}
+
+    #pay-button:hover {
+        background-color: #9CCC83;
+        transition: background 0.2s ease-in-out;
+    }
+   
+
+/* 
+==========================================================================
+FOOTER
+========================================================================== */
+
+#site-footer {
+    height: 8em;
+    padding-top: 2em;
+    background-color: #CCCCCC;
     color: #fff;
     text-align: center;
     position: relative;
 }
-
-.footer-info {
-    opacity: 0;
-}
-
-.share {
-    margin-bottom: 4em;
-}
-
-.sharing-icon {
-    list-style-type: none;
-    display: inline-block;
-    margin-right: 3em;
-    border: 2px solid white;
-    border-radius: 90px;
-    transition: 0.2s all;
-}
-
-.sharing-icon:last-of-type {
-    margin-right: 0;
-}
-
-.sharing-icon:hover {
-    border-color: #A5A5A5;
-    transition: 0.2s all;
-}
-
-.sharing-icon a {
-    display: block;
-    padding: 45px;
-    width: 50px;
-    height: 50px;
-}
-
-.icon-twitter {
-    background: url('../img/sharing/icon-twitter.png') no-repeat center center;
-}
-
-    .icon-twitter:hover {
-        background: url('../img/sharing/icon-twitter2.png') no-repeat center center;
-    }
-
-.icon-facebook {
-    background: url('../img/sharing/icon-facebook.png') no-repeat center center;
-}
-
-    .icon-facebook:hover {
-        background: url('../img/sharing/icon-facebook2.png') no-repeat center center;
-    }
-
-.icon-email {
-    background: url('../img/sharing/icon-email.png') no-repeat center center;
-}
-
-    .icon-email:hover {
-        background: url('../img/sharing/icon-email2.png') no-repeat center center;
-    }
 
 .studentrnd {
     font-weight: bold;
@@ -584,9 +945,13 @@ footer {
     color: #A5A4A4;
 }
 
-.copyright {
-    margin-top: 2em;
+#site-footer .site-nav li {
+    margin-top: 0;
 }
+
+    #site-footer .site-nav li:last-of-type {
+        margin-right: 0;
+    }
 
 footer.subpage {
     height: auto;
@@ -612,188 +977,4 @@ footer.subpage .sharing-icon a {
 
 footer.subpage .copyright {
     margin: 1em 0 0 0;
-}
-
-/* 
-==========================================================================
-Timezones and Cities
-========================================================================== */
-
-.subpage {
-    padding-top: 9.2em;
-}
-
-.subpage header {
-    overflow: auto;
-    z-index: 100;
-    border-bottom: 1px solid #E6E6E6;
-    width: 100%;
-    background-color: #fff;
-    transition: 0.5s box-shadow;
-    position: fixed;
-    top: 0;
-}
-
-.popout {
-    transition: 0.5s box-shadow;
-    -webkit-box-shadow: 0px 1px 25px 0px rgba(50, 50, 50, 0.2);
-    -moz-box-shadow:    0px 1px 25px 0px rgba(50, 50, 50, 0.2);
-    box-shadow:         0px 1px 25px 0px rgba(50, 50, 50, 0.2);
-}
-
-.back {
-    margin-top: 20px;
-    float: right;
-    background: url('../img/back.png') no-repeat left center;
-    transition: 0.2s all;
-}
-
-.back:hover {
-    background: url('../img/back2.png') no-repeat left center;
-    transition: 0.2s all;
-}
-
-.back a {
-    display: inline-block;
-    padding: 3px 0 0 25px;
-    font-size: 1.4em;
-    color: #83BAC6;
-    transition: 0.2s all;
-}
-
-.back:hover a {
-    color: #6F99A2;
-    transition: 0.2s all;
-}
-
-.step {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    transition: 0.2s all;
-}
-
-.register-number {
-    font-size: 1.5em;
-    padding: 17px 15px 13px 15px;
-    line-height: 0.6em;
-    border-radius: 90px;
-    background: #DD5D5C;
-    color: #fff;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.register-direction {
-    font-size: 2.2em;
-    color: #666;
-}
-
-.section {    
-    text-align: right;
-    transition: 0.5s opacity;
-    width: 100%;
-    -webkit-background-size: cover !important;
-    -moz-background-size: cover !important;
-    -o-background-size: cover !important;
-    background-size: cover !important;
-    opacity: 0.7;
-}
-
-.section:hover {
-    opacity: 1;
-    transition: 0.5s opacity;
-}
-
-.timezone {
-    height: 500px;
-}
-
-    .timezone-pacific {
-        background: url('../img/timezones/pacific.jpg') no-repeat center center;
-    }
-
-    .timezone-mountain {
-        background: url('../img/timezones/mountain.jpg') no-repeat center center;
-    }
-
-    .timezone-central {
-        background: url('../img/timezones/central.jpg') no-repeat center center;
-    }
-
-    .timezone-eastern {
-        background: url('../img/timezones/eastern.jpg') no-repeat center center;
-    }
-
-.section-register {
-    height: 100%;
-    width: 100%;
-    display: block;
-    font-size: 3.5em;
-    color: #fff;
-    transition: 0.2s color;
-}
-
-.section-register:hover {
-    color: #fff;
-    transition: 0.2s color;
-}
-
-.timezone .section-register {
-    padding: 260px 150px 0 0;
-}
-
-.city {
-    height: 330px;
-}
-
-.city .section-register {
-    padding: 160px 150px 0 0;
-}
-
-    .city-seattle {
-        background: url('../img/cities/seattle.jpg') no-repeat center center;   
-    }
-
-    .city-sanfrancisco {
-        background: url('../img/cities/sanfrancisco.jpg') no-repeat center center;   
-    }
-
-    .city-sandiego {
-        background: url('../img/cities/sandiego.jpg') no-repeat center center;   
-    }
-
-    .city-losangeles {
-        background: url('../img/cities/losangeles.jpg') no-repeat center center;   
-    }
-
-    .city-portland {
-        background: url('../img/cities/portland.jpg') no-repeat center center;   
-    }
-
-
-/* 
-==========================================================================
-Registration
-========================================================================== */
-
-.purchase-info {
-    padding-bottom: 4em;
-}
-
-.map {
-    margin-bottom: 4em;
-}
-
-.purchase-city {
-    margin-bottom: 0.5em;
-}
-
-.purchase-date, .purchase-host {
-    font-size: 1.6em;
-}
-
-.table-time {
-    width: 5em;
-    display: inline-block;
-    margin-right: 10px;
 }

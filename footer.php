@@ -1,16 +1,20 @@
-        <footer>
+        <footer id="site-footer">
 
-        	<div class="footer-info fadein">
+        	<div class="row">
 
-			<ul class="share">
-				<li class="sharing-icon icon-twitter"><a href="https://twitter.com/CodeDay"></a></li>	
-				<li class="sharing-icon icon-facebook"><a href="https://www.facebook.com/CodeDayEvents"></a></li>	
-				<li class="sharing-icon icon-email"><a href="mailto:contact@studentrnd.org"></a></li>	
-			</ul>
+	    		<div class="columns large-5 text-left">
 
-			<p>Organized in Seattle by <a href="https://studentrnd.org/" class="studentrnd">StudentRND</a>.</p>
-			
-			<p class="copyright">&copy; <?php echo date("Y") ?> CodeDay. All rights reserved.</p>
+					<p>Organized in Seattle by <a href="https://studentrnd.org/" class="studentrnd">StudentRND</a>.</p>
+					
+					<p class="copyright">&copy; <?php echo date("Y") ?> CodeDay. All rights reserved.</p>
+
+				</div>
+
+				<div class="columns large-7 hide-for-medium hide-for-small">
+
+					<?php include 'navigation.php'; ?>
+
+				</div>
 
 			</div>
         

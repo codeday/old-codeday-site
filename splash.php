@@ -3,7 +3,7 @@
 	<?php include 'navigation.php'; ?>
 
 	<div id="splash-info" class="row text-center">
-		<h1 class="site-title">CodeDay <a href="/city" id="current-city">Seattle</a></h1>
+		<h1 class="site-title">CodeDay <a href="/" id="current-city">Seattle</a></h1>
 		<div id="city-picker" class="round-corners text-left">
 			<ul>
 				<h3 class="city-panel-title">Nearest locations</h3>
@@ -14,7 +14,8 @@
 		</div>
 		<h2 class="event-date">Nov 11-12, 2014</h2>
 		<p class="site-description">Build something awesome in 24 hours!</p>
-		<a href="timezone.php" class="button register round-corners">Get your ticket!</a>
+		<a href="register.php" class="button register-button round-corners">Get your ticket!</a>
+		<!-- MAKE SUBSCRIPTION FORM -->
 		<p><a href="/video" class="intro-video">Watch video</a></p>
 	</div>
 
