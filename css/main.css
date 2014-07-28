@@ -7,6 +7,7 @@ body {
     font-family: 'Varela Round', 'Open Sans', Verdana, sans-serif  !important; 
     line-height: 3em;
     opacity: 0;
+    color: #4D4D4D;
 }
 
 h1, h2, h3, h4, h4, h5, h6, a, span, p {
@@ -62,6 +63,14 @@ ul {
 
 li {
     list-style-type: none;
+}
+
+a {
+    color: #42c2d2;
+}
+
+a:hover {
+    color: #12A2C2;
 }
 
 .column, .columns {
@@ -411,7 +420,7 @@ PITCH
 
 #pitch {
     position: relative;
-    background-color: #FFAE47;
+    background-color: #F9A448;
     color: #fff;
     font-size: 1.3em;
 }
@@ -656,7 +665,6 @@ SUBPAGE
 
 .header-subpage {
     overflow: auto;
-    background-color: #AEA3CC;
 }
 
 .subpage {
@@ -683,10 +691,52 @@ SUBPAGE
         margin-right: 0;
     }
 
+.content {
+    margin: 2em auto;
+    background-color: #fff;
+    border: 1px solid #E6E6E6;
+}
+
 /* 
 ==========================================================================
 REGISTRATION
 ========================================================================== */
+
+#register-page .header-subpage {
+    background-color: #AEA3CC;
+}
+
+.dropdown+div,
+.register-box p, 
+.register-box span,
+.register-box input[type="text"] 
+{
+    border-bottom: 1px solid #E6E6E6;
+}
+
+input.first-name, 
+input.first-name:focus,
+input.last-name,
+input.last-name:focus,
+input.email,
+input.email:focus,
+#credit-num,
+#expir-date
+{
+    border-right: 1px solid #E6E6E6;
+}
+
+p.register-date,
+span.dropdown,
+#text-total,
+#total-cost,
+#expir-date,
+#mm,
+#mm + span,
+#yy
+{
+    border-bottom: none;
+}
 
 .register-box {
     margin-bottom: 3em;
@@ -718,7 +768,6 @@ REGISTRATION
 .register-box p, .register-box span {
     margin: 0;
     padding: 0.9em 1em 0.6em 1em;
-    border-bottom: 1px solid #E6E6E6;
 }
 
 .register-box span {
@@ -769,10 +818,6 @@ REGISTRATION
     width: 25%;
 }
 
-.dropdown+div {
-    border-bottom: 1px solid #E6E6E6;
-}
-
 #promo-code {
     width: 70%;
 }
@@ -802,37 +847,12 @@ REGISTRATION
     margin: 0;
     padding: 1.1em 1em 1em 1em;
     background-color: transparent;
-    border-bottom: 1px solid #E6E6E6;
     display: inline-block;
 }
 
     .register-box input[type="text"]:focus {
         background-color: transparent;
     }
-
-input.first-name, 
-input.first-name:focus,
-input.last-name,
-input.last-name:focus,
-input.email,
-input.email:focus,
-#credit-num,
-#expir-date
-{
-    border-right: 1px solid #E6E6E6;
-}
-
-p.register-date,
-span.dropdown,
-#text-total,
-#total-cost,
-#expir-date,
-#mm,
-#mm + span,
-#yy
-{
-    border-bottom: none;
-}
 
 .register-box input.first-name, .register-box input.last-name {
     width: 40%;
@@ -912,7 +932,8 @@ span.dropdown,
     padding: 0.6em 0 0.5em 0;
     color: #fff;
     text-transform: uppercase;
-    background-color: #A0D388;
+    background-color: #A0D388; 
+    border: 1px solid #E6E6E6;
     transition: background 0.2s ease-in-out;
 }
 
@@ -921,6 +942,154 @@ span.dropdown,
         transition: background 0.2s ease-in-out;
     }
    
+
+/* 
+==========================================================================
+PRESS
+========================================================================== */
+
+.separator {
+    margin: 0.8em 0 1em 0;
+}
+
+#press-page .header-subpage {
+    background: #F9A448 url('../img/press.jpg') no-repeat center center;
+    background-size: 100%;
+}
+
+#press-page .subpage-title {
+    margin: 1.5em 0 0.5em 0;
+}
+
+.press-description {
+    margin: 1em 0 4em 0;
+    color: #fff;
+    font-size: 1.4em;
+}
+
+#press-container {
+    position: relative;
+}
+
+    #press-container:before {
+        content: '';
+        width: 100%;
+        height: 10px;
+        display: block;
+        top: 0;
+        position: absolute;
+        background-color: #F9A448;
+        border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+    }
+
+.press-title {
+    margin: 1.5em 0 0 0;
+    text-transform: uppercase;
+    color: #666666;
+    font-size: 1.3em;
+}
+
+.press-contact-info li, .press-stats li {
+    line-height: 3em;
+}
+
+.press-stats li {
+    color: #B3B3B3;
+}
+
+.press-contact-info .press-icon {
+    vertical-align: middle;
+}
+
+    .press-icon:before {
+        content: '';
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        margin-right: 0.5em;
+        vertical-align: -13%;
+        background: url('../img/icon-press.png') no-repeat center top;
+    }
+    
+        #phone-number:before {
+            background-position: center top;
+        }
+        
+        #email:before {
+            background-position: center -30px;
+        }
+        
+        #stats-hours:before {
+            background-position: center -60px;
+        }
+        
+        #stats-locations:before {
+            background-position: center -90px;
+        }
+        
+        #stats-projects:before {
+            background-position: center -120px;
+        }
+        
+        #stats-participants:before {
+            background-position: center -150px;
+        } 
+
+.stats-numbers {
+    color: #666666;
+    font-size: 1.5em;
+}
+
+.press-kit {
+    padding: 1em 0 1em 0;
+    background: #E6E6E6;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+    .press-kit a {
+        display: block;
+        color: #828282;
+    }
+
+    .press-kit:hover {
+        background-color: #F9A448;
+        transition: all 0.2s ease;
+    }
+
+        .press-kit:hover a {
+            color: #fff;
+        }
+
+.press-kit span {
+    background: url('../img/press-kit.png') no-repeat center center;
+    display: block;
+    padding: 11em 0 0 0;
+}
+
+.press-article {
+    line-height: 1em;
+}
+
+    .press-article span {
+        color: #B3B3B3;
+        font-size: 0.8em;
+    }
+
+    .press-article h3 {
+        margin-bottom: 1em;
+        font-size: 1em;
+    }
+
+.view-more a {
+    color: #B3B3B3;
+}
+
+    .view-more a:hover {
+        color: #4D4D4D;
+    }
 
 /* 
 ==========================================================================

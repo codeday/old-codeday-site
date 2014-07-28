@@ -1,6 +1,6 @@
 <?php include 'header.php'; ?>
 
-<div id="register" class="subpage">
+<div id="register-page" class="subpage">
 	
 	<header class="header-subpage">
 		<div class="row">
@@ -31,7 +31,7 @@
 				<iframe class="register-map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5377.2521925759165!2d-122.326322!3d47.633399!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54901521431b5d01%3A0xdfaa192e0856f09e!2s1551+Eastlake+Ave+E%2C+Seattle%2C+WA+98102!5e0!3m2!1sen!2sus!4v1405657973519" width="100%" height="250" frameborder="0" style="border:0"></iframe>
 				<p class="register-host">Porch</p>
 				<p class="register-address">1551 Eastlake Ave E Seattle, WA 98103</p>
-				<p class="register-date">November 11-12</p>
+				<p class="register-date">November 11-12, 2014</p>
 			</div>
 
 			<div class="register-box round-corners">
@@ -70,7 +70,7 @@
 					--><input type="text" class="age" name="age" placeholder="Age" maxlength="2"><!--
 					--><input type="text" class="email" name="email" placeholder="Email"><!--
 					--><input type="text" class="confirm-email" name="confirm-email" placeholder="Confirm Email">
-					<input type="checkbox" id="subscribe1" class="register-checkbox" name="subscribe1" value="none"><label for="subscribe1">I’d like to recieve info from sponsors</label>
+					<input type="checkbox" id="subscribe1" class="register-checkbox" name="subscribe1" value="subscribe" checked><label for="subscribe1">I’d like to recieve info from sponsors</label>
 				</form>
 			</div>
 			<div class="register-box round-corners">

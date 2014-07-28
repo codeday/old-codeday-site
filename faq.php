@@ -14,7 +14,7 @@
 		<div class="columns large-6 fadein">
 
 			<h3 class="faq-q">Are there any age requirements?</h3>
-			<p class="faq-a">No, the event is open to all currently enrolled students. Usually, most of the attendees are in high school and college. Middle school students who can behave independently are also allowed.</p>
+			<p class="faq-a">No, the event is open to all currently enrolled students. Usually, most of the attendees are in high school and college. Middle school students who can behave independently are also welcomed.</p>
 
 		</div>
 
