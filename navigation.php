@@ -1,4 +1,4 @@
-<nav class="site-nav text-right">
+<nav class="site-nav text-right row">
 	<ul>
 		<li><a href="register.php">Register</a></li>
 		<li><a href="showcase.php">Showcase</a></li>

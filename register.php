@@ -22,7 +22,7 @@
 	</header>
 
 
-	<main class="row">
+	<main class="row wrapper-column">
 
 		<div class="columns large-6">
 

@@ -10,7 +10,7 @@
 
 <?php include 'pitch.php'; ?>
 
-<?php include 'sponsors.php'; ?>
+<?php include 'sponsors-list.php'; ?>
 
 <?php include 'footer.php'; ?>
 
