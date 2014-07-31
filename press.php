@@ -23,8 +23,8 @@
 	</header>
 
 	<main id="press-container" class="content row round-corners">
-		<div class="column large-8">
-			<h2 class="press-title">Who We Are</h2>
+		<div class="column large-8 wrapper-column">
+			<h2 class="section-title">Who We Are</h2>
 			<hr class="separator">
 			<p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
 
@@ -32,7 +32,7 @@
 
 			<p>Completely synergize resource sucking relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
 
-			<h2 class="press-title">Past Coverage</h2>
+			<h2 class="section-title">Past Coverage</h2>
 			<hr class="separator">
 			<article class="press-article">
 				<span>The Gazette, 02/2014</span>
@@ -60,15 +60,15 @@
 			</article>
 			<span class="view-more"><a href="">View More</a></span>
 		</div>
-		<div class="column large-4">
-			<h2 class="press-title">Contact</h2>
+		<div class="column large-4 wrapper-column">
+			<h2 class="section-title">Contact</h2>
 			<hr class="separator">
 			<ul class="press-contact-info">
 				<li id="phone-number" class="press-icon">(866) 382-2377</li>
 				<li id="email" class="press-icon"><a href="mailto:press@codeday.org?subject=Press Inquiry">press@codeday.org</a></li>
 			</ul>
 
-			<h2 class="press-title">Fast Stats</h2>
+			<h2 class="section-title">Fast Stats</h2>
 			<hr class="separator">
 			<ul class="press-stats">
 				<li id="stats-hours" class="press-icon"><span class="stats-numbers">3880</span> hours coding</li>
@@ -76,7 +76,7 @@
 				<li id="stats-projects" class="press-icon"></span><span class="stats-numbers">652</span> nifty projects</li>
 				<li id="stats-participants" class="press-icon"></span><span class="stats-numbers">521</span> participants</li>
 			</ul>
-			<h2 class="press-title">Press Kit</h2>
+			<h2 class="section-title">Press Kit</h2>
 			<hr class="separator">
 			<p>Find logos, images of CodeDay in action, and other assets in our press kit.</p>
 			<div class="press-kit text-center round-corners"><a href=""><span></span>Press Kit</a></div>
