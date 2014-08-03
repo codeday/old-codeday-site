@@ -28,7 +28,8 @@
 		<section id="sponsor-pitch" class="content row round-corners">
 			<img src="img/sponsor.jpg" id="sponsor-img" alt="Two young students presenting their projects.">
 			<div class="wrapper">
-				<p>Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric "outside the box" thinking. Completely pursue scalable customer service through sustainable potentialities. Collaboratively administrate turnkey channels whereas virtual e-tailers. Objectively seize scalable metrics whereas proactive e-services. Seamlessly empower fully researched growth strategies and interoperable internal or "organic" sources.</p>
+				<h3>CodeDay is a 24-hour programming event for students. This fall, CodeDay will take place in 30 cities across the US, attracting many thousands of students.</h3>
+				<p>Unlike hackathons, CodeDay isn't focused on showing off to win thousands of dollars in prizes or building a hot startup. Students attend CodeDay to have fun. As a result, we attract only attendees who genuinely love technology, and they tend to be the best in their field. Many of the students who you’ve seen publish successful apps and games, succeed at large university and industry hackathons, and start companies were inspired at CodeDay. We are a non-profit working to get students excited about building tech projects. Each year we identify a select number of organizations we believe can be beneficial to our participants, and to whom we believe we can provide great value, and offer them an opportunity to partner.</p>
 			</div>
 		</section>
 

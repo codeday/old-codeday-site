@@ -10,7 +10,7 @@
 
 				</div>
 
-				<div class="columns large-7 hide-for-medium hide-for-small">
+				<div class="columns large-7 hide-for-medium-down">
 
 					<?php include 'navigation.php'; ?>
 
@@ -28,6 +28,7 @@
         <script src="js/plugins.js"></script>-->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/waypoints.min.js"></script>
+        <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
         <script src="js/main.js"></script>
 
     </body>

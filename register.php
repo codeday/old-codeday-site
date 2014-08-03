@@ -3,12 +3,21 @@
 <div id="register-page" class="subpage">
 	
 	<header class="header-subpage">
+		<!-- <nav id="mobile-nav" class="hide-for-large-up">
+			<ul>
+				<li><a href="register.php" class="current-page">Register</a></li>
+				<li><a href="showcase.php">Showcase</a></li>
+				<li><a href="sponsor.php">Sponsor</a></li>
+				<li><a href="press.php">Press</a></li>
+			</ul>
+		</nav> -->
 		<div class="row">
-			<div class="column large-3 small-3">
+			<div class="column medium-3 small-6">
 				<h1 class="site-title"><a href="/codeday">CodeDay</a></h1>
 			</div>
-			<div class="column large-9 small-9">
-				<nav class="site-nav text-right">
+			<div class="column medium-9 small-6"> 
+				<a href="#" id="nav-button" class="hide-for-large-up"></a>
+				<nav class="site-nav text-right hide-for-medium-down">
 					<ul>
 						<li><a href="register.php" class="current-page">Register</a></li>
 						<li><a href="showcase.php">Showcase</a></li>
@@ -84,10 +93,9 @@
 				</form>
 			</div>
 
-			<p id="toa">By clicking “Pay Now”, I have read and agree with the <a href="">CodeDay terms of service</a>, <a href="">CodeDay code of conduct</a>, and possibly getting my picture taken during the event.</p>
-			
 			<a href="" id="pay-button" class="round-corners text-center">Pay Now</a>
 			
+			<p id="toa">By clicking “Pay Now”, I have read and agree with the <a href="">CodeDay terms of service</a>, <a href="">CodeDay code of conduct</a>, and possibly getting my picture taken during the event.</p>
 
 		</div>
 

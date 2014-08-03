@@ -1,6 +1,6 @@
 <section id="schedule" class="text-center">
 
-	<div class="row fadein">
+	<div class="row">
 
 		<h2 class="section-title text-center">Schedule</h2>
 

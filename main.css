@@ -69,11 +69,6 @@ a {
         color: #12A2C2;
     }
 
-    a:focus, a:visited {
-        color: inherit;
-    }
-
-
 p:last-of-type {
     margin-bottom: 0;
 }
@@ -112,7 +107,7 @@ p:last-of-type {
     border-radius: 3px;
 }
 
-#arrow {
+.arrow {
     width: 30px;
     height: 30px;
     border-right: 2px solid #fff;
@@ -174,16 +169,11 @@ Splash
 
 #splash-info  {
     position: relative;
-    top: 10%;
+    top: 14%;
     color: #fff;
 }
 
-.site-title, 
-.site-title a, 
-.event-date, 
-.site-description, 
-.intro-video:hover, 
-.intro-video:link {
+.site-title, .site-title a, .event-date, .site-description, .intro-video:link {
     color: #fff;
 }
 
@@ -208,7 +198,7 @@ Splash
     /* CITY-PICKER PANEL */
     #city-picker {
         display: none;
-        width: 16em;
+        width: 250px;
         position: absolute;
         right: 10em;
         margin-top: 10px;
@@ -294,7 +284,7 @@ Splash
 
 .intro-video:link {
     display: inline-block;
-    margin-top: 2.5em;
+    margin-top: 3.5em;
     padding: 0.8em 0em 0.8em 2.3em;
     font-size: 1.2em;
     background: url('../img/video-icon.png') no-repeat left center;
@@ -457,6 +447,10 @@ PITCH
     background-color: #F9A448;
     color: #fff;
     font-size: 1.3em;
+}
+
+.pitch-info {
+    opacity: 0;
 }
 
 #pitch p {
@@ -932,19 +926,13 @@ span.dropdown,
     .register-box input[type="checkbox"] + label {
         position: relative;
         display: block;
-        padding: 1em 1em 0.8em 1.5em;
-        line-height: 1.5em;
+        padding: 1em 1em 0.8em 1em;
         color: #CCCCCC;
         font-size: 1em;
-        box-sizing: content-box;
     }
 
-        .register-box input[type="checkbox"] + label:hover {
-            cursor: pointer;
-        }
-
     .register-box input[type="checkbox"]:checked + label {
-        background: url('../img/cross.png') no-repeat 1em 1.15em;
+        background: url('../img/cross.png') no-repeat 9px 20px;
         color: #808080;
     }
 
@@ -954,7 +942,8 @@ span.dropdown,
         position: relative;
         width: 15px;
         height: 15px;
-        right: 0.5em;
+        right: 7px;
+        bottom: -2px;
         border: 2px solid #E6E6E6;
     }
 
@@ -1085,7 +1074,6 @@ PRESS
 }
 
 .press-kit {
-    margin-top: 1em;
     padding: 1em 0 1em 0;
     background: #E6E6E6;
     text-transform: uppercase;
@@ -1388,7 +1376,7 @@ FOOTER
 #site-footer {
     height: 8em;
     padding-top: 2em;
-    background-color: #969696;
+    background-color: #CCCCCC;
     color: #fff;
     text-align: center;
     position: relative;
