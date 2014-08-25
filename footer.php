@@ -1,26 +1,32 @@
-        <footer id="site-footer">
-
-        	<div class="row">
-
-	    		<div class="columns large-5 text-left">
-
-					<p>Organized in Seattle by <a href="https://studentrnd.org/" class="studentrnd">StudentRND</a>.</p>
-					
-					<p class="copyright">&copy; <?php echo date("Y") ?> CodeDay. All rights reserved.</p>
-
-				</div>
-
-				<div class="columns large-7 hide-for-medium-down">
-
-					<?php include 'navigation.php'; ?>
-
-				</div>
-
-			</div>
         
-        </footer>
+            <footer id="site-footer">
+
+            	<div class="row">
+
+    	    		<div class="columns medium-5 text-left">
+
+    					<p>Organized in Seattle by <a href="https://studentrnd.org/" class="studentrnd">StudentRND</a>.</p>
+    					
+    					<p class="copyright">&copy; <?php echo date("Y") ?> CodeDay. All rights reserved.</p>
+
+    				</div>
+
+    				<div class="columns medium-7 hide-for-small-only">
+
+    					<nav class="site-nav text-right row">
+                            <ul>
+                                <li><a href="terms.php">Terms</a></li>
+                            </ul>
+                        </nav>
+
+    				</div>
+
+    			</div>
+            
+            </footer>
 
 		
+        </div> <!-- Cloes #over -->
 
 
         <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

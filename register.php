@@ -1,28 +1,38 @@
 <?php include 'header.php'; ?>
 
 <div id="register-page" class="subpage">
-	
-	<header class="header-subpage">
-		<!-- <nav id="mobile-nav" class="hide-for-large-up">
+
+	<!-- Mobile nav -->
+	<header class="header-subpage header-mobile hide-for-medium-up"> 
+		<nav class="site-nav text-right">
 			<ul>
 				<li><a href="register.php" class="current-page">Register</a></li>
-				<li><a href="showcase.php">Showcase</a></li>
+				<li><a href="showcase.php">Featured Projects</a></li>
 				<li><a href="sponsor.php">Sponsor</a></li>
-				<li><a href="press.php">Press</a></li>
+                <li><a href="press.php">Press</a></li>
 			</ul>
-		</nav> -->
+		</nav>
 		<div class="row">
-			<div class="column medium-3 small-6">
+			<h1 class="site-title left"><a href="/codeday">CodeDay</a></h1>
+			<a href="#" id="nav-button" class="right">Menu</a>
+		</div>
+		<h1 class="subpage-title text-center">Register</h1>
+	</header>
+	
+	<!-- Regular Nav -->
+	<header class="header-subpage header-large hide-for-small-only">
+		<div class="row">
+			<div class="column medium-2 small-6">
 				<h1 class="site-title"><a href="/codeday">CodeDay</a></h1>
 			</div>
-			<div class="column medium-9 small-6"> 
-				<a href="#" id="nav-button" class="hide-for-large-up"></a>
-				<nav class="site-nav text-right hide-for-medium-down">
+			<div class="column medium-10 small-6"> 
+				<nav class="site-nav text-right">
+					<a href="#" id="nav-button" class="right">Menu</a>
 					<ul>
 						<li><a href="register.php" class="current-page">Register</a></li>
-						<li><a href="showcase.php">Showcase</a></li>
+						<li><a href="showcase.php">Featured Projects</a></li>
 						<li><a href="sponsor.php">Sponsor</a></li>
-						<li><a href="press.php">Press</a></li>
+                        <li><a href="press.php">Press</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -33,7 +43,7 @@
 
 	<main class="row wrapper-column">
 
-		<div class="columns large-6">
+		<div class="columns medium-6">
 
 			<div class="register-box round-corners">
 				<h2>CodeDay Seattle</h2>
@@ -46,7 +56,7 @@
 			<div class="register-box round-corners">
 				<h2>Ticket Info</h2>
 				<span class="ticket-type">Student</span><!--
-				--><span class="ticket-price text-center">$10 (Early Bird 50% Off)</span><!--
+				--><span class="ticket-price">$10 (Early Bird 50% Off)</span><!--
 				--><span class="dropdown">
 				<select id="ticket-amount">
 					<option value="1">1</option>
@@ -70,10 +80,10 @@
 
 		</div>
 
-		<div class="columns large-6">
-			<div class="register-box round-corners">
-				<form id="coder-1" action="" method="post" autocomplete="off">
-					<h2>Coder's Info</h2>
+		<div class="columns medium-6">
+			<div id="coder-profile-1" class="register-box round-corners coder-profile">
+				<form action="" method="post" autocomplete="off">
+					<h2 class="coder-profile-title">Coder's Info</h2>
 					<input type="text" class="first-name" name="first-name" placeholder="First Name"><!--
 					--><input type="text" class="last-name" name="last-name" placeholder="Last Name"><!--
 					--><input type="text" class="age" name="age" placeholder="Age" maxlength="2"><!--

@@ -2,18 +2,38 @@
 
 <div id="press-page" class="subpage">
 
-	<header class="header-subpage">
+	<!-- Mobile nav -->
+	<header class="header-subpage header-mobile hide-for-medium-up"> 
+		<nav class="site-nav text-right">
+			<ul>
+				<li><a href="register.php">Register</a></li>
+				<li><a href="showcase.php">Featured Projects</a></li>
+				<li><a href="sponsor.php">Sponsor</a></li>
+                <li><a href="press.php" class="current-page">Press</a></li>
+			</ul>
+		</nav>
 		<div class="row">
-			<div class="column large-3 small-3">
+			<h1 class="site-title left"><a href="/codeday">CodeDay</a></h1>
+			<a href="#" id="nav-button" class="right">Menu</a>
+		</div>
+		<h1 class="subpage-title text-center">Press</h1>
+		<h2 class="press-description text-center">We get students excited about technology.</h2>
+	</header>
+	
+	<!-- Regular Nav -->
+	<header class="header-subpage header-large hide-for-small-only">
+		<div class="row">
+			<div class="column medium-3 small-3">
 				<h1 class="site-title"><a href="/codeday">CodeDay</a></h1>
 			</div>
-			<div class="column large-9 small-9">
+			<div class="column medium-9 small-9">
 				<nav class="site-nav text-right">
+					<a href="#" id="nav-button" class="right">Menu</a>
 					<ul>
 						<li><a href="register.php">Register</a></li>
-						<li><a href="showcase.php">Showcase</a></li>
+						<li><a href="showcase.php">Featured Projects</a></li>
 						<li><a href="sponsor.php">Sponsor</a></li>
-						<li><a href="press.php" class="current-page">Press</a></li>
+                        <li><a href="press.php" class="current-page">Press</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -23,14 +43,12 @@
 	</header>
 
 	<main id="press-container" class="content row round-corners">
-		<div class="column large-8 wrapper-column">
+		<div class="column medium-8 wrapper-column">
 			<h2 class="section-title">Who We Are</h2>
 			<hr class="separator">
-			<p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
+			<p>CodeDay is a series of student programming events held across the world. It's the world's largest series of educational programming marathons, in addition to being one of the most effective methods of education.</p>
 
-			<p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</p>
-
-			<p>Completely synergize resource sucking relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
+			<p>Our participants enter with a wide variety of skill levels, but they leave as some of the most skilled in the nation. Past participants have gone on to create venture-funded startups, gain hundreds of thousands of downloads on app stores, and more.</p>
 
 			<h2 class="section-title">Past Coverage</h2>
 			<hr class="separator">
@@ -58,9 +76,10 @@
 				<span>Corvallis Gazette-Times, 12/2014</span>
 				<h3><a href="http://www.gazettetimes.com/news/local/codeday-corvallis-set-for-jan/article_7a53f4b0-70cd-11e3-8ea8-001a4bcf887a.html">CodeDay Corvallis set for Jan. 18</a></h3>
 			</article>
-			<span class="view-more"><a href="">View More</a></span>
+			<div id="press-more-past-coverage"></div>
+			<span id="view-more">View More</span>
 		</div>
-		<div class="column large-4 wrapper-column">
+		<div class="column medium-4 wrapper-column">
 			<h2 class="section-title">Contact</h2>
 			<hr class="separator">
 			<ul class="press-contact-info">
@@ -71,7 +90,7 @@
 			<h2 class="section-title">Fast Stats</h2>
 			<hr class="separator">
 			<ul class="press-stats">
-				<li id="stats-hours" class="press-icon"><span class="stats-numbers">3880</span> hours coding</li>
+				<li id="stats-hours" class="press-icon"><span class="stats-numbers" data-from="0" data-to="3880" data-speed="1000" data-refresh-interval="25">3880</span> hours coding</li>
 				<li id="stats-locations" class="press-icon"><span class="stats-numbers">30</span> locations nationwide</li>
 				<li id="stats-projects" class="press-icon"></span><span class="stats-numbers">652</span> nifty projects</li>
 				<li id="stats-participants" class="press-icon"></span><span class="stats-numbers">521</span> participants</li>
@@ -82,6 +101,6 @@
 			<div class="press-kit text-center round-corners"><a href=""><span></span>Press Kit</a></div>
 		</div>
 	</main>
-
+</div>
 
 <?php include 'footer.php'; ?>

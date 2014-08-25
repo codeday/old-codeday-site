@@ -1,8 +1,12 @@
+<?php
+
+$content = file_get_contents("http://clear.codeday.org/api/event/6v3KtjQGPDal");
+$event = json_decode($content);
+?>
+
 <?php include 'header.php'; ?>
 
 <?php include 'splash.php'; ?>
-
-<div id="over">
 
 <?php include 'faq.php'; ?>
 

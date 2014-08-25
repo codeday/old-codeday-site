@@ -1,22 +1,38 @@
-<!-- dark green 8EBC75 -->
-<!-- medium green A0D388 -->
-<!-- light green B5E59C -->
-
 <?php include 'header.php'; ?>
 
 <div id="sponsor-page" class="subpage">
-	<header class="header-subpage">
+
+	<!-- Mobile nav -->
+	<header class="header-subpage header-mobile hide-for-medium-up"> 
+		<nav class="site-nav text-right">
+			<ul>
+				<li><a href="register.php">Register</a></li>
+				<li><a href="showcase.php">Featured Projects</a></li>
+				<li><a href="sponsor.php" class="current-page">Sponsor</a></li>
+                <li><a href="press.php">Press</a></li>
+			</ul>
+		</nav>
+		<div class="row">
+			<h1 class="site-title left"><a href="/codeday">CodeDay</a></h1>
+			<a href="#" id="nav-button" class="right">Menu</a>
+		</div>
+		<h1 class="subpage-title text-center">Sponsor</h1>
+	</header>
+	
+	<!-- Regular Nav -->
+	<header class="header-subpage header-large hide-for-small-only">
 		<div class="row">
 			<div class="column large-3 small-3">
 				<h1 class="site-title"><a href="/codeday">CodeDay</a></h1>
 			</div>
 			<div class="column large-9 small-9">
 				<nav class="site-nav text-right">
+					<a href="#" id="nav-button" class="right">Menu</a>
 					<ul>
 						<li><a href="register.php">Register</a></li>
-						<li><a href="showcase.php">Showcase</a></li>
+						<li><a href="showcase.php">Featured Projects</a></li>
 						<li><a href="sponsor.php" class="current-page">Sponsor</a></li>
-						<li><a href="press.php">Press</a></li>
+                        <li><a href="press.php">Press</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -33,17 +49,17 @@
 			</div>
 		</section>
 
-		<section id="sponsor-global" class="content row round-corners">
+		<section id="sponsor-past-partners" class="content row round-corners">
 			<div class="wrapper">
-				<h2 class="section-title">Global Sponsorship</h2>
+				<h2 class="section-title">Selected Past Sponsors</h2>
 				<hr class="separator">
-				<div id="sponsor-global-map" class="column no-padding large-7 no-padding">
-					<img src="img/map.jpg" alt="Map of CodeDay events." id="map">
+				<div class="column medium-6 sponsor-wrap-google">
+					<img src="img/google-logo.png" alt="Google logo" id="sponsor-google">
+					<p>Quickly maximize timely deliverables for real time schemas. Dramatically maintain clicks and mortar solutions without functional solutions.</p>
 				</div>
-				<div id="sponsor-global-pitch" class="column large-5">
-					<h3>This is your reach.</h3>
-					<p>Become a global sponsor and support the next innovator.</p>
-					<a href="mailto:contact@studentrnd.org?subject=Sponsor Inquiry" id="sponsor-contact-us" class="round-corners">Contact Us</a>
+				<div class="column medium-6 sponsor-wrap-amazon">
+					<img src="img/amazon-logo.png" alt="Amazon Web Services logo" id="sponsor-amazon">
+					<p>A year-long global sponsorship of CodeDay helped Amazon Web Services expand its reach into the student market.</p>
 				</div>
 			</div>
 		</section>
@@ -54,7 +70,7 @@
 				<hr class="separator">
 				<p>If your team is able to physically attend several CodeDays, you may find value in sponsoring events on an individual level. We offer a 5% discount for each event you sponsor beyond one, up to a maximum 20% discount.</p>
 
-				<div id="sponsor-table" class="text-center">
+				<div id="sponsor-table" class="text-center hide-for-small">
 					<div class="clearfix">
 						<div class="column no-padding sponsor-stage-column ghost">
 							.
@@ -237,39 +253,42 @@
 						</div>
 					</div>
 				</div>
-				<div class="clearfix foot-note">
-					<div class="column no-padding large-7 no-padding">	
+				<div class="clearfix foot-note hide-for-small">
+					<div class="column no-padding medium-7 no-padding">	
 						<p>Alternative sponsorship options:</p>
 						<ul>
 							<li>Pay for a meal ($500 value)</li>
 							<li>Provide venue for CodeDay ($2,000 value)</li>
 						</ul>
 					</div>
-					<div class="column no-padding large-5 no-padding">
+					<div class="column no-padding medium-5 no-padding">
 						<p>
 							* You must supply all of your prizes. </br>
 							<span>Cannot exceed $100/person cash value.</span>
 						</p>
 					</div>
 				</div>
+				<div class="text-center show-for-small-only">
+					<a href="codeday-sponsor.pdf" target="_blank" id="sponsor-pdf-button" class="round-corners">View sponsor PDF</a>
+				</div>
 			</div>
 		</section>
 
-		<section id="sponsor-past-partners" class="content row round-corners">
+		<section id="sponsor-global" class="content row round-corners">
 			<div class="wrapper">
-				<h2 class="section-title">Selected Past Sponsors</h2>
+				<h2 class="section-title">Global Sponsorship</h2>
 				<hr class="separator">
-				<div class="column large-6 sponsor-wrap-google">
-					<img src="img/google-logo.png" alt="Google logo" id="sponsor-google">
-					<p>Quickly maximize timely deliverables for real time schemas. Dramatically maintain clicks and mortar solutions without functional solutions.</p>
+				<div id="sponsor-global-map" class="column no-padding medium-7 no-padding">
+					<img src="img/map.jpg" alt="Map of CodeDay events." id="map">
 				</div>
-				<div class="column large-6 sponsor-wrap-amazon">
-					<img src="img/amazon-logo.png" alt="Amazon Web Services logo" id="sponsor-amazon">
-					<p>A year-long global sponsorship of CodeDay helped Amazon Web Services expand its reach into the student market.</p>
+				<div id="sponsor-global-pitch" class="column medium-5">
+					<h3>This is your reach.</h3>
+					<p>Become a global sponsor and support the next innovator.</p>
+					<a href="mailto:contact@studentrnd.org?subject=Sponsor Inquiry" id="sponsor-contact-us" class="round-corners">Contact Us</a>
 				</div>
-
 			</div>
 		</section>
 	</main>
+</div>
 
 <?php include 'footer.php'; ?>
