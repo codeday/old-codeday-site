@@ -110,7 +110,6 @@
 		var pickedCity = $(this).val();
 	});
 
-})();
 
 })();
 
