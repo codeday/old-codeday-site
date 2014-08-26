@@ -29,7 +29,7 @@
 			</nav>
 		</div>
 
-		<h1 class="site-title">CodeDay <input type="text" id="current-city" value="<?php echo $event->name ?>" ></h1>
+		<h1 class="site-title">CodeDay <input type="text" id="current-city" value="" ></h1>
 		<div id="city-picker" class="round-corners text-left">
 			<h3 class="city-panel-title">Nearest events</h3>
 			<ul>
@@ -37,7 +37,7 @@
 		</div>
 		<p class="site-description">Build something awesome in 24 hours!</p>
 		<h2 class="event-date">November 11-12th 2014</h2>
-		<h2 class="event-host">Hosted at <?php echo $event->venue->name ?></h2>
+		<h2 class="event-host">Hosted at Porch</h2>
 		<a href="register.php" class="button register-button round-corners">Get your ticket!</a>
 		<!-- <input type="text" > -->
 		<!-- <input type="submit" value="subscribe"> -->

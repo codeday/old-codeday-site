@@ -235,7 +235,7 @@ SPLASH
 }
 
 #splash .site-title {
-    margin-top: 0.3em;
+    margin-top: 0.1em;
 }
 
 .site-title {
@@ -261,7 +261,7 @@ SPLASH
 
     /* CITY-PICKER PANEL */
     #city-picker {
-        /*display: none;*/
+        display: none;
         width: 16em;
         position: absolute;
         left: 49%;

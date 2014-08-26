@@ -1,28 +1,3 @@
-// Playing with JSON
-(function(){
-	var cityValue;
-	$('#current-city').keyup(function(){
-		cityValue = $(this).val().toString();
-		$('#city-picker ul').html('');
-		$.ajax({
-			url: "https://clear.codeday.org/api/regions/search?term=" + cityValue,
-			method: "GET",
-			dataType: "JSON",
-			success: function(response_object) {
-				$.each(response_object, function(key, value) {
-					var cityOption = '<li class="city-option">' + value.name + '</li>';
-					$('#city-picker ul').append(cityOption);
-				});
-			}
-		});
-	});
-	$('.city-option').on('click', function(){
-		var pickedCity = $(this).val();
-	});
-
-})();
-
-
 // Fade in body
 (function(){
 	$('body').animate({'opacity': 1}, 500);
@@ -66,16 +41,6 @@
 	});
 })();
 
-// Geolocation current-city
-// (function(){
-// 	var userCity = geoplugin_city();
-//     $('#current-city').val(userCity);
-//     if (geoplugin_countryName() !== 'United States') {
-//     	$('#foreign-country').show(); 
-//     	$('#current-city').hide();  
-//     }
-// })();
-
 // Display schedule popup
 (function(){
 	$('.schedule-task').hover(function() {
@@ -106,8 +71,10 @@
 })();
 
 
-// Display city picker when current city is clicked
+// City picker stuff
 (function(){
+
+	// Display city picker when current city is clicked
 	var cityPicker = $('#city-picker');
 	$('#current-city').click(function(e){
 		e.preventDefault();
@@ -117,6 +84,34 @@
 	$(document).on('click', function() { 
 		cityPicker.fadeOut('fast'); 
 	});
+
+	// Retrieve city picker values
+	var cityValue;
+	function capitaliseFirstLetter(string) {
+	    return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+	$('#current-city').on('input propertychange paste', function(){
+		cityValue = $(this).val().toString();
+		cityValue = capitaliseFirstLetter(cityValue);
+		$('#city-picker ul').html('');
+		$.ajax({
+			url: "https://clear.codeday.org/api/regions/search?term=" + cityValue,
+			method: "GET",
+			dataType: "JSON",
+			success: function(response_object) {
+				$.each(response_object, function(key, value) {
+					var cityOption = '<li class="city-option">' + value.name + '</li>';
+					$('#city-picker ul').append(cityOption);
+				});
+			}
+		});
+	});
+	$('.city-option').on('click', function(){
+		var pickedCity = $(this).val();
+	});
+
+})();
+
 })();
 
 // Registration ticket price calculations and add coders
@@ -158,85 +153,4 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-// Showcase sharing buttons
-// (function(){
-// 	$('.showcase-share').on('click', function(){
-// 		return false;
-// 	});
-// })();
-
-// (function(){
-
-	// $('#faq').waypoint(function(up) {
-	// 	$('#faq .fadein').each(function(index) {
-	// 	    $(this).delay(400 * index).animate({'opacity': 1}, 400);
-	// 	});
-	// }, { offset: 500 });
-
-	// $('#schedule').waypoint(function(up) {
-	// 	$('#schedule .fadein').each(function(index) {
-	// 	    $(this).delay(300 * index).animate({'opacity': 1}, 400);
-	// 	});
-	// }, { offset: 650 });
-
-	// $('#pitch').waypoint(function(up) {
-	// 	$('#pitch .fadein').each(function(index) {
-	// 	    $(this).delay(200 * index).animate({'opacity': 1}, 500);
-	// 	});
-	// }, { offset: 450 });
-
-	// $('#sponsors').waypoint(function(up) {
-	// 	$('#sponsors .fadein').each(function(index) {
-	// 	    $(this).delay(50 * index).animate({'opacity': 1}, 500);
-	// 	});
-	// }, { offset: 350 });
-
-	// $('footer').waypoint(function(up) {
-	// 	$('footer .fadein').each(function(index) {
-	// 	    $(this).delay(100 * index).animate({'opacity': 1}, 500);
-	// 	});
-	// }, { offset: 450 });
-
-
-// })();
-
-
-
-
-
-// (function(){
-	
-// 	// splash blur on scroll
-
-// 	$(window).scroll(function(){
-// 	    var winHeight = $(window).scrollTop(),
-// 	    	opacityVal = (100.0 / (winHeight * 3)),
-// 	    	regSplash = $('.reg-splash');
-
-// 		regSplash.css('opacity', opacityVal); 
-
-// 		if (winHeight == 0) {
-// 			regSplash.css('opacity', 1); 
-// 		}
-// 	});
-
-// })();
-
-// // facebook sharing 
-// function fbShare(url, title, descr, image, winWidth, winHeight) {
-//     var winTop = (screen.height / 2) - (winHeight / 2);
-//     var winLeft = (screen.width / 2) - (winWidth / 2);
-//     window.open('http://www.facebook.com/sharer.php?s=100&p[title]=' + title + '&p[summary]=' + descr + '&p[url]=' + url + '&p[images][0]=' + image, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
-// }
 

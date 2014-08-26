@@ -1,3 +1,4 @@
+styles
 <?php include 'header.php'; ?>
 
 <div id="register-page" class="subpage">
