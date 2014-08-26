@@ -78,12 +78,15 @@
 	var cityPicker = $('#city-picker');
 	$('#current-city').click(function(e){
 		e.preventDefault();
-		cityPicker.fadeToggle('fast');
+		cityPicker.fadeIn('fast');
 		return false;
 	})
 	$(document).on('click', function() { 
 		cityPicker.fadeOut('fast'); 
 	});
+	if ($('#current-city').is(':focus')) {
+		cityPicker.show();
+	}
 
 	// Retrieve city picker values
 	var cityValue;
@@ -103,11 +106,13 @@
 					var cityOption = '<li class="city-option">' + value.name + '</li>';
 					$('#city-picker ul').append(cityOption);
 				});
+				$('.city-option').on('click', function(){
+					var pickedCity = $(this).html();
+					$('#current-city').val(pickedCity);
+					// Display nearest cities to pickedCity inside panel
+				});
 			}
 		});
-	});
-	$('.city-option').on('click', function(){
-		var pickedCity = $(this).val();
 	});
 
 
