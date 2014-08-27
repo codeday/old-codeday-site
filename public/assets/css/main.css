@@ -25,6 +25,11 @@ select, select:hover {
     text-overflow: '';
 }
 
+input, input:focus {
+    border: none;
+    outline: none;
+}
+
 section {
     padding: 5em 0;
 }
@@ -241,22 +246,31 @@ SPLASH
     display: inline-block;
     margin: 0.6em 0 0.2em 0;
     padding-left: 1em;
-    background: url('../img/logo.png') no-repeat left 40%;
+    background: url('../img/logo.png') no-repeat left 58%;
     background-size: 0.8em;
     font-weight: 400;
     font-size: 4.8em;
     line-height: 1.2em;
 }
 
-#current-city {
-    width: 6.2em;
+span.current-city, 
+input.current-city, 
+input.current-city:focus {
     display: inline-block;
+    height: 1.4em;
+    margin-bottom: 0;
+    padding: 0;
     font-weight: normal;
+    line-height: 1.3em;
     color: #fff;
     border-bottom: 3px dotted #fff;
-    position: relative;
-    height: inherit;
+    text-align: left;
+    text-indent: 0;
 }
+
+    input.current-city {
+        display: none;
+    }
 
     /* CITY-PICKER PANEL */
     #city-picker {
@@ -296,7 +310,8 @@ SPLASH
         color: #B3B3B3;
     }
 
-        .city-option:last-of-type, .city-option:last-of-type:hover {
+        .city-option:last-of-type, 
+        .city-option:last-of-type:hover {
             border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
         }
@@ -347,6 +362,25 @@ SPLASH
     .register-button:hover {
         background-color: #D35353;
     }
+
+#subscription-email {
+    border: 2px solid blue;
+    width: 27%;
+    display: inline-block;
+    margin: 1.7em 0;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+#subscription-submit,
+#subscription-submit:focus {
+    padding: 0.47em 0.6em;
+    background-color: #DD5D5C;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
 
 #video-link:link {
     display: inline-block;
@@ -1148,10 +1182,6 @@ PRESS
 #press-page .header-subpage {
     background: url('../img/press.jpg') no-repeat center center;
     background-size: 100%;
-}
-
-#press-page .subpage-title {
-    margin: 1.5em 0 0.5em 0;
 }
 
 .press-description {

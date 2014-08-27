@@ -21,7 +21,7 @@
             </nav>
         </div>
 
-        <h1 class="site-title">CodeDay <input type="text" id="current-city" value="{{ event.name }}" ></h1>
+        <h1 class="site-title">CodeDay <span class="current-city">{{ event.name }}</span><input type="text" class="current-city" value=""></h1>
         <div id="city-picker" class="round-corners text-left">
             <h3 class="city-panel-title">Nearest events</h3>
             <ul>
@@ -32,9 +32,11 @@
         {% if event.venue %}
             <h2 class="event-host">Hosted at {{ event.venue.name }}</h2>
         {% endif %}
-        <a href="/register" class="button register-button round-corners">Get your ticket!</a>
-        <!-- <input type="text" > -->
-        <!-- <input type="submit" value="subscribe"> -->
+        {# <a href="/register" class="button register-button round-corners">Get your ticket!</a> #}
+        <div class="row text-center">
+	        <input type="text" id="subscription-email" placeholder="Email"><!--
+	        --><input type="submit" value="Subscribe" id="subscription-submit">
+        </div>
         <p class="show-for-large-up"><a href="#" id="video-link">Watch video</a></p>
         <p class="show-for-medium-down"><a href="http://vimeo.com/77693957" target="_blank" id="video-link">Watch video</a></p>
     </div>

@@ -1,0 +1,56 @@
+[2014-08-27 16:55:43] production.ERROR: exception 'ErrorException' with message 'file_put_contents(/var/www/new.codeday.org/app/storage/sessions/920bd9fd073ff0983fc23ba40779cb4b25f3d0b5): failed to open stream: Permission denied' in /var/www/new.codeday.org/bootstrap/compiled.php:4153
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleError(2, 'file_put_conten...', '/var/www/new.co...', 4153, Array)
+#1 /var/www/new.codeday.org/bootstrap/compiled.php(4153): file_put_contents('/var/www/new.co...', 'a:4:{s:6:"_toke...')
+#2 /var/www/new.codeday.org/vendor/laravel/framework/src/Illuminate/Session/FileSessionHandler.php(71): Illuminate\Filesystem\Filesystem->put('/var/www/new.co...', 'a:4:{s:6:"_toke...')
+#3 /var/www/new.codeday.org/bootstrap/compiled.php(7873): Illuminate\Session\FileSessionHandler->write('920bd9fd073ff09...', 'a:4:{s:6:"_toke...')
+#4 /var/www/new.codeday.org/bootstrap/compiled.php(7730): Illuminate\Session\Store->save()
+#5 /var/www/new.codeday.org/bootstrap/compiled.php(7708): Illuminate\Session\Middleware->closeSession(Object(Illuminate\Session\Store))
+#6 /var/www/new.codeday.org/bootstrap/compiled.php(8309): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#7 /var/www/new.codeday.org/bootstrap/compiled.php(8256): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#8 /var/www/new.codeday.org/bootstrap/compiled.php(10895): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#9 /var/www/new.codeday.org/bootstrap/compiled.php(659): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#10 /var/www/new.codeday.org/public/index.php(49): Illuminate\Foundation\Application->run()
+#11 {main} [] []
+[2014-08-27 16:55:47] production.ERROR: exception 'ErrorException' with message 'file_put_contents(/var/www/new.codeday.org/app/storage/sessions/920bd9fd073ff0983fc23ba40779cb4b25f3d0b5): failed to open stream: Permission denied' in /var/www/new.codeday.org/bootstrap/compiled.php:4153
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleError(2, 'file_put_conten...', '/var/www/new.co...', 4153, Array)
+#1 /var/www/new.codeday.org/bootstrap/compiled.php(4153): file_put_contents('/var/www/new.co...', 'a:4:{s:6:"_toke...')
+#2 /var/www/new.codeday.org/vendor/laravel/framework/src/Illuminate/Session/FileSessionHandler.php(71): Illuminate\Filesystem\Filesystem->put('/var/www/new.co...', 'a:4:{s:6:"_toke...')
+#3 /var/www/new.codeday.org/bootstrap/compiled.php(7873): Illuminate\Session\FileSessionHandler->write('920bd9fd073ff09...', 'a:4:{s:6:"_toke...')
+#4 /var/www/new.codeday.org/bootstrap/compiled.php(7730): Illuminate\Session\Store->save()
+#5 /var/www/new.codeday.org/bootstrap/compiled.php(7708): Illuminate\Session\Middleware->closeSession(Object(Illuminate\Session\Store))
+#6 /var/www/new.codeday.org/bootstrap/compiled.php(8309): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#7 /var/www/new.codeday.org/bootstrap/compiled.php(8256): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#8 /var/www/new.codeday.org/bootstrap/compiled.php(10895): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#9 /var/www/new.codeday.org/bootstrap/compiled.php(659): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#10 /var/www/new.codeday.org/public/index.php(49): Illuminate\Foundation\Application->run()
+#11 {main} [] []
+[2014-08-27 16:55:59] production.ERROR: exception 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' in /var/www/new.codeday.org/bootstrap/compiled.php:5687
+Stack trace:
+#0 /var/www/new.codeday.org/bootstrap/compiled.php(5004): Illuminate\Routing\RouteCollection->match(Object(Illuminate\Http\Request))
+#1 /var/www/new.codeday.org/bootstrap/compiled.php(4992): Illuminate\Routing\Router->findRoute(Object(Illuminate\Http\Request))
+#2 /var/www/new.codeday.org/bootstrap/compiled.php(4984): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#3 /var/www/new.codeday.org/bootstrap/compiled.php(717): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#4 /var/www/new.codeday.org/bootstrap/compiled.php(698): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#5 /var/www/new.codeday.org/bootstrap/compiled.php(7706): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#6 /var/www/new.codeday.org/bootstrap/compiled.php(8309): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#7 /var/www/new.codeday.org/bootstrap/compiled.php(8256): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#8 /var/www/new.codeday.org/bootstrap/compiled.php(10895): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#9 /var/www/new.codeday.org/bootstrap/compiled.php(659): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#10 /var/www/new.codeday.org/public/index.php(49): Illuminate\Foundation\Application->run()
+#11 {main} [] []
+[2014-08-27 16:56:35] production.ERROR: exception 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' in /var/www/new.codeday.org/bootstrap/compiled.php:5687
+Stack trace:
+#0 /var/www/new.codeday.org/bootstrap/compiled.php(5004): Illuminate\Routing\RouteCollection->match(Object(Illuminate\Http\Request))
+#1 /var/www/new.codeday.org/bootstrap/compiled.php(4992): Illuminate\Routing\Router->findRoute(Object(Illuminate\Http\Request))
+#2 /var/www/new.codeday.org/bootstrap/compiled.php(4984): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#3 /var/www/new.codeday.org/bootstrap/compiled.php(717): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#4 /var/www/new.codeday.org/bootstrap/compiled.php(698): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#5 /var/www/new.codeday.org/bootstrap/compiled.php(7706): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#6 /var/www/new.codeday.org/bootstrap/compiled.php(8309): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#7 /var/www/new.codeday.org/bootstrap/compiled.php(8256): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#8 /var/www/new.codeday.org/bootstrap/compiled.php(10895): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#9 /var/www/new.codeday.org/bootstrap/compiled.php(659): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#10 /var/www/new.codeday.org/public/index.php(49): Illuminate\Foundation\Application->run()
+#11 {main} [] []
