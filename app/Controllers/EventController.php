@@ -20,6 +20,20 @@ class EventController extends \Controller {
 
     public function getIndex()
     {
+
+        if (\Input::get('region')) {
+            try {
+                $region = Models\Region::find(\Input::get('region'));
+                \Session::put('loaded_event', $region->current_event->id);
+            } catch (\Exception $ex) {}
+
+
+            // Try to redirect
+            if (\Request::isMethod('get')) {
+                return \Redirect::to(\Request::url());
+            }
+        }
+
         return \View::make('index');
     }
 
