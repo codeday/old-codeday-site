@@ -1,0 +1,54 @@
+<div id="splash">
+
+    <div id="splash-info" class="text-center">
+        <!-- Mobile nav -->
+        <div class="nav-mobile hide-for-medium-up">
+            <nav class="site-nav text-right">
+                <ul>
+                    {% include "parts/navigation.twig" %}
+                </ul>
+            </nav>
+            <a href="#" id="nav-button" class="right">Menu</a>
+        </div>
+
+        <!-- Regular Nav -->
+        <div class="nav-large hide-for-small-only">
+            <nav class="site-nav text-right row">
+                <a href="#" id="nav-button" class="right">Menu</a>
+                <ul>
+                    {% include "parts/navigation.twig" %}
+                </ul>
+            </nav>
+        </div>
+
+        <h1 class="site-title">CodeDay <input type="text" id="current-city" value="{{ event.name }}" ></h1>
+        <div id="city-picker" class="round-corners text-left">
+            <h3 class="city-panel-title">Nearest events</h3>
+            <ul>
+            </ul>
+        </div>
+        <p class="site-description">Build something awesome in 24 hours!</p>
+        <h2 class="event-date">November 11-12th 2014</h2>
+        {% if event.venue %}
+            <h2 class="event-host">Hosted at {{ event.venue.name }}</h2>
+        {% endif %}
+        <a href="/register" class="button register-button round-corners">Get your ticket!</a>
+        <!-- <input type="text" > -->
+        <!-- <input type="submit" value="subscribe"> -->
+        <p class="show-for-large-up"><a href="#" id="video-link">Watch video</a></p>
+        <p class="show-for-medium-down"><a href="http://vimeo.com/77693957" target="_blank" id="video-link">Watch video</a></p>
+    </div>
+
+    <a href="#faqAnchor" class="anchorLink"><div id="arrow"></div></a>
+
+    <div id="overlay"></div>
+</div>
+
+<div class="hide-for-small-only">
+    <a href="#" id="splash-return" class="round-corners">Return</a>
+    <video id="splash-video">
+        <source src="/assets/mp4/splash.mp4" type="video/mp4" autostart="false">
+    </video>
+</div>
+
+<div id="splash-bg" class="hide-for-medium-up"></div>
