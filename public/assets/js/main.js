@@ -61,18 +61,43 @@
 	$('.anchorLink').click(function(){
 	    root.animate({
 	        scrollTop: $( $(this).attr('href') ).offset().top
-	    }, 1000);
+	    }, 800);
 	});
 })();
 
+// Notification subscription
+(function(){
+	var eventId = $('.current-city').attr('id'),
+		subscriptionSubmit = $('.subscription-submit');
+	subscriptionSubmit.on('click', function(){
+		var enteredEmail = $('.subscription-email').val();
+		$.ajax({
+			method: 'post',
+			dataType: 'json',
+			url: 'https://clear.codeday.org/api/notify/subscribe',
+			data: {
+				email: enteredEmail,
+				event: eventId
+			},
+			success: function(){
+				$('.subscription-email').val('');
+				subscriptionSubmit.css('background', '#A0D388').val('Thanks!');
+				setTimeout(function(){
+					subscriptionSubmit.css('background', '#DD5D5C').val('Subscribe');
+				}, 1500);
+			}
+		});
+	});
+
+})();
 
 // City picker stuff
 (function(){
-	var spanCurrentCity = $('span.current-city');
-	var inputCurrentCity = $('input.current-city');
-	var cityPicker = $('#city-picker');
-    var previous_picker_xhr;
-	var cityValue;
+	var spanCurrentCity = $('span.current-city'),
+		inputCurrentCity = $('input.current-city'),
+		cityPicker = $('#city-picker'),
+   		previous_picker_xhr,
+		cityValue;
 
 	// Retrieve city picker values
 	function capitaliseFirstLetter(string) {
@@ -81,7 +106,7 @@
 
 	function displayCities(response_object) {
 		$.each(response_object, function(key, value) {
-			var cityOption = '<li class="city-option">' + value.name + '</li>';
+			var cityOption = '<li id="' + value.id + ' " class="city-option">' + value.name + '</li>';
 			if (key !== 0) {
 				$('#city-picker ul').append(cityOption);
 			} else {
@@ -90,13 +115,21 @@
 			return key < 7;
 		});
 		$('.city-option').on('click', function(){
-			var pickedCity = $(this).html();
-			inputCurrentCity.val(pickedCity);
+			if (!$(this).hasClass('no-click')) {
+				var pickedCity = $(this).html();
+				var pickedId = $(this).attr('id');
+				spanCurrentCity.html(pickedCity);
+                                if (typeof(window.location.replace) !== 'undefined') {
+                               	    window.location.replace('/'+pickedId);
+                                } else {
+                                    window.location.href = '/'+pickedId;
+                                }
+           
+			}
 		});
 	}
 
 	$('.current-city').click(function(e){
-		e.preventDefault();
 		// Change current-city span into input box 
 		spanCurrentCity.hide();
 		inputCurrentCity.css('width', '6.2em').show().focus();
@@ -106,15 +139,17 @@
 
 	$(document).on('click', function() { 
 		cityPicker.fadeOut('fast'); 
+		inputCurrentCity.hide();
+		spanCurrentCity.show();
 	});
 
 	if (inputCurrentCity.is(':focus')) {
 		cityPicker.show();
 	}
 
-	if($.trim(inputCurrentCity.val()).length == 0) { // If current city input box is empty
+	if ($.trim(inputCurrentCity.val()).length == 0) { // If current city input box is empty
 		$.ajax({
-			url: "http://clear.codeday.org/api/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
+			url: "https://clear.codeday.org/api/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
 			method: "GET",
 			dataType: "JSON",
 			success: function(response_object) {
@@ -126,18 +161,26 @@
 	inputCurrentCity.on('input propertychange paste', function(){
 		cityValue = $(this).val().toString().toLowerCase();
 		cityValue = capitaliseFirstLetter(cityValue);
-		$('#city-picker ul').html('');
-        if (typeof(previous_picker_xhr) !== 'undefined') {
-            previous_picker_xhr.abort();
-        }
-		previous_picker_xhr = $.ajax({
-			url: "https://clear.codeday.org/api/regions/search?term=" + cityValue,
-			method: "GET",
-			dataType: "JSON",
-			success: function(response_object) {
-				displayCities(response_object);
-			}
-		});
+		$('#city-picker ul').html('<li class="city-option no-click">. . .</li>');
+        if ($.trim(inputCurrentCity.val()).length == 0) { // If current city input box is empty, search for nearest cities
+			$.ajax({
+				url: "https://clear.codeday.org/api/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
+				method: "GET",
+				dataType: "JSON",
+				success: function(response_object) {
+					displayCities(response_object);
+				}
+			});
+		} else {
+			$.ajax({
+				url: "https://clear.codeday.org/api/regions/search?term=" + cityValue,
+				method: "GET",
+				dataType: "JSON",
+				success: function(response_object) {
+					displayCities(response_object);
+				}
+			});
+		}
 	});
 
 

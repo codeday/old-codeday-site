@@ -8,37 +8,37 @@ class EventController extends \Controller {
     {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
 
-        if (!\Session::has('loaded_event')) {
-            $event = Models\Event::closestNearby($visitor_info->lat, $visitor_info->lng);
-            \Session::set('loaded_event', $event->id);
-        }
-
-        $event = Models\Event::find(\Session::get('loaded_event'));
-        \View::share('event', $event);
+        \View::share('event', \Route::input('event'));
         \View::share('visitor', $visitor_info);
     }
 
     public function getIndex()
     {
-
-        if (\Input::get('region')) {
-            try {
-                $region = Models\Region::find(\Input::get('region'));
-                \Session::put('loaded_event', $region->current_event->id);
-            } catch (\Exception $ex) {}
-
-
-            // Try to redirect
-            if (\Request::isMethod('get')) {
-                return \Redirect::to(\Request::url());
-            }
-        }
-
         return \View::make('index');
     }
 
     public function getRegister()
     {
+        $event = \Route::input('event');
+        if (!$event->registration_info['is_open']) {
+            return \Redirect::to('/');
+        }
+
         return \View::make('register');
+    }
+
+    public function getPress()
+    {
+        return \View::make('press');
+    }
+
+    public function getSponsor()
+    {
+        return \View::make('sponsor');
+    }
+
+    public function getRules()
+    {
+        return \View::make('rules');
     }
 } 

@@ -21,36 +21,48 @@
             </nav>
         </div>
 
-        <h1 class="site-title">CodeDay <span class="current-city">{{ event.name }}</span><input type="text" class="current-city" value=""></h1>
-        <div id="city-picker" class="round-corners text-left">
-            <h3 class="city-panel-title">Nearest events</h3>
-            <ul>
-            </ul>
+        <div class="to">
+            <div class="ti">
+                <h1 class="site-title"><span id="codeday-title">CodeDay</span> <span id="{{event.id}}" class="current-city">{{ event.name }}</span><input type="text" class="current-city" value=""></h1>
+                <div id="city-picker" class="round-corners text-left">
+                    <h3 class="city-panel-title">Nearest events</h3>
+                    <ul>
+                    </ul>
+                </div>
+                <p class="site-description">Build something awesome in 24 hours!</p>
+                <p class="event-date">
+                    {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon{% if event.venue %}.
+                    Hosted at <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank">{{ event.venue.name }}</a>.
+                {% endif %}
+                </p>
+                {% if event and event.registration_info.is_open %}
+                    <a href="/{{ event.webname }}/register" class="button register-button round-corners">Get your ticket!</a>
+                {% else %}
+                    <p id="subscription-message">We're not selling tickets right now but we can notify you when we are.</p>
+                    <input type="text" class="subscription-email" placeholder="Email"><!--
+                    --><input type="submit" value="Subscribe" class="subscription-submit">
+                {% endif %}
+                <div class="text-center">
+                    {# <p class="show-for-large-up"><a href="#" id="video-link">Watch video</a></p> #}
+                    {# <p class="show-for-medium-down"><a href="http://vimeo.com/77693957" target="_blank" id="video-link">Watch video</a></p> #}
+                </div>
+                <a href="#faqAnchor" class="anchorLink"><span id="arrow"></span></a>
+            </div>
         </div>
-        <p class="site-description">Build something awesome in 24 hours!</p>
-        <h2 class="event-date">November 11-12th 2014</h2>
-        {% if event.venue %}
-            <h2 class="event-host">Hosted at {{ event.venue.name }}</h2>
-        {% endif %}
-        {# <a href="/register" class="button register-button round-corners">Get your ticket!</a> #}
-        <div class="row text-center">
-	        <input type="text" id="subscription-email" placeholder="Email"><!--
-	        --><input type="submit" value="Subscribe" id="subscription-submit">
-        </div>
-        <p class="show-for-large-up"><a href="#" id="video-link">Watch video</a></p>
-        <p class="show-for-medium-down"><a href="http://vimeo.com/77693957" target="_blank" id="video-link">Watch video</a></p>
     </div>
 
-    <a href="#faqAnchor" class="anchorLink"><div id="arrow"></div></a>
 
     <div id="overlay"></div>
 </div>
 
+{# 
+UNCOMMENT WHEN VIDEO IS AVAILABLE
 <div class="hide-for-small-only">
     <a href="#" id="splash-return" class="round-corners">Return</a>
     <video id="splash-video">
         <source src="/assets/mp4/splash.mp4" type="video/mp4" autostart="false">
     </video>
-</div>
+</div> #}
 
-<div id="splash-bg" class="hide-for-medium-up"></div>
+{# UNCOMMENT WHEN VIDEO IS AVAILABLE <div id="splash-bg" class="hide-for-medium-up"></div>  #}
+<div id="splash-bg"></div>
