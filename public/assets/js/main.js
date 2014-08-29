@@ -67,28 +67,29 @@
 
 // Notification subscription
 (function(){
-	var eventId = $('.current-city').attr('id'),
-		subscriptionSubmit = $('.subscription-submit');
-	subscriptionSubmit.on('click', function(){
-		var enteredEmail = $('.subscription-email').val();
-		$.ajax({
-			method: 'post',
-			dataType: 'json',
-			url: 'https://clear.codeday.org/api/notify/subscribe',
-			data: {
-				email: enteredEmail,
-				event: eventId
-			},
-			success: function(){
-				$('.subscription-email').val('');
-				subscriptionSubmit.css('background', '#A0D388').val('Thanks!');
-				setTimeout(function(){
-					subscriptionSubmit.css('background', '#DD5D5C').val('Subscribe');
-				}, 1500);
-			}
-		});
-	});
-
+        var eventId = $('.current-city').attr('id'),
+        subscriptionSubmit = $('.subscription-submit');
+        var onSubmitFunction = function(){
+                var enteredEmail = $('.subscription-email').val();
+                $.ajax({
+                        method: 'post',
+                        dataType: 'json',
+                        url: 'https://clear.codeday.org/api/notify/subscribe',
+                        data: {
+                                email: enteredEmail,
+                                event: eventId
+                        },
+                        success: function(){
+                                $('.subscription-email').val('');
+                                subscriptionSubmit.css('background', '#A0D388').val('Thanks!');
+                                setTimeout(function(){
+                                        subscriptionSubmit.css('background', '#DD5D5C').val('Subscribe');
+                                }, 1500);
+                        }
+                });
+        };
+        subscriptionSubmit.on('click', onSubmitFunction);
+        $('.subscription-email').on('keypress', function(e) { if(e.which == 13) { onSubmitFunction(); } });
 })();
 
 // City picker stuff
