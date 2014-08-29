@@ -11,6 +11,9 @@
             {{ block('title') }} |
         {% endif %}
         CodeDay
+        {% if event %}
+            {{ event.name }}
+        {% endif %}
     </title>
     {% if event %}
         <meta property="og:site_name" content="CodeDay">
@@ -30,10 +33,9 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/foundation.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
-    <script src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
 </head>
 <body>
 
@@ -53,7 +55,7 @@
                 </ul>
             </nav>
             <div class="row">
-                <h1 class="site-title left"><a href="/">CodeDay</a></h1>
+                <h1 class="site-title left"><a href="/{% if event %}{{ event.webname }}{% endif %}">CodeDay</a></h1>
                 <a href="#" id="nav-button" class="right">Menu</a>
             </div>
             <h1 class="subpage-title text-center">{{ block('title') }}</h1>
@@ -63,7 +65,7 @@
         <header class="header-subpage header-large hide-for-small-only">
             <div class="row">
                 <div class="column large-3 small-3">
-                    <h1 class="site-title"><a href="/">CodeDay</a></h1>
+                    <h1 class="site-title"><a href="/{% if event %}{{ event.webname }}{% endif %}">CodeDay</a></h1>
                 </div>
                 <div class="column large-9 small-9">
                     <nav class="site-nav text-right">

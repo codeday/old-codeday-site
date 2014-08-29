@@ -477,7 +477,6 @@ body .subscription-submit {
     -webkit-transition: 0.2s background;
     transition: 0.2s background;
     position: relative;
-    top: -0.05rem;
 }
 
 #video-link:link {
