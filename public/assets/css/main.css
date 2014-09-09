@@ -176,6 +176,34 @@ p:last-of-type {
     visibility: hidden;
 }
 
+
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+}
+
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+
 /* 
 ==========================================================================
 SPLASH
@@ -1617,6 +1645,94 @@ SPONSOR SUBPAGE
     margin-bottom: 2em;
 }
 
+
+/*
+==========================================================================
+GLOBAL HOMEPAGE
+========================================================================== */
+
+#global-page.subpage {
+    background-color: transparent;
+}
+
+#global-page .site-nav a, #global-page .site-title a {
+    color: #4D4D4D;
+}
+
+#global-page h2.excite, #global-page h3.excite {
+    text-align: center;
+    color: #4D4D4D;
+}
+
+#global-page h2.excite {
+    font-size: 3em;
+    margin-top: 1.5em;
+}
+
+#global-page h3.excite {
+    font-size: 1em;
+    margin-top: 0.1em;
+}
+
+#global-page .excite a {
+    color: #F9A448;
+    text-decoration: underline;
+}
+
+#global-page .details {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#global-page #map {
+    width: 100%;
+    max-width: 62.5rem;
+    margin: 1rem auto;
+}
+
+#global-page .land {
+    fill: #4D4D4D;
+}
+
+#global-page .state-boundary {
+    fill: none;
+    stroke: #fff;
+}
+
+#global-page circle.city {
+    fill: #fff;
+}
+
+#global-page circle.city.handle {
+    stroke: #4D4D4D;
+    stroke-width: 1px;
+    cursor: pointer;
+}
+
+#global-page circle.city.nearest {
+    fill: #F9A448;
+}
+
+#global-page .list {
+    width: 100%;
+    max-width: 62.5rem;
+    margin: 0 auto 1rem;
+    padding-top: 0;
+}
+
+#global-page .list section {
+    padding-top: 0;
+    text-align: center;
+    float: left;
+    width: 25%;
+}
+
+#global-page .list section a {
+    color: #666;
+    text-decoration: underline;
+    font-size: 0.9em;
+}
+
 /* 
 ==========================================================================
 SHOWCASE
@@ -1732,6 +1848,7 @@ TERMS OF SERVICE
 FOOTER
 ========================================================================== */
 #site-footer {
+    clear: both;
     padding: 2em 0;
     background-color: #797979;
     color: #fff;

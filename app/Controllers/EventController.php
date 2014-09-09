@@ -10,6 +10,7 @@ class EventController extends \Controller {
 
         \View::share('event', \Route::input('event'));
         \View::share('visitor', $visitor_info);
+        \View::share('loaded_batch', Models\Batch::current());
     }
 
     public function getIndex()

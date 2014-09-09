@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'CodeDay\\Controllers\\EventController' => $baseDir . '/app/Controllers/EventController.php',
     'CodeDay\\Controllers\\StaticController' => $baseDir . '/app/Controllers/StaticController.php',
+    'CodeDay\\Models\\Batch' => $baseDir . '/app/Models/Batch.php',
     'CodeDay\\Models\\ClearModel' => $baseDir . '/app/Models/ClearModel.php',
     'CodeDay\\Models\\Event' => $baseDir . '/app/Models/Event.php',
     'CodeDay\\Models\\Ip' => $baseDir . '/app/Models/Ip.php',

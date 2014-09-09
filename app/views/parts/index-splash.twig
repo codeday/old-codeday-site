@@ -29,7 +29,7 @@
                     <ul>
                     </ul>
                 </div>
-                <p class="site-description">Join students in 27 cities nationwide, and build something awesome in 24 hours!</p>
+                <p class="site-description">Join students in {{ loaded_batch.events|length }} cities nationwide, and build something awesome in 24 hours!</p>
                 <p class="event-date">
                     {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon{% if event.venue %}.
                     Hosted at <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank">{{ event.venue.name }}</a>.

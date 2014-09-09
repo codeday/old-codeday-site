@@ -21,7 +21,6 @@ App::down(function()
 	return Response::make("Be right back!", 503);
 });
 
-
 $include_all_directories = ['events', 'filters', 'routes'];
 foreach ($include_all_directories as $directory) {
     foreach (glob(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), $directory, "*.php"])) as $filename) {
