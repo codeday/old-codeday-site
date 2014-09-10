@@ -20,15 +20,15 @@
         <meta property="og:locale" content="en_US">
         <meta property="og:type" content="website">
         <meta property="og:image" content="https://codeday.org/assets/img/facebookthumb.jpg">
-        <meta property="og:description" content="{{ event.full_name }}. {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon." />
-        <meta name="description" content="{{ event.full_name }}. {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon." />
+        <meta property="og:description" content="Get your ticket for {{ event.full_name }} today. {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon. Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours." />
+        <meta name="description" content="Get your ticket for {{ event.full_name }} today. {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon. Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours." />
     {% else %}
         <meta property="og:site_name" content="CodeDay">
         <meta property="og:locale" content="en_US">
         <meta property="og:type" content="website">
         <meta property="og:image" content="https://codeday.org/assets/img/facebookthumb.jpg">
-        <meta property="og:description" content="Join students in {{ loaded_batch.events|length }} cities at CodeDay and build something awesome in 24 hours!">
-        <meta name="description" content="Join students in {{ loaded_batch.events|length }} cities at CodeDay and build something awesome in 24 hours!">
+        <meta property="og:description" content="The most exciting CodeDay yet! Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours.">
+        <meta name="description" content="The most exciting CodeDay yet! Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours.">
     {% endif %}
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico" />
