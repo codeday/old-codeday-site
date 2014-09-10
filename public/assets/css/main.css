@@ -802,6 +802,7 @@ SPONSORS LIST
     overflow: auto;
     padding-bottom: 0;
     position: relative;
+    clear: both;
 }
 
 #sponsors .section-title {
@@ -1651,12 +1652,12 @@ SPONSOR SUBPAGE
 GLOBAL HOMEPAGE
 ========================================================================== */
 
-#global-page.subpage {
-    background-color: transparent;
+#global-page .site-nav a, #global-page .site-title a, #global-page #nav-button {
+    color: #4D4D4D;
 }
 
-#global-page .site-nav a, #global-page .site-title a {
-    color: #4D4D4D;
+#nav-button {
+    background-image: url(../img/nav-icon-inverse.png);
 }
 
 #global-page h2.excite, #global-page h3.excite {
@@ -1675,7 +1676,7 @@ GLOBAL HOMEPAGE
 }
 
 #global-page .excite a {
-    color: #F9A448;
+    color: #42C2D2;
     text-decoration: underline;
 }
 
@@ -1696,23 +1697,22 @@ GLOBAL HOMEPAGE
 
 #global-page .state-boundary {
     fill: none;
-    stroke: #fff;
+    stroke: rgba(255, 255, 255, 0.2);
 }
 
 #global-page circle.city {
-    fill: #fff;
+    fill: #F9A448;
 }
 
 #global-page circle.city.handle {
-    stroke: #4D4D4D;
+    stroke: #fff;
     stroke-width: 1px;
     cursor: pointer;
 }
 
 #global-page circle.city.nearest {
-    fill: #F9A448;
+    fill: #42C2D2;
 }
-
 #global-page .list {
     width: 100%;
     max-width: 62.5rem;
@@ -1731,6 +1731,14 @@ GLOBAL HOMEPAGE
     color: #666;
     text-decoration: underline;
     font-size: 0.9em;
+}
+
+#global-page #over {
+    position: initial;
+}
+
+#global-page #sponsors {
+    background-color: transparent;
 }
 
 /* 
