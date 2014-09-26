@@ -77,6 +77,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVggXa9btjGmzqgUim-1HjmnMtbF3UNms&sensor=false&libraries=visualization"></script>
     <script type="text/javascript">
         window.unit_cost = {{ event.cost }};
+        window.quoted_price = {{ event.cost }};
         function initialize() {
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({
