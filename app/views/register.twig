@@ -14,11 +14,18 @@
                 <p class="register-date">{{ event.starts_at|date('F j') }}-{{event.ends_at|date('j, Y') }}; noon-noon</p>
             </div>
 
-            <div class="register-box round-corners">
+            <div class="register-box round-corners" id="purchase-info-box">
                 <h2>Purchase Info</h2>
-                <span class="ticket-type">Student</span><!--
-				--><span class="ticket-price">$10 (Early Bird 50% Off)</span><!--
-				--><span class="dropdown">
+                <span class="ticket-type">Student</span>
+                <span class="ticket-price">
+                    {% if event.is_early_bird_pricing %}
+                        <em style="text-decoration: line-through">$20</em>
+                        $10 (Early-bird)
+                    {% else %}
+                        $20
+                    {% endif %}
+                </span>
+                <span class="dropdown">
 				<select id="ticket-amount">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -36,46 +43,40 @@
                     <span id="total-cost" class="text-center">$10</span>
                 </div>
                 <input type="text" id="promo-code" name="promo-code" placeholder="Enter Promotional Code"><!--
-                --><a href="" id="promo-code-button" class="text-center">Apply</a>
+                --><a href="#" id="promo-code-button" class="text-center">Apply</a>
             </div>
 
         </div>
 
         <div class="columns medium-6">
             <div id="coder-profile-1" class="register-box round-corners coder-profile">
-                <form action="" method="post" autocomplete="off">
-                    <h2 class="coder-profile-title">Attendee</h2>
-                    <input type="text" class="first-name" name="first-name" placeholder="First Name"><!--
-					--><input type="text" class="last-name" name="last-name" placeholder="Last Name"><!--
-					--><input type="text" class="age" name="age" placeholder="Age" maxlength="2"><!--
-					--><input type="text" class="email" name="email" placeholder="Email"><!--
-					--><input type="text" class="confirm-email" name="confirm-email" placeholder="Confirm Email">
-                    <input type="checkbox" id="subscribe1" class="register-checkbox" name="subscribe1" value="subscribe" checked><label for="subscribe1">I’d like to recieve info from sponsors</label>
-                </form>
+                <h2 class="coder-profile-title">Attendee Info</h2>
+                <input type="text" class="first-name" name="first-name" placeholder="First Name"><!--
+					--><input type="text" class="last-name" name="last-name" placeholder="Last Name">
+                <input type="text" class="email" name="email" placeholder="Email">
             </div>
-            <div class="register-box round-corners">
-                <form id="billing-info" action="" method="post" autocomplete="off">
-                    <h2>Billing</h2>
-                    <input type="text" id="credit-num" name="credit-num" placeholder="Credit Card Number"><!--
+            <div id="billing-info" class="register-box round-corners">
+                <h2>Billing</h2>
+                <input type="text" id="credit-num" name="credit-num" placeholder="Credit Card Number"><!--
 					--><input type="text" id="csc" name="csc" placeholder="CSC" maxlength="3"><!--
 					--><span id="expir-date">Expiration Date</span><!--
 					--><input type="text" id="mm" name="mm" placeholder="mm" maxlength="2"><!--
-					--><span> /</span><!-- 
+					--><span> /</span><!--
                     --><input type="text" id="yy" name="yy" placeholder="yy" maxlength="2">
-                </form>
             </div>
 
             <a href="" id="pay-button" class="round-corners text-center">Pay Now</a>
 
-            <p id="toa">By clicking “Pay Now”, I have read and agree with the <a href="">CodeDay terms of service</a>, <a href="">CodeDay code of conduct</a>, and possibly getting my picture taken during the event.</p>
+            <p id="toa">By registering, I have read and agree with the <a href="">code of conduct</a>, understand that my name and email may be shared with sponsors, and agree to have my photo or video taken during the event.</p>
 
         </div>
 
     </main>
 {% endblock %}
 {% block scripts %}
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVggXa9btjGmzqgUim-1HjmnMtbF3UNms&sensor=false&libraries=visualization"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVggXa9btjGmzqgUim-1HjmnMtbF3UNms&sensor=false&libraries=visualization"></script>
     <script type="text/javascript">
+        window.unit_cost = {{ event.cost }};
         function initialize() {
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({
@@ -105,5 +106,137 @@
             });
         }
         google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+        $('#promo-code-button').on('click', function(e) {
+            e.preventDefault();
+
+            if ($('#promo-code').prop('disabled') || $('#promo-code-button').text() == '...') {
+                return;
+            }
+
+            $('#promo-code-button').text('...');
+
+            $.ajax({
+                url: "https://clear.codeday.org/api/register/{{ event.id }}/promotion",
+                type: "GET",
+                dataType: "json",
+                data: {
+                    code: $('#promo-code').val()
+                },
+                success: function(data){
+                    if (data.expired) {
+                        alert("Code is expired.");
+                        $('#promo-code-button').text('Apply');
+                        $('#promo-code').val('');
+                        return;
+                    } else if (data.remaining_uses == 0) {
+                        alert("Code has already been used.");
+                        $('#promo-code-button').text('Apply');
+                        $('#promo-code').val('');
+                        return;
+                    }
+
+                    if (data.remaining_uses != null && data.remaining_uses < 10) {
+                        console.log(data.remaining_uses);
+                        $('#ticket-amount option').filter(function() {
+                            return parseInt($(this).val(), 10) > data.remaining_uses;
+                        }).remove();
+                    }
+
+                    if (data.cost == 0) {
+                        $('#billing-info').css('display', 'none');
+                        $('#billing-info input').val('');
+                        $('#pay-button').text('Register Now');
+                    }
+
+                    $('#promo-code').prop('disabled', true);
+                    $('#promo-code-button').text('Applied');
+                    window.unit_cost = data.cost;
+                    $('.ticket-price').html('<em style="text-decoration: line-through">$20</em> $'+data.cost);
+                    $('#ticket-amount option').trigger('change');
+                },
+                error: function(){
+                    alert("Code is invalid.");
+                    $('#promo-code-button').text('Apply');
+                    $('#promo-code').val('');
+                }
+            });
+
+            return false;
+        })
+
+        Stripe.setPublishableKey('{{ event.stripe_public_key|escape('js') }}');
+        $('#pay-button').click(function(e){
+            e.preventDefault();
+
+            if ($('#pay-button').text() == '...') {
+                return;
+            }
+
+            $('#pay-button').text('...');
+
+            if ($('.coder-profile input').filter(function(){return $(this).val() == ''}).length > 0) {
+                $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            var allVals = function(elems) { var vals = []; elems.each(function(){ vals.push($(this).val()) }); return vals; }
+
+            var register = function(token) {
+
+                $.ajax({
+                    url: "https://clear.codeday.org/api/register/{{ event.id }}/register",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        card_token: token,
+                        quoted_price: window.quoted_price,
+                        first_names: allVals($('.first-name')),
+                        last_names: allVals($('.last-name')),
+                        emails: allVals($('.email')),
+                        code: $('#promo-code').val()
+                    },
+                    success: function(data) {
+                        if (data.status == 200) {
+                            $('#purchase-info-box, .coder-profile, #pay-button, #billing-info').css('display', 'none');
+                            $('#toa').css('padding-top', '2rem')
+                                    .html("Thanks for registering! A receipt has been emailed to you. We look forward to seeing you at CodeDay. If you have any questions, please <a href='mailto:contact@studentrnd.org'>email us</a>.");
+                        } else {
+                            alert(data.message);
+                            $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
+                        }
+                    },
+                    error: function(data) {
+                        alert('Your card was declined.');
+                        $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
+                    }
+                });
+            };
+
+            if (unit_cost == 0) {
+                register(null);
+            } else {
+                Stripe.card.createToken({
+                    number: $('#credit-num').val(),
+                    cvc: $('#csc').val(),
+                    exp_month: $('#mm').val(),
+                    exp_year: $('#yy').val()
+                },
+                function(status, response) {
+                    if (response.error) {
+                        alert(response.error.message);
+                        $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
+                    } else {
+                        var token = response.id;
+                        register(token);
+                    }
+                });
+            }
+
+            return false;
+        });
     </script>
 {% endblock %}

@@ -190,18 +190,18 @@
 
 // Registration ticket price calculations and add coders
 (function(){
-	var ticketPrice = 10; // TODO
-
 	$('#ticket-amount').change(function() { 
 		var quantity = $('#ticket-amount').val(),
-			total = quantity * ticketPrice;
-		$('#total-cost').text('$' + total); 
+			total = quantity * window.unit_cost;
+		$('#total-cost').text('$' + total);
+        window.quoted_price = total;
 
 		$('#coder-profile-1').siblings('.coder-profile').remove(); // Remove extra coder profiles (reset)
 
 		for (var i = 0; i < quantity - 1; i++) {
 			var $coderProfile = $('#coder-profile-1').clone(); // Clone coder profile 1
 			var $newCoderProfile = ($coderProfile).attr('id','coder-profile-' + (i + 2)); // Set new coder profile with id of, say, 3
+            $newCoderProfile.find('input').val('');
 			($newCoderProfile).insertAfter($('#coder-profile-' + (i + 1))); // Put new coder profile 3 after coder profile 2
 		}
 	});
