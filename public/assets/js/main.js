@@ -74,7 +74,7 @@
                 $.ajax({
                         method: 'post',
                         dataType: 'json',
-                        url: 'https://clear.codeday.org/api/notify/subscribe',
+                        url: window.api_base+'/notify/subscribe',
                         data: {
                                 email: enteredEmail,
                                 event: eventId
@@ -150,7 +150,7 @@
 
 	if ($.trim(inputCurrentCity.val()).length == 0) { // If current city input box is empty
 		$.ajax({
-			url: "https://clear.codeday.org/api/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
+			url: window.api_base+"/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
 			method: "GET",
 			dataType: "JSON",
 			success: function(response_object) {
@@ -165,7 +165,7 @@
 		$('#city-picker ul').html('<li class="city-option no-click">. . .</li>');
         if ($.trim(inputCurrentCity.val()).length == 0) { // If current city input box is empty, search for nearest cities
 			$.ajax({
-				url: "https://clear.codeday.org/api/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
+				url: window.api_base+"/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
 				method: "GET",
 				dataType: "JSON",
 				success: function(response_object) {
@@ -174,7 +174,7 @@
 			});
 		} else {
 			$.ajax({
-				url: "https://clear.codeday.org/api/regions/search?term=" + cityValue,
+				url: window.api_base+"/regions/search?term=" + cityValue,
 				method: "GET",
 				dataType: "JSON",
 				success: function(response_object) {
@@ -193,7 +193,7 @@
 	$('#ticket-amount').change(function() { 
 		var quantity = $('#ticket-amount').val(),
 			total = quantity * window.unit_cost;
-		$('#total-cost').text('$' + total);
+		$('#total-cost').text('$' + total.toFixed(2));
         window.quoted_price = total;
 
 		$('#coder-profile-1').siblings('.coder-profile').remove(); // Remove extra coder profiles (reset)

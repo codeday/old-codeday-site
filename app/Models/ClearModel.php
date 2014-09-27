@@ -2,14 +2,13 @@
 namespace CodeDay\Models;
 
 abstract class ClearModel extends RemoteModel {
-    const api_base = 'http://clear.codeday.org/api';
 
     protected static function clearGet($endpoint, $data = [])
     {
         $data['access_token'] = \Config::get('clear.access_token');
         $data['secret'] = \Config::get('clear.secret');
 
-        $url = self::api_base.$endpoint.'?'.http_build_query($data);
+        $url = \Config::get('clear.api_base').$endpoint.'?'.http_build_query($data);
 
         if (!\Cache::has('clearmodel.urlcache.'.base64_encode($url))) {
             $contents = file_get_contents($url);
@@ -31,4 +30,4 @@ abstract class ClearModel extends RemoteModel {
             return $this->remote_data[$key];
         }
     }
-} 
+}

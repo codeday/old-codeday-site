@@ -40,7 +40,7 @@
                 </select></span>
                 <div class="text-right">
                     <span id="text-total" class="text-center">Total</span>
-                    <span id="total-cost" class="text-center">$10</span>
+                    <span id="total-cost" class="text-center">{% if event.is_early_bird_pricing %}$10.00{% else %}$20.00{% endif %}</span>
                 </div>
                 <input type="text" id="promo-code" name="promo-code" placeholder="Enter Promotional Code"><!--
                 --><a href="#" id="promo-code-button" class="text-center">Apply</a>
@@ -120,7 +120,7 @@
             $('#promo-code-button').text('...');
 
             $.ajax({
-                url: "https://clear.codeday.org/api/register/{{ event.id }}/promotion",
+                url: "{{ api_base }}/register/{{ event.id }}/promotion",
                 type: "GET",
                 dataType: "json",
                 data: {
@@ -155,7 +155,7 @@
                     $('#promo-code').prop('disabled', true);
                     $('#promo-code-button').text('Applied');
                     window.unit_cost = data.cost;
-                    $('.ticket-price').html('<em style="text-decoration: line-through">$20</em> $'+data.cost);
+                    $('.ticket-price').html('<em style="text-decoration: line-through">$20</em> $'+data.cost.toFixed(2));
                     $('#ticket-amount option').trigger('change');
                 },
                 error: function(){
@@ -189,7 +189,7 @@
             var register = function(token) {
 
                 $.ajax({
-                    url: "https://clear.codeday.org/api/register/{{ event.id }}/register",
+                    url: "{{ api_base }}/register/{{ event.id }}/register",
                     type: "POST",
                     dataType: "json",
                     data: {
