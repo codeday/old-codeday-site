@@ -1141,7 +1141,7 @@ p.register-date, span.dropdown, #text-total, #total-cost, #expir-date, #mm, #mm 
 
 .register-box .dropdown {
     padding: 0;
-    width: 23%;
+    width: 25%;
     position: relative;
     top: -2px;
 }

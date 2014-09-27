@@ -16,16 +16,16 @@
 
             <div class="register-box round-corners" id="purchase-info-box">
                 <h2>Purchase Info</h2>
-                <span class="ticket-type">Student</span>
-                <span class="ticket-price">
+                <span class="ticket-type">Student</span>{#
+                #}<span class="ticket-price">
                     {% if event.is_early_bird_pricing %}
                         <em style="text-decoration: line-through">$20</em>
                         $10 (Early-bird)
                     {% else %}
                         $20
                     {% endif %}
-                </span>
-                <span class="dropdown">
+                </span>{#
+                #}<span class="dropdown">
 				<select id="ticket-amount">
                     <option value="1">1</option>
                     <option value="2">2</option>
