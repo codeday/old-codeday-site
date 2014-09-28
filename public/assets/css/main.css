@@ -614,6 +614,11 @@ FAQ
     line-height: 1.5em;
 }
 
+.faq-a a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
 /* 
 ==========================================================================
 SCHEDULE
