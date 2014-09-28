@@ -18,6 +18,10 @@ class Ip extends RemoteModel{
             $user_data = json_decode($json, true);
 
             try {
+                if (!isset($user_data['latitude']) || !isset($user_data['longitude'])) {
+                    throw new \Exception();
+                }
+
                 $user_data['lat'] = $user_data['latitude'];
                 $user_data['lng'] = $user_data['longitude'];
 
@@ -26,7 +30,16 @@ class Ip extends RemoteModel{
                     'lng' => $user_data['lng']
                 ];
             } catch (\Exception $ex) {
-                $user_data = json_decode('{"timezone":"America\/Los_Angeles","isp":"Broadstripe","region_code":"WA","country":"United States","dma_code":"0","area_code":"0","region":"Washington","ip":"24.143.69.226","asn":"AS23292","continent_code":"NA","city":"Kirkland","postal_code":"98033","longitude":-122.1873,"latitude":47.6727,"country_code":"US","country_code3":"USA"}');
+                return (object)[
+                    'location' => [
+                        'lat' => 47,
+                        'lng' => -122
+                    ],
+                    'latitude' => 47,
+                    'longitude' => -122,
+                    'lat' => 47,
+                    'lng' => -122
+                ];
             }
 
             \Cache::put('ip.telize.'.$ip, $user_data, 60 * 24 * 7);
