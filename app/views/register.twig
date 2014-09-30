@@ -184,6 +184,11 @@
                 return;
             }
 
+            if (typeof($zopim) !== 'undefined') {
+                $zopim.livechat.setName($('.first-name').first().val()+' '+$('.last-name').first().val());
+                $zopim.livechat.setEmail($('.email').first().val());
+            }
+
             var allVals = function(elems) { var vals = []; elems.each(function(){ vals.push($(this).val()) }); return vals; }
 
             var register = function(token) {
