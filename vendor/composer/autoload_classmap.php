@@ -14,6 +14,8 @@ return array(
     'CodeDay\\Models\\Ip' => $baseDir . '/app/Models/Ip.php',
     'CodeDay\\Models\\Region' => $baseDir . '/app/Models/Region.php',
     'CodeDay\\Models\\RemoteModel' => $baseDir . '/app/Models/RemoteModel.php',
+    'CodeDay\\Models\\Swag' => $baseDir . '/app/Models/Swag.php',
+    'CreateSwagTracker' => $baseDir . '/app/database/migrations/2014_09_30_172349_create_swag_tracker.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',

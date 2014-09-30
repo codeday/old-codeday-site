@@ -24,6 +24,22 @@ class StaticController extends \Controller {
         ]);
     }
 
+    public function postSwag()
+    {
+        if (!\Session::get('swag-request')) {
+            $swag = new Models\Swag;
+            $swag->name = \Input::get('name');
+            $swag->address_1 = \Input::get('address_1');
+            $swag->address_2 = \Input::get('address_2');
+            $swag->city = \Input::get('city');
+            $swag->state = \Input::get('state');
+            $swag->postal = \Input::get('postal');
+            $swag->save();
+            \Session::set('swag-request', true);
+        }
+        return ['status' => 200];
+    }
+
     public function getPress()
     {
         return \View::make('press');

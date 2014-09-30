@@ -69,6 +69,31 @@
 
             <p id="toa">By registering, I have read and agree with the <a href="">code of conduct</a>, understand that my name and email may be shared with sponsors, and agree to have my photo or video taken during the event.</p>
 
+            <div id="confirmed" style="display: none;margin-top:1.9rem;">
+                <p>Thanks for registering! A receipt has been emailed to you. We look forward
+                    to seeing you at CodeDay. If you have any questions, please
+                    <a href="mailto:contact@studentrnd.org">email us</a>.</p>
+                <div class="share" style="margin-top:1rem">
+                    <p>CodeDay is more fun with friends! Share your registration and we'll mail
+                        you some freew swag!</p>
+                    <a id="fb-share" href="#" style="width:100%;height: 3.18em;background-color:#A0D388;text-transform: uppercase;color: #ffffff;text-align:center;display: block;margin-top:1rem">Share on Facebook</a>
+                </div>
+            </div>
+
+            <div id="request-address" class="register-box round-corners"  style="display: none">
+                <h2>Shipping Info</h2>
+                <p>Ship my swag to:</p>
+                <form>
+                    <input type="text" id="swag_name" placeholder="Name" required/>
+                    <input type="text" id="swag_address_1" placeholder="Address (Line 1)" required />
+                    <input type="text" id="swag_address_2" placeholder="Address (Line 2)" />
+                    <input type="text" id="swag_city" placeholder="City" required />
+                    <input type="text" id="swag_state" placeholder="State" required />
+                    <input type="text" id="swag_postal" placeholder="Postal Code" required />
+                    <input type="submit" style="height: 3.18em;width:100%;text-align: center;background-color:#A0D388;color:#ffffff;text-transform: uppercase" value="Ship it!"/>
+                </form>
+            </div>
+
         </div>
 
     </main>
@@ -108,7 +133,90 @@
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
+    <link rel="stylesheet" href="/assets/css/sweet-alert.css"/>
+    <style>
+        .sweet-alert, .sweet-alert * {
+            box-sizing: content-box;
+            -moz-box-sizing: content-box;
+        }
+    </style>
+    <script type="text/javascript" src="/assets/js/sweet-alert.min.js"></script>
+    <script type="text/javascript" src="/assets/js/share.min.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+        window.fbAsyncInit = function(){
+            FB.init({
+                appId      : '134222673401073',
+                status     : true,
+                xfbml      : true,
+                version    : 'v2.0'
+            });
+
+            $('#fb-share').click(function(e){
+                e.preventDefault();
+                FB.ui(
+                        {
+                            method: 'feed',
+                            name: 'CodeDay {{ event.name }}',
+                            link: 'https://codeday.org/{{ event.region_id }}',
+                            picture: 'https://codeday.org/assets/img/facebookthumb.jpg',
+                            caption: '{{ event.starts_at|date('F j') }}-{{event.ends_at|date('j, Y') }}; noon-noon',
+                            description: 'I just registered for CodeDay! Join me and other students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours.'
+                        },
+                        function(response) {
+                            $('#confirmed .share').css('display', 'none');
+                            $('#request-address').css('display', 'block');
+                        }
+                );
+            });
+        };
+
+        $('#request-address form').on('submit', function(e) {
+            e.preventDefault();
+
+            if ($('#request-address input[type="submit"]').val() == '...') {
+                return;
+            }
+
+            $('#request-address input[type="submit"]').val('...');
+
+            $.ajax({
+                url: '/swag',
+                type: 'POST',
+                data: {
+                    'name': $('#swag_name').val(),
+                    'address_1': $('#swag_address_1').val(),
+                    'address_2': $('#swag_address_2').val(),
+                    'city': $('#swag_city').val(),
+                    'state': $('#swag_state').val(),
+                    'postal': $('#swag_postal').val()
+                },
+                success: function(){
+                    $('#request-address').css('display', 'none');
+                    swal({
+                        title: 'On its way!',
+                        text: "Thanks for sharing! Your swag is on its way!",
+                        type: 'success',
+                        allowOutsideClick: true
+                    });
+                },
+                error: function() {
+                    $('#request-address input[type="submit"]').val('Ship it!');
+                    alert('Unknown error, contact support.');
+                }
+            });
+
+            return false;
+        });
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <script type="text/javascript">
         $('#promo-code-button').on('click', function(e) {
             e.preventDefault();
@@ -128,12 +236,20 @@
                 },
                 success: function(data){
                     if (data.expired) {
-                        alert("Code is expired.");
+                        swal({
+                            title: 'Expired',
+                            text: 'Sorry, this promo code is expired.',
+                            type: 'error'
+                        });
                         $('#promo-code-button').text('Apply');
                         $('#promo-code').val('');
                         return;
                     } else if (data.remaining_uses == 0) {
-                        alert("Code has already been used.");
+                        swal({
+                            title: 'Used',
+                            text: 'Sorry, this promo code has already been used the maximum number of times.',
+                            type: 'error'
+                        });
                         $('#promo-code-button').text('Apply');
                         $('#promo-code').val('');
                         return;
@@ -157,16 +273,28 @@
                     window.unit_cost = data.cost;
                     $('.ticket-price').html('<em style="text-decoration: line-through">$20</em> $'+data.cost.toFixed(2));
                     $('#ticket-amount option').trigger('change');
+
+
+                    swal({
+                        title: data.discount+'% off!',
+                        text: "Promo code \""+$('#promo-code').val()+"\" was successfully applied. Your new total is "+$('#total-cost').text(),
+                        imageUrl: '/assets/img/thumbsup.jpg',
+                        allowOutsideClick: true
+                    });
                 },
                 error: function(){
-                    alert("Code is invalid.");
+                    swal({
+                        title: 'Invalid',
+                        text: 'Sorry, this promo code doesn\'t exist.',
+                        type: 'error'
+                    });
                     $('#promo-code-button').text('Apply');
                     $('#promo-code').val('');
                 }
             });
 
             return false;
-        })
+        });
 
         Stripe.setPublishableKey('{{ event.stripe_public_key|escape('js') }}');
         $('#pay-button').click(function(e){
@@ -180,7 +308,10 @@
 
             if ($('.coder-profile input').filter(function(){return $(this).val() == ''}).length > 0) {
                 $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
-                alert('Please fill out all fields.');
+                swal({
+                    title: 'Please fill out all fields.',
+                    type: 'error'
+                });
                 return;
             }
 
@@ -207,16 +338,29 @@
                     },
                     success: function(data) {
                         if (data.status == 200) {
-                            $('#purchase-info-box, .coder-profile, #pay-button, #billing-info').css('display', 'none');
-                            $('#toa').css('padding-top', '2rem')
-                                    .html("Thanks for registering! A receipt has been emailed to you. We look forward to seeing you at CodeDay. If you have any questions, please <a href='mailto:contact@studentrnd.org'>email us</a>.");
+                            $('#purchase-info-box, .coder-profile, #pay-button, #billing-info, #toa').css('display', 'none');
+                            $('#confirmed').css('display', 'block');
+                            swal({
+                                title: 'You\'re in!',
+                                text: "You've successfully registered for CodeDay {{ event.name|escape('js') }}. A receipt has been emailed to you.",
+                                type: 'success',
+                                allowOutsideClick: true
+                            });
                         } else {
-                            alert(data.message);
+                            swal({
+                                title: 'Error',
+                                text: data.message,
+                                type: 'error'
+                            });
                             $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
                         }
                     },
                     error: function(data) {
-                        alert('Your card was declined.');
+                        swal({
+                            title: 'Error',
+                            text: 'We got an unusual response from our payment processor. This usually means your card was declined. Please contact support with any questions.',
+                            type: 'error'
+                        });
                         $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
                     }
                 });
@@ -233,7 +377,11 @@
                 },
                 function(status, response) {
                     if (response.error) {
-                        alert(response.error.message);
+                        swal({
+                            title: 'Error',
+                            text: response.error.message,
+                            type: 'error'
+                        });
                         $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
                     } else {
                         var token = response.id;

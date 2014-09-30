@@ -36,6 +36,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/foundation.min.css">
     <link rel="stylesheet" href="/assets/css/main.css">
+    {% if event and event.custom_css %}
+        <style type="text/css">
+            {{ event.custom_css }}
+        </style>
+    {% endif %}
 </head>
 <body>
 
