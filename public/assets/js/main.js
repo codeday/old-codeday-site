@@ -4,22 +4,26 @@
 		splashVideo =  $('#splash-video'),
 		splash = $('#splash');
 
+    var wistiaEmbed = splashVideo[0].wistiaApi;
+
 	$('#video-link').on('click', function(){
 		splash.fadeOut('fast', function(){ 
-			splashVideo.css('z-index', 0).get(0).play();
+			splashVideo.css('z-index', 0).get(0);
+            wistiaEmbed.play();
 			splashReturn.fadeIn();
 		});
 	});
 
 	function returnToSplash() {
 		splashReturn.hide();
-		splashVideo.css('z-index', -100).get(0).pause();
+		splashVideo.css('z-index', -100).get(0)
+        wistiaEmbed.pause();
 		splash.fadeIn('fast');
 	}
 
-	splashVideo.bind('ended', function(){
-		returnToSplash();
-	});
+    wistiaEmbed.bind("end", function() {
+        returnToSplash();
+    });
 
 	splashReturn.on('click', function(){
 		returnToSplash();
