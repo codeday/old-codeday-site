@@ -21,8 +21,8 @@ class EventController extends \Controller {
     public function getRegister()
     {
         $event = \Route::input('event');
-        if (!$event->registration_info['is_open']) {
-            return \Redirect::to('/');
+        if (!$event->registration_info['is_open'] || $event->registration_info['remaining'] == 0) {
+            return \Redirect::to('/'.$event->webname);
         }
 
         return \View::make('register');

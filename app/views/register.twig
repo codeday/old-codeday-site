@@ -9,6 +9,11 @@
             <div class="register-box round-corners">
                 <h2>CodeDay {{ event.name }}</h2>
                 <div class="register-map" id="location-map"></div>
+                {% if event.registration_info.remaining < (event.registration_info.max * 0.30) %}
+                    <p class="last-few">Only {{ event.registration_info.remaining }} tickets left!</p>
+                {% elseif event.registration_info.is_earlybird_ending %}
+                    <p class="last-few">Earlybird discount ends soon!</p>
+                {% endif %}
                 <p class="register-host">{{ event.venue.name }}</p>
                 <p class="register-address">{{ event.venue.full_address }}</p>
                 <p class="register-date">{{ event.starts_at|date('F j') }}-{{event.ends_at|date('j, Y') }}; noon-noon</p>

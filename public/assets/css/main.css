@@ -1090,6 +1090,12 @@ p.register-date, span.dropdown, #text-total, #total-cost, #expir-date, #mm, #mm 
     border-bottom: none;
 }
 
+p.last-few {
+    background-color: #DD5D5C;
+    color: #fff;
+    font-weight: bold;
+}
+
 .register-box {
     margin: 2em auto 3em auto;
     border: 2px solid #E6E6E6;
@@ -1661,7 +1667,7 @@ GLOBAL HOMEPAGE
     color: #4D4D4D;
 }
 
-#nav-button {
+#global-page #nav-button {
     background-image: url(../img/nav-icon-inverse.png);
 }
 
