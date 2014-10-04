@@ -37,7 +37,7 @@
                 </p>
                 {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
                     <a href="/{{ event.webname }}/register" class="button register-button round-corners">Get your ticket{% if event.registration_info.remaining < (event.registration_info.max * 0.10) %} &mdash;{{ event.registration_info.remaining }} left!{% else %}!{% endif %}</a>
-                {% elseif event.registration_info.remaining == 0 %}
+                {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
                     <a href="/" class="button register-button round-corners">Sold out &mdash; find a nearby event</a>
                 {% else %}
                     <p id="subscription-message">We're not selling tickets right now but we can notify you when we are.</p>
