@@ -348,7 +348,7 @@
                 return;
             }
 
-            if (typeof($zopim) !== 'undefined') {
+            if (typeof($zopim) !== 'undefined' && typeof($zopim.livechat) !== 'undefined' && typeof($zopim.livechat.setName) !== 'undefined') {
                 $zopim.livechat.setName($('.first-name').first().val()+' '+$('.last-name').first().val());
                 $zopim.livechat.setEmail($('.email').first().val());
             }
