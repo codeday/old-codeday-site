@@ -8,3 +8,10 @@
     {% include "parts/pitch.twig" %}
     {% include "parts/sponsors-list.twig" %}
 {% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        mixpanel.track(
+                "Event Page Loaded"
+        );
+    </script>
+{% endblock %}

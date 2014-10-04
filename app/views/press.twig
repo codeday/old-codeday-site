@@ -59,3 +59,10 @@
             </div>
         </main>
 {% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        mixpanel.track(
+                "Press Page Loaded"
+        );
+    </script>
+{% endblock %}

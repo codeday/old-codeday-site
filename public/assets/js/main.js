@@ -12,6 +12,9 @@
             wistiaEmbed.play();
 			splashReturn.fadeIn();
 		});
+        mixpanel.track(
+            "Started Video"
+        );
 	});
 
 	function returnToSplash() {
@@ -23,6 +26,9 @@
 
     wistiaEmbed.bind("end", function() {
         returnToSplash();
+        mixpanel.track(
+            "Watched Entire Video"
+        );
     });
 
 	splashReturn.on('click', function(){
@@ -193,12 +199,14 @@
 })();
 
 // Registration ticket price calculations and add coders
+window.ticket_quantity = 1;
 (function(){
 	$('#ticket-amount').change(function() { 
 		var quantity = $('#ticket-amount').val(),
 			total = quantity * window.unit_cost;
 		$('#total-cost').text('$' + total.toFixed(2));
         window.quoted_price = total;
+        window.ticket_quantity = quantity;
 
 		$('#coder-profile-1').siblings('.coder-profile').remove(); // Remove extra coder profiles (reset)
 

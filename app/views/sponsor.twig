@@ -250,3 +250,10 @@
     </section>
     </main>
 {% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        mixpanel.track(
+                "Sponsor Page Loaded"
+        );
+    </script>
+{% endblock %}

@@ -171,6 +171,10 @@
                             $('#request-address').css('display', 'block');
                         }
                 );
+
+                mixpanel.track(
+                        "Shared For Swag"
+                );
             });
         };
 
@@ -182,6 +186,11 @@
             }
 
             $('#request-address input[type="submit"]').val('...');
+
+
+            mixpanel.track(
+                    "Swag Requested"
+            );
 
             $.ajax({
                 url: '/swag',
@@ -221,6 +230,10 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
     <script type="text/javascript">
+        mixpanel.track(
+                "Register Page Loaded"
+        );
+
         $('#promo-code-button').on('click', function(e) {
             e.preventDefault();
 
@@ -244,6 +257,10 @@
                             text: 'Sorry, this promo code is expired.',
                             type: 'error'
                         });
+                        mixpanel.track(
+                                "Promo Error Expired",
+                                {"Code": $('#promo-code').val()}
+                        );
                         $('#promo-code-button').text('Apply');
                         $('#promo-code').val('');
                         return;
@@ -253,13 +270,16 @@
                             text: 'Sorry, this promo code has already been used the maximum number of times.',
                             type: 'error'
                         });
+                        mixpanel.track(
+                                "Promo Error Used",
+                                {"Code": $('#promo-code').val()}
+                        );
                         $('#promo-code-button').text('Apply');
                         $('#promo-code').val('');
                         return;
                     }
 
                     if (data.remaining_uses != null && data.remaining_uses < 10) {
-                        console.log(data.remaining_uses);
                         $('#ticket-amount option').filter(function() {
                             return parseInt($(this).val(), 10) > data.remaining_uses;
                         }).remove();
@@ -270,6 +290,11 @@
                         $('#billing-info input').val('');
                         $('#pay-button').text('Register Now');
                     }
+
+                    mixpanel.track(
+                            "Promo Used",
+                            {"Code": $('#promo-code').val()}
+                    );
 
                     $('#promo-code').prop('disabled', true);
                     $('#promo-code-button').text('Applied');
@@ -323,6 +348,13 @@
                 $zopim.livechat.setEmail($('.email').first().val());
             }
 
+            mixpanel.identify($('.email').first().val());
+            mixpanel.people.set({
+                "$email": $('.email').first().val(),
+                "$first_name": $('.first-name').first().val(),
+                "$last_name": $('.last-name').first().val()
+            });
+
             var allVals = function(elems) { var vals = []; elems.each(function(){ vals.push($(this).val()) }); return vals; }
 
             var register = function(token) {
@@ -349,12 +381,37 @@
                                 type: 'success',
                                 allowOutsideClick: true
                             });
+                            mixpanel.track(
+                                    "Registered"
+                            );
+                            var txn = ''+Math.floor(Math.random() * 10000000);
+                            ga('ecommerce:addTransaction', {
+                                'id': txn,
+                                'affiliation': 'CodeDay',
+                                'revenue': ''+window.quoted_price,
+                                'shipping': '0',
+                                'tax': '0'
+                            });
+                            mixpanel.people.track_charge(window.quoted_price);
+                            ga('ecommerce:addItem', {
+                                'id': txn,
+                                'name': 'CodeDay Ticket',
+                                'sku': 'CDT',
+                                'category': 'CodeDay Tickets',
+                                'price': ''+window.unit_cost,
+                                'quantity': ''+window.ticket_quantity
+                            });
+                            ga('ecommerce:send');
                         } else {
                             swal({
                                 title: 'Error',
                                 text: data.message,
                                 type: 'error'
                             });
+                            mixpanel.track(
+                                    "Registration Exception",
+                                    {"Exception": data.error}
+                            );
                             $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
                         }
                     },
@@ -364,6 +421,9 @@
                             text: 'We got an unusual response from our payment processor. This usually means your card was declined. Please contact support with any questions.',
                             type: 'error'
                         });
+                        mixpanel.track(
+                                "Registration 500"
+                        );
                         $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
                     }
                 });
@@ -385,6 +445,9 @@
                             text: response.error.message,
                             type: 'error'
                         });
+                        mixpanel.track(
+                                "Stripe Error"
+                        );
                         $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
                     } else {
                         var token = response.id;
