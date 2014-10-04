@@ -4,6 +4,10 @@
 		splashVideo =  $('#splash-video'),
 		splash = $('#splash');
 
+    if (splashVideo.length == 0) {
+        return;
+    }
+
     var wistiaEmbed = splashVideo[0].wistiaApi;
 
 	$('#video-link').on('click', function(){
