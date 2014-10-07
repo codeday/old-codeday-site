@@ -13,5 +13,8 @@
         mixpanel.track(
                 "Event Page Loaded"
         );
+        if (window.location.hash == '#video') {
+            $('#video-link').click();
+        }
     </script>
 {% endblock %}
