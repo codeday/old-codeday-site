@@ -8,6 +8,10 @@ class EventController extends \Controller {
     {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
 
+        if (!\Route::input('event')) {
+            \App::abort(404);
+        }
+
         \View::share('event', \Route::input('event'));
         \View::share('visitor', $visitor_info);
         \View::share('loaded_batch', Models\Batch::current());
