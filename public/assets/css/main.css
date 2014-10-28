@@ -818,190 +818,41 @@ SPONSORS LIST
     border: 1px #f0f0f0 solid;
     height: 250px;
     float: left;
+    text-align: center;
 }
 
-.sponsor-splunk {
-    background: url(../img/sponsors/splunk.jpg) no-repeat center center;
+.sponsor-image {
+    height: 70%;
+    width: 70%;
+    margin-top: 7%;
+    margin-left: 15%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
 }
 
-.sponsor-intellectualventures {
-    background: url(../img/sponsors/intellectualventures.jpg) no-repeat center center;
+.sponsor-splunk .sponsor-image {
+    background-image: url(../img/sponsors/splunk.png);
 }
 
-.sponsor-dwolla {
-    background: url(../img/sponsors/dwolla.jpg) no-repeat center center;
+.sponsor-intellectualventures .sponsor-image {
+    background-image: url(../img/sponsors/intellectualventures.png);
 }
 
-.sponsor-lexisnexis {
-    background: url(../img/sponsors/lexisnexis.jpg) no-repeat center center;
+.sponsor-lexisnexis .sponsor-image {
+    background-image: url(../img/sponsors/lexisnexis.jpg);
 }
 
-.sponsor-readyforce {
-    background: url(../img/sponsors/readyforce.jpg) no-repeat center center;
+.sponsor-lob .sponsor-image {
+    background-image: url(../img/sponsors/lob.png);
 }
 
-.sponsor-generalassembly {
-    background: url(../img/sponsors/generalassembly.jpg) no-repeat center center;
-}
-
-.sponsor-treehouse {
-    background: url(../img/sponsors/treehouse.jpg) no-repeat center center;
-}
-
-.sponsor-lob {
-    background: url(../img/sponsors/lob.jpg) no-repeat center center;
-}
-
-.sponsor-amazonwebservices {
-    background: url(../img/sponsors/amazonwebservices.jpg) no-repeat center center;
+.sponsor-fh .sponsor-image {
+    background-image: url(../img/sponsors/fancyhands.png);
 }
 
 .past-sponsor {
     height: 200px;
-}
-
-.sponsor-ebayinc {
-    background: url(../img/sponsors/ebayinc.png) no-repeat center center;
-}
-
-.sponsor-andreesenhorowitz {
-    background: url(../img/sponsors/andreesenhorowitz.png) no-repeat center center;
-}
-
-.sponsor-thielfellowship {
-    background: url(../img/sponsors/thielfellowship.png) no-repeat center center;
-}
-
-.sponsor-wix {
-    background: url(../img/sponsors/wix.png) no-repeat center center;
-}
-
-.sponsor-outerwall {
-    background: url(../img/sponsors/outerwall.png) no-repeat center center;
-}
-
-.sponsor-moz {
-    background: url(../img/sponsors/moz.png) no-repeat center center;
-}
-
-.sponsor-microsoft {
-    background: url(../img/sponsors/microsoft.png) no-repeat center center;
-}
-
-.sponsor-coronalabs {
-    background: url(../img/sponsors/coronalabs.png) no-repeat center center;
-}
-
-.sponsor-twilio {
-    background: url(../img/sponsors/twilio.png) no-repeat center center;
-}
-
-.sponsor-sendgrid {
-    background: url(../img/sponsors/sendgrid.png) no-repeat center center;
-}
-
-.sponsor-googlefiber {
-    background: url(../img/sponsors/googlefiber.png) no-repeat center center;
-}
-
-.sponsor-google {
-    background: url(../img/sponsors/google.png) no-repeat center center;
-}
-
-.sponsor-sap {
-    background: url(../img/sponsors/sap.png) no-repeat center center;
-}
-
-.sponsor-yahoo {
-    background: url(../img/sponsors/yahoo.png) no-repeat center center;
-}
-
-.sponsor-gracenote {
-    background: url(../img/sponsors/gracenote.png) no-repeat center center;
-}
-
-.sponsor-aspenware {
-    background: url(../img/sponsors/aspenware.png) no-repeat center center;
-}
-
-.sponsor-kauffmanlabs {
-    background: url(../img/sponsors/kauffmanlabs.png) no-repeat center center;
-}
-
-.sponsor-github {
-    background: url(../img/sponsors/github.png) no-repeat center center;
-}
-
-.sponsor-puppetlabs {
-    background: url(../img/sponsors/puppetlabs.png) no-repeat center center;
-}
-
-.sponsor-rackspace {
-    background: url(../img/sponsors/rackspace.png) no-repeat center center;
-}
-
-.sponsor-contextio {
-    background: url(../img/sponsors/contextio.png) no-repeat center center;
-}
-
-.sponsor-chef {
-    background: url(../img/sponsors/chef.png) no-repeat center center;
-}
-
-.sponsor-hp {
-    background: url(../img/sponsors/hp.png) no-repeat center center;
-}
-
-.sponsor-sprintaccelerator {
-    background: url(../img/sponsors/sprintaccelerator.png) no-repeat center center;
-}
-
-.sponsor-codingforinterviews {
-    background: url(../img/sponsors/codingforinterviews.png) no-repeat center center;
-}
-
-.sponsor-hubaustin {
-    background: url(../img/sponsors/hubaustin.png) no-repeat center center;
-}
-
-.sponsor-stagebloc {
-    background: url(../img/sponsors/stagebloc.png) no-repeat center center;
-}
-
-.sponsor-techcolumbus {
-    background: url(../img/sponsors/techcolumbus.png) no-repeat center center;
-}
-
-.sponsor-devbootcamp {
-    background: url(../img/sponsors/aspenware.png) no-repeat center center;
-}
-
-.sponsor-lookout {
-    background: url(../img/sponsors/lookout.png) no-repeat center center;
-}
-
-.sponsor-teradata {
-    background: url(../img/sponsors/teradata.png) no-repeat center center;
-}
-
-.sponsor-dice {
-    background: url(../img/sponsors/dice.png) no-repeat center center;
-}
-
-.sponsor-newrelic {
-    background: url(../img/sponsors/newrelic.png) no-repeat center center;
-}
-
-.sponsor-onsip {
-    background: url(../img/sponsors/onsip.png) no-repeat center center;
-}
-
-.sponsor-uw {
-    background: url(../img/sponsors/uw.png) no-repeat center center;
-}
-
-.sponsor-geonetric {
-    background: url(../img/sponsors/geonetric.png) no-repeat center center;
 }
 
 /* 

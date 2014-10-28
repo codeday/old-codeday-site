@@ -7,56 +7,17 @@
 
 	<h2 class="section-title text-center">Sponsors</h2>
 
-	<div class="medium-4 small-12 current-sponsor sponsor-splunk"></div>
-	<div class="medium-4 small-12 current-sponsor sponsor-intellectualventures"></div>
-	<div class="medium-4 small-12 current-sponsor sponsor-dwolla"></div>
+	<a title="Splunk" target="_blank" href="https://splunk.com/" class="medium-4 small-12 current-sponsor sponsor-splunk"><div class="sponsor-image"></div></a>
+	<a title="Intellectual Ventures" target="_blank" href="http://eureka.intven.com/" class="medium-4 small-12 current-sponsor sponsor-intellectualventures"><div class="sponsor-image"></div></a>
+	<a title="LexisNexis Risk Solutions" target="_blank" href="http://www.lexisnexis.com/risk/" class="medium-4 small-12 current-sponsor sponsor-lexisnexis"><div class="sponsor-image"></div></a>
+    <a title="Lob" target="_blank" href="https://www.lob.com/" class="medium-4 small-12 current-sponsor sponsor-lob"><div class="sponsor-image"></div></a>
+    <a title="Fancy Hands" target="_blank" href="https://www.fancyhands.com/" class="medium-4 small-12 current-sponsor sponsor-fh"><div class="sponsor-image"></div></a>
 
-
-	<div class="medium-4 small-12 current-sponsor sponsor-lexisnexis"></div>
-	<div class="medium-4 small-12 current-sponsor sponsor-readyforce"></div>
-	<div class="medium-4 small-12 current-sponsor sponsor-generalassembly"></div>
-
-
-	<div class="medium-4 small-12 current-sponsor sponsor-treehouse"></div>
-	<div class="medium-4 small-12 current-sponsor sponsor-lob"></div>
-	<div class="medium-4 small-12 current-sponsor sponsor-amazonwebservices"></div>
-
-	<div class="cf"></div>
-
-	<div class="medium-2 small-6 past-sponsor sponsor-ebayinc"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-andreesenhorowitz"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-thielfellowship"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-wix"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-outerwall"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-moz"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-microsoft"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-coronalabs"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-twilio"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-sendgrid"></div>	
-	<div class="medium-2 small-6 past-sponsor sponsor-googlefiber"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-google"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-sap"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-yahoo"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-gracenote"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-aspenware"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-kauffmanlabs"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-github"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-puppetlabs"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-rackspace"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-contextio"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-chef"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-hp"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-sprintaccelerator"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-codingforinterviews"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-hubaustin"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-stagebloc"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-techcolumbus"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-devbootcamp"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-lookout"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-teradata"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-dice"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-newrelic"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-onsip"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-uw"></div>
-	<div class="medium-2 small-6 past-sponsor sponsor-geonetric"></div>
+    {% for sponsor in event.sponsors %}
+        {% if sponsor.url %}
+            <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" target="_blank" class="medium-4 small-12 current-sponsor" style="background: url('{{ sponsor.logo }}') no-repeat scroll center center transparent;"></a>
+	    {% else %}
+            <div title="{{ sponsor.name }}" class="medium-4 small-12 current-sponsor"><div class="sponsor-image" style="background-image: url('{{ sponsor.logo }}');"></div></div>
+        {% endif %}
+    {% endfor %}
 </section>
