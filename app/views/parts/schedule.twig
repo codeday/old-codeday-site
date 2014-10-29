@@ -4,118 +4,33 @@
 
 		<h2 class="section-title text-center">Schedule</h2>
 
-		<div class="columns medium-6">
-			<div class="schedule-panel round-corners">
-				<h3 class="schedule-day">Saturday</h3>
-				<ul class="text-left">
-					<li>
-						<span class="schedule-time">11am</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Doors Open
-							<span class="schedule-popup">Please don't show up earlier, you'll be waiting outside!</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">11:30am</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Lunch
-							<span class="schedule-popup">All food is included with your ticket!</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">12pm</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Kickoff &amp; Pitches
-							<span class="schedule-popup">Not sure what you want to work on? Get some ideas and form a team at the kickoff.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">1pm</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Start Coding!
-							<span class="schedule-popup">After forming teams, it's time to get to work on your project! Our staff will be helping teams throughout the event.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">2pm</span>
-						<span class="schedule-task workshop">
-							<span class="purple-tab"></span>Beginner: Intro into coding <a href="https://www.scirra.com/tutorials/37/beginners-guide-to-construct-2">More</a>
-							<span class="schedule-popup">Totally new to coding? No problem! Attend this workshop and we'll walk you through creating your first game.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">3pm</span>
-						<span class="schedule-task workshop">
-							<span class="purple-tab"></span>Splunk: Doing fun things with data <a href="https://studentrnd.org/build/making-better-games-with-splunk">More</a>
-							<span class="schedule-popup">Learn how others play your game and use that knowledge to make it more fun with minimal work.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">7pm</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Dinner
-							<span class="schedule-popup">All food is included with your ticket!</span>
-						</span>
-					</li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="columns medium-6">
-			<div class="schedule-panel round-corners">
-				<h3 class="schedule-day">Sunday</h3>
-				<ul class="text-left">
-					<li>
-						<span class="schedule-time">12am</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Midnight Snack
-							<span class="schedule-popup">All food is included with your ticket!</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">7am</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Breakfast
-							<span class="schedule-popup">All food is included with your ticket!</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">8am</span>
-						<span class="schedule-task">
-						<span class="red-tab"></span>Presentation sign-up
-							<span class="schedule-popup">The final few hours. Teams with something to show are encouraged to sign up to present at the end.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">9am</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Judges arrive
-							<span class="schedule-popup">Judges will go around to demo the projects before the final presentations.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">10am</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Presentations
-							<span class="schedule-popup">Everyone who created something during CodeDay is asked to give a brief presentation.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">11:30am</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Awards
-							<span class="schedule-popup">Awards given for Top Overall, Best App, Best Game, and more.</span>
-						</span>
-					</li>
-					<li>
-						<span class="schedule-time">12pm</span>
-						<span class="schedule-task">
-							<span class="red-tab"></span>Clean up
-							<span class="schedule-popup">Thank the venue for hosting CodeDay by helping clean up!</span>
-						</span>
-					</li>
-				</ul>
-			</div>
-		</div>
+        {% for day,entries in event.schedule %}
+            <div class="columns medium-6">
+                <div class="schedule-panel round-corners">
+                    <h3 class="schedule-day">{{ day }}</h3>
+                    <ul class="text-left">
+                        {% for entry in entries %}
+                            <li>
+                                <span class="schedule-time">{{ entry.hour }}</span>
+                                <span class="schedule-task {{ entry.type }}">
+                                    {% if entry.type == 'event' %}
+                                        <span class="red-tab"></span>
+                                    {% else %}
+                                        <span class="purple-tab"></span>
+                                    {% endif %}
+                                    {{ entry.title }}
+                                    {% if entry.url %}
+                                        <a target="_blank" href="{{ entry.url }}">More</a>
+                                    {% endif %}
+                                    {% if entry.description %}
+                                        <span class="schedule-popup">{{ entry.description }}</span>
+                                    {% endif %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
 	</div>
 </section>
