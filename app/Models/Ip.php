@@ -14,8 +14,8 @@ class Ip extends RemoteModel{
 
         if (!\Cache::has('ip.telize.'.$ip)) {
             $url = 'http://www.telize.com/geoip/'.urlencode($ip);
-            $json = file_get_contents($url);
-            $user_data = json_decode($json, true);
+            $json = @file_get_contents($url);
+            $user_data = @json_decode($json, true);
 
             try {
                 if (!isset($user_data['latitude']) || !isset($user_data['longitude'])) {
