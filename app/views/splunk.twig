@@ -1,0 +1,25 @@
+{% extends "template.twig" %}
+{% block title %}Splunk{% endblock %}
+{% block page %}sponsor{% endblock %}
+{% block content %}
+    <section id="sponsor-global" class="content row round-corners">
+    <div class="wrapper">
+    <h2 class="section-title">CodeDay Splunk Cloud</h2>
+    <hr class="separator">
+        {% if username %}
+            <p>Your login details are:</p>
+            <p>Username: <input type="text" value="{{ username }}" readonly onfocus="this.select();" onmouseup="return false;" style="display: inline;width: 50%;"/><br />
+               Password: <input type="text" value="{{ password }}" readonly onfocus="this.select();" onmouseup="return false;" style="display: inline;width: 50%;" /><br />
+               URL: <a href="http://splunk.codeday.org/" target="_new">splunk.codeday.org</a></p>
+        {% else %}
+            <p>During CodeDay, you have access to a cloud-hosted instance of Splunk to help you make your
+               projects better. Please enter your email to get a Splunk login.</p>
+
+            <form method="post" style="margin-top:2rem;">
+                <input type="email" name="email" placeholder="Your Email Address" required />
+                <input type="submit" value="Create my account" style="margin: 0 auto;width:10rem;display:block;border: 1px solid black;" />
+            </form>
+        {% endif %}
+    </div>
+    </section>
+{% endblock %}

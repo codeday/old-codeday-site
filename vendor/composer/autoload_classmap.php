@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CodeDay\\Controllers\\EventController' => $baseDir . '/app/Controllers/EventController.php',
+    'CodeDay\\Controllers\\PhoneController' => $baseDir . '/app/Controllers/PhoneController.php',
+    'CodeDay\\Controllers\\SplunkController' => $baseDir . '/app/Controllers/SplunkController.php',
     'CodeDay\\Controllers\\StaticController' => $baseDir . '/app/Controllers/StaticController.php',
     'CodeDay\\Models\\Batch' => $baseDir . '/app/Models/Batch.php',
     'CodeDay\\Models\\ClearModel' => $baseDir . '/app/Models/ClearModel.php',
@@ -19,7 +21,7 @@ return array(
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
-    'Whoops\\Module' => $vendorDir . '/filp/whoops/src/deprecated/Zend/Module.php',
-    'Whoops\\Provider\\Zend\\ExceptionStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/ExceptionStrategy.php',
-    'Whoops\\Provider\\Zend\\RouteNotFoundStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/RouteNotFoundStrategy.php',
+    'Whoops\\Module' => $vendorDir . '/filp/whoops/src/deprecated/zend/Module.php',
+    'Whoops\\Provider\\Zend\\ExceptionStrategy' => $vendorDir . '/filp/whoops/src/deprecated/zend/ExceptionStrategy.php',
+    'Whoops\\Provider\\Zend\\RouteNotFoundStrategy' => $vendorDir . '/filp/whoops/src/deprecated/zend/RouteNotFoundStrategy.php',
 );
