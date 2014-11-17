@@ -167,8 +167,10 @@ p:last-of-type {
 }
 
 #over {
-    position: relative;
+    position: absolute;
     top: 100%;
+    left: 0;
+    right: 0;
     z-index: 500;
 }
 
@@ -212,6 +214,11 @@ SPLASH
     width: 100%;
     height: 100%;
     position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0; /* explicitly set z-index to 0 to 
+                avoid issues in some browsers;
+                see http://www.blooberry.com/indexdot/css/properties/position/zindex.htm */
 }
 
 #splash-bg {
