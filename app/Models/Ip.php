@@ -12,15 +12,27 @@ class Ip extends RemoteModel{
             $ip = '24.143.69.226';
         }
 
-        if (!\Cache::has('ip.telize.'.$ip)) {
-            $url = 'http://www.telize.com/geoip/'.urlencode($ip);
-            $json = @file_get_contents($url);
-            $user_data = @json_decode($json, true);
-
+        if (!\Cache::has('ip.maxmind.'.$ip)) {
             try {
-                if (!isset($user_data['latitude']) || !isset($user_data['longitude'])) {
+                $url = 'https://geoip.maxmind.com/geoip/v2.1/city/'.urlencode($ip);
+                $username = \Config::get('maxmind.user_id');
+                $password = \Config::get('maxmind.license_key');
+
+                $context = stream_context_create(array(
+                    'http' => array(
+                        'header'  => "Authorization: Basic " . base64_encode("$username:$password")
+                    )
+                ));
+
+                $json = @file_get_contents($url, false, $context);
+                $user_data = @json_decode($json, true);
+
+
+                if (!isset($user_data['location']['latitude']) || !isset($user_data['location']['longitude'])) {
                     throw new \Exception();
                 }
+
+                $user_data = $user_data['location'];
 
                 $user_data['lat'] = $user_data['latitude'];
                 $user_data['lng'] = $user_data['longitude'];
@@ -42,9 +54,9 @@ class Ip extends RemoteModel{
                 ];
             }
 
-            \Cache::put('ip.telize.'.$ip, $user_data, 60 * 24 * 7);
+            \Cache::put('ip.maxmind.'.$ip, $user_data, 60 * 24 * 7);
         }
 
-        return new self(\Cache::get('ip.telize.'.$ip));
+        return new self(\Cache::get('ip.maxmind.'.$ip));
     }
 }

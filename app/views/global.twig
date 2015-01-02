@@ -126,7 +126,7 @@
                     {
                         lat: {{ region.location.lat }},
                         lng: {{ region.location.lng }},
-                        name: "{{ region.region_name }}",
+                        name: "{{ region.name }}",
                         id: "{{ region.id }}",
                         nearest: {% if nearest_event.webname == region.webname %}true{% else %}false{% endif %}
                     }
