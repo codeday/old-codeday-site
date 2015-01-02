@@ -35,7 +35,7 @@ class Region extends ClearModel {
     public function current_event()
     {
         if ($this->remote_data['current_event']) {
-            return Event::find($this->remote_data['current_event']);
+            return Event::find($this->remote_data['current_event']['id']);
         } else {
             return null;
         }

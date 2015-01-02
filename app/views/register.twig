@@ -7,7 +7,7 @@
         <div class="columns medium-6">
 
             <div class="register-box round-corners">
-                <h2>CodeDay {{ event.name }}</h2>
+                <h2>CodeDay {{ event.region_name }}</h2>
                 <div class="register-map" id="location-map"></div>
                 {% if event.registration_info.remaining < (event.registration_info.max * 0.30) %}
                     <p class="last-few">Only {{ event.registration_info.remaining }} tickets left!</p>
@@ -72,11 +72,18 @@
 
             <a href="" id="pay-button" class="round-corners text-center">Pay Now</a>
 
-            <p id="toa">By registering, I have read and agree with the
-                <a href="https://studentrnd.org/code-of-conduct">code of conduct</a>, understand that
-                my name and email may be shared with sponsors, and consent to having my photo and video
-                taken during the event. <strong>I understand that I may only request a refund prior to
-                the week before the event.</strong></p>
+            <div id="toa">
+                <h2>Terms</h2>
+                <ul>
+                    <li>You agree to uphold the rules and the
+                        <a href="https://studentrnd.org/code-of-conduct">code of conduct</a>.</li>
+                    <li>You are entitled to a refund up to <a href="https://studentrnd.org/returns">7 days before
+                        the event.</a></li>
+                    <li>You may be photographed at the event and appear in promos.</li>
+                    <li>We may <a href="https://studentrnd.org/privacy">share your info</a> with
+                        sponsors interested in hiring you.</li>
+                </ul>
+            </div>
 
             <div id="confirmed" style="display: none;margin-top:1.9rem;">
                 <p>Thanks for registering! A receipt has been emailed to you. We look forward

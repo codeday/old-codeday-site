@@ -9,11 +9,11 @@ class Batch extends ClearModel {
 
     public function starts_at()
     {
-        return strtotime($this->remote_data['starts_at']['date']);
+        return strtotime($this->remote_data['starts_at']);
     }
 
     public function ends_at()
     {
-        return strtotime($this->remote_data['starts_at']['date']) + (60*60*24);
+        return strtotime($this->remote_data['ends_at']);
     }
 } 

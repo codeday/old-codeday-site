@@ -1161,7 +1161,24 @@ p.last-few {
 }
 
 #toa {
+    margin-top: 4rem;
+}
+
+#toa p, #toa li, #toa h2 {
     color: #A5A2A2;
+}
+
+#toa h2 {
+    font-size: 1rem;
+}
+
+#toa ul {
+    padding-left: 0.8rem;
+}
+
+#toa ul li {
+    font-size: 0.8rem;
+    list-style-type: circle;
 }
 
 #pay-button {

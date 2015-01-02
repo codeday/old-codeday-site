@@ -30,7 +30,7 @@
         </header>
 
         <h2 class="excite">CodeDay {{ loaded_batch.name }}</h2>
-        <h3 class="excite">{{ loaded_batch.starts_at|date('F j') }}-{{ loaded_batch.ends_at|date('j') }} &middot; {{ loaded_batch.events|length }} cities nationwide &middot; Nearest event: <a href="/{{ nearest_event.webname }}">{{ nearest_event.name }}</a></h3>
+        <h3 class="excite">{{ loaded_batch.starts_at|date('F j') }}-{{ loaded_batch.ends_at|date('j') }} &middot; {{ loaded_batch.events|length }} cities nationwide &middot; Nearest event: <a href="/{{ nearest_event.webname }}">{{ nearest_event.region_name }}</a></h3>
         <p class="details">The most exciting CodeDay yet. Select your city to view more details.</p>
 
         <div id="map"></div>
@@ -126,9 +126,9 @@
                     {
                         lat: {{ region.location.lat }},
                         lng: {{ region.location.lng }},
-                        name: "{{ region.name }}",
+                        name: "{{ region.region_name }}",
                         id: "{{ region.id }}",
-                        nearest: {% if nearest_event.webname == region.id %}true{% else %}false{% endif %}
+                        nearest: {% if nearest_event.webname == region.webname %}true{% else %}false{% endif %}
                     }
                     {% endfor %}
                 ];
