@@ -10,8 +10,13 @@
 			<p>Get your ticket before they're sold out!</p>
 			<a href="/{{ event.webname }}/register" class="button register-button round-corners">Let's code</a>
         {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
-            <p>Sorry, tickets are sold out, but you may still be able to attend a CodeDay nearby.</p>
-            <a href="/" class="button register-button round-corners">Find a nearby event!</a>
+			{% if event.overflow_event %}
+				<p>Sorry, tickets to the main venue are sold out, but you can attend at the nearby overflow venue.</p>
+				<a href="/{{ event.overflow_event.webname }}" class="button register-button round-corners">Register for overflow</a>
+			{% else %}
+            	<p>Sorry, tickets are sold out, but you may still be able to attend a CodeDay nearby.</p>
+				<a href="/" class="button register-button round-corners">Find a nearby event!</a>
+			{% endif %}
         {% else %}
 			<p>Registrations aren't yet open, but we can let you know when they are!</p>
 			<input type="email" class="subscription-email" placeholder="Email"><!--
