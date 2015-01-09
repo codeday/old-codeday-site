@@ -188,7 +188,7 @@
 			});
 		} else {
 			$.ajax({
-				url: window.api_base+"/regions/search?term=" + cityValue,
+				url: window.api_base+"/regions/search?term=" + encodeURIComponent(cityValue) + "&with_current_event=1",
 				method: "GET",
 				dataType: "JSON",
 				success: function(response_object) {

@@ -3,7 +3,12 @@
 use \CodeDay\Models;
 
 \Route::bind('event', function($webname) {
-    return Models\Region::find($webname)->current_event;
+    $event = Models\Region::find($webname)->current_event;
+    if ($event->webname != $webname) {
+        \App::abort(302, '', ['Location' => '/'.$event->webname]);
+    } else {
+        return $event;
+    }
 });
 
 \Route::get('/{event}/register', '\CodeDay\Controllers\EventController@getRegister');
