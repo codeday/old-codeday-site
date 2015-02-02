@@ -89,6 +89,10 @@
                 <p>Thanks for registering! A receipt has been emailed to you. We look forward
                     to seeing you at CodeDay. If you have any questions, please
                     <a href="mailto:contact@studentrnd.org">email us</a>.</p>
+                {% if waiver %}
+                    <p>Important: You will need to fill out <a href="{{ event.waiver }}" target="_blank">this waiver</a>
+                        before the event!</p>
+                {% endif %}
                 <div class="share" style="margin-top:1rem">
                     <p>CodeDay is more fun with friends! Share your registration and we'll mail
                         you some <strong>free swag!</strong></p>

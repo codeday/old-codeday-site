@@ -12,7 +12,7 @@
         {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
 			{% if event.overflow_event %}
 				<p>Sorry, tickets to the main venue are sold out, but you can attend at the nearby overflow venue.</p>
-				<a href="/{{ event.overflow_event.webname }}" class="button register-button round-corners">Register for overflow</a>
+				<a href="/{{ event.overflow_event.webname }}" class="button register-button round-corners">Register for {{ event.overflow_event.region_name }}</a>
 			{% else %}
             	<p>Sorry, tickets are sold out, but you may still be able to attend a CodeDay nearby.</p>
 				<a href="/" class="button register-button round-corners">Find a nearby event!</a>
