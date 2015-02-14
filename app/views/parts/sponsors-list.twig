@@ -10,7 +10,7 @@
 	<a title="Splunk" target="_blank" href="https://splunk.com/" class="medium-4 small-12 current-sponsor sponsor-splunk"><div class="sponsor-image"></div></a>
 	<a title="Intellectual Ventures" target="_blank" href="http://eureka.intven.com/" class="medium-4 small-12 current-sponsor sponsor-intellectualventures"><div class="sponsor-image"></div></a>
 	<a title="LexisNexis Risk Solutions" target="_blank" href="http://www.lexisnexis.com/risk/" class="medium-4 small-12 current-sponsor sponsor-lexisnexis"><div class="sponsor-image"></div></a>
-    
+
     {% for sponsor in event.sponsors %}
         {% if sponsor.url %}
             <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" target="_blank" class="medium-4 small-12 current-sponsor"><div class="sponsor-image" style="background-image: url('{{ sponsor.logo }}');"></div></a>

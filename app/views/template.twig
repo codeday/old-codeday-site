@@ -54,7 +54,12 @@
     </script>
 </head>
 <body>
-
+{% if event.notice %}
+    <div class="notice" style="position:fixed;top:0;left:0;right:0;line-height:1;
+    padding:0.1rem;text-align:center;text-transform:uppercase;background-color: #f00;color: #fff">
+        {{ event.notice }}
+    </div>
+{% endif %}
 {% if block('splash') %}
     {{ block('splash') }}
 {% endif %}
