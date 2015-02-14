@@ -74,7 +74,7 @@ class PhoneController extends \Controller {
         $region_index = \Input::get('region');
         $event_index = \Input::get('Digits');
 
-        if (!$event_index || $event_index > 4) {
+        if (!$event_index) {
             $response = \Response::make('<Response><Say>Sorry, that event does not exist.</Say></Response>', 200);
             $response->header('Content-type', 'text/xml');
             return $response;
