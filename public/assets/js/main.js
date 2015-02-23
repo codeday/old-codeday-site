@@ -223,14 +223,6 @@ window.ticket_quantity = 1;
 	});
 })();
 
-// Masonry effect
-(function(){
-	var msnry = new Masonry( '#masonry-container', {
-	  // options
-	  itemSelector: '.showcase-column'
-	});
-})();
-
 // Load view more content on Press
 (function(){
 	$('#view-more').on('click', function(e){
