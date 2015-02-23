@@ -1,0 +1,5 @@
+{% if event and event.registration_info.is_open %}
+    <li><a href="/{{ event.webname }}/register">Register</a></li>
+{% endif %}
+<li><a href="/sponsor">Sponsor</a></li>
+<li><a href="/press">Press</a></li>

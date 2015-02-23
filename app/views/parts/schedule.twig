@@ -1,0 +1,36 @@
+<section id="schedule" class="text-center">
+
+	<div class="row">
+
+		<h2 class="section-title text-center">Schedule</h2>
+
+        {% for day,entries in event.schedule %}
+            <div class="columns medium-6">
+                <div class="schedule-panel round-corners">
+                    <h3 class="schedule-day">{{ day }}</h3>
+                    <ul class="text-left">
+                        {% for entry in entries %}
+                            <li>
+                                <span class="schedule-time">{{ entry.hour }}</span>
+                                <span class="schedule-task {{ entry.type }}">
+                                    {% if entry.type == 'event' %}
+                                        <span class="red-tab"></span>
+                                    {% else %}
+                                        <span class="purple-tab"></span>
+                                    {% endif %}
+                                    {{ entry.title }}
+                                    {% if entry.url %}
+                                        <a target="_blank" href="{{ entry.url }}">More</a>
+                                    {% endif %}
+                                    {% if entry.description %}
+                                        <span class="schedule-popup">{{ entry.description }}</span>
+                                    {% endif %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+	</div>
+</section>

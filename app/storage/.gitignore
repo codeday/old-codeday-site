@@ -1,0 +1,6 @@
+services.manifest
+cache/*
+logs/*
+meta/*
+sessions/*
+views/*
