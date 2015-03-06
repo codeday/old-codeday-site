@@ -1,0 +1,82 @@
+<!-- This file should not extend any templates or reference any external scripts/styles! -->
+<html>
+  <head>
+    <title>500 Internal Server Error</title>
+    <style>
+      body{
+        animation: colorpulse 10s infinite;
+        -webkit-animation: colorpulse 10s infinite;
+        -moz-animation: colorpulse 10s infinite;
+      }
+
+      @-webkit-keyframes colorpulse{
+        0%{
+          background: rgb(11,192,194);
+        }
+
+        25%{
+          background: rgb(248,99,243);
+        }
+
+        50%{
+          background: rgb(252,88,67);
+        }
+
+        100%{
+          background: rgb(11,192,194);
+        }
+      }
+
+      @keyframes colorpulse{
+        0%{
+          background: rgb(11,192,194);
+        }
+
+        25%{
+          background: rgb(248,99,243);
+        }
+
+        50%{
+          background: rgb(252,88,67);
+        }
+
+        100%{
+          background: rgb(11,192,194);
+        }
+      }
+
+      @moz-keyframes colorpulse{
+        0%{
+          background: rgb(11,192,194);
+        }
+
+        25%{
+          background: rgb(248,99,243);
+        }
+
+        50%{
+          background: rgb(252,88,67);
+        }
+
+        100%{
+          background: rgb(11,192,194);
+        }
+      }
+
+      .message {
+        font-family: "Arial";
+        height: 100%;
+        width: 100%;
+        top: 45%;
+        position: fixed;
+        font-size: 2.5em;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="message">
+      Seems like you broke something! Want to <a href="https://github.com/StudentRND/CodeDay/issues/new?title=[Internal Server Error]&amp;body=Describe what you were doing that made this error happen...">report it?</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!-- This file should not extend any templates or reference any external scripts/styles! -->
+<html>
+  <head>
+    <title>401 Unauthorized</title>
+    <style>
+      body{
+        animation: colorpulse 10s infinite;
+        -webkit-animation: colorpulse 10s infinite;
+        -moz-animation: colorpulse 10s infinite;
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+      }
+
+      @-webkit-keyframes colorpulse{
+        0%{
+          background: rgb(11,192,194);
+        }
+
+        25%{
+          background: rgb(248,99,243);
+        }
+
+        50%{
+          background: rgb(252,88,67);
+        }
+
+        100%{
+          background: rgb(11,192,194);
+        }
+      }
+
+      @keyframes colorpulse{
+        0%{
+          background: rgb(11,192,194);
+        }
+
+        25%{
+          background: rgb(248,99,243);
+        }
+
+        50%{
+          background: rgb(252,88,67);
+        }
+
+        100%{
+          background: rgb(11,192,194);
+        }
+      }
+
+      @moz-keyframes colorpulse{
+        0%{
+          background: rgb(11,192,194);
+        }
+
+        25%{
+          background: rgb(248,99,243);
+        }
+
+        50%{
+          background: rgb(252,88,67);
+        }
+
+        100%{
+          background: rgb(11,192,194);
+        }
+      }
+
+      .message {
+        font-family: "Arial";
+        height: 100%;
+        width: 100%;
+        top: 45%;
+        position: fixed;
+        font-size: 2.5em;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="message">
+      I truly am sorry, but I'm not allowed to let you in here. If you think this is a mistake, please <a href="mailto:contact@studentrnd.org">contact us.</a>
+    </div>
+  </body>
+</html>
