@@ -25,7 +25,7 @@ if(\Config::get('app.debug')){
 	\App::error(function(Exception $exception, $code)
 	{
 		\Log::error($exception);
-		return Response::view('errors.'.$code, array(), $code);
+		return Response::view('errors.'.$code, array("uri" => Request::path()), $code);
 	});
 }
 
