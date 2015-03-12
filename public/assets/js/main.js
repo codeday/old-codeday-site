@@ -11,7 +11,7 @@
     var wistiaEmbed = splashVideo[0].wistiaApi;
 
 	$('#video-link').on('click', function(){
-		splash.fadeOut('fast', function(){ 
+		splash.fadeOut('fast', function(){
 			splashVideo.css('z-index', 0).get(0);
             wistiaEmbed.play();
 			splashReturn.fadeIn();
@@ -82,9 +82,11 @@
 // Notification subscription
 (function(){
         var eventId = $('.current-city').attr('id'),
-        subscriptionSubmit = $('.subscription-submit');
-        var onSubmitFunction = function(){
-                var enteredEmail = $('.subscription-email').val();
+        subscriptionSubmit = $('.subscription-box');
+        var onSubmitFunction = function(el){
+								$el = $(el);
+                var enteredEmail = $el.find('.subscription-email').val();
+								var subscriptionSubmit = $el.find('subscription-submit');
                 $.ajax({
                         method: 'post',
                         dataType: 'json',
@@ -102,8 +104,10 @@
                         }
                 });
         };
-        subscriptionSubmit.on('click', onSubmitFunction);
-        $('.subscription-email').on('keypress', function(e) { if(e.which == 13) { onSubmitFunction(); } });
+				$.each($(".subscription-box"), function(i, el){
+					$(el).on('click', function(){ onSubmitFunction(el) });
+	        $('.subscription-email').on('keypress', function(e) { if(e.which == 13) { onSubmitFunction(el) } });
+				});
 })();
 
 // City picker stuff
@@ -139,21 +143,21 @@
                                 } else {
                                     window.location.href = '/'+pickedId;
                                 }
-           
+
 			}
 		});
 	}
 
 	$('.current-city').click(function(e){
-		// Change current-city span into input box 
+		// Change current-city span into input box
 		spanCurrentCity.hide();
 		inputCurrentCity.css('width', '6.2em').show().focus();
 		cityPicker.fadeIn('fast'); // Display city picker when current city is clicked
 		return false;
 	})
 
-	$(document).on('click', function() { 
-		cityPicker.fadeOut('fast'); 
+	$(document).on('click', function() {
+		cityPicker.fadeOut('fast');
 		inputCurrentCity.hide();
 		spanCurrentCity.show();
 	});
@@ -205,7 +209,7 @@
 // Registration ticket price calculations and add coders
 window.ticket_quantity = 1;
 (function(){
-	$('#ticket-amount').change(function() { 
+	$('#ticket-amount').change(function() {
 		var quantity = $('#ticket-amount').val(),
 			total = quantity * window.unit_cost;
 		$('#total-cost').text('$' + total.toFixed(2));
@@ -232,7 +236,3 @@ window.ticket_quantity = 1;
 	    $(this).hide();
 	});
 })();
-
-
-
-

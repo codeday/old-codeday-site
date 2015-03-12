@@ -44,9 +44,11 @@
                         <a href="/" class="button register-button round-corners">Sold out &mdash; find a nearby event</a>
                     {% endif %}
                 {% else %}
-                    <p id="subscription-message">We're not selling tickets right now but we can notify you when we are.</p>
-                    <input type="text" class="subscription-email" placeholder="Email"><!--
-                    --><input type="submit" value="Subscribe" class="subscription-submit">
+                    <div class="subscription-box">
+                      <p id="subscription-message">We're not selling tickets right now but we can notify you when we are.</p>
+                      <input type="text" class="subscription-email" placeholder="Email">
+                      <input type="submit" value="Subscribe" class="subscription-submit">
+                    </div>
                 {% endif %}
                 <div class="text-center">
                     <p class="show-for-large-up"><a href="#" id="video-link">Watch video</a></p>
@@ -67,4 +69,3 @@
     <iframe src="//fast.wistia.net/embed/iframe/q0z803g4cp?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" id="splash-video" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
     <script src="//fast.wistia.net/assets/external/iframe-api-v1.js"></script>
 </div>
-
