@@ -37,7 +37,7 @@
                 </p>
                 {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
                     <a href="/{{ event.webname }}/register" class="button register-button round-corners">Get your ticket{% if event.registration_info.remaining < (event.registration_info.max * 0.10) %} &mdash;{{ event.registration_info.remaining }} left!{% else %}!{% endif %}</a>
-                    {% if event.related_events %}
+                    {% if event.related_events|length > 0 %}
                         <p>Or register for other nearby events:</p>
                         {% for related_event in event.related_events %}
                             <a href="/{{ related_event.webname }}" class="button register-button round-corners">Register for {{ related_event.region_name }}</a>
@@ -56,10 +56,12 @@
                     <p id="subscription-message">We're not selling tickets right now but we can notify you when we are.</p>
                     <input type="text" class="subscription-email" placeholder="Email"><!--
                     --><input type="submit" value="Subscribe" class="subscription-submit">
-                    <p>Or see nearby events:</p>
-                    {% for related_event in event.related_events %}
-                        <a href="/{{ related_event.webname }}" class="button register-button round-corners">{{ related_event.region_name }}</a>
-                    {% endfor %}
+                    {% if event.related_events|length > 0 %}
+                        <p>Or see nearby events:</p>
+                        {% for related_event in event.related_events %}
+                            <a href="/{{ related_event.webname }}" class="button register-button round-corners">{{ related_event.region_name }}</a>
+                        {% endfor %}
+                    {% endif %}
                 {% endif %}
 
 
