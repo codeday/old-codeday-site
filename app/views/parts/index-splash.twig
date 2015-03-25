@@ -37,9 +37,18 @@
                 </p>
                 {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
                     <a href="/{{ event.webname }}/register" class="button register-button round-corners">Get your ticket{% if event.registration_info.remaining < (event.registration_info.max * 0.10) %} &mdash;{{ event.registration_info.remaining }} left!{% else %}!{% endif %}</a>
+                    {% if event.related_events %}
+                        <p>Or register for other nearby events:</p>
+                        {% for related_event in event.related_events %}
+                            <a href="/{{ related_event.webname }}" class="button register-button round-corners">Register for {{ related_event.region_name }}</a>
+                        {% endfor %}
+                    {% endif %}
                 {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
-                    {% if event.overflow_event %}
-                        <a href="/{{ event.overflow_event.webname }}" class="button register-button round-corners">Sold out &mdash; register for {{ event.overflow_event.region_name }}</a>
+                    {% if event.related_events %}
+                        <p>Sold out, register for a nearby event:</p>
+                        {% for related_event in event.related_events %}
+                            <a href="/{{ related_event.webname }}" class="button register-button round-corners">Register for {{ related_event.region_name }}</a>
+                        {% endfor %}
                     {% else %}
                         <a href="/" class="button register-button round-corners">Sold out &mdash; find a nearby event</a>
                     {% endif %}
@@ -47,7 +56,13 @@
                     <p id="subscription-message">We're not selling tickets right now but we can notify you when we are.</p>
                     <input type="text" class="subscription-email" placeholder="Email"><!--
                     --><input type="submit" value="Subscribe" class="subscription-submit">
+                    <p>Or see nearby events:</p>
+                    {% for related_event in event.related_events %}
+                        <a href="/{{ related_event.webname }}" class="button register-button round-corners">{{ related_event.region_name }}</a>
+                    {% endfor %}
                 {% endif %}
+
+
                 <div class="text-center">
                     <p class="show-for-large-up"><a href="#" id="video-link">Watch video</a></p>
                     <p class="show-for-medium-down"><a href="https://fast.wistia.net/embed/iframe/q0z803g4cp" target="_blank" id="video-link">Watch video</a></p>
