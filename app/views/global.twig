@@ -1,5 +1,8 @@
 {% extends "template.twig" %}
 {% block splash %}
+    <style>
+        .sponsors { clear: both; text-align: center; padding: 0; margin-top: -2rem; }
+    </style>
     <div id="global-page" class="subpage">
         <header class="header-subpage header-mobile hide-for-medium-up">
             <nav class="site-nav text-right">
@@ -68,6 +71,13 @@
                     {% endfor %}
                 </ul>
             </section>
+        </section>
+
+        <section class="sponsors">
+            <h3>Supported Nationally By</h3>
+            <a title="Splunk" target="_blank" href="https://splunk.com/" class="medium-4 small-12 current-sponsor sponsor-splunk"><div class="sponsor-image"></div></a>
+            <a title="Intellectual Ventures" target="_blank" href="http://eureka.intven.com/" class="medium-4 small-12 current-sponsor sponsor-intellectualventures"><div class="sponsor-image"></div></a>
+            <a title="LexisNexis Risk Solutions" target="_blank" href="http://www.lexisnexis.com/risk/" class="medium-4 small-12 current-sponsor sponsor-lexisnexis"><div class="sponsor-image"></div></a>
         </section>
 {% endblock %}
 {% block scripts %}

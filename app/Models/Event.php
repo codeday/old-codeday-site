@@ -18,7 +18,9 @@ class Event extends ClearModel {
     {
         $closest_region = Region::nearby($lat, $lng, null, 1, true);
         if (count($closest_region) > 0) {
-            $closest_region->next();
+            if (defined('HHVM_VERSION')) {
+                $closest_region->next();
+            }
             return $closest_region->current()->current_event;
         } else {
             return null;
