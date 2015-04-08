@@ -55,7 +55,8 @@
 
         <div class="columns medium-6">
             <div id="coder-profile-1" class="register-box round-corners coder-profile">
-                <h2 class="coder-profile-title">Attendee Info</h2>
+                <h2 class="coder-profile-title">Attendee Info<br/>
+                <small>(Please use the student's info, you can fill out parent info later)</small></h2>
                 <input type="text" class="first-name" name="first-name" placeholder="First Name"><!--
 					--><input type="text" class="last-name" name="last-name" placeholder="Last Name">
                 <input type="text" class="email" name="email" placeholder="Email">
@@ -390,11 +391,12 @@
                     },
                     success: function(data) {
                         if (data.status == 200) {
+                          console.log(data);
                             $('#purchase-info-box, .coder-profile, #pay-button, #billing-info, #toa').css('display', 'none');
                             $('#confirmed').css('display', 'block');
                             swal({
                                 title: 'You\'re in!',
-                                text: "You've successfully registered for CodeDay {{ event.name|escape('js') }}. A receipt has been emailed to you.",
+                                text: "You've successfully registered for CodeDay {{ event.name|escape('js') }}. A receipt has been emailed to you. This email will also include a link to fill out emergency contact info.",
                                 type: 'success',
                                 allowOutsideClick: true
                             });
