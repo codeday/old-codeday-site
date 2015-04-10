@@ -46,6 +46,8 @@ if(\Config::get('app.debug')){
 ]);
 
 \View::share('api_base', \Config::get('clear.api_base'));
+\View::share('api_base_public', \Config::get('clear.api_base_public'));
+\View::share('api_access_token', \Config::get('clear.access_token'));
 
 $include_all_directories = ['events', 'filters', 'routes'];
 foreach ($include_all_directories as $directory) {

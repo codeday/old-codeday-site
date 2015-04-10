@@ -91,7 +91,8 @@
                         url: window.api_base+'/notify/subscribe',
                         data: {
                                 email: enteredEmail,
-                                event: eventId
+                                event: eventId,
+								access_token: window.api_access_token
                         },
                         success: function(){
                                 $('.subscription-email').val('');
@@ -164,7 +165,7 @@
 
 	if ($.trim(inputCurrentCity.val()).length == 0) { // If current city input box is empty
 		$.ajax({
-			url: window.api_base+"/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
+			url: window.api_base+"/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1&access_token="+window.api_access_token,
 			method: "GET",
 			dataType: "JSON",
 			success: function(response_object) {
@@ -179,7 +180,7 @@
 		$('#city-picker ul').html('<li class="city-option no-click">. . .</li>');
         if ($.trim(inputCurrentCity.val()).length == 0) { // If current city input box is empty, search for nearest cities
 			$.ajax({
-				url: window.api_base+"/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1",
+				url: window.api_base+"/regions/nearby?lat=" + window.lat + "&lng=" + window.lng + "&limit=5&with_current_event=1&access_token="+window.api_access_token,
 				method: "GET",
 				dataType: "JSON",
 				success: function(response_object) {
@@ -188,7 +189,7 @@
 			});
 		} else {
 			$.ajax({
-				url: window.api_base+"/regions/search?term=" + encodeURIComponent(cityValue) + "&with_current_event=1",
+				url: window.api_base+"/regions/search?term=" + encodeURIComponent(cityValue) + "&with_current_event=1&access_token="+window.api_access_token,
 				method: "GET",
 				dataType: "JSON",
 				success: function(response_object) {

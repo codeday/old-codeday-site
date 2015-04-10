@@ -266,7 +266,8 @@
                 type: "GET",
                 dataType: "json",
                 data: {
-                    code: $('#promo-code').val()
+                    code: $('#promo-code').val(),
+                    access_token: window.api_access_token
                 },
                 success: function(data){
                     if (data.expired) {
@@ -387,7 +388,8 @@
                         first_names: allVals($('.first-name')),
                         last_names: allVals($('.last-name')),
                         emails: allVals($('.email')),
-                        code: $('#promo-code').val()
+                        code: $('#promo-code').val(),
+                        access_token: window.api_access_token
                     },
                     success: function(data) {
                         if (data.status == 200) {
