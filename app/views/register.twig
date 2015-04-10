@@ -262,7 +262,7 @@
             $('#promo-code-button').text('...');
 
             $.ajax({
-                url: "{{ api_base }}/register/{{ event.id }}/promotion",
+                url: "{{ api_base_public }}/register/{{ event.id }}/promotion",
                 type: "GET",
                 dataType: "json",
                 data: {
@@ -379,7 +379,7 @@
             var register = function(token) {
 
                 $.ajax({
-                    url: "{{ api_base }}/register/{{ event.id }}/register",
+                    url: "{{ api_base_public }}/register/{{ event.id }}/register",
                     type: "POST",
                     dataType: "json",
                     data: {
