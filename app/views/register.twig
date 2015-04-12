@@ -252,96 +252,116 @@
                 "Register Page Loaded"
         );
 
+        var hashParams = {};
+
+        function checkPromotionCode(code){
+          if ($('#promo-code').prop('disabled') || $('#promo-code-button').text() == '...') {
+              return;
+          }
+
+          $("#promo-code").val(code);
+
+          $('#promo-code-button').text('...');
+
+          $.ajax({
+              url: "{{ api_base_public }}/register/{{ event.id }}/promotion",
+              type: "GET",
+              dataType: "json",
+              data: {
+                  code: $('#promo-code').val(),
+                  access_token: window.api_access_token
+              },
+              success: function(data){
+                  if (data.expired) {
+                      swal({
+                          title: 'Expired',
+                          text: 'Sorry, this promo code is expired.',
+                          type: 'error'
+                      });
+                      mixpanel.track(
+                              "Promo Error Expired",
+                              {"Code": $('#promo-code').val()}
+                      );
+                      $('#promo-code-button').text('Apply');
+                      $('#promo-code').val('');
+                      return;
+                  } else if (data.remaining_uses == 0) {
+                      swal({
+                          title: 'Used',
+                          text: 'Sorry, this promo code has already been used the maximum number of times.',
+                          type: 'error'
+                      });
+                      mixpanel.track(
+                              "Promo Error Used",
+                              {"Code": $('#promo-code').val()}
+                      );
+                      $('#promo-code-button').text('Apply');
+                      $('#promo-code').val('');
+                      return;
+                  }
+
+                  if (data.remaining_uses != null && data.remaining_uses < 10) {
+                      $('#ticket-amount option').filter(function() {
+                          return parseInt($(this).val(), 10) > data.remaining_uses;
+                      }).remove();
+                  }
+
+                  if (data.cost == 0) {
+                      $('#billing-info').css('display', 'none');
+                      $('#billing-info input').val('');
+                      $('#pay-button').text('Register Now');
+                  }
+
+                  mixpanel.track(
+                          "Promo Used",
+                          {"Code": $('#promo-code').val()}
+                  );
+
+                  $('#promo-code').prop('disabled', true);
+                  $('#promo-code-button').text('Applied');
+                  window.unit_cost = data.cost;
+                  $('.ticket-price').html('<em style="text-decoration: line-through">$20</em> $'+data.cost.toFixed(2));
+                  $('#ticket-amount option').trigger('change');
+
+
+                  swal({
+                      title: data.discount+'% off!',
+                      text: "Promo code \""+$('#promo-code').val()+"\" was successfully applied. Your new total is "+$('#total-cost').text(),
+                      imageUrl: '/assets/img/thumbsup.jpg',
+                      allowOutsideClick: true
+                  });
+              },
+              error: function(){
+                  swal({
+                      title: 'Invalid',
+                      text: 'Sorry, this promo code doesn\'t exist.',
+                      type: 'error'
+                  });
+                  $('#promo-code-button').text('Apply');
+                  $('#promo-code').val('');
+              }
+            });
+        }
+
         $('#promo-code-button').on('click', function(e) {
             e.preventDefault();
 
-            if ($('#promo-code').prop('disabled') || $('#promo-code-button').text() == '...') {
-                return;
-            }
-
-            $('#promo-code-button').text('...');
-
-            $.ajax({
-                url: "{{ api_base_public }}/register/{{ event.id }}/promotion",
-                type: "GET",
-                dataType: "json",
-                data: {
-                    code: $('#promo-code').val(),
-                    access_token: window.api_access_token
-                },
-                success: function(data){
-                    if (data.expired) {
-                        swal({
-                            title: 'Expired',
-                            text: 'Sorry, this promo code is expired.',
-                            type: 'error'
-                        });
-                        mixpanel.track(
-                                "Promo Error Expired",
-                                {"Code": $('#promo-code').val()}
-                        );
-                        $('#promo-code-button').text('Apply');
-                        $('#promo-code').val('');
-                        return;
-                    } else if (data.remaining_uses == 0) {
-                        swal({
-                            title: 'Used',
-                            text: 'Sorry, this promo code has already been used the maximum number of times.',
-                            type: 'error'
-                        });
-                        mixpanel.track(
-                                "Promo Error Used",
-                                {"Code": $('#promo-code').val()}
-                        );
-                        $('#promo-code-button').text('Apply');
-                        $('#promo-code').val('');
-                        return;
-                    }
-
-                    if (data.remaining_uses != null && data.remaining_uses < 10) {
-                        $('#ticket-amount option').filter(function() {
-                            return parseInt($(this).val(), 10) > data.remaining_uses;
-                        }).remove();
-                    }
-
-                    if (data.cost == 0) {
-                        $('#billing-info').css('display', 'none');
-                        $('#billing-info input').val('');
-                        $('#pay-button').text('Register Now');
-                    }
-
-                    mixpanel.track(
-                            "Promo Used",
-                            {"Code": $('#promo-code').val()}
-                    );
-
-                    $('#promo-code').prop('disabled', true);
-                    $('#promo-code-button').text('Applied');
-                    window.unit_cost = data.cost;
-                    $('.ticket-price').html('<em style="text-decoration: line-through">$20</em> $'+data.cost.toFixed(2));
-                    $('#ticket-amount option').trigger('change');
-
-
-                    swal({
-                        title: data.discount+'% off!',
-                        text: "Promo code \""+$('#promo-code').val()+"\" was successfully applied. Your new total is "+$('#total-cost').text(),
-                        imageUrl: '/assets/img/thumbsup.jpg',
-                        allowOutsideClick: true
-                    });
-                },
-                error: function(){
-                    swal({
-                        title: 'Invalid',
-                        text: 'Sorry, this promo code doesn\'t exist.',
-                        type: 'error'
-                    });
-                    $('#promo-code-button').text('Apply');
-                    $('#promo-code').val('');
-                }
-            });
+            checkPromotionCode($("#promo-code").val());
 
             return false;
         });
+
+        if(window.location.hash){
+          var hash = window.location.hash.substr(1).split("&");
+          for(i in hash){
+            var param = hash[i].split("=");
+            hashParams[param[0]] = param[1];
+          }
+        }
+
+        if(hashParams["code"]){
+          checkPromotionCode(hashParams["code"]);
+        }
 
         Stripe.setPublishableKey('{{ event.stripe_public_key|escape('js') }}');
         $('#pay-button').click(function(e){
