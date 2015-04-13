@@ -178,7 +178,7 @@
                 FB.ui(
                         {
                             method: 'feed',
-                            name: 'CodeDay {{ event.name }}',
+                            name: '{{ event.name }}',
                             link: 'https://codeday.org/{{ event.region_id }}',
                             picture: 'https://codeday.org/assets/img/facebookthumb.jpg',
                             caption: '{{ event.starts_at|date('F j') }}-{{event.ends_at|date('j, Y') }}; noon-noon',
