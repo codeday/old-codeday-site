@@ -233,34 +233,3 @@ window.ticket_quantity = 1;
 	    $(this).hide();
 	});
 })();
-
-// Location
-var LocationTools = {
-	degToRad: function(deg){
-		return deg * Math.PI / 180;
-	},
-	pythagorasEquirectangular: function(lat, long, lat2, long2){
-		lat = LocationTools.degToRad(lat);
-		lat2 = LocationTools.degToRad(lat2);
-		long = LocationTools.degToRad(long);
-		long2 = LocationTools.degToRad(long2);
-		var R = 6371; // km
-		var x = (long2-long) * Math.cos((lat+lat2)/2);
-		var y = (lat2-lat);
-		var d = Math.sqrt(x*x + y*y) * R;
-		return d;
-	},
-	nearestRegion: function(cities, lat, long){
-	  var mindif = 99999;
-	  var closest;
-
-	  for (index = 0; index < cities.length; ++index) {
-	    var dif =  LocationTools.pythagorasEquirectangular(lat, long, cities[index].lat, cities[index].lng);
-	    if (dif < mindif){
-	      closest = index;
-	    	mindif = dif;
-	    }
-	  }
-	  return cities[closest];
-	}
-}
