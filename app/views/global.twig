@@ -33,7 +33,7 @@
         </header>
 
         <h2 class="excite">CodeDay {{ loaded_batch.name }}</h2>
-        <h3 class="excite">{{ loaded_batch.starts_at|date('F j') }}-{{ loaded_batch.ends_at|date('j') }} &middot; {{ loaded_batch.events|length }} cities nationwide &middot; Nearest event: <a href="/{{ nearest_event.webname }}">{{ nearest_event.region_name }}</a></h3>
+        <h3 class="excite">{{ loaded_batch.starts_at|date('F j') }}-{{ loaded_batch.ends_at|date('j') }} &middot; {{ loaded_batch.events|length }} cities nationwide &middot; Nearest event: <a id="nearest_event_link" href="/{{ nearest_event.webname }}">{{ nearest_event.region_name }}</a></h3>
         <p class="details">The most exciting CodeDay yet. Select your city to view more details.</p>
 
         <div id="map"></div>
@@ -86,139 +86,163 @@
     <script src="/assets/js/d3.tip.js"></script>
     <script>
 
+        batch_regions = [
+            {% set is_first = true %}
+            {% for region in batch_regions %}
+            {% if not is_first %},{% endif %}{% set is_first = false %}
+            {
+                lat: {{ region.location.lat }},
+                lng: {{ region.location.lng }},
+                name: "{{ region.name }}",
+                id: "{{ region.id }}",
+                nearest: {% if nearest_event.webname == region.webname %}true{% else %}false{% endif %}
+            }
+            {% endfor %}
+        ];
+
+        usCached = null;
+
+        var updateMap = function(us){
+          var path = d3.geo.path();
+
+          var map = $('#map').html('<svg></svg>');
+          var width = map.width();
+          var height = map.width() * 0.5;
+
+          var projection = d3.geo.albersUsa()
+                  .scale((width))
+                  .translate([width / 2, height / 2]);
+
+          var path = d3.geo.path()
+                  .projection(projection);
+
+          var svg = d3.select("#map svg")
+                  .attr("width", width)
+                  .attr("height", height);
+
+          var tip = d3.tip()
+                  .attr('class', 'd3-tip')
+                  .offset([-10, 0])
+                  .html(function(d) {
+                      return d.name;
+                  });
+          svg.call(tip);
+
+          svg.insert("path", ".graticule")
+                  .datum(topojson.feature(us, us.objects.land))
+                  .attr("class", "land")
+                  .attr("d", path);
+
+          svg.insert("clipPath")
+                  .attr("id", "landclip")
+                  .append("path", ".graticule")
+                  .datum(topojson.feature(us, us.objects.land))
+                  .attr("d", path);
+
+          svg.insert("path", ".graticule")
+                  .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+                  .attr("class", "state-boundary")
+                  .attr("d", path);
+
+          svg.selectAll("circle.footprint")
+                  .data(batch_regions)
+                  .enter()
+                  .append("circle")
+                  .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
+                  .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
+                  .attr("r", Math.min(49, (width/12.5)))
+                  .attr("style", "opacity: 0.05")
+                  .attr("clip-path", "url(#landclip)")
+                  .attr("class", function(d) {
+                      if (d.nearest) {
+                          return "city footprint nearest";
+                      } else {
+                          return "city footprint";
+                      }
+                  });
+
+          svg.selectAll("circle.impact")
+                  .data(batch_regions)
+                  .enter()
+                  .append("circle")
+                  .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
+                  .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
+                  .attr("r", Math.min(35, (width/25)))
+                  .attr("style", "opacity: 0.075")
+                  .attr("clip-path", "url(#landclip)")
+                  .attr("class", function(d) {
+                      if (d.nearest) {
+                          return "city impact nearest";
+                      } else {
+                          return "city impact";
+                      }
+                  });
+
+          svg.selectAll("circle.outline")
+                  .data(batch_regions)
+                  .enter()
+                  .append("circle")
+                  .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
+                  .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
+                  .attr("r", Math.min(21, (width/10)))
+                  .attr("style", "opacity: 0.075")
+                  .attr("clip-path", "url(#landclip)")
+                  .attr("class", function(d) {
+                      if (d.nearest) {
+                          return "city outline nearest";
+                      } else {
+                          return "city outline";
+                      }
+                  });
+
+          svg.selectAll("circle.handle")
+                  .data(batch_regions)
+                  .enter()
+                  .append("circle")
+                  .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
+                  .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
+                  .attr("r", Math.min(7, (width/100)))
+                  .attr("class", function(d) {
+                      if (d.nearest) {
+                          return "city handle nearest";
+                      } else {
+                          return "city handle";
+                      }
+                  })
+                  .on('mouseover', tip.show)
+                  .on('mouseout', tip.hide)
+                  .on('click', function(d){
+                      window.location.href = '/'+ d.id;
+                  });
+
+          d3.select(self.frameElement).style("height", height + "px");
+        };
+
         var update = function() {
-            var path = d3.geo.path();
-
-            var map = $('#map').html('<svg></svg>');
-            var width = map.width();
-            var height = map.width() * 0.5;
-
-            var projection = d3.geo.albersUsa()
-                    .scale((width))
-                    .translate([width / 2, height / 2]);
-
-            var path = d3.geo.path()
-                    .projection(projection);
-
-            var svg = d3.select("#map svg")
-                    .attr("width", width)
-                    .attr("height", height);
-
-            var tip = d3.tip()
-                    .attr('class', 'd3-tip')
-                    .offset([-10, 0])
-                    .html(function(d) {
-                        return d.name;
-                    });
-            svg.call(tip);
-
-            d3.json("/assets/topo/us.json", function(error, us) {
-                svg.insert("path", ".graticule")
-                        .datum(topojson.feature(us, us.objects.land))
-                        .attr("class", "land")
-                        .attr("d", path);
-
-                svg.insert("clipPath")
-                        .attr("id", "landclip")
-                        .append("path", ".graticule")
-                        .datum(topojson.feature(us, us.objects.land))
-                        .attr("d", path);
-
-                svg.insert("path", ".graticule")
-                        .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-                        .attr("class", "state-boundary")
-                        .attr("d", path);
-
-                var batch_regions = [
-                    {% set is_first = true %}
-                    {% for region in batch_regions %}
-                    {% if not is_first %},{% endif %}{% set is_first = false %}
-                    {
-                        lat: {{ region.location.lat }},
-                        lng: {{ region.location.lng }},
-                        name: "{{ region.name }}",
-                        id: "{{ region.id }}",
-                        nearest: {% if nearest_event.webname == region.webname %}true{% else %}false{% endif %}
-                    }
-                    {% endfor %}
-                ];
-
-                svg.selectAll("circle.footprint")
-                        .data(batch_regions)
-                        .enter()
-                        .append("circle")
-                        .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
-                        .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
-                        .attr("r", Math.min(49, (width/12.5)))
-                        .attr("style", "opacity: 0.05")
-                        .attr("clip-path", "url(#landclip)")
-                        .attr("class", function(d) {
-                            if (d.nearest) {
-                                return "city footprint nearest";
-                            } else {
-                                return "city footprint";
-                            }
-                        });
-
-                svg.selectAll("circle.impact")
-                        .data(batch_regions)
-                        .enter()
-                        .append("circle")
-                        .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
-                        .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
-                        .attr("r", Math.min(35, (width/25)))
-                        .attr("style", "opacity: 0.075")
-                        .attr("clip-path", "url(#landclip)")
-                        .attr("class", function(d) {
-                            if (d.nearest) {
-                                return "city impact nearest";
-                            } else {
-                                return "city impact";
-                            }
-                        });
-
-                svg.selectAll("circle.outline")
-                        .data(batch_regions)
-                        .enter()
-                        .append("circle")
-                        .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
-                        .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
-                        .attr("r", Math.min(21, (width/10)))
-                        .attr("style", "opacity: 0.075")
-                        .attr("clip-path", "url(#landclip)")
-                        .attr("class", function(d) {
-                            if (d.nearest) {
-                                return "city outline nearest";
-                            } else {
-                                return "city outline";
-                            }
-                        });
-
-                svg.selectAll("circle.handle")
-                        .data(batch_regions)
-                        .enter()
-                        .append("circle")
-                        .attr("cx", function(d) { return projection([d.lng, d.lat])[0]; })
-                        .attr("cy", function(d) { return projection([d.lng, d.lat])[1]; })
-                        .attr("r", Math.min(7, (width/100)))
-                        .attr("class", function(d) {
-                            if (d.nearest) {
-                                return "city handle nearest";
-                            } else {
-                                return "city handle";
-                            }
-                        })
-                        .on('mouseover', tip.show)
-                        .on('mouseout', tip.hide)
-                        .on('click', function(d){
-                            window.location.href = '/'+ d.id;
-                        });
-            });
-
-            d3.select(self.frameElement).style("height", height + "px");
+            // Caching the map really makes the load time quicker.
+            if(!usCached){
+              d3.json("/assets/topo/us.json", function(error, us) {
+                usCached = us;
+                updateMap(us);
+              });
+            }else{
+              updateMap(usCached);
+            }
         };
 
         update();
         $(window).on('resize', update);
+
+        if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(function(data){
+            var nearest_event = LocationTools.nearestRegion(batch_regions, data.coords.latitude, data.coords.longitude);
+            for(i in batch_regions){
+              batch_regions[i].nearest = false;
+            }
+            batch_regions[batch_regions.indexOf(nearest_event)].nearest = true;
+            update();
+            $("#nearest_event_link").text(nearest_event.name).attr("href", "/" + nearest_event.id);
+          });
+        }
     </script>
 {% endblock %}

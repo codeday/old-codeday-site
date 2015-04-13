@@ -11,7 +11,7 @@
     var wistiaEmbed = splashVideo[0].wistiaApi;
 
 	$('#video-link').on('click', function(){
-		splash.fadeOut('fast', function(){ 
+		splash.fadeOut('fast', function(){
 			splashVideo.css('z-index', 0).get(0);
             wistiaEmbed.play();
 			splashReturn.fadeIn();
@@ -140,21 +140,21 @@
                                 } else {
                                     window.location.href = '/'+pickedId;
                                 }
-           
+
 			}
 		});
 	}
 
 	$('.current-city').click(function(e){
-		// Change current-city span into input box 
+		// Change current-city span into input box
 		spanCurrentCity.hide();
 		inputCurrentCity.css('width', '6.2em').show().focus();
 		cityPicker.fadeIn('fast'); // Display city picker when current city is clicked
 		return false;
 	})
 
-	$(document).on('click', function() { 
-		cityPicker.fadeOut('fast'); 
+	$(document).on('click', function() {
+		cityPicker.fadeOut('fast');
 		inputCurrentCity.hide();
 		spanCurrentCity.show();
 	});
@@ -206,7 +206,7 @@
 // Registration ticket price calculations and add coders
 window.ticket_quantity = 1;
 (function(){
-	$('#ticket-amount').change(function() { 
+	$('#ticket-amount').change(function() {
 		var quantity = $('#ticket-amount').val(),
 			total = quantity * window.unit_cost;
 		$('#total-cost').text('$' + total.toFixed(2));
@@ -234,6 +234,33 @@ window.ticket_quantity = 1;
 	});
 })();
 
+// Location
+var LocationTools = {
+	degToRad: function(deg){
+		return deg * Math.PI / 180;
+	},
+	pythagorasEquirectangular: function(lat, long, lat2, long2){
+		lat = LocationTools.degToRad(lat);
+		lat2 = LocationTools.degToRad(lat2);
+		long = LocationTools.degToRad(long);
+		long2 = LocationTools.degToRad(long2);
+		var R = 6371; // km
+		var x = (long2-long) * Math.cos((lat+lat2)/2);
+		var y = (lat2-lat);
+		var d = Math.sqrt(x*x + y*y) * R;
+		return d;
+	},
+	nearestRegion: function(cities, lat, long){
+	  var mindif = 99999;
+	  var closest;
 
-
-
+	  for (index = 0; index < cities.length; ++index) {
+	    var dif =  LocationTools.pythagorasEquirectangular(lat, long, cities[index].lat, cities[index].lng);
+	    if (dif < mindif){
+	      closest = index;
+	    	mindif = dif;
+	    }
+	  }
+	  return cities[closest];
+	}
+}

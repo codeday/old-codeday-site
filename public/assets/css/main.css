@@ -872,7 +872,7 @@ SUBPAGE
 }
 
 .subpage {
-    padding-bottom: 0.1em;
+    /* padding-bottom: 0.1em; */
     background-color: #F2F2F2;
 }
 
