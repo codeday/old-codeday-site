@@ -43,7 +43,7 @@
                 <h3>Pacific</h3>
                 <ul>
                     {% for region in tz_regions['America/Los_Angeles'] %}
-                        <li><a href="/{{ region.id }}">{{ region.name }}</a></li>
+                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
@@ -51,7 +51,7 @@
                 <h3>Mountain</h3>
                 <ul>
                     {% for region in tz_regions['America/Denver'] %}
-                        <li><a href="/{{ region.id }}">{{ region.name }}</a></li>
+                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
@@ -59,7 +59,7 @@
                 <h3>Central</h3>
                 <ul>
                     {% for region in tz_regions['America/Chicago'] %}
-                        <li><a href="/{{ region.id }}">{{ region.name }}</a></li>
+                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
@@ -67,7 +67,7 @@
                 <h3>Eastern</h3>
                 <ul>
                     {% for region in tz_regions['America/Detroit'] %}
-                        <li><a href="/{{ region.id }}">{{ region.name }}</a></li>
+                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
@@ -125,7 +125,7 @@
                 lat: {{ region.location.lat }},
                 lng: {{ region.location.lng }},
                 name: "{{ region.name }}",
-                id: "{{ region.id }}",
+                id: "{{ region.webname }}",
                 nearest: {% if nearest_event.webname == region.webname %}true{% else %}false{% endif %}
             }
             {% endfor %}
