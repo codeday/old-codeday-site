@@ -90,7 +90,7 @@ class PhoneController extends \Controller {
         $event = $region[$event_index - 1]->current_event;
 
         $xml = '<Response>';
-        $xml .= '<Dial callerId="18882633230">'.$event->emergency_phone.'</Dial>';
+        $xml .= '<Dial>'.(strpos($event->emergency_phone, '@') !== false ? ('<Sip>'.$event->emergency_phone.'</Sip>') : $event->emergency_phone).'</Dial>';
         $xml .= '</Response>';
 
         $response = \Response::make($xml, 200);
