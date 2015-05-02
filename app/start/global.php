@@ -17,15 +17,26 @@ App::down(function()
 });
 
 if(\Config::get('app.debug')){
-	\App::error(function(Exception $exception, $code)
-	{
-		\Log::error($exception);
-	});
+	\App::error(function(Exception $exception, $code){});
 }else{
 	\App::error(function(Exception $exception, $code)
 	{
-		\Log::error($exception);
-		return Response::view('errors.'.$code, array("uri" => Request::path()), $code);
+        $traceback_encrypted = null;
+
+        $traceback = $exception->getMessage()."\n Line ".$exception->getLine()." of ".$exception->getFile()
+            ."\n\n".$exception->getTraceAsString();
+
+        try {
+            $iv = str_random(8);
+            $cipher = mcrypt_module_open(MCRYPT_BLOWFISH,'','cbc','');
+
+            mcrypt_generic_init($cipher, \Config::get('app.key'), $iv);
+            $traceback_encrypted = $iv.base64_encode(mcrypt_generic($cipher,$traceback));
+            mcrypt_generic_deinit($cipher);
+
+        } catch (\Exception $ex) {}
+
+		return Response::view('errors.'.$code, array("uri" => Request::path(), "technical_details" => $traceback_encrypted), $code);
 	});
 }
 

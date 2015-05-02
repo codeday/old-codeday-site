@@ -64,19 +64,36 @@
       }
 
       .message {
-        font-family: "Arial";
-        height: 100%;
+        font-family: "Arial", sans-serif;
         width: 100%;
-        top: 45%;
-        position: fixed;
-        font-size: 2.5em;
+        padding-top: 1rem;
         text-align: center;
+      }
+
+      .tech {
+        font-family: "Arial", sans-serif;
+        width: 100%;
+        padding-top: 1rem;
+        text-align: center;
+      }
+
+      .tech textarea {
+        width: 60%;
+        height: 10rem;
       }
     </style>
   </head>
   <body>
     <div class="message">
-      Seems like you broke something! Want to <a href="https://github.com/StudentRND/CodeDay/issues/new?title=[Internal Server Error]&amp;body=%23%20Error%20report%0A%0AStatus%20Code%3A%20500%0APath%3A%20%60%2F{{ uri }}%60">report it?</a>
+      <h1>Something went wrong with this request.</h1>
+      <a href="mailto:contact@studentrnd.org">Want to report this problem?</a>
+      (If you haven't done anything unusual, chances are good we're already aware of the problem and working on a fix.)
     </div>
+    {% if technical_details %}
+      <div class="tech">
+        <h2>Technical Details</h2>
+        <textarea>{{ technical_details }}</textarea>
+      </div>
+    {% endif %}
   </body>
 </html>
