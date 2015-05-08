@@ -13,7 +13,8 @@
 	$('#video-link').on('click', function(){
 		splash.fadeOut('fast', function(){
 			splashVideo.css('z-index', 0).get(0);
-            wistiaEmbed.play();
+			$("#splash-video").show();
+      wistiaEmbed.play();
 			splashReturn.fadeIn();
 		});
         mixpanel.track(

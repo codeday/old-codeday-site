@@ -212,6 +212,8 @@ SPLASH
     width: 100%;
     height: 100%;
     position: fixed;
+    background-size: cover;
+    background: url(../img/hero.jpg) no-repeat center center
 }
 
 #splash-bg {
@@ -253,6 +255,7 @@ SPLASH
     height: auto;
     -webkit-background-size: cover;
     background-size: cover;
+    display: none;
 }
 
 #splash-return {
