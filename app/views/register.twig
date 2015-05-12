@@ -252,8 +252,6 @@
                 "Register Page Loaded"
         );
 
-        var hashParams = {};
-
         function checkPromotionCode(code){
           if ($('#promo-code').prop('disabled') || $('#promo-code-button').text() == '...') {
               return;
@@ -350,14 +348,6 @@
 
             return false;
         });
-
-        if(window.location.hash){
-          var hash = window.location.hash.substr(1).split("&");
-          for(i in hash){
-            var param = hash[i].split("=");
-            hashParams[param[0]] = param[1];
-          }
-        }
 
         if(hashParams["code"]){
           checkPromotionCode(hashParams["code"]);

@@ -1,3 +1,31 @@
+// Hash parameters
+
+hashParams = {};
+
+(function(){
+	function scrollTo(el){
+		$(document).ready(function(){
+			$('html, body').animate({
+				scrollTop: $("#" + el).offset().top
+			}, 100);
+		});
+	}
+
+	if(window.location.hash){
+		var hash = window.location.hash.substr(1).split("&");
+		for(i in hash){
+			var param = hash[i].split("=");
+			if($("#" + param[0]).length !== 0){
+				scrollTo(param[0]);
+				$(document).ready(function(){
+					scrollTo(param[0]);
+				});
+			}
+			hashParams[param[0]] = param[1];
+		}
+	}
+})();
+
 // Playing background video
 (function(){
 	var splashReturn = $('#splash-return'),
