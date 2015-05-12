@@ -4,7 +4,7 @@ namespace CodeDay\Models;
 class Event extends ClearModel {
     public static function find($eventID)
     {
-        return new self(self::clearGet('/event/'.urlencode(strtolower($eventID))));
+        return new self(self::clearGet('/event/'.urlencode($eventID)));
     }
 
     public static function all()
