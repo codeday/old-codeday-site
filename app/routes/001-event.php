@@ -3,7 +3,7 @@
 use \CodeDay\Models;
 
 \Route::bind('event', function($webname) {
-    $event = Models\Region::find($webname)->current_event;
+    $event = Models\Region::find(strtolower($webname))->current_event;
     if ($event->webname != $webname) {
         \App::abort(302, '', ['Location' => '/'.$event->webname]);
     } else {

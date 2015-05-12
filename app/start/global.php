@@ -21,6 +21,8 @@ if(\Config::get('app.debug')){
 }else{
 	\App::error(function(Exception $exception, $code)
 	{
+        if (!in_array($code, [500, 404, 401])) return;
+
         $traceback_encrypted = null;
 
         $traceback = $exception->getMessage()."\n Line ".$exception->getLine()." of ".$exception->getFile()
