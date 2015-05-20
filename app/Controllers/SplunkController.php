@@ -26,7 +26,13 @@ class SplunkController extends \Controller {
         $username .= '-' . str_random(4);
         $password = str_random(10);
 
-        $command = "sudo /usr/bin/splunk add user '".$username."' -password '".$password."' -role user -auth ".\Config::get('splunk.admin.username').":".\Config::get('splunk.admin.password');
+        $splunkAuth = \Config::get('splunk.admin.username').":".\Config::get('splunk.admin.password');
+        $sshCommand = "ssh ".\Config::get('splunk.server.username')."@".\Config::get('splunk.server.host')
+            ." -p ".\Config::get('splunk.server.port').' -o StrictHostKeyChecking=no';
+        $passCommand = "sshpass -p '".\Config::get('splunk.server.password')."'";
+        $splunkCommand = "sudo /usr/bin/splunk add user '$username' -password '$password' -role user -auth ".$splunkAuth;
+
+        $command = "$passCommand $sshCommand \"$splunkCommand\"";
 
         $output = null;
         exec($command, $output);
