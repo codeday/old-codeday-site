@@ -1,0 +1,72 @@
+{
+    "app": {
+        "url": "https://codeday.dev/",
+        "timezone": "UTC",
+        "key": "24 Random Alphanum Chars",
+        "debug": true
+    },
+
+    "session": {
+        "cookie": "codeday_www"
+    },
+
+
+    "splunk": { /* Only required if you use /splunk to generate accounts */
+        "admin": { /* Splunk admin user to run commands with */
+            "username": "",
+            "password": ""
+        },
+        "server": { /* SSH login to splunk server for running commands */
+            "host": "",
+            "port": 21,
+            "username": "",
+            "password": ""
+        }
+    },
+
+    "maxmind": { /* For geoip. Optional, will default to Seattle if not provided. */
+        "user_id": "",
+        "license_key": ""
+    },
+
+    "database": { /* Required */
+        "connections": {
+            "mysql": {
+                "driver": "mysql",
+                "host": "localhost",
+                "database": "codedaywww",
+                "username": "codedaywww",
+                "password": "",
+                "charset": "utf8",
+                "collation": "utf8_bin",
+                "prefix": ""
+            }
+        }
+    },
+
+    "clear": { /* Clear app info. Requires `internal` permissions. Run your own local copy if possible. */
+        "access_token": "",
+        "secret": "",
+        "api_base": "http://clear.codeday.dev/api",
+        "api_base_public": "http://clear.codeday.dev/api"
+    },
+
+    "memcached": { /* Required */
+        "prefix": "localhost",
+        "servers": [
+            {
+                "host": "127.0.0.1",
+                "port": 11211,
+                "weight": 100
+            }
+        ]
+    },
+
+    "mailgun": { /* Not used currently */
+        "pretend": false,
+        "smtp": {
+            "username": "postmaster@XXXXXXXXXX",
+            "password": "XXXXXXXXX"
+        }
+    }
+}
