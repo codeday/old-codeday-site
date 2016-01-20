@@ -1,0 +1,26 @@
+<section id="pitch" class="text-center">
+	{% if event and event.registration_info.is_open %}
+		<h2 class="tag">Build something awesome</h2>
+	{% else %}
+		<h2 class="tag">Get your ticket!</h2>
+	{% endif %}
+	<div class="pitch-info">
+        {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
+            <p>Practice your skills, meet new people, and have fun.</p>
+			<p>Get your ticket before they're sold out!</p>
+			<a href="/{{ event.webname }}/register" class="button register-button round-corners">Let's code</a>
+        {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
+			{% if event.overflow_event %}
+				<p>Sorry, tickets to the main venue are sold out, but you can attend at the nearby overflow venue.</p>
+				<a href="/{{ event.overflow_event.webname }}" class="button register-button round-corners">Register for {{ event.overflow_event.region_name }}</a>
+			{% else %}
+            	<p>Sorry, tickets are sold out, but you may still be able to attend a CodeDay nearby.</p>
+				<a href="/" class="button register-button round-corners">Find a nearby event!</a>
+			{% endif %}
+        {% else %}
+			<p>Registrations aren't yet open, but we can let you know when they are!</p>
+			<input type="email" class="subscription-email" placeholder="Email"><!--
+	        --><input type="submit" value="Subscribe" class="subscription-submit">
+        {% endif %}
+	</div>
+</section>

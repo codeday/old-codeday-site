@@ -1,0 +1,86 @@
+<div id="splash">
+
+    <div id="splash-info" class="text-center">
+        <!-- Mobile nav -->
+        <div class="nav-mobile hide-for-medium-up">
+            <nav class="site-nav text-right">
+                <ul>
+                    {% include "parts/navigation.twig" %}
+                </ul>
+            </nav>
+            <a href="#" id="nav-button" class="right">Menu</a>
+        </div>
+
+        <!-- Regular Nav -->
+        <div class="nav-large hide-for-small-only">
+            <nav class="site-nav text-right row">
+                <a href="#" id="nav-button" class="right">Menu</a>
+                <ul>
+                    {% include "parts/navigation.twig" %}
+                </ul>
+            </nav>
+        </div>
+
+        <div class="to">
+            <div class="ti">
+                <h1 class="site-title"><span id="codeday-title">CodeDay</span> <span id="{{event.id}}" class="current-city">{{ event.region_name }}</span><input type="text" class="current-city" value=""></h1>
+                <div id="city-picker" class="round-corners text-left">
+                    <h3 class="city-panel-title">Nearest events</h3>
+                    <ul>
+                    </ul>
+                </div>
+                <p class="site-description">Join students in {{ loaded_batch.events|length }} cities nationwide, and build something awesome in 24 hours!</p>
+                <p class="event-date">
+                    {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon{% if event.venue %}.
+                    Hosted at <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank">{{ event.venue.name }}</a>.
+                {% endif %}
+                </p>
+                {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
+                    <a href="/{{ event.webname }}/register" class="button register-button round-corners">Get your ticket{% if event.registration_info.remaining < (event.registration_info.max * 0.10) %} &mdash;{{ event.registration_info.remaining }} left!{% else %}!{% endif %}</a>
+                    {% if event.related_events|length > 0 %}
+                        <p>Or register for other nearby events:</p>
+                        {% for related_event in event.related_events %}
+                            <a href="/{{ related_event.webname }}" class="button register-button round-corners">Register for {{ related_event.region_name }}</a>
+                        {% endfor %}
+                    {% endif %}
+                {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
+                    {% if event.related_events %}
+                        <p>Sold out, register for a nearby event:</p>
+                        {% for related_event in event.related_events %}
+                            <a href="/{{ related_event.webname }}" class="button register-button round-corners">Register for {{ related_event.region_name }}</a>
+                        {% endfor %}
+                    {% else %}
+                        <a href="/" class="button register-button round-corners">Sold out &mdash; find a nearby event</a>
+                    {% endif %}
+                {% else %}
+                    <p id="subscription-message">We're not selling tickets right now but we can notify you when we are.</p>
+                    <input type="text" class="subscription-email" placeholder="Email"><!--
+                    --><input type="submit" value="Subscribe" class="subscription-submit">
+                    {% if event.related_events|length > 0 %}
+                        <p>Or see nearby events:</p>
+                        {% for related_event in event.related_events %}
+                            <a href="/{{ related_event.webname }}" class="button register-button round-corners">{{ related_event.region_name }}</a>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+
+
+                <div class="text-center">
+                    <p class="show-for-large-up"><a href="#" id="video-link">Watch video</a></p>
+                    <p class="show-for-medium-down promotion-video"><a href="https://fast.wistia.net/embed/iframe/q0z803g4cp" target="_blank" id="video-link">Watch video</a></p>
+                </div>
+                <a href="#faqAnchor" class="anchorLink"><span id="arrow"></span></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+</div>
+
+
+
+<div class="hide-for-small-only">
+    <a href="#" id="splash-return" class="round-corners">Return</a>
+    <iframe src="//fast.wistia.net/embed/iframe/q0z803g4cp?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" id="splash-video" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
+    <script src="//fast.wistia.net/assets/external/iframe-api-v1.js"></script>
+</div>
