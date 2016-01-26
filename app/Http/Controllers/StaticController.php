@@ -42,7 +42,7 @@ class StaticController extends Controller {
 
     public function getPress()
     {
-        return \View::make('press');
+        return \Redirect::to('https://studentrnd.org/press');
     }
 
     public function getSponsor()
