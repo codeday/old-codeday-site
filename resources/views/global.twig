@@ -1,46 +1,39 @@
-{% extends "template.twig" %}
-{% block splash %}
-    <style>
-        .sponsors { clear: both; text-align: center; padding: 0; margin-top: -2rem; }
-    </style>
-    <div id="global-page" class="subpage">
-        <header class="header-subpage header-mobile hide-for-medium-up">
-            <nav class="site-nav text-right">
-                <ul>
-                    {% include "parts/navigation.twig" %}
-                </ul>
-            </nav>
-            <div class="row">
-                <h1 class="site-title left"><a href="/{% if event %}{{ event.webname }}{% endif %}">CodeDay</a></h1>
-                <a href="#" id="nav-button" class="right">Menu</a>
-            </div>
-        </header>
+{% extends 'template.twig' %}
+{% block section %}global{% endblock %}
+{% block page %}index{% endblock %}
+{% block hero %}
+    <article class="lead">
+        <span class="date">{{ loaded_batch.starts_at|date('F j') }}-{{ loaded_batch.ends_at|date('j') }}</span>
+        <h2>{{ loaded_batch.events|length }} cities. 24 hours of fun.</h2>
+        <p>At CodeDay, student programmers and artists get together, build cool apps &amp; games, and have a lot of fun.
+           You can attend whether you're a total beginner or very experienced.</p>
+        <div id="map" class="map"></div>
+    </article>
+    <article class="cta">
+        Learn more: <a href="/{{ nearest_event.webname }}">{{ nearest_event.region_name }}</a>, or click your city on the map above.
+    </article>
+{% endblock %}
+{% block content %}
+    <article class="what-is">
+        <section class="video">
+            <iframe src="//fast.wistia.net/embed/iframe/r4avh9mp2g?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" id="splash-video" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
+            <script src="//fast.wistia.net/assets/external/iframe-api-v1.js"></script>
+        </section>
+        <section class="details">
+            <h3>Have fun, make friends, build something awesome.</h3>
+            <p>CodeDay is a nationwide event where student programmers, artists, musicians, actors, and everyone else
+               can get together and build apps &amp; games for 24 hours. Students of all skill levels are
+               welcome&thinsp;&mdash;&thinsp;we have workshops and mentors who can help if you're new!</p>
+            <p>At the beginning of CodeDay, everyone with an idea comes up and pitches it to the group. If you're on
+               your own, or just without an idea, this is the time for you to build whatever you want.</p>
+        </section>
+    </article>
 
-        <header class="header-subpage header-large hide-for-small-only">
-            <div class="row">
-                <div class="column large-3 small-3">
-                    <h1 class="site-title"><a href="/{% if event %}{{ event.webname }}{% endif %}">CodeDay</a></h1>
-                </div>
-                <div class="column large-9 small-9">
-                    <nav class="site-nav text-right">
-                        <a href="#" id="nav-button" class="right">Menu</a>
-                        <ul>
-                            {% include "parts/navigation.twig" %}
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-
-        <h2 class="excite">CodeDay {{ loaded_batch.name }}</h2>
-        <h3 class="excite">{{ loaded_batch.starts_at|date('F j') }}-{{ loaded_batch.ends_at|date('j') }} &middot; {{ loaded_batch.events|length }} cities nationwide &middot; Nearest event: <a id="nearest_event_link" href="/{{ nearest_event.webname }}">{{ nearest_event.region_name }}</a></h3>
-        <p class="details">The most exciting CodeDay yet. Select your city to view more details.</p>
-
-        <div id="map"></div>
-
+    <article class="cities">
         <section class="list">
+            <h3>Select your nearest city for more information.</h3>
             <section>
-                <h3>Pacific</h3>
+                <h4>Pacific</h4>
                 <ul>
                     {% for region in tz_regions['America/Los_Angeles'] %}
                         <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
@@ -48,7 +41,7 @@
                 </ul>
             </section>
             <section>
-                <h3>Mountain</h3>
+                <h4>Mountain</h4>
                 <ul>
                     {% for region in tz_regions['America/Denver'] %}
                         <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
@@ -56,7 +49,7 @@
                 </ul>
             </section>
             <section>
-                <h3>Central</h3>
+                <h4>Central</h4>
                 <ul>
                     {% for region in tz_regions['America/Chicago'] %}
                         <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
@@ -64,7 +57,7 @@
                 </ul>
             </section>
             <section>
-                <h3>Eastern</h3>
+                <h4>Eastern</h4>
                 <ul>
                     {% for region in tz_regions['America/Detroit'] %}
                         <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
@@ -72,50 +65,21 @@
                 </ul>
             </section>
         </section>
+        <img src="/assets/img/code.jpg" alt="" />
+    </article>
 
-        <section class="sponsors">
-            <h3>Supported Nationally By</h3>
-            <a title="Splunk" target="_blank" href="https://splunk.com/" class="medium-4 small-12 current-sponsor sponsor-splunk"><div class="sponsor-image"></div></a>
-            <a title="Kinesis" target="_blank" href="http://www.kinesis-ergo.com/" class="medium-4 small-12 current-sponsor sponsor-kinesis"><div class="sponsor-image"></div></a>
-            <a title="LexisNexis Risk Solutions" target="_blank" href="http://www.lexisnexis.com/risk/" class="medium-4 small-12 current-sponsor sponsor-lexisnexis"><div class="sponsor-image"></div></a>
-        </section>
+    <article class="sponsors">
+        <h3>CodeDay is supported nationwide by these sponsors:</h3>
+        <ul>
+            {% include "parts/national_sponsors.twig" %}
+        </ul>
+    </article>
 {% endblock %}
 {% block scripts %}
     <script src="/assets/js/d3.v3.min.js"></script>
     <script src="/assets/js/topojson.v1.min.js"></script>
     <script src="/assets/js/d3.tip.js"></script>
     <script>
-
-    // Location
-    var LocationTools = {
-      degToRad: function(deg){
-        return deg * Math.PI / 180;
-      },
-      pythagorasEquirectangular: function(lat, long, lat2, long2){
-        lat = LocationTools.degToRad(lat);
-        lat2 = LocationTools.degToRad(lat2);
-        long = LocationTools.degToRad(long);
-        long2 = LocationTools.degToRad(long2);
-        var R = 6371; // km
-        var x = (long2-long) * Math.cos((lat+lat2)/2);
-        var y = (lat2-lat);
-        var d = Math.sqrt(x*x + y*y) * R;
-        return d;
-      },
-      nearestRegion: function(cities, lat, long){
-        var mindif = 99999;
-        var closest;
-
-        for (index = 0; index < cities.length; ++index) {
-          var dif =  LocationTools.pythagorasEquirectangular(lat, long, cities[index].lat, cities[index].lng);
-          if (dif < mindif){
-            closest = index;
-            mindif = dif;
-          }
-        }
-        return cities[closest];
-      }
-    }
 
         batch_regions = [
             {% set is_first = true %}
@@ -247,6 +211,7 @@
                   });
 
           d3.select(self.frameElement).style("height", height + "px");
+          map.css('margin-top', '-'+(height/1.5)+'px');
         };
 
         var update = function() {
@@ -263,17 +228,5 @@
 
         update();
         $(window).on('resize', update);
-
-        if(navigator.geolocation){
-          navigator.geolocation.getCurrentPosition(function(data){
-            var nearest_event = LocationTools.nearestRegion(batch_regions, data.coords.latitude, data.coords.longitude);
-            for(i in batch_regions){
-              batch_regions[i].nearest = false;
-            }
-            batch_regions[batch_regions.indexOf(nearest_event)].nearest = true;
-            update();
-            $("#nearest_event_link").text(nearest_event.name).attr("href", "/" + nearest_event.id);
-          });
-        }
     </script>
 {% endblock %}

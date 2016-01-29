@@ -1,0 +1,61 @@
+$font-family-header: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+$font-family-body: "Helvetica Neue", "Helvetica", "Arial", "proxima-nova", "Proxima Nova", sans-serif
+
+$color-red: #cb7972
+$color-green: #72CB99
+$color-blue: #466D98
+$color-background: #F8F8FA
+$color-black: #333
+$color-gray: #AAA
+$color-white: #fff
+
+%normal-width
+    width: 100%
+    max-width: 68rem
+    margin: auto
+
+.wrap
+    width: 100%
+    > *
+        @extend %normal-width
+
+html, html > body
+    margin: 0
+    padding: 0
+    *
+        font-family: $font-family-body
+        text-rendering: optimizeLegibility
+        -webkit-font-smoothing: antialiased
+        box-sizing: border-box
+        -moz-box-sizing: border-box
+
+    p, li, blockquote, em, strong
+        font-size: 1rem
+        line-height: 1.44rem
+
+    h1, h2, h3, h4, h5, h6
+        font:
+            family: $font-family-header
+            weight: 500
+
+    a, a:visited
+        color: inherit
+
+    a:hover, a:active
+        color: $color-red
+
+    section.content > article
+        +row
+        padding: 3rem 0 1rem 0
+
+        h3
+            margin-bottom: 0
+            font-size: 1.44rem
+
+    ::selection
+        background: $color-blue
+        color: #ffffff
+
+    ::-moz-selection
+        background: $color-blue
+        color: #ffffff

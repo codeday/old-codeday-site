@@ -1,0 +1,200 @@
+{% extends "template.twig" %}
+{% block section %}event{% endblock %}
+{% block page %}index{% endblock %}
+
+{% block hero %}
+    <article class="details">
+        <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>
+        <span class="time">noon to noon</span>
+    </article>
+    <article class="lead">
+        <h2>Build something fun at CodeDay {{ event.region_name }}.</h2>
+        <p>At CodeDay {{ event.region_name }}, student programmers and artists get together to build awesome games and
+           apps in 24 hours. You're invited to join us, no matter what your previous experience.</p>
+    </article>
+    <article class="action">
+        {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
+            <a href="/{{ event.webname }}/register" class="register">Get your ticket &raquo;</a>
+        {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
+            {% if event.related_events %}
+                <span class="sold-out-label">Sorry, we're sold out! Register for a nearby event:</span>
+                {% for related_event in event.related_events %}
+                    <a href="/{{ related_event.webname }}" class="nearby-avail">{{ related_event.region_name }}</a>
+                {% endfor %}
+            {% else %}
+                <span class="sold-out">Sorry, we're sold out!</span>
+            {% endif %}
+        {% else %}
+            <span class="notify-label">Tickets are not yet on sale. Sign up to be notified when they are:</span>
+            <form action="/{{ event.webname }}/notify" class="notify-signup">
+                <input type="email" name="email" id="email" placeholder="you@email.co" />{#
+                #}<input type="submit" method="post" value="Notify me!">
+            </form>
+        {% endif %}
+        {% if event.venue %}
+            <span class="venue">
+                Hosted at <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}"
+                         target="_blank">{{ event.venue.name }}</a>
+            </span>
+        {% endif %}
+
+        {% if event.related_events and not (event.registration_info.is_open and event.registration_info.remaining == 0) %}
+            <section class="nearby">
+                <span class="label">Or register for another nearby event:</span>
+                {% for related_event in event.related_events %}
+                    <a href="/{{ related_event.webname }}" class="event">{{ related_event.region_name }}</a>
+                {% endfor %}
+            </section>
+        {% endif %}
+    </article>
+{% endblock %}
+
+{% block content %}
+    <article class="what-is">
+        <section class="details">
+            <h3>What is CodeDay?</h3>
+            <p>CodeDay is a nationwide event where student programmers, artists, musicians, actors, and everyone else
+                can get together and build apps &amp; games for 24 hours. Students of all skill levels are
+                welcome&thinsp;&mdash;&thinsp;we have workshops and mentors who can help if you're new!</p>
+            <p>At the beginning of CodeDay, everyone with an idea comes up and pitches it to the group. If you're on
+                your own, or just without an idea, this is the time for you to build whatever you want.</p>
+        </section>
+        <section class="video">
+            <iframe src="//fast.wistia.net/embed/iframe/r4avh9mp2g?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" id="splash-video" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
+            <script src="//fast.wistia.net/assets/external/iframe-api-v1.js"></script>
+        </section>
+    </article>
+    
+    <article class="how-works">
+        <h3>How It Works</h3>
+        <ul>
+            <li>
+                <img src="/assets/img/friends.jpg" alt="" />
+                <span class="caption">1. Arrive, make new friends.</span>
+            </li>
+            <li>
+                <img src="/assets/img/pitch.jpg" alt="" />
+                <span class="caption">2. Pitch ideas for what you want to make.</span>
+            </li>
+            <li>
+                <img src="/assets/img/workshops.jpg" alt="" />
+                <span class="caption">3. Optional: attend workshops.</span>
+            </li>
+            <li>
+                <img src="/assets/img/code.jpg" alt="" />
+                <span class="caption">4. Make it! (With help from our mentors.)</span>
+            </li>
+        </ul>
+    </article>
+
+    <article class="faq">
+        <h3>FAQ</h3>
+        <ul>
+            <li>
+                <span class="q">Is this a "hackathon"?</span>
+                <p>CodeDay is a place for people who are interested in learning something new and meeting new people.
+                   It is not focused on winning awards or getting jobs, so <strong>we do not call CodeDay a
+                   hackathon.</strong></p>
+            </li>
+            <li>
+                <span class="q">Do I need to come with a team?</span>
+                <p><strong>No!</strong> In fact, most people don't come with a team! At the beginning of the event,
+                   everyone will pitch ideas for what they want to build. You can form a team then.</p>
+            </li>
+            <li>
+                <span class="q">What should I bring?</span>
+                <p>Bring your laptop and mouse. Food is included in your ticket. If you're planning on sleeping, bring
+                   a sleeping bag, pillow, and toothbrush. Desktop PCs and monitors are also allowed, although less
+                   common.</p>
+            </li>
+            <li>
+                <span class="q">I don't know how to code! Can I really come?</span>
+                <p><strong>Yes!</strong> Part of the fun is learning how to program when working with other people.
+                   We'll also provide some great workshops that you can attend. Or you can always just hang out and
+                   have fun!</p>
+            </li>
+            <li>
+                <span class="q">Can I attend if I'm not in high school or college?</span>
+                <p>Please <a href="mailto:contact@codeday.org">contact us</a> before registering if you are not
+                    currently in high school or college. If you register without contacting us, we will unfortunately
+                    need to turn you away at the door.</p>
+            </li>
+            <li>
+                <span class="q">Where will I sleep?</span>
+                <p>Students who plan to sleep (we recommend you do!) can sleep anywhere in the venue, or in the
+                   designated sleeping room. Don't forget to pack a sleeping bag and pillow!</p>
+            </li>
+            <li>
+                <span class="q">We'd like to attend as a school. Can we pay with a PO?</span>
+                <p>Yes, please <a href="mailto:contact@codeday.org">contact us</a> for more information on group rates
+                   and paying by PO.</p>
+            </li>
+            <li>
+                <span class="q">What is security like at the event?</span>
+                <p>The venue will be locked down overnight, and students under 18 will not be able to leave without
+                   an parent there to pick them up.</p>
+            </li>
+            <li>
+                <span class="q">Can I attend with my student?</span>
+                <p>Parents can attend the Kickoff and final presentations, but cannot stay throughout the event due to
+                   background check requirements. Teachers may attend with students, but must show school ID or other
+                   proof of status at the door.</p>
+            </li>
+        </ul>
+    </article>
+
+    {% if event.venue and event.venue.name != "TBA" %}
+        <article class="map">
+            <h3>Hosted at {{ event.venue.name }}:
+                <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank"
+                >{{ event.venue.address.line_1 }}{% if event.venue.address.line_2 %},{{ event.venue.address.line_2 }}{% endif %},
+                {{ event.venue.address.city }}</a></h3>
+            <div id="map"></div>
+        </article>
+    {% endif %}
+
+    <article class="schedule">
+        <h3>Schedule</h3>
+        {% for day,entries in event.schedule %}
+            <section class="day">
+                <div class="schedule">
+                    <h4>{{ day }}</h4>
+                    <ul>
+                        {% for entry in entries %}
+                            <li>
+                                <span class="time">{{ entry.hour }}</span>
+                                <span class="task {{ entry.type }}">
+                                    {% if entry.url %}<a target="_blank" href="{{ entry.url }}">{% endif %}
+                                    {{ entry.title }}
+                                    {% if entry.url %}</a>{% endif %}
+                                    {% if entry.description %}
+                                        <span class="popup">{{ entry.description }}</span>
+                                    {% endif %}
+                                </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
+        {% endfor %}
+    </article>
+
+    <article class="sponsors">
+        <h2>Supported By</h2>
+        <ul>
+            {% include "parts/national_sponsors.twig" %}
+            {% for sponsor in event.sponsors %}
+                <li>
+                    {% if sponsor.url %}
+                        <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" target="_blank"><span style="background-image: url('{{ sponsor.logo }}');" title="{{ sponsor.name }}"></span></a>
+                    {% else %}
+                        <span style="background-image: url('{{ sponsor.logo }}');" title="{{ sponsor.name }}"></span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </article>
+{% endblock %}
+{% block scripts %}
+    {% include "parts/map.twig" %}
+{% endblock %}
