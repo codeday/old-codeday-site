@@ -925,7 +925,7 @@ body.event.index section.hero {
   body.event.index section.hero article.details {
     text-transform: uppercase;
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    font-size: 0.833rem; }
+    font-size: 1rem; }
     body.event.index section.hero article.details span.date:after {
       content: "-"; }
   body.event.index section.hero article.lead {
