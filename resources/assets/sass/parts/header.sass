@@ -1,0 +1,67 @@
+body > header
+    &.with-notice
+        margin-top: 1rem
+    +row
+    background-color: $color-red
+    color: $color-white
+    section.site-title
+        +span-columns(4)
+        padding-top: 1.4rem
+        h1
+            display: inline-block
+            margin: 0
+            a
+                background:
+                    image: url(/assets/img/logo.png)
+                    position: 50% 50%
+                    repeat: no-repeat
+                    size: contain
+                height: 20px
+                width: 100px
+                display: block
+                text-indent: 3000px
+        & > a
+            text-decoration: none
+            color: inherit !important
+            font:
+                family: $font-family-header
+                weight: 300
+                size: 0.883rem
+            display: inline-block
+            position: relative
+            top: -3px
+    nav
+        +span-columns(8)
+        ul
+            padding: 0
+            text-align: right
+            li
+                list-style-type: none
+                display: inline-block
+                a
+                    text-transform: uppercase
+                    display: inline-block
+                    color: inherit !important
+                    font-family: $font-family-header
+                    text-decoration: none
+                    padding: 0.5rem
+                &.active a, &:hover a
+                    text-decoration: underline
+                &:last-child a
+                    padding-right: 0
+
+body > .notice
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    line-height: 1
+    padding: 0.2rem
+    text-align: center
+    text-transform: uppercase
+    background-color: $color-green
+    color: $color-white
+    z-index: 5000
+    font:
+        family: $font-family-header
+        weight: 700

@@ -1,0 +1,27 @@
+<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+
+<script>
+    L.mapbox.accessToken = 'pk.eyJ1IjoidHlsZXJtZW5lemVzIiwiYSI6ImNpangwZm03djBub212M2x6dmZ0MHd4YTkifQ.xq1UxOv7Bujmi43FzHj_pg';
+    var geocoder = L.mapbox.geocoder('mapbox.places');
+    var map = L.mapbox.map('map', 'mapbox.streets', {
+        attributionControl : {compact: true}
+    });
+    map.dragging.disable();
+    map.touchZoom.disable();
+    map.doubleClickZoom.disable();
+    map.scrollWheelZoom.disable();
+    map.keyboard.disable();
+    if (map.tap) map.tap.disable();
+
+    geocoder.query('{{ event.venue.full_address|escape('js') }}', function(err, data) {
+        map.setView(data.latlng, 15);
+        L.marker(new L.LatLng(data.latlng[0], data.latlng[1]), {
+            icon: L.mapbox.marker.icon({
+                'marker-color': 'ff8888'
+            })
+        }).addTo(map).on('click', function(){
+            window.open('https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}');
+        });
+    });
+</script>

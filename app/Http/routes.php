@@ -25,6 +25,7 @@ use CodeDay\Models;
 
 // Static Routes
 \Route::get('/', '\CodeDay\Http\Controllers\StaticController@getGlobal');
+\Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');
 \Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
 
 \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');

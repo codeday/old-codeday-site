@@ -1,314 +1,99 @@
 {% extends "template.twig" %}
+{% block section %}sponsor{% endblock %}
+{% block page %}index{% endblock %}
 {% block title %}Sponsor{% endblock %}
-{% block page %}sponsor{% endblock %}
-{% block content %}
-    <style>
-        section.content, section.content * {
-            line-height: initial;
-        }
-
-        .wrapper h2.section-title {
-            line-height: 0;
-        }
-
-        section.content .wrapper p {
-            margin-bottom: 0;
-            margin-top: 0;
-            line-height: 1.7rem;
-        }
-
-        .selector-label {
-            display: block;
-            text-align: center;
-            text-transform: uppercase;
-            padding: 1rem 0;
-        }
-
-        .selector {
-            padding: 0;
-        }
-
-        .selector li {
-            list-style-type: none;
-            display: inline-block;
-            width: 33%;
-            font-size: 1.5rem;
-            text-align: center;
-        }
-
-        .selector li.current {
-            color: #A0D388;
-        }
-
-        .ways-to-engage ul {
-            padding: 0;
-        }
-
-        .ways-to-engage li {
-            list-style-type: none;
-            width: 48%;
-            margin: 0;
-            padding: 0 3rem 3rem 0;
-            display: inline-block;
-            vertical-align: top;
-            line-height: 1.8rem
-        }
-
-        .ways-to-engage li:nth-child(2n) {
-            padding: 0 0 3rem 3rem;
-        }
-
-        .ways-to-engage li h3 {
-            font-size: 1rem;
-            font-weight: bold;
-        }
-
-        .sponsor-sale {
-            padding: 0;
-        }
-
-        .sponsor-sale li {
-            list-style-type: none;
-            display: inline-block;
-            width: 32%;
-            vertical-align: top;
-            padding: 1rem;
-            margin: 0;
-        }
-
-        .sales-content blockquote {
-            border: 0;
-            padding: 0 1rem;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .sales-content blockquote .quote {
-            font-weight: 300;
-            font-style: italic;
-            color: #A0D388;
-        }
-
-        .sales-content blockquote .author {
-            font-weight: 300;
-            font-size: 0.7rem;
-            color: #A0D388;
-            display: block;
-            margin-top: 0.3rem;
-        }
-
-        .sales-content h2 {
-            text-align: center;
-        }
-
-        section.national, section.started {
-            display: inline-block;
-            margin-top: 2rem;
-            vertical-align: top;
-        }
-
-        section.national {
-            width: 60%;
-            margin-right: 5%;
-        }
-
-        section.started {
-            width: 33%;
-        }
-
-    </style>
-    <main>
-    <section id="sponsor-pitch" class="content row round-corners">
-        <img src="/assets/img/sponsor.jpg" id="sponsor-img">
-
-         <div class="wrapper" style="padding-top: 0">
-            <h2 class="section-title">CodeDay is unlike anything else in the country.</h2> 
-            <p>Students come to CodeDay to learn more about technology. CodeDay is about meeting people, learning things, 
-                and having fun. And our attendees are genuinely interested in getting to know your company.</p>
-
-             <p style="font-weight: 700">Sponsoring a CodeDay is the most efficient way to get in touch with the best
-                developers of today... and tomorrow.</p>  
-
-            <section class="national">
-                <h2 class="section-title">Engage locally or nationally</h2>
-                <hr class="separator"/>
-                 <p style="margin-top:-1.2rem">CodeDay is both national and local. Depending on your needs and budget, you can sponsor a CodeDay in your
-                    city, in a region, or nationally across all of our cities. Every sponsorship level offers your organization
-                    the ability to deeply connect and engage with students.</p> 
-                <p>Whether you're a small startup or a major corporation, we want to work with you to ensure you get the most 
-                    out of CodeDay. By sponsoring CodeDay, you'll get access to our training program which will walk you through 
-                    the steps to ensure you and your employees get the most return on your investment.</p>
-            </section>
-
-            <section class="started">
-                <h2 class="section-title">Get started</h2>
-                <hr class="separator"/>
-                <p>Sponsorship opportunities are available for companies of all size.</p>
-                <p><a href="mailto:brettneese@studentrnd.org?subject=Sponsoring CodeDay">Contact us and we'll work with you
-                        to determine what's right for your organization.</a></p>
-            </section>
-        </div>
-    </section>
-
-    <section id="sponsor-global" class="content row round-corners">
-        <span class="selector-label">I'm looking to...</span>
-        <ul class="selector">
-            <li id="recruit">Recruit programmers</li>
-            <li id="api" class="current">Evangelize an API</li>
-            <li id="product">Promote a product</li>
-        </ul>
-        <div class="wrapper">
-            <section id="recruit-content" style="display:none" class="sales-content">
-                <blockquote>
-                    <span class="quote">&ldquo;Interns from CodeDay are the best we've ever hired.&rdquo;</span>
-                    <span class="author">&mdash;Engineer at a Fortune 500 Company</span>
-                 </blockquote>  
-
-                <h2 class="section-title">Ways to engage with students at CodeDay</h2> 
-                <p>Sponsors get the most engagement out of CodeDay by creating genuine engagement with students. As a 
-                   recruiting sponsor, you'll have many opportunities to engage:</p> 
-
-                <ul class="ways-to-engage">
-                    <li>
-                        <h3>Bring developers (or other technical mentors) from your organization.</h3> 
-                        CodeDay is an opportunity for your company to show off its technical chops, and participants
-                        appreciate hearing about your company from the perspective of those making the technology that 
-                        powers it. 
-                    </li> 
-                    <li>
-                        <h3>Put a face to a name with resumes and student data.</h3>
-                        Getting copies of student resumes is nice, but matching those documents to real interactions
-                        ensures  you find the best cultural fits, and that you're the top choice of many of the best
-                        developers in  the world. 
-                    </li>
-                    <li>
-                        <h3>Swag is nice, but too much swag is gimmicky.</h3>
-                        Recruiting sponsors can set up a booth and distribute swag, but your options to create
-                        engagement  at CodeDay go way deeper than distributing sunglasses and t-shirts. 
-                    </li> 
-                    <li>
-                        <h3>Branded events, meals, and more!</h3> 
-                        Bring some of your company's culture to CodeDay by sponsoring a meal (&ldquo;Lunch, presented
-                        by&hellip;&rdquo;) or event (&ldquo;Midnight Karaoke, sponsored by&hellip;&rdquo;). We're happy 
-                        to customize an option to help you build a connection. 
-                    </li>
-                 </ul>
-            </section>
-            <section id="api-content" class="sales-content">
-                <blockquote> 
-                    <span class="quote"> &ldquo;Of all the events we've sponsored, CodeDay has driven the largest
-                        long-term growth.&rdquo; </span>
-                    <span class="author">&mdash;Developer Evangelist at a YC-Backed Startup</span> 
-                </blockquote>
-                  
-                <ul class="sponsor-sale"> 
-                    <li>  <span>             CodeDay attendees are curious, engaged, and passionate about technology. At CodeDay, API             sponsors have an opportunity to personally connect with this audience, and create connections             that last far beyond the weekend.         </span> 
-                    </li>
-                     
-                    <li>  <span>             Our small event size and format means deeper levels of engagement for you and your developer             evangelists. Whether you have teams in multiple cities or just one, CodeDay is an excellent             opportunity to expose your technology to the developers of tomorrow.         </span> 
-                    </li>
-                     
-                    <li>  <span>             When students are learning from you, your technology becomes cemented in the foundations for             their future.         </span> 
-                    </li>
-                     
-                </ul>
-                  <h2 class="section-title">Ways to engage with students at CodeDay</h2> 
-                <p>Sponsors get the most engagement out of CodeDay by creating genuine engagement with students. As an
-                   API sponsor, you'll have many opportunities to engage:</p> 
-                <ul class="ways-to-engage"> 
-                    <li>  <h3>We'll make you visible.</h3>
-                          Our staff will introduce your developer evangelists or
-                         mentors at the event kickoff, and  introduce them to students throughout the event. By
-                         working with students coding projects at  CodeDay, your mentors will build up real
-                         connections that last past the end of the event.
-                    </li>
-                     
-                    <li>  <h3>Swag is nice, but too much swag is gimmicky.</h3> 
-                         API sponsors can set up a booth and
-                        distribute swag, but your options to create engagement at  CodeDay go way deeper than
-                        distributing sunglasses and t-shirts. 
-                    </li>
-                     
-                    <li>  <h3>Sponsor nationally, let us handle the logistics.</h3>
-                          By sponsoring nationally, you'll be
-                        able to send your developer evangelists to events in nearby  cities, while our staff will teach
-                        your technology in the cities in which you aren't able to attend. 
-                    </li>
-                     
-                    <li>  <h3>Engage for the long-term.</h3> 
-                         Our community members encounter problems which can be
-                        solved with partner APIs every day. By  building connections at CodeDay, you'll be the first
-                        choice in future internships and 
-                    </li>
-                     
-                </ul>
-            </section>
-            <section id="product-content" class="sales-content" style="display:none">
-
-                <blockquote>
-                    <span class="quote">&ldquo;No other event will allow you to connect with students like CodeDay.&rdquo;</span>
-                </blockquote>
-
-                <ul class="sponsor-sale">
-                    <li>
-                        6,000+ students in 30+ cities attend a CodeDay every year. More than any other programming event
-                        for students in the country.
-                    </li>
-                    <li>The product choices CodeDay attendees make now will impact their entire academic career and beyond.
-                        Use it to demo your product, to recruit students to your developer bootcamp, or to showcase your
-                        app.</li>
-                    <li>40% of students who attend CodeDay are in college, and 60% are in high school. A wide range of
-                        students, for a wide range of products.</li>
-                </ul>
-
-                <h2 class="section-title">Ways to engage with students at CodeDay</h2> 
-                <p>Sponsors get the most engagement out of CodeDay by creating genuine engagement with students. As a 
-                    product sponsor, you'll have many opportunities to engage:</p> 
-                <ul class="ways-to-engage">
-                    <li> 
-                        <h3>Our students love hands-on demos of new products.</h3> 
-                        CodeDay is an atmosphore of learning and fun, and that extends to learning about our sponsors as 
-                        well. Bring samples (physical products) or trial codes (digital products) and our students will
-                        love trying them out.
-                    </li> 
-                    <li> 
-                        <h3>Sponsor nationally, let us handle the logistics.</h3>
-                        By sponsoring nationally, you'll be able to send your employees to events in nearby cities,
-                        while our staff will show off your product in the cities in which you aren't able to attend. 
-                    </li> 
-                    <li> 
-                        <h3>Engage for the long-term.</h3> 
-                        Our community members encounter problems which can be solved with partner products every day. By 
-                        building connections at CodeDay, you'll be on the top of their minds.
-                    </li>
-                 </ul>
-            </section>
-        </div>
-    </section>
-    </main>
+{% block hero %}
+    <article class="lead">
+        <h2>15,000 of the brightest minds in the US, and you.</h2>
+        <p>Between a huge nationwide reach and the highest quality events proven to inspire, CodeDay is the best
+           resource for organizations looking to engage with the next generation of developers.</p>
+    </article>
+    <article class="cta">
+        <a href="mailto:sponsor@codeday.org">Get started</a>
+    </article>
 {% endblock %}
-{% block scripts %}
-    <script type="text/javascript">
-        mixpanel.track(
-                "Sponsor Page Loaded"
-        );
-    </script>
-    <script>
-        $('.selector li').on('click', function(){
-            var $this = $(this);
-            var id = $this.attr('id');
-            var contentId = id + '-content';
-            var $content = $('#' + contentId);
+{% block content %}
+    <section class="lead">
+        <article class="intro">
+            <h3>An Event Unlike Anything You've Seen</h3>
+            <p>CodeDay is unlike anything in the country: an event which attracts thousands of students for the purposes
+               of learning, exploring, and having fun with code.</p>
+            <p>CodeDay follows a format you might have heard termed a hackathon: students attend CodeDay and spend 24
+               hours building interesting apps or games from scratch, presenting the results to a panel of judges at the
+               end. Unlike traditional hackathons, however, CodeDay does not have a focus on prizes, and participants
+               are judged based on the technical difficulty of their ideas - not business models or pitch decks.</p>
+            <p>As a result, attendees at CodeDay are some of the most dedicated and talented programmers of today and
+               tommorow, and we've helped many of the top companies reach this unique set of students:</p>
+            <ul class="past-sponsors">
+                <li><div style="background-image:url(/assets/img/sponsors/splunk.png);"></div></li>
+                <li><div style="background-image:url(/assets/img/sponsors/lexisnexis.png);"></div></li>
+                <li><div style="background-image:url(/assets/img/sponsors/a16z.png);"></div></li>
+                <li><div style="background-image:url(/assets/img/sponsors/ebay.png);"></div></li>
+                <li><div style="background-image:url(/assets/img/sponsors/amazon.png);"></div></li>
+                <li><div style="background-image:url(/assets/img/sponsors/facebook.png);"></div></li>
+            </ul>
+        </article>
+        <article class="stats">
+            <article class="reach">
+                <h3>Big Reach</h3>
+                <ul>
+                    <li>Over 15,000 community members</li>
+                    <li>100-500 participants per city, 3,000 per nationwide event</li>
+                    <li>38 cities regularly participating in events</li>
+                    <li>13,000 followers on social media</li>
+                </ul>
+            </article>
+            <article class="impact">
+                <h3>Big Impact</h3>
+                <p>CodeDay reaches the most diverse community of any coding-related non-profit:</p>
+                <ul>
+                    <li>43% Women</li>
+                    <li>38% Low-Income Background</li>
+                    <li>28% African-American and Hispanic</li>
+                </ul>
+            </article>
+            <a class="whitepaper" href="/assets/pdf/codeday-sponsor.pdf">Download our full sponsor prospectus</a>
+        </article>
+    </section>
+    
+    <article class="good">
+        <h3>Community-Level Sponsorships</h3>
+        <p>StudentRND is a 501(c)(3) public charity with a mission to inspire students everywhere to learn to code.
+           Each student who attends CodeDay costs us $36, meaning the average CodeDay costs $4,500 to run.</p>
+        <p>By sponsoring CodeDay, you are helping build a better future for students in your community. Your
+           sponsorship directly supports:</p>
+        <ul>
+            <li>Broader marketing to students of under-represented groups in your city</li>
+            <li>Providing scholarships to students in need</li>
+        </ul>
+    <p><strong>By contributing $250-$1,000 for one city, or $2,500 for a national sponsorship, you can help make
+           CodeDay happen. In addition:</strong></p>
+        <ul>
+            <li>Your logo will be listed on the CodeDay website, along with a link back to your site.</li>
+            <li>You'll get a sign at the event with information about your company, and you can distribute swag.</li>
+            <li>We'll tell students about your company at the kickoff, and explain why you support them
+               (or you can send your own rep to speak).</li>
+            <li>You and your employees can attend the event and meet the students.</li>
+        </ul>
+    </article>
 
-            if ($this.hasClass('current')) return;
-
-            $('.selector li').removeClass('current');
-            $this.addClass('current');
-
-            $('#sponsor-global .sales-content:visible').hide(500);
-            $content.show(500);
-        })
-    </script>
+    <article class="for-profit">
+        <h3>API and Recruiting Sponsorships</h3>
+        <p>Because CodeDay has a unique focus on learning and downplays prizes and showing off for recruiters, students
+           who attend CodeDay genuinely love to solve difficult problems and learn new technologies. Our partners have
+           told us that these students become fanatics of their products, and advocate for these technologies in their
+           careers, and the many companies who have hired interns from CodeDay have been very pleased.</p>
+        <blockquote>
+            <span class="quote">Interns from CodeDay are the best we've ever hired.</span>
+            <span class="attr">Engineer at eBay</span>
+        </blockquote>
+        <p>Recruiting and API sponsorships are $1,500 per event, or $5,000 nationally, and provide you with
+           additional reach over the Community-level sponsorships:</p>
+        <ul>
+            <li>Give a 5 minute talk at the kickoff</li>
+            <li>Bring recruiters, and distribute swag</li>
+            <li>Get access to student resumes and open-source work with the
+                <a href="http://wiki.studentrnd.org/display/SUP/Recruiting+Portal">StudentRND Recruiting Tool</a>.</li>
+        </ul>
+    </article>
 {% endblock %}

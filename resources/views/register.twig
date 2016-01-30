@@ -1,493 +1,110 @@
 {% extends "template.twig" %}
-{% block title %}Register{% endblock %}
+{% block section %}event{% endblock %}
 {% block page %}register{% endblock %}
+{% block title %}Register{% endblock %}
 {% block content %}
-    <main class="row wrapper-column">
-
-        <div class="columns medium-6">
-
-            <div class="register-box round-corners">
-                <h2>CodeDay {{ event.region_name }}</h2>
-                <div class="register-map" id="location-map"></div>
-                {% if event.registration_info.remaining < (event.registration_info.max * 0.30) %}
-                    <p class="last-few">Only {{ event.registration_info.remaining }} tickets left!</p>
-                {% elseif event.registration_info.is_earlybird_ending %}
-                    <p class="last-few">Earlybird discount ends soon!</p>
+<form>
+    <section class="info">
+        <section class="event" data-remaining="{{ event.registration_info.remaining }}">
+            <h3>{{ event.name }}</h3>
+            {% if event.registration_info.remaining < (event.registration_info.max * 0.30) %}
+                <p class="last-few">Only {{ event.registration_info.remaining }} tickets left!</p>
+            {% elseif event.registration_info.is_earlybird_ending %}
+                <p class="last-few">Earlybird discount ends soon!</p>
+            {% endif %}
+            <div id="map"></div>
+            <section class="address">
+                {{ event.venue.name }}<br />
+                {{ event.venue.address.line_1 }}<br />
+                {% if event.venue.address.line_2 %}
+                    {{ event.venue.address.line_2 }}<br />
                 {% endif %}
-                <p class="register-host">{{ event.venue.name }}</p>
-                <p class="register-address">{{ event.venue.full_address }}</p>
-                <p class="register-date">{{ event.starts_at|date('F j') }}-{{event.ends_at|date('j, Y') }}; noon-noon</p>
-            </div>
-
-            <div class="register-box round-corners" id="purchase-info-box">
-                <h2>Purchase Info</h2>
-                <span class="ticket-type">Student</span>{#
-                #}<span class="ticket-price">
-                    {% if event.is_early_bird_pricing %}
-                        <em style="text-decoration: line-through">$20</em>
-                        $10 (Early-bird)
+                {{ event.venue.address.city }}, {{ event.venue.address.state }} {{ event.venue.address.postal }}
+            </section>
+            <section class="time">
+                {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />
+                noon - noon
+            </section>
+        </section>
+        <section class="tos">
+            <h4>Terms</h4>
+            <ul>
+                <li>You agree to uphold the
+                    <a href="https://studentrnd.org/code-of-conduct">code of conduct</a>.</li>
+                <li>You can request a refund until
+                    {% if (event.starts_at - (60*60*24*7)) > null|date('U') %}
+                        <a href="https://studentrnd.org/returns" title="That's 7 days before CodeDay."
+                        >{{ (event.starts_at - (60*60*24*7))|date('M j') }}.</a>
                     {% else %}
-                        $20
+                        <a href="https://studentrnd.org/returns" title="Limited refunds within 7 days of CodeDay."
+                        >tomorrow evening.</a>
                     {% endif %}
-                </span>{#
-                #}<span class="dropdown">
-				<select id="ticket-amount">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select></span>
-                <div class="text-right">
-                    <span id="text-total" class="text-center">Total</span>
-                    <span id="total-cost" class="text-center">{% if event.is_early_bird_pricing %}$10.00{% else %}$20.00{% endif %}</span>
-                </div>
-                <input type="text" id="promo-code" name="promo-code" placeholder="Enter Promotional Code"><!--
-                --><a href="#" id="promo-code-button" class="text-center">Apply</a>
-            </div>
+                </li>
+                <li>You may be photographed or recorded at CodeDay.</li>
+                <li>We may <a href="https://studentrnd.org/privacy">share your info</a> with
+                    our sponsors.</li>
+            </ul>
+        </section>
+    </section>
 
+    <section class="registration">
+        <h3>Attendees</h3>
+        <section class="attendee">
+            <input type="text" name="first_name" placeholder="First Name" value="" autocomplete="off" required />{#
+            #}<input type="text" name="last_name" placeholder="Last Name" value="" autocomplete="off" required />
+            <input type="email" name="email" placeholder="Email" value="" autocomplete="off" required />
+        </section>
+        <span class="add-attendee">Add Another Attendee</span>
+        <span class="remove-attendee">Remove Last</span>
+    </section>
+
+    <section class="payment" data-default-unit-price="{{ event.cost }}">
+        <h3>Payment</h3>
+        <div class="card" data-stripe-pk="{{ event.stripe_public_key }}">
+            <input id="card_number" placeholder="Card Number" data-stripe="number" type="text" value="" autocomplete="off">
+            <div class="exp">
+                <label for="exp">EXP</label>
+                <input id="exp" placeholder="MM/YYYY" type="text" pattern="\d{1,2} *\/ *\d{2,4}" autocomplete="off" >
+            </div>
         </div>
-
-        <div class="columns medium-6">
-            <div id="coder-profile-1" class="register-box round-corners coder-profile">
-                <h2 class="coder-profile-title">Attendee Info<br/>
-                <small>(Please use the attendee's information)</small></h2>
-                <input type="text" class="first-name" name="first-name" placeholder="First Name"><!--
-					--><input type="text" class="last-name" name="last-name" placeholder="Last Name">
-                <input type="text" class="email" name="email" placeholder="Email">
+        <section class="price">
+            <section class="subtotal">
+                <span class="label">Attendee (x1)</span><span class="amount">10.00</span>
+            </section>
+            <section class="discount">
+                <span class="label">No discount</span><span class="amount">0.00</span>
+            </section>
+            <section class="total">
+                <span class="label">Total</span><span class="amount">10.00</span>
+            </section>
+            <span class="promo link">Have a promo code?</span>
+            <div class="promo-picker">
+                <input type="text" name="promo" id="promo" placeholder="Code" />
+                <button>Apply</button>
             </div>
-            <div id="billing-info" class="register-box round-corners">
-                <h2>Billing</h2>
-                <input type="text" id="credit-num" name="credit-num" placeholder="Credit Card Number"><!--
-					--><input type="text" id="csc" name="csc" placeholder="CSC" maxlength="4"><!--
-					--><span id="expir-date">Expiration Date</span><!--
-					--><input type="text" id="mm" name="mm" placeholder="mm" maxlength="2"><!--
-					--><span> /</span><!--
-                    --><input type="text" id="yy" name="yy" placeholder="yy" maxlength="4">
-            </div>
-
-            <a href="" id="pay-button" class="round-corners text-center">Pay Now</a>
-
-            <div id="toa">
-                <h2>Terms</h2>
-                <ul>
-                    <li>You agree to uphold the rules and the
-                        <a href="https://studentrnd.org/code-of-conduct">code of conduct</a>.</li>
-                    <li>You are entitled to a refund up to <a href="https://studentrnd.org/returns">7 days before
-                        the event.</a></li>
-                    <li>You may be photographed at the event and appear in promos.</li>
-                    <li>We may <a href="https://studentrnd.org/privacy">share your info</a> with
-                        sponsors interested in hiring you.</li>
-                </ul>
-            </div>
-
-            <div id="confirmed" style="display: none;margin-top:1.9rem;">
-                <p>Thanks for registering! A receipt has been emailed to you. We look forward
-                    to seeing you at CodeDay. If you have any questions, please
-                    <a href="mailto:contact@studentrnd.org">email us</a>.</p>
-                {% if waiver %}
-                    <p>Important: You will need to fill out <a href="{{ event.waiver }}" target="_blank">this waiver</a>
-                        before the event!</p>
-                {% endif %}
-                <div class="share" style="margin-top:1rem">
-                    <p>CodeDay is more fun with friends! Share your registration and we'll mail
-                        you some <strong>free swag!</strong></p>
-                    <a id="fb-share" href="#" style="width:100%;height: 3.18em;background-color:#A0D388;text-transform: uppercase;color: #ffffff;text-align:center;display: block;margin-top:1rem">Share on Facebook</a>
-                </div>
-            </div>
-
-            <div id="request-address" class="register-box round-corners"  style="display: none">
-                <h2>Shipping Info</h2>
-                <p>Ship my swag to:</p>
-                <form>
-                    <input type="text" id="swag_name" placeholder="Name" required/>
-                    <input type="text" id="swag_address_1" placeholder="Address (Line 1)" required />
-                    <input type="text" id="swag_address_2" placeholder="Address (Line 2)" />
-                    <input type="text" id="swag_city" placeholder="City" required />
-                    <input type="text" id="swag_state" placeholder="State" required />
-                    <input type="text" id="swag_postal" placeholder="Postal Code" required />
-                    <input type="submit" style="height: 3.18em;width:100%;text-align: center;background-color:#A0D388;color:#ffffff;text-transform: uppercase" value="Ship it!"/>
-                </form>
-            </div>
-
-        </div>
-
-    </main>
+        </section>
+        <section class="finalize">
+            <button class="pay" type="submit">Complete Registration</button>
+            <span><a href="mailto:contact@codeday.org">Can't afford a ticket? Contact us.</a></span>
+        </section>
+    </section>
+    <section class="success">
+        <h3>You're going to CodeDay!</h3>
+        <p>Your payment was successful, and you're now on the attendees list for CodeDay!</p>
+        <p>In a few minutes, you will receive an email with registration details. Please note, however, that we do not
+           issue actual tickets: we check in all attendees by name at the door.</p>
+        <p>If you can't find your confirmation email, it's possible it made it into your spam folder. If you still
+           can't find it there, you can <a href="mailto:contact@codeday.org">contact us</a>.</p>
+    </section>
+</form>
 {% endblock %}
 {% block scripts %}
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVggXa9btjGmzqgUim-1HjmnMtbF3UNms&sensor=false&libraries=visualization"></script>
-    <script type="text/javascript">
-        window.unit_cost = {{ event.cost }};
-        window.quoted_price = {{ event.cost }};
-        function initialize() {
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({
-                'address': '{{ event.venue.full_address|escape('js') }}'
-            }, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    var mapElem = document.getElementById('location-map');
-                    var styles = [{"stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"visibility":"on"},{"color":"#ced8df"}]},{"featureType":"road.arterial","elementType": "geometry.fill","stylers":[{"visibility":"on"},{"color":"#F1C40F"}]},{"featureType":"road.highway","elementType": "geometry.fill","stylers":[{"visibility":"on"},{"color":"#F1C40F"}]},{"featureType":"landscape","stylers":[{"visibility":"on"},{"color":"#f3f4f4"}]},{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#9bcae9"}]},{},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#7ad1bf"}]},{"elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"weight":0.9},{"visibility":"on"}]}];
-                    var map = new google.maps.Map(mapElem, {
-                        zoom: 14,
-                        center: results[0].geometry.location,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP,
-                        disableDefaultUI: true,
-                        scrollwheel: false,
-                        mapTypeControl:false,
-                        styles: styles
-                    });
-
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-                    google.maps.event.addListener(marker, "click", function() {
-                        window.open('https://www.google.com/maps/search/{{ loaded_event.venue.address_url|escape('url') }}');
-                    });
-                }
-            });
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-    <link rel="stylesheet" href="/assets/css/sweet-alert.css"/>
-    <style>
-        .sweet-alert, .sweet-alert * {
-            box-sizing: content-box;
-            -moz-box-sizing: content-box;
-        }
-    </style>
-    <script type="text/javascript" src="/assets/js/sweet-alert.min.js"></script>
-    <script type="text/javascript" src="/assets/js/share.min.js"></script>
+    {% include "parts/map.twig" %}
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.2/jquery.payment.min.js"></script>
     <script type="text/javascript">
-        window.fbAsyncInit = function(){
-            FB.init({
-                appId      : '134222673401073',
-                status     : true,
-                xfbml      : true,
-                version    : 'v2.0'
-            });
-
-            $('#fb-share').click(function(e){
-                e.preventDefault();
-                FB.ui(
-                        {
-                            method: 'feed',
-                            name: '{{ event.name }}',
-                            link: 'https://codeday.org/{{ event.region_id }}',
-                            picture: 'https://codeday.org/assets/img/facebookthumb.jpg',
-                            caption: '{{ event.starts_at|date('F j') }}-{{event.ends_at|date('j, Y') }}; noon-noon',
-                            description: 'I just registered for CodeDay! Join me and other students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours.'
-                        },
-                        function(response) {
-                            $('#confirmed .share').css('display', 'none');
-                            $('#request-address').css('display', 'block');
-                        }
-                );
-
-                mixpanel.track(
-                        "Shared For Swag"
-                );
-            });
-        };
-
-        $('#request-address form').on('submit', function(e) {
-            e.preventDefault();
-
-            if ($('#request-address input[type="submit"]').val() == '...') {
-                return;
-            }
-
-            $('#request-address input[type="submit"]').val('...');
-
-
-            mixpanel.track(
-                    "Swag Requested"
-            );
-
-            $.ajax({
-                url: '/swag',
-                type: 'POST',
-                data: {
-                    'name': $('#swag_name').val(),
-                    'address_1': $('#swag_address_1').val(),
-                    'address_2': $('#swag_address_2').val(),
-                    'city': $('#swag_city').val(),
-                    'state': $('#swag_state').val(),
-                    'postal': $('#swag_postal').val()
-                },
-                success: function(){
-                    $('#request-address').css('display', 'none');
-                    swal({
-                        title: 'On its way!',
-                        text: "Thanks for sharing! Your swag is on its way!",
-                        type: 'success',
-                        allowOutsideClick: true
-                    });
-                },
-                error: function() {
-                    $('#request-address input[type="submit"]').val('Ship it!');
-                    alert('Unknown error, contact support.');
-                }
-            });
-
-            return false;
-        });
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <script type="text/javascript">
-        mixpanel.track(
-                "Register Page Loaded"
-        );
-
-        function checkPromotionCode(code){
-          if ($('#promo-code').prop('disabled') || $('#promo-code-button').text() == '...') {
-              return;
-          }
-
-          $("#promo-code").val(code);
-
-          $('#promo-code-button').text('...');
-
-          $.ajax({
-              url: "{{ api_base_public }}/register/{{ event.id }}/promotion",
-              type: "GET",
-              dataType: "json",
-              data: {
-                  code: $('#promo-code').val(),
-                  access_token: window.api_access_token
-              },
-              success: function(data){
-                  if (data.expired) {
-                      swal({
-                          title: 'Expired',
-                          text: 'Sorry, this promo code is expired.',
-                          type: 'error'
-                      });
-                      mixpanel.track(
-                              "Promo Error Expired",
-                              {"Code": $('#promo-code').val()}
-                      );
-                      $('#promo-code-button').text('Apply');
-                      $('#promo-code').val('');
-                      return;
-                  } else if (data.remaining_uses == 0) {
-                      swal({
-                          title: 'Used',
-                          text: 'Sorry, this promo code has already been used the maximum number of times.',
-                          type: 'error'
-                      });
-                      mixpanel.track(
-                              "Promo Error Used",
-                              {"Code": $('#promo-code').val()}
-                      );
-                      $('#promo-code-button').text('Apply');
-                      $('#promo-code').val('');
-                      return;
-                  }
-
-                  if (data.remaining_uses != null && data.remaining_uses < 10) {
-                      $('#ticket-amount option').filter(function() {
-                          return parseInt($(this).val(), 10) > data.remaining_uses;
-                      }).remove();
-                  }
-
-                  if (data.cost == 0) {
-                      $('#billing-info').css('display', 'none');
-                      $('#billing-info input').val('');
-                      $('#pay-button').text('Register Now');
-                  }
-
-                  mixpanel.track(
-                          "Promo Used",
-                          {"Code": $('#promo-code').val()}
-                  );
-
-                  $('#promo-code').prop('disabled', true);
-                  $('#promo-code-button').text('Applied');
-                  window.unit_cost = data.cost;
-                  $('.ticket-price').html('<em style="text-decoration: line-through">$20</em> $'+data.cost.toFixed(2));
-                  $('#ticket-amount option').trigger('change');
-
-
-                  swal({
-                      title: data.discount+'% off!',
-                      text: "Promo code \""+$('#promo-code').val()+"\" was successfully applied. Your new total is "+$('#total-cost').text(),
-                      imageUrl: '/assets/img/thumbsup.jpg',
-                      allowOutsideClick: true
-                  });
-              },
-              error: function(){
-                  swal({
-                      title: 'Invalid',
-                      text: 'Sorry, this promo code doesn\'t exist.',
-                      type: 'error'
-                  });
-                  $('#promo-code-button').text('Apply');
-                  $('#promo-code').val('');
-              }
-            });
-        }
-
-        $('#promo-code-button').on('click', function(e) {
-            e.preventDefault();
-
-            checkPromotionCode($("#promo-code").val());
-
-            return false;
-        });
-
-        if(hashParams["code"]){
-          checkPromotionCode(hashParams["code"]);
-        }
-
-        Stripe.setPublishableKey('{{ event.stripe_public_key|escape('js') }}');
-        $('#pay-button').click(function(e){
-            e.preventDefault();
-
-            if ($('#pay-button').text() == '...') {
-                return;
-            }
-
-            $('#pay-button').text('...');
-
-            if ($('.coder-profile input').filter(function(){return $(this).val() == ''}).length > 0) {
-                $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
-                swal({
-                    title: 'Please fill out all fields.',
-                    type: 'error'
-                });
-                return;
-            }
-
-            if (typeof($zopim) !== 'undefined' && typeof($zopim.livechat) !== 'undefined' && typeof($zopim.livechat.setName) !== 'undefined') {
-                $zopim.livechat.setName($('.first-name').first().val()+' '+$('.last-name').first().val());
-                $zopim.livechat.setEmail($('.email').first().val());
-            }
-
-            mixpanel.identify($('.email').first().val());
-            mixpanel.people.set({
-                "$email": $('.email').first().val(),
-                "$first_name": $('.first-name').first().val(),
-                "$last_name": $('.last-name').first().val()
-            });
-
-            var allVals = function(elems) { var vals = []; elems.each(function(){ vals.push($(this).val()) }); return vals; }
-
-            var register = function(token) {
-
-                $.ajax({
-                    url: "{{ api_base_public }}/register/{{ event.id }}/register",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        card_token: token,
-                        quoted_price: window.quoted_price,
-                        first_names: allVals($('.first-name')),
-                        last_names: allVals($('.last-name')),
-                        emails: allVals($('.email')),
-                        code: $('#promo-code').val(),
-                        access_token: window.api_access_token
-                    },
-                    success: function(data) {
-                        if (data.status == 200) {
-                          console.log(data);
-                            $('#purchase-info-box, .coder-profile, #pay-button, #billing-info, #toa').css('display', 'none');
-                            $('#confirmed').css('display', 'block');
-                            swal({
-                                title: 'You\'re in!',
-                                text: "You've successfully registered for CodeDay {{ event.name|escape('js') }}. A receipt has been emailed to you. This email will also include a link to fill out emergency contact info.",
-                                type: 'success',
-                                allowOutsideClick: true
-                            });
-                            mixpanel.track(
-                                    "Registered"
-                            );
-                            var txn = ''+Math.floor(Math.random() * 10000000);
-                            ga('ecommerce:addTransaction', {
-                                'id': txn,
-                                'affiliation': 'CodeDay',
-                                'revenue': ''+window.quoted_price,
-                                'shipping': '0',
-                                'tax': '0'
-                            });
-                            mixpanel.people.track_charge(window.quoted_price);
-                            ga('ecommerce:addItem', {
-                                'id': txn,
-                                'name': 'CodeDay Ticket',
-                                'sku': 'CDT',
-                                'category': 'CodeDay Tickets',
-                                'price': ''+window.unit_cost,
-                                'quantity': ''+window.ticket_quantity
-                            });
-                            ga('ecommerce:send');
-                        } else {
-                            swal({
-                                title: 'Error',
-                                text: data.message,
-                                type: 'error'
-                            });
-                            mixpanel.track(
-                                    "Registration Exception",
-                                    {"Exception": data.error}
-                            );
-                            $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
-                        }
-                    },
-                    error: function(data) {
-                        swal({
-                            title: 'Error',
-                            text: 'We got an unusual response from our payment processor. This usually means your card was declined. Please contact support with any questions.',
-                            type: 'error'
-                        });
-                        mixpanel.track(
-                                "Registration 500"
-                        );
-                        $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
-                    }
-                });
-            };
-
-            if (unit_cost == 0) {
-                register(null);
-            } else {
-                Stripe.card.createToken({
-                    number: $('#credit-num').val(),
-                    cvc: $('#csc').val(),
-                    exp_month: $('#mm').val(),
-                    exp_year: $('#yy').val()
-                },
-                function(status, response) {
-                    if (response.error) {
-                        swal({
-                            title: 'Error',
-                            text: response.error.message,
-                            type: 'error'
-                        });
-                        mixpanel.track(
-                                "Stripe Error"
-                        );
-                        $('#pay-button').text(window.quoted_price > 0 ? 'Pay Now' : 'Register Now');
-                    } else {
-                        var token = response.id;
-                        register(token);
-                    }
-                });
-            }
-
-            return false;
-        });
+        // ## Auto format the card number
+        $('#card_number').payment('formatCardNumber');
+        $('#exp').payment('formatCardExpiry');
     </script>
 {% endblock %}

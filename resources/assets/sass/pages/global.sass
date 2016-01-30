@@ -1,0 +1,109 @@
+body.global
+    section.hero
+        padding: 1rem
+        text-align: center
+        background-color: $color-red
+        color: $color-white
+
+        article.lead
+            +span-columns(8)
+            +shift(2)
+            +omega
+            margin-top: 5rem
+            margin-bottom: 2rem
+            span.date
+                font-family: $font-family-header
+                text-transform: uppercase
+            h2
+                font:
+                    size: 3.583rem
+                    weight: 700
+                margin: 0
+            .map
+                path
+                    fill: none
+                    &.land
+                        stroke: rgba(255, 255, 255, 0.15)
+                    &.state-boundary
+                        stroke: rgba(255, 255, 255, 0.1)
+                circle
+                    fill: rgba(255, 255, 255, 0.25)
+                    &.city
+                        cursor: pointer
+                        &.nearest
+                            fill: $color-white
+        article.cta
+            clear: both
+            text-transform: uppercase
+            &, a
+                font-family: $font-family-header
+                &:hover
+                    color: $color-white
+
+    .d3-tip
+        color: $color-white
+        background-color: $color-green
+        font-family: $font-family-header
+        padding: 0.3rem 0.5rem
+
+    article h3
+        text-align: center
+
+    article.what-is
+        .video
+            +span-columns(5)
+        .details
+            +span-columns(7)
+            +omega
+
+    article.cities
+        section.list
+            +span-columns(7)
+            section
+                +span-columns(3)
+                text-align: center
+                h4
+                    display: none
+                ul
+                    padding: 0
+                    li
+                        list-style-type: none
+        .cta
+            +span-columns(5)
+            float: right
+            text-align: center
+            padding-top: 2rem
+            a
+                padding: 1.25rem 3rem
+                background-color: $color-red
+                border-radius: 3px
+                color: $color-white
+                display: inline-block
+                text-decoration: none
+                font:
+                    family: $font-family-header
+                    size: 1.2rem
+                    weight: 700
+            span
+                display: block
+                font:
+                    family: $font-family-header
+                    size: 0.8833rem
+
+    article.sponsors
+        ul
+            padding: 0
+            li
+                list-style-type: none
+                +span-columns(4)
+                &:nth-child(3n)
+                    +omega
+                span
+                    display: block
+                    height: 7rem
+                    width: 100%
+                    background:
+                        size: contain
+                        position: 50% 50%
+                        repeat: no-repeat
+

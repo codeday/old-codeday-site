@@ -1,175 +1,112 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>
-        {% if block('title') %}
-            {{ block('title') }} |
-        {% endif %}
-        CodeDay
-        {% if event %}
-            {{ event.region_name }}
-        {% endif %}
-    </title>
-    {% if event %}
-        <meta property="og:site_name" content="CodeDay">
-        <meta property="og:locale" content="en_US">
-        <meta property="og:type" content="website">
-        <meta property="og:image" content="https://codeday.org/assets/img/facebookthumb.jpg">
-        <meta property="og:description" content="Get your ticket for {{ event.name }} today. {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon. Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours." />
-        <meta name="description" content="Get your ticket for {{ event.name }} today. {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}, noon-noon. Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours." />
-    {% else %}
-        <meta property="og:site_name" content="CodeDay">
-        <meta property="og:locale" content="en_US">
-        <meta property="og:type" content="website">
-        <meta property="og:image" content="https://codeday.org/assets/img/facebookthumb.jpg">
-        <meta property="og:description" content="The most exciting CodeDay yet! Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours.">
-        <meta name="description" content="The most exciting CodeDay yet! Join students in {{ loaded_batch.events|length }} cities nationwide and build something awesome in 24 hours.">
-    {% endif %}
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.1/css/foundation.min.css">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    {% set title = (block('title') ? block('title')~' ~ ' : '')~'CodeDay'~(event ? ' '~event.region_name : '') %}
+    {% set shortDescription =
+        (loaded_batch.events|length)~" cities. 24 hours of fun. At CodeDay, student programmers and artists get "
+        ~"together, build cool apps & games, and have a lot of fun. All in 24 hours. No experience is required, and "
+        ~"you can attend alone or with a friend." %}
+    {% set veryShortDescription = (loaded_batch.events|length)~" cities. 24 hours of fun."%}
+
+    {# Meta #}
+    <title>{{ title }}</title>
+    <meta property="og:title" content="{{ title }}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta property="og:image" content="{{ url('/assets/img/og.jpg') }}" />
+    <meta property="og:url" content="{{ url('') }}" />
+    <meta property="og:description" name="description" content="{{ shortDescription }}" />
+
+    {# Styling #}
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
     {% if event and event.custom_css %}
         <style type="text/css">
             {{ event.custom_css }}
         </style>
     {% endif %}
-    <script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-            for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
-        mixpanel.init("0c5e9520459ec7c2eb46f2d2f4564f21");
-        {% if event %}
-            mixpanel.register({
-                "Event": "{{ event.id|escape('js') }}",
-                "Region": "{{ event.webname|escape('js') }}",
-                "Batch": "{{ event.batch_name }}"
-            });
-        {% endif %}
-    </script>
 </head>
-<body>
-{% if event.notice %}
-    <div class="notice" style="position:fixed;top:0;left:0;right:0;line-height:1;
-    padding:0.1rem;text-align:center;text-transform:uppercase;background-color: #f00;color: #fff">
-        {{ event.notice }}
-    </div>
-{% endif %}
-{% if block('splash') %}
-    {{ block('splash') }}
-{% endif %}
+<body class="{{ block('section') }} {{ block('page') }}"
+      data-api-base="{{ api_base_public }}" data-api-public="{{ api_access_token }}"
+      {% if event %}data-event="{{ event.id }}"{% endif %}>
+    {% if event.notice %}
+        <div class="notice">
+            {{ event.notice }}
+        </div>
+    {% endif %}
 
-{% if block('splash') %}
-    <div id="over">
-{% else %}
-    <div id="{{ block('page') }}-page" class="subpage">
-        {# Mobile nav #}
-        <header class="header-subpage header-mobile hide-for-medium-up">
-            <nav class="site-nav text-right">
+    {# Top Bar #}
+    <header class="{% if block('hero') %}with-hero{% else %}no-hero{% endif %}{% if event.notice %} with-notice{% endif %}">
+        <div class="wrap"><div class="wrap-inner">
+            <section class="site-title">
+                <h1><a href="/">CodeDay</a></h1>
+                <a href="https://studentrnd.org/" target="_blank">by StudentRND</a>
+            </section>
+
+            <nav>
                 <ul>
-                    {% include "parts/navigation.twig" %}
+                    {% if event %}
+                        <li {% if block('section') == 'event' and block('page') == 'index' %}class="active"{% endif %}><a
+                                    href="/{{ event.webname }}">Event Info</a></li>
+                        {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
+                            <li {% if block('page') == 'register' %}class="active"{% endif %}><a href="/{{ event.webname }}/register">Register</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% set skipSponsor = false %}
+                    {% for link in event.special_links %}
+                        {% if link.location == 'header' %}
+                            {% if link.name == 'Sponsor' %}
+                                {% set skipSponsor = true %}
+                            {% endif %}
+                            <li><a href="{{ link.url }}"{% if link.new_window %} target="_blank"{% endif %}>{{ link.name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if not skipSponsor %}
+                        <li {% if block('section') == 'sponsor' %}class="active"{% endif %}"><a href="/sponsor">Sponsor</a></li>
+                    {% endif %}
+                    <li><a href="/press" target="_blank">Press Kit</a></li>
                 </ul>
             </nav>
-            <div class="row">
-                <h1 class="site-title left"><a href="/{% if event %}{{ event.webname }}{% endif %}">CodeDay</a></h1>
-                <a href="#" id="nav-button" class="right">Menu</a>
-            </div>
-            <h1 class="subpage-title text-center">{{ block('title') }}</h1>
-        </header>
+        </div></div>
+    </header>
 
-        {# Regular Nav #}
-        <header class="header-subpage header-large hide-for-small-only">
-            <div class="row">
-                <div class="column large-3 small-3">
-                    <h1 class="site-title"><a href="/{% if event %}{{ event.webname }}{% endif %}">CodeDay</a></h1>
-                </div>
-                <div class="column large-9 small-9">
-                    <nav class="site-nav text-right">
-                        <a href="#" id="nav-button" class="right">Menu</a>
-                        <ul>
-                            {% include "parts/navigation.twig" %}
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <h1 class="subpage-title text-center">{{ block('title') }}</h1>
-        </header>
-{% endif %}
+    {# Hero Section #}
+    {% if block('hero') %}
+        <section class="hero">
+            <div class="wrap"><div class="wrap-inner">
+                {{ block('hero') }}
+            </div></div>
+        </section>
+    {% endif %}
 
-    {{ block('content') }}
-
-    <footer id="site-footer">
-        <div class="row">
-            <div class="columns medium-7 text-left">
-                <p class="copyright">Organized by <a style="color: white;text-decoration:underline" href="https://studentrnd.org/">StudentRND</a>.</p>
-            </div>
-            <div class="columns medium-5 hide-for-small-only">
-                <nav class="site-nav text-right row">
-                    <ul>
-                        <li><a href="mailto:support@codeday.org">support@codeday.org</a></li>
-                        <li><a href="tel:18882633230">(888) CODE-230 </a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </footer>
-</div>
-
-
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-<script src="js/plugins.js"></script>-->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript">
-    window.lat = {{visitor.lat}};
-    window.lng = {{visitor.lng}};
-    window.api_base = '{{ api_base_public }}';
-    window.api_access_token = '{{ api_access_token }}';
-</script>
-<script src="/assets/js/main.js"></script>
-<script type="text/javascript">
-    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-            d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-            _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-        $.src='//v2.zopim.com/?1R6S6EzSmHx69lhNeJVbghkeEbFsB1xZ';z.t=+new Date;$.
-                type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-</script>
-<script type="text/javascript">
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-8868191-6', 'auto');
-    ga('send', 'pageview');
-    ga('require', 'ecommerce');
-</script>
-<script type="text/javascript">
-    var _qevents = _qevents || [];
-
-    (function() {
-        var elem = document.createElement('script');
-        elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-        elem.async = true;
-        elem.type = "text/javascript";
-        var scpt = document.getElementsByTagName('script')[0];
-        scpt.parentNode.insertBefore(elem, scpt);
-    })();
-
-    _qevents.push({
-        qacct:"p-LxH3UPEa1wD-H"
-    });
-</script>
-<noscript>
-    <div style="display:none;">
-        <img src="//pixel.quantserve.com/pixel/p-LxH3UPEa1wD-H.gif" border="0" height="1" width="1" alt="Quantcast"/>
+    <div class="wrap">
+        <section class="content">
+            {{ block('content') }}
+        </section>
     </div>
-</noscript>
-{{ block('scripts') }}
+
+    {# Footer #}
+    <footer><div class="wrap"><div class="wrap-inner">
+        <span class="copyright">
+            &copy; 2011-2015 <a href="https://studentrnd.org/">StudentRND</a>.<br />
+            CodeDay and the CodeDay logo are trademarks of StudentRND.
+        </span>
+        <span class="contact">
+            <a href="mailto:contact@codeday.org">contact@codeday.org</a><br />
+            <a href="tel:1882633230">(888) CODE-230</a>
+        </span>
+    </div></div></footer>
+
+    {# Scripts #}
+    <script src="https://use.typekit.net/wck5lid.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/sweet-alert.min.js"></script>
+    {{ block('scripts') }}
+    {#<script src="http://d.codeday.dev/resources/dart/web/main.dart" type="application/dart"></script>#}
+    <script src="/assets/js/app.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ class EventController extends Controller {
 
     public function getIndex()
     {
-        return \View::make('index');
+        return \View::make('event');
     }
 
     public function getRegister()

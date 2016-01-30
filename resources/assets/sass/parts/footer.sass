@@ -1,0 +1,18 @@
+body > footer
+    clear: both
+    padding: 2rem 0
+    .copyright, .contact
+        +span-columns(6)
+        &, a
+            font:
+                family: $font-family-header
+                size: 0.875rem
+            color: $color-gray
+
+    .contact
+        text-align: right
+
+    &:after
+        content: ""
+        clear: both
+        display: block

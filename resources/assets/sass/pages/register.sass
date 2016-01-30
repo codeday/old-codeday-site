@@ -1,0 +1,172 @@
+body.event.register
+    .info
+        +span-columns(4)
+        .event
+            #map
+                width: 100%
+                height: 15rem
+                z-index: -1000
+        .time, .address
+            font:
+                family: $font-family-header
+                size: 0.833rem
+            color: $color-gray
+            margin-top: 1rem
+            +span-columns(6)
+        .time
+            text-align: right
+        .last-few
+            display: block
+            background-color: $color-red
+            color: $color-white
+            padding: 0.4rem 0.6rem
+            font-family: $font-family-header
+        .tos
+            padding-top: 1rem
+            clear: both
+            color: $color-gray
+            h4
+                margin-bottom: 0
+            ul
+                margin-top: 0
+                padding: 0.5rem
+                li, li a
+                    font-size: 0.833rem
+                    line-height: 1rem
+                    font-family: $font-family-header
+
+    .registration
+        +span-columns(4)
+        text-align: center
+        h3
+            text-align: left
+        .attendee
+            text-align: left
+            border: 5px solid $color-red
+            margin-bottom: 1rem
+            &:before
+                content: "Hello, my name is"
+                text-align: center
+                display: block
+                color: $color-white
+                background-color: $color-red
+                padding: 0.5rem 0
+                margin-bottom: 1rem
+                font:
+                    family: $font-family-header
+                    weight: 700
+
+            input
+                border: 1px solid $color-red
+                padding: 0.25rem 1rem
+                font:
+                    family: $font-family-header
+                &[name='first_name'], &[name='last_name']
+                    width: 45%
+                    margin: 0
+                &[name='first_name']
+                    border-right-width: 0
+                    margin-left: 5%
+                &[name='email']
+                    width: 90%
+                    margin-left: 5%
+                    margin-bottom: 1rem
+                    border-top-width: 0
+        .add-attendee, .remove-attendee
+            display: inline-block
+            padding: 0.4rem 0.6rem
+            font-size: 0.833rem
+            background-color: $color-red
+            color: $color-white
+            cursor: pointer
+            font:
+                family: $font-family-header
+            &.remove-attendee
+                background-color: $color-gray
+                display: none
+
+
+    .payment
+        +span-columns(4)
+        +omega
+        .card
+            background-image: url(/assets/img/card-front-background.png)
+            background-size: cover
+            background-position: 0px 0px
+            border: 5px solid $color-gray
+            padding: 7rem 2rem 3rem
+            margin: 0px auto 1rem
+            label, input
+                font-family: "ocraregular","OCR A Std","OCR A",Courier,"Courier New",monospace
+                width: 100%
+            .exp
+                +row
+                label
+                    +span-columns(8)
+                    text-align: right
+                input
+                    +span-columns(4)
+
+        .price
+            text-align: center
+            section
+                .label
+                    +span-columns(6)
+                    text-align: right
+                    &:after
+                        content: ": "
+                .amount
+                    +span-columns(6)
+                    +omega
+                    text-align: left
+                    &:before
+                        content: "$"
+                .label, .amount
+                    font:
+                        family: $font-family-header
+                &.subtotal
+                    color: $color-gray
+                &.discount
+                    display: none
+                    color: $color-red
+                    font-style: italic
+                    .label
+                        cursor: pointer
+
+                &.total
+                    font-weight: 700
+
+            .promo.link
+                cursor: pointer
+                font-size: 0.694rem
+                color: $color-gray
+                display: inline-block
+            .promo-picker
+                display: none
+
+        .finalize
+            clear: both
+            padding-top: 1rem
+            text-align: center
+            button
+                padding: 1.25rem 3rem
+                background-color: $color-gray
+                border-width: 0
+                color: $color-white
+                display: inline-block
+                text-decoration: none
+                cursor: pointer
+                font:
+                    family: $font-family-header
+                    size: 1.2rem
+                    weight: 700
+            span
+                display: block
+                padding-top: 0.25rem
+                a
+                    color: $color-gray
+                    font-size: 0.833rem
+    form > .success
+        +span-columns(8)
+        +omega
+        display: none
