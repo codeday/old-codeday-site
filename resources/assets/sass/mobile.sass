@@ -1,0 +1,129 @@
+$media-mobile: new-breakpoint(max-width 700px 4)
+@include media($media-mobile)
+    body
+        & > header
+            padding-left: 1rem
+            padding-right: 0.5rem
+            section.site-title
+                +span-columns(1)
+                & > a
+                    display: none
+            nav ul li a
+                padding-right: 0.5rem !important
+        .content
+            padding: 1rem
+        & > footer
+            padding: 4rem 0 1rem
+            clear: both
+            span.contact, span.copyright
+                +span-columns(4)
+                +omega
+                text-align: center
+
+            span.contact
+                margin-top: 1rem
+                a
+                    font-size: 1.2rem
+        &.global.index
+            section.hero
+                article.lead
+                    +span-columns(4)
+                    +row
+                    +omega
+                    margin: 0 0 -3rem 0
+                    .map
+                        position: relative
+                        top: -5rem
+                article.cta
+                    display: none
+                &:after
+                    content: ""
+                    display: block
+                    clear: both
+
+                
+            article.what-is .details, article.what-is .video, article.cities .cta, article.cities .list
+                +span-columns(4)
+                +row
+                +omega
+            article.cities, article.cities .cta
+                padding-top: 0
+                padding-bottom: 1rem
+
+        &.event.index
+            section.hero
+                margin-top: -7rem
+            article.what-is
+                padding-top: 0
+                section.details, section.video
+                    +span-columns(4)
+                    +row
+                    +omega
+            article.how-works
+                padding-top: 0
+                ul li
+                    +span-columns(2)
+                    margin-bottom: 1rem
+                    &:nth-child(2n)
+                        +omega
+            article.faq
+                padding-top: 0
+                ul li
+                    +span-columns(4)
+                    +omega
+                    padding-bottom: 0.5rem
+                    min-height: 0
+
+            article.map
+                padding-top: 0
+
+            article.schedule
+                padding-top: 0
+                section.day
+                    +span-columns(4)
+                    +omega
+                    ul li .task .popup
+                        left: 25%
+        &.event.register
+            section.info, section.registration, section.payment, form section.success
+                +span-columns(4)
+                +omega
+                input[type="text"], input[type="email"]
+                    font-size: 1.2rem !important
+                    padding: 0.5rem !important
+            form section.success
+                display: none
+            section.info
+                .address, .time
+                    font-size: 1rem
+                .tos
+                    text-align: center
+                    h4
+                        margin-top: 0
+                        font-size: 1.2rem
+                    ul
+                        padding: 0
+                        li
+                            list-style-type: none
+                            &, a
+                                font-size: 1rem
+            section.registration
+                .add-attendee, .remove-attendee
+                    font-size: 1rem
+                    padding: 0.5rem 0.7rem
+            section.payment .price .promo.link
+                font-size: 0.844rem
+
+        &.sponsor.index
+            section.lead article.intro, section.lead article.stats, article.good, article.for-profit
+                +span-columns(4)
+                +omega
+            section.lead article.stats
+                padding: 0 1rem 2rem
+                border: 3px solid $color-green
+                margin-top: 3rem
+            section.lead article.intro ul.past-sponsors li
+                +span-columns(2)
+                padding-bottom: 1rem
+                &:nth-child(2n)
+                    +omega

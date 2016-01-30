@@ -23,12 +23,23 @@
     {# Styling #}
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
     <link rel="stylesheet" href="/assets/css/style.css" />
+    {% if event and event.custom_css %}
+        <style type="text/css">
+            {{ event.custom_css }}
+        </style>
+    {% endif %}
 </head>
 <body class="{{ block('section') }} {{ block('page') }}"
       data-api-base="{{ api_base_public }}" data-api-public="{{ api_access_token }}"
       {% if event %}data-event="{{ event.id }}"{% endif %}>
+    {% if event.notice %}
+        <div class="notice">
+            {{ event.notice }}
+        </div>
+    {% endif %}
+
     {# Top Bar #}
-    <header class="{% if block('hero') %}with-hero{% else %}no-hero{% endif %}">
+    <header class="{% if block('hero') %}with-hero{% else %}no-hero{% endif %}{% if event.notice %} with-notice{% endif %}">
         <div class="wrap"><div class="wrap-inner">
             <section class="site-title">
                 <h1><a href="/">CodeDay</a></h1>
@@ -93,8 +104,9 @@
     <script src="https://use.typekit.net/wck5lid.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/sweet-alert.min.js"></script>
     {{ block('scripts') }}
-    <script src="http://d.codeday.dev/resources/dart/web/main.dart" type="application/dart"></script>
-    {#<script src="/assets/js/app.js"></script>#}
+    {#<script src="http://d.codeday.dev/resources/dart/web/main.dart" type="application/dart"></script>#}
+    <script src="/assets/js/app.js"></script>
 </body>
 </html>

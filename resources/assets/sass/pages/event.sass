@@ -52,21 +52,24 @@ body.event.index
                     border: 0
                     &[type="email"]
                         +border-left-radius(3px)
-                        border-right: 1px solid $color-gray
                         width: 25rem
-                        color: $color-blue
+                        color: $color-black
                         font:
                             family: $font-family-header
-                            size: 1.1rem
+                            size: 1.3rem
                             weight: 500
                     &[type="submit"]
                         +border-left-radius(0 !important)
+                        color: $color-white
+                        background-color: $color-red
+                        font-size: 1.2rem
+                        cursor: pointer
 
             a.register, .sold-out, a.nearby-avail, .notify-signup input[type="submit"]
                 padding: 1.25rem 3rem
-                background-color: $color-white
+                background-color: $color-red
                 border-radius: 3px
-                color: $color-blue
+                color: $color-white
                 display: inline-block
                 text-decoration: none
                 font:
@@ -75,7 +78,7 @@ body.event.index
                     weight: 700
 
             .sold-out
-                background-color: $color-red
+                background-color: $color-gray
                 color: $color-white
 
             .nearby-avail
@@ -98,15 +101,15 @@ body.event.index
                             size: 0.833rem
                 .event
                     padding: 0.5rem 0.6rem
-                    background-color: $color-white
+                    background-color: $color-red
                     border-radius: 3px
-                    color: $color-blue
+                    color: $color-white
                     display: inline-block
                     text-decoration: none
                     font:
                         family: $font-family-header
                         size: 1rem
-                        weight: 500
+                        weight: 700
 
             span.venue
                 margin-top: 0.25rem
@@ -161,6 +164,7 @@ body.event.index
         & > div
             width: 100%
             height: 20rem
+            z-index: -1000
 
     article.schedule
         .day

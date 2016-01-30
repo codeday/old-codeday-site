@@ -54,4 +54,9 @@ class StaticController extends Controller {
     {
         return \View::make('rules');
     }
+
+    public function getVideo()
+    {
+        return \View::make('video');
+    }
 } 

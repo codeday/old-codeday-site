@@ -14,7 +14,7 @@
     </article>
     <article class="action">
         {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
-            <a href="/{{ event.webname }}/register" class="register">Get your ticket &raquo;</a>
+            <a href="/{{ event.webname }}/register" class="register">Get your ticket {% if event.registration_info.remaining < (event.registration_info.max * 0.10) %}&mdash;{{ event.registration_info.remaining }} left!{% else %}&raquo;{% endif %}</a>
         {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
             {% if event.related_events %}
                 <span class="sold-out-label">Sorry, we're sold out! Register for a nearby event:</span>
@@ -26,9 +26,9 @@
             {% endif %}
         {% else %}
             <span class="notify-label">Tickets are not yet on sale. Sign up to be notified when they are:</span>
-            <form action="/{{ event.webname }}/notify" class="notify-signup">
+            <form action="/{{ event.webname }}/notify" method="post" class="notify-signup">
                 <input type="email" name="email" id="email" placeholder="you@email.co" />{#
-                #}<input type="submit" method="post" value="Notify me!">
+                #}<input type="submit" value="Notify me!">
             </form>
         {% endif %}
         {% if event.venue %}
@@ -60,11 +60,11 @@
                 your own, or just without an idea, this is the time for you to build whatever you want.</p>
         </section>
         <section class="video">
-            <iframe src="//fast.wistia.net/embed/iframe/r4avh9mp2g?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" id="splash-video" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
-            <script src="//fast.wistia.net/assets/external/iframe-api-v1.js"></script>
+            <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_n6xc4pm90n videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
         </section>
     </article>
-    
+
+   
     <article class="how-works">
         <h3>How It Works</h3>
         <ul>

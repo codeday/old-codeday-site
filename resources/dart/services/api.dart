@@ -1,4 +1,4 @@
-import "registration.dart";
+import "../models/registration.dart";
 import "dart:html";
 import 'dart:async';
 import 'dart:convert' show JSON;
@@ -36,6 +36,17 @@ class Api {
     Future GetPromotionDetails(String code) {
         return Request('register/'+Event+'/promotion', 'GET', {
             'code': code
+        });
+    }
+
+    /**
+     * Subscribes to notifications for event registration opening.
+     */
+    Future NotifySubscribe(String email)
+    {
+        return Request('notify/subscribe', 'POST', {
+            'email': email,
+            'event': Event
         });
     }
 

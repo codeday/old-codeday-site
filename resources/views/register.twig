@@ -3,14 +3,16 @@
 {% block page %}register{% endblock %}
 {% block title %}Register{% endblock %}
 {% block content %}
+<form>
     <section class="info">
-        <section class="event">
+        <section class="event" data-remaining="{{ event.registration_info.remaining }}">
             <h3>{{ event.name }}</h3>
+            {% if event.registration_info.remaining < (event.registration_info.max * 0.30) %}
+                <p class="last-few">Only {{ event.registration_info.remaining }} tickets left!</p>
+            {% elseif event.registration_info.is_earlybird_ending %}
+                <p class="last-few">Earlybird discount ends soon!</p>
+            {% endif %}
             <div id="map"></div>
-            <section class="time">
-                {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />
-                noon - noon
-            </section>
             <section class="address">
                 {{ event.venue.name }}<br />
                 {{ event.venue.address.line_1 }}<br />
@@ -19,15 +21,38 @@
                 {% endif %}
                 {{ event.venue.address.city }}, {{ event.venue.address.state }} {{ event.venue.address.postal }}
             </section>
+            <section class="time">
+                {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />
+                noon - noon
+            </section>
+        </section>
+        <section class="tos">
+            <h4>Terms</h4>
+            <ul>
+                <li>You agree to uphold the
+                    <a href="https://studentrnd.org/code-of-conduct">code of conduct</a>.</li>
+                <li>You can request a refund until
+                    {% if (event.starts_at - (60*60*24*7)) > null|date('U') %}
+                        <a href="https://studentrnd.org/returns" title="That's 7 days before CodeDay."
+                        >{{ (event.starts_at - (60*60*24*7))|date('M j') }}.</a>
+                    {% else %}
+                        <a href="https://studentrnd.org/returns" title="Limited refunds within 7 days of CodeDay."
+                        >tomorrow evening.</a>
+                    {% endif %}
+                </li>
+                <li>You may be photographed or recorded at CodeDay.</li>
+                <li>We may <a href="https://studentrnd.org/privacy">share your info</a> with
+                    our sponsors.</li>
+            </ul>
         </section>
     </section>
 
     <section class="registration">
         <h3>Attendees</h3>
         <section class="attendee">
-            <input type="text" name="first_name" placeholder="First Name" />{#
-            #}<input type="text" name="last_name" placeholder="Last Name" />
-            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="first_name" placeholder="First Name" value="" autocomplete="off" required />{#
+            #}<input type="text" name="last_name" placeholder="Last Name" value="" autocomplete="off" required />
+            <input type="email" name="email" placeholder="Email" value="" autocomplete="off" required />
         </section>
         <span class="add-attendee">Add Another Attendee</span>
         <span class="remove-attendee">Remove Last</span>
@@ -36,10 +61,10 @@
     <section class="payment" data-default-unit-price="{{ event.cost }}">
         <h3>Payment</h3>
         <div class="card" data-stripe-pk="{{ event.stripe_public_key }}">
-            <input id="card_number" placeholder="Card Number" data-stripe="number" type="text">
+            <input id="card_number" placeholder="Card Number" data-stripe="number" type="text" value="" autocomplete="off">
             <div class="exp">
                 <label for="exp">EXP</label>
-                <input id="exp" placeholder="MM/YYYY" type="text">
+                <input id="exp" placeholder="MM/YYYY" type="text" pattern="\d{1,2} *\/ *\d{2,4}" autocomplete="off" >
             </div>
         </div>
         <section class="price">
@@ -59,22 +84,24 @@
             </div>
         </section>
         <section class="finalize">
-            <button class="pay">Complete Registration</button>
+            <button class="pay" type="submit">Complete Registration</button>
+            <span><a href="mailto:contact@codeday.org">Can't afford a ticket? Contact us.</a></span>
         </section>
     </section>
+    <section class="success">
+        <h3>You're going to CodeDay!</h3>
+        <p>Your payment was successful, and you're now on the attendees list for CodeDay!</p>
+        <p>In a few minutes, you will receive an email with registration details. Please note, however, that we do not
+           issue actual tickets: we check in all attendees by name at the door.</p>
+        <p>If you can't find your confirmation email, it's possible it made it into your spam folder. If you still
+           can't find it there, you can <a href="mailto:contact@codeday.org">contact us</a>.</p>
+    </section>
+</form>
 {% endblock %}
 {% block scripts %}
     {% include "parts/map.twig" %}
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.0.2/jquery.payment.min.js"></script>
-    <link rel="stylesheet" href="/assets/css/sweet-alert.css"/>
-    <style>
-        .sweet-alert, .sweet-alert * {
-            box-sizing: content-box;
-            -moz-box-sizing: content-box;
-        }
-    </style>
-    <script type="text/javascript" src="/assets/js/sweet-alert.min.js"></script>
     <script type="text/javascript">
         // ## Auto format the card number
         $('#card_number').payment('formatCardNumber');

@@ -2,16 +2,18 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:js';
 import "package:js/js.dart";
-import "../api.dart";
-import "../registration.dart";
-import "../swal.dart";
+import "../../services/api.dart";
+import "../../services/stripe.dart";
+import "../../services/swal.dart";
+import "../../models/registration.dart";
 
-class Register {
-    String stripeApiPublic;
+class RegisterPage {
+    Stripe stripe;
     String currentPromo = null;
     num defaultUnitPrice = 10;
     num unitPrice = 10;
     num displayedPrice = 0;
+    num remainingCapacity = 100;
 
     bool formDisabled = false;
 
@@ -21,15 +23,18 @@ class Register {
     /**
      * Binds all handlers to page elements and loads data from the page.
      */
-    Register(){
+    RegisterPage(){
         // Get the default (no-promos-applied) price for the event, and update the display
         defaultUnitPrice = num.parse(querySelector('.payment').dataset['defaultUnitPrice']);
         unitPrice = defaultUnitPrice;
         refreshDisplayedPrice();
 
+        // Get the remaining event capacity
+        remainingCapacity = num.parse(querySelector('section.event').dataset['remaining']);
+
         // Set up Stripe
-        stripeApiPublic = querySelector('.card').dataset['stripePk'];
-        context['Stripe'].callMethod('setPublishableKey', [stripeApiPublic]);
+        stripe = new Stripe(querySelector('.card').dataset['stripePk']);
+
 
         // # Button Bindings
         // Bind the "add new attendee" and "remove last attendee" handlers
@@ -49,10 +54,13 @@ class Register {
             showPromoPicker();
         });
         querySelector('.promo-picker button').onClick.listen((event) {
+            event.stopPropagation();
+            event.preventDefault();
             if (formDisabled) return;
             doApplyPromo();
         });
-        querySelector('.pay').onClick.listen((event) {
+        querySelector('form').onSubmit.listen((event) {
+            event.preventDefault();
             if (formDisabled) return;
             doPay();
         });
@@ -120,7 +128,7 @@ class Register {
             title: details['discount'].toString()+'% off!',
             text: 'We\'ve successfully applied the promo code '+code+'. Your'
             +' new total is \$'+displayedPrice.toStringAsFixed(2)+'.',
-            type: 'success',
+            type: null,
             imageUrl: '/assets/img/thumbsup.jpg'
         );
 
@@ -161,7 +169,7 @@ class Register {
         // Make sure all fields are filled out:
         var complete = true;
         getRegistrationInputs(true).forEach((elem) {
-            if (elem.value.trim().length < 1) complete = false;
+            if (elem.value.trim().length < 1 || !elem.checkValidity()) complete = false;
         });
         if (!complete) {
             await swal(
@@ -178,7 +186,7 @@ class Register {
             // Post to Stripe, and check if the response was successful:
             var tokenResponse = await requestStripeToken();
             if (tokenResponse['status'] != 200) { // ERROR ERROR ERROR
-                await error(tokenResponse['response']['error']['message']);
+                error(tokenResponse['response']['error']['message']);
                 enableForm();
                 return;
             }
@@ -202,8 +210,12 @@ class Register {
                             ' a ticket -- we will check you in by name at the door.',
                     type: 'success'
             );
+            querySelectorAll('.registration, .payment').style.display = 'none';
+            querySelector('form .success').style.display = 'block';
         } else {
             error(regResponse['message']);
+            enableForm();
+            return;
         }
     }
 
@@ -246,22 +258,23 @@ class Register {
      * Requests a Stripe token for the card currently displayed on the page.
      */
     Future requestStripeToken() async {
+        var completer = new Completer();
+
+
         InputElement cardNumber = querySelector('#card_number');
         InputElement cardExp = querySelector('#exp');
 
-        var completer = new Completer();
+        // Parse out the expiration date
+        var expParts = cardExp.value.split('/');
+        int expDay;
+        int expYear;
+        
+        expDay = int.parse(expParts[0].trim());
+        expYear = int.parse(expParts[1].trim());
 
-        var cardInfo = new JsObject.jsify({
-            "number": cardNumber.value,
-            "exp": cardExp.value
-        });
-        var callback = allowInterop((status, response) => completer.complete({
-            "status": status,
-            "response": response
-        }));
-
+        // Send the request
         try {
-            context['Stripe']['card'].callMethod('createToken', [cardInfo, callback]);
+            completer.complete(await stripe.GetToken(cardNumber.value, expDay, expYear));
         } catch (exception, stack) {
             completer.complete({
                 "status": 402,
@@ -300,6 +313,13 @@ class Register {
                     +" uses remaining. If you want to register additional"
                     +" users without this code, you will need to submit"
                     +" two orders.");
+            return;
+        }
+
+        // Check to make sure this wouldn't exceed the event capacity:
+        if (getFilledRegistrations().length >= remainingCapacity) {
+            error("Sorry, we only have room for "+remainingCapacity.toString()
+                    +" more attendees right now.");
             return;
         }
 

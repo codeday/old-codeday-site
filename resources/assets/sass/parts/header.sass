@@ -1,4 +1,6 @@
 body > header
+    &.with-notice
+        margin-top: 1rem
     +row
     background-color: $color-red
     color: $color-white
@@ -47,3 +49,19 @@ body > header
                     text-decoration: underline
                 &:last-child a
                     padding-right: 0
+
+body > .notice
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    line-height: 1
+    padding: 0.2rem
+    text-align: center
+    text-transform: uppercase
+    background-color: $color-green
+    color: $color-white
+    z-index: 5000
+    font:
+        family: $font-family-header
+        weight: 700

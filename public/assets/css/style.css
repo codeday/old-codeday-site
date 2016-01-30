@@ -620,6 +620,10 @@ html {
   -moz-animation: pulseWarningIns 0.75s infinite alternate;
   animation: pulseWarningIns 0.75s infinite alternate; }
 
+.sweet-alert, .sweet-alert * {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box; }
+
 .wrap > * {
   width: 100%;
   max-width: 68rem;
@@ -630,9 +634,10 @@ html {
 
 html, html > body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-size: 14px;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", "proxima-nova", "Proxima Nova", sans-serif; }
   html *, html > body * {
-    font-family: "Helvetica Neue", "Helvetica", "Arial", "proxima-nova", "Proxima Nova", sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
@@ -699,8 +704,6 @@ body.global section.hero {
         cursor: pointer; }
         body.global section.hero article.lead .map circle.city.nearest {
           fill: #fff; }
-    body.global section.hero article.lead .map .d3-tip {
-      color: #fff; }
   body.global section.hero article.cta {
     clear: both;
     text-transform: uppercase; }
@@ -708,6 +711,11 @@ body.global section.hero {
       font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
       body.global section.hero article.cta:hover, body.global section.hero article.cta a:hover {
         color: #fff; }
+body.global .d3-tip {
+  color: #fff;
+  background-color: #72CB99;
+  font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  padding: 0.3rem 0.5rem; }
 body.global article h3 {
   text-align: center; }
 body.global article.what-is .video {
@@ -724,13 +732,6 @@ body.global article.what-is .details {
   width: 57.35098%;
   margin-right: 0; }
   body.global article.what-is .details:last-child {
-    margin-right: 0; }
-body.global article.cities img {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 40.29137%; }
-  body.global article.cities img:last-child {
     margin-right: 0; }
 body.global article.cities section.list {
   float: left;
@@ -753,6 +754,30 @@ body.global article.cities section.list {
       padding: 0; }
       body.global article.cities section.list section ul li {
         list-style-type: none; }
+body.global article.cities .cta {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 40.29137%;
+  float: right;
+  text-align: center;
+  padding-top: 2rem; }
+  body.global article.cities .cta:last-child {
+    margin-right: 0; }
+  body.global article.cities .cta a {
+    padding: 1.25rem 3rem;
+    background-color: #cb7972;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    text-decoration: none;
+    font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700; }
+  body.global article.cities .cta span {
+    display: block;
+    font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 0.8833rem; }
 body.global article.sponsors ul {
   padding: 0; }
   body.global article.sponsors ul li {
@@ -772,6 +797,119 @@ body.global article.sponsors ul {
       background-size: contain;
       background-position: 50% 50%;
       background-repeat: no-repeat; }
+
+body.sponsor h3 {
+  font-size: 1.44rem; }
+body.sponsor > header {
+  background-color: #72CB99; }
+body.sponsor section.hero {
+  padding: 2rem 0;
+  text-align: center;
+  background-color: #72CB99;
+  color: #fff; }
+  body.sponsor section.hero article.lead h2 {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 82.94039%;
+    margin-left: 8.5298%;
+    font-size: 2.986rem;
+    font-weight: 700;
+    margin-bottom: 0; }
+    body.sponsor section.hero article.lead h2:last-child {
+      margin-right: 0; }
+  body.sponsor section.hero article.lead p {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 65.88078%;
+    margin-left: 17.05961%; }
+    body.sponsor section.hero article.lead p:last-child {
+      margin-right: 0; }
+  body.sponsor section.hero article.cta {
+    clear: both;
+    padding-top: 1.5rem; }
+    body.sponsor section.hero article.cta a {
+      padding: 1.25rem 3rem;
+      background-color: #fff;
+      border-radius: 3px;
+      color: #72CB99;
+      display: inline-block;
+      text-decoration: none;
+      font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700; }
+body.sponsor article.good, body.sponsor article.for-profit {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  body.sponsor article.good:last-child, body.sponsor article.for-profit:last-child {
+    margin-right: 0; }
+  body.sponsor article.good blockquote, body.sponsor article.for-profit blockquote {
+    text-align: center;
+    font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    color: #72CB99;
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 82.94039%;
+    margin-left: 8.5298%;
+    margin-right: 17.0596%;
+    padding-left: 1rem;
+    border-left: 3px solid #72CB99; }
+    body.sponsor article.good blockquote:last-child, body.sponsor article.for-profit blockquote:last-child {
+      margin-right: 0; }
+    body.sponsor article.good blockquote span.quote, body.sponsor article.for-profit blockquote span.quote {
+      font-weight: 300;
+      font-size: 1.44rem;
+      font-style: italic;
+      line-height: 1.1; }
+      body.sponsor article.good blockquote span.quote:before, body.sponsor article.for-profit blockquote span.quote:before {
+        content: '"'; }
+      body.sponsor article.good blockquote span.quote:after, body.sponsor article.for-profit blockquote span.quote:after {
+        content: '"'; }
+    body.sponsor article.good blockquote span.attr, body.sponsor article.for-profit blockquote span.attr {
+      display: block;
+      text-align: right; }
+      body.sponsor article.good blockquote span.attr:before, body.sponsor article.for-profit blockquote span.attr:before {
+        content: "-"; }
+body.sponsor article.intro {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 65.88078%; }
+  body.sponsor article.intro:last-child {
+    margin-right: 0; }
+  body.sponsor article.intro ul.past-sponsors {
+    padding: 0; }
+    body.sponsor article.intro ul.past-sponsors li {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 14.70196%;
+      list-style-type: none; }
+      body.sponsor article.intro ul.past-sponsors li:last-child {
+        margin-right: 0; }
+      body.sponsor article.intro ul.past-sponsors li div {
+        display: block;
+        width: 100%;
+        height: 4rem;
+        background-size: contain;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        -webkit-filter: grayscale(1);
+        filter: grayscale(1); }
+body.sponsor article.stats {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 31.76157%;
+  margin-right: 0; }
+  body.sponsor article.stats:last-child {
+    margin-right: 0; }
+  body.sponsor article.stats .whitepaper {
+    color: #72CB99; }
 
 body.event.index section.hero, body.event.index > header {
   background-color: transparent;
@@ -821,27 +959,30 @@ body.event.index section.hero {
       body.event.index section.hero article.action .notify-signup input[type="email"] {
         border-bottom-left-radius: 3px;
         border-top-left-radius: 3px;
-        border-right: 1px solid #AAA;
         width: 25rem;
-        color: #466D98;
+        color: #333;
         font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         font-weight: 500; }
       body.event.index section.hero article.action .notify-signup input[type="submit"] {
         border-bottom-left-radius: 0 !important;
-        border-top-left-radius: 0 !important; }
+        border-top-left-radius: 0 !important;
+        color: #fff;
+        background-color: #cb7972;
+        font-size: 1.2rem;
+        cursor: pointer; }
     body.event.index section.hero article.action a.register, body.event.index section.hero article.action .sold-out, body.event.index section.hero article.action a.nearby-avail, body.event.index section.hero article.action .notify-signup input[type="submit"] {
       padding: 1.25rem 3rem;
-      background-color: #fff;
+      background-color: #cb7972;
       border-radius: 3px;
-      color: #466D98;
+      color: #fff;
       display: inline-block;
       text-decoration: none;
       font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
       font-size: 1.2rem;
       font-weight: 700; }
     body.event.index section.hero article.action .sold-out {
-      background-color: #cb7972;
+      background-color: #AAA;
       color: #fff; }
     body.event.index section.hero article.action .nearby-avail {
       margin-bottom: 1rem; }
@@ -860,14 +1001,14 @@ body.event.index section.hero {
         font-size: 0.833rem; }
     body.event.index section.hero article.action .nearby .event {
       padding: 0.5rem 0.6rem;
-      background-color: #fff;
+      background-color: #cb7972;
       border-radius: 3px;
-      color: #466D98;
+      color: #fff;
       display: inline-block;
       text-decoration: none;
       font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
       font-size: 1rem;
-      font-weight: 500; }
+      font-weight: 700; }
     body.event.index section.hero article.action span.venue {
       margin-top: 0.25rem;
       text-transform: uppercase;
@@ -930,7 +1071,8 @@ body.event.index article.faq {
         font-size: 1.2rem; }
 body.event.index article.map > div {
   width: 100%;
-  height: 20rem; }
+  height: 20rem;
+  z-index: -1000; }
 body.event.index article.schedule .day {
   float: left;
   display: block;
@@ -1037,13 +1179,40 @@ body.event.register .info {
     margin-right: 0; }
   body.event.register .info .event #map {
     width: 100%;
-    height: 15rem; }
+    height: 15rem;
+    z-index: -1000; }
   body.event.register .info .time, body.event.register .info .address {
-    text-align: center;
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 0.833rem;
     color: #AAA;
-    margin-top: 1rem; }
+    margin-top: 1rem;
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 48.82117%; }
+    body.event.register .info .time:last-child, body.event.register .info .address:last-child {
+      margin-right: 0; }
+  body.event.register .info .time {
+    text-align: right; }
+  body.event.register .info .last-few {
+    display: block;
+    background-color: #cb7972;
+    color: #fff;
+    padding: 0.4rem 0.6rem;
+    font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
+  body.event.register .info .tos {
+    padding-top: 1rem;
+    clear: both;
+    color: #AAA; }
+    body.event.register .info .tos h4 {
+      margin-bottom: 0; }
+    body.event.register .info .tos ul {
+      margin-top: 0;
+      padding: 0.5rem; }
+      body.event.register .info .tos ul li, body.event.register .info .tos ul li a {
+        font-size: 0.833rem;
+        line-height: 1rem;
+        font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
 body.event.register .registration {
   float: left;
   display: block;
@@ -1098,7 +1267,8 @@ body.event.register .payment {
   float: left;
   display: block;
   margin-right: 2.35765%;
-  width: 31.76157%; }
+  width: 31.76157%;
+  margin-right: 0; }
   body.event.register .payment:last-child {
     margin-right: 0; }
   body.event.register .payment .card {
@@ -1189,11 +1359,28 @@ body.event.register .payment {
       font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
       font-size: 1.2rem;
       font-weight: 700; }
+    body.event.register .payment .finalize span {
+      display: block;
+      padding-top: 0.25rem; }
+      body.event.register .payment .finalize span a {
+        color: #AAA;
+        font-size: 0.833rem; }
+body.event.register form > .success {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 65.88078%;
+  margin-right: 0;
+  display: none; }
+  body.event.register form > .success:last-child {
+    margin-right: 0; }
 
 body > header {
   display: block;
   background-color: #cb7972;
   color: #fff; }
+  body > header.with-notice {
+    margin-top: 1rem; }
   body > header::after {
     clear: both;
     content: "";
@@ -1252,6 +1439,21 @@ body > header {
         body > header nav ul li:last-child a {
           padding-right: 0; }
 
+body > .notice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  line-height: 1;
+  padding: 0.2rem;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #72CB99;
+  color: #fff;
+  z-index: 5000;
+  font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-weight: 700; }
+
 body > footer {
   clear: both;
   padding: 2rem 0; }
@@ -1272,5 +1474,186 @@ body > footer {
     content: "";
     clear: both;
     display: block; }
+
+@media screen and (max-width: 700px) {
+  body > header {
+    padding-left: 1rem;
+    padding-right: 0.5rem; }
+    body > header section.site-title {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 19.43277%; }
+      body > header section.site-title:last-child {
+        margin-right: 0; }
+      body > header section.site-title > a {
+        display: none; }
+    body > header nav ul li a {
+      padding-right: 0.5rem !important; }
+  body .content {
+    padding: 1rem; }
+  body > footer {
+    padding: 4rem 0 1rem;
+    clear: both; }
+    body > footer span.contact, body > footer span.copyright {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 100%;
+      margin-right: 0;
+      text-align: center; }
+      body > footer span.contact:last-child, body > footer span.copyright:last-child {
+        margin-right: 0; }
+    body > footer span.contact {
+      margin-top: 1rem; }
+      body > footer span.contact a {
+        font-size: 1.2rem; }
+  body.global.index section.hero article.lead {
+    float: left;
+    display: block;
+    margin-right: 7.42297%;
+    width: 100%;
+    display: block;
+    margin-right: 0;
+    margin: 0 0 -3rem 0; }
+    body.global.index section.hero article.lead:last-child {
+      margin-right: 0; }
+    body.global.index section.hero article.lead::after {
+      clear: both;
+      content: "";
+      display: table; }
+    body.global.index section.hero article.lead .map {
+      position: relative;
+      top: -5rem; }
+  body.global.index section.hero article.cta {
+    display: none; }
+  body.global.index section.hero:after {
+    content: "";
+    display: block;
+    clear: both; }
+  body.global.index article.what-is .details, body.global.index article.what-is .video, body.global.index article.cities .cta, body.global.index article.cities .list {
+    float: left;
+    display: block;
+    margin-right: 7.42297%;
+    width: 100%;
+    display: block;
+    margin-right: 0; }
+    body.global.index article.what-is .details:last-child, body.global.index article.what-is .video:last-child, body.global.index article.cities .cta:last-child, body.global.index article.cities .list:last-child {
+      margin-right: 0; }
+    body.global.index article.what-is .details::after, body.global.index article.what-is .video::after, body.global.index article.cities .cta::after, body.global.index article.cities .list::after {
+      clear: both;
+      content: "";
+      display: table; }
+  body.global.index article.cities, body.global.index article.cities .cta {
+    padding-top: 0;
+    padding-bottom: 1rem; }
+  body.event.index section.hero {
+    margin-top: -7rem; }
+  body.event.index article.what-is {
+    padding-top: 0; }
+    body.event.index article.what-is section.details, body.event.index article.what-is section.video {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 100%;
+      display: block;
+      margin-right: 0; }
+      body.event.index article.what-is section.details:last-child, body.event.index article.what-is section.video:last-child {
+        margin-right: 0; }
+      body.event.index article.what-is section.details::after, body.event.index article.what-is section.video::after {
+        clear: both;
+        content: "";
+        display: table; }
+  body.event.index article.how-works {
+    padding-top: 0; }
+    body.event.index article.how-works ul li {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 46.28851%;
+      margin-bottom: 1rem; }
+      body.event.index article.how-works ul li:last-child {
+        margin-right: 0; }
+      body.event.index article.how-works ul li:nth-child(2n) {
+        margin-right: 0; }
+  body.event.index article.faq {
+    padding-top: 0; }
+    body.event.index article.faq ul li {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 100%;
+      margin-right: 0;
+      padding-bottom: 0.5rem;
+      min-height: 0; }
+      body.event.index article.faq ul li:last-child {
+        margin-right: 0; }
+  body.event.index article.map {
+    padding-top: 0; }
+  body.event.index article.schedule {
+    padding-top: 0; }
+    body.event.index article.schedule section.day {
+      float: left;
+      display: block;
+      margin-right: 7.42297%;
+      width: 100%;
+      margin-right: 0; }
+      body.event.index article.schedule section.day:last-child {
+        margin-right: 0; }
+      body.event.index article.schedule section.day ul li .task .popup {
+        left: 25%; }
+  body.event.register section.info, body.event.register section.registration, body.event.register section.payment, body.event.register form section.success {
+    float: left;
+    display: block;
+    margin-right: 7.42297%;
+    width: 100%;
+    margin-right: 0; }
+    body.event.register section.info:last-child, body.event.register section.registration:last-child, body.event.register section.payment:last-child, body.event.register form section.success:last-child {
+      margin-right: 0; }
+    body.event.register section.info input[type="text"], body.event.register section.info input[type="email"], body.event.register section.registration input[type="text"], body.event.register section.registration input[type="email"], body.event.register section.payment input[type="text"], body.event.register section.payment input[type="email"], body.event.register form section.success input[type="text"], body.event.register form section.success input[type="email"] {
+      font-size: 1.2rem !important;
+      padding: 0.5rem !important; }
+  body.event.register form section.success {
+    display: none; }
+  body.event.register section.info .address, body.event.register section.info .time {
+    font-size: 1rem; }
+  body.event.register section.info .tos {
+    text-align: center; }
+    body.event.register section.info .tos h4 {
+      margin-top: 0;
+      font-size: 1.2rem; }
+    body.event.register section.info .tos ul {
+      padding: 0; }
+      body.event.register section.info .tos ul li {
+        list-style-type: none; }
+        body.event.register section.info .tos ul li, body.event.register section.info .tos ul li a {
+          font-size: 1rem; }
+  body.event.register section.registration .add-attendee, body.event.register section.registration .remove-attendee {
+    font-size: 1rem;
+    padding: 0.5rem 0.7rem; }
+  body.event.register section.payment .price .promo.link {
+    font-size: 0.844rem; }
+  body.sponsor.index section.lead article.intro, body.sponsor.index section.lead article.stats, body.sponsor.index article.good, body.sponsor.index article.for-profit {
+    float: left;
+    display: block;
+    margin-right: 7.42297%;
+    width: 100%;
+    margin-right: 0; }
+    body.sponsor.index section.lead article.intro:last-child, body.sponsor.index section.lead article.stats:last-child, body.sponsor.index article.good:last-child, body.sponsor.index article.for-profit:last-child {
+      margin-right: 0; }
+  body.sponsor.index section.lead article.stats {
+    padding: 0 1rem 2rem;
+    border: 3px solid #72CB99;
+    margin-top: 3rem; }
+  body.sponsor.index section.lead article.intro ul.past-sponsors li {
+    float: left;
+    display: block;
+    margin-right: 7.42297%;
+    width: 46.28851%;
+    padding-bottom: 1rem; }
+    body.sponsor.index section.lead article.intro ul.past-sponsors li:last-child {
+      margin-right: 0; }
+    body.sponsor.index section.lead article.intro ul.past-sponsors li:nth-child(2n) {
+      margin-right: 0; } }
 
 /*# sourceMappingURL=style.css.map */

@@ -32,9 +32,6 @@ body.global
                         cursor: pointer
                         &.nearest
                             fill: $color-white
-                .d3-tip
-                    color: $color-white
-
         article.cta
             clear: both
             text-transform: uppercase
@@ -42,6 +39,12 @@ body.global
                 font-family: $font-family-header
                 &:hover
                     color: $color-white
+
+    .d3-tip
+        color: $color-white
+        background-color: $color-green
+        font-family: $font-family-header
+        padding: 0.3rem 0.5rem
 
     article h3
         text-align: center
@@ -54,8 +57,6 @@ body.global
             +omega
 
     article.cities
-        img
-            +span-columns(5)
         section.list
             +span-columns(7)
             section
@@ -67,7 +68,27 @@ body.global
                     padding: 0
                     li
                         list-style-type: none
-
+        .cta
+            +span-columns(5)
+            float: right
+            text-align: center
+            padding-top: 2rem
+            a
+                padding: 1.25rem 3rem
+                background-color: $color-red
+                border-radius: 3px
+                color: $color-white
+                display: inline-block
+                text-decoration: none
+                font:
+                    family: $font-family-header
+                    size: 1.2rem
+                    weight: 700
+            span
+                display: block
+                font:
+                    family: $font-family-header
+                    size: 0.8833rem
 
     article.sponsors
         ul

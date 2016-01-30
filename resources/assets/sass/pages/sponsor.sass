@@ -1,0 +1,89 @@
+body.sponsor
+    h3
+        font-size: 1.44rem
+
+    & > header
+        background-color: $color-green
+
+    section.hero
+        padding: 2rem 0
+        text-align: center
+        background-color: $color-green
+        color: $color-white
+
+        article.lead
+            h2
+                +span-columns(10)
+                +shift(1)
+                font:
+                    size: 2.986rem
+                    weight: 700
+                margin-bottom: 0
+            p
+                +span-columns(8)
+                +shift(2)
+        article.cta
+            clear: both
+            padding-top: 1.5rem
+            a
+                padding: 1.25rem 3rem
+                background-color: $color-white
+                border-radius: 3px
+                color: $color-green
+                display: inline-block
+                text-decoration: none
+                font:
+                    family: $font-family-header
+                    size: 1.2rem
+                    weight: 700
+
+    article.good, article.for-profit
+        +span-columns(6)
+        blockquote
+            text-align: center
+            font-family: $font-family-header
+            color: $color-green
+            +span-columns(10)
+            +shift(1)
+            margin-right: 17.0596%
+            padding-left: 1rem
+            border-left: 3px solid $color-green
+            span.quote
+                &:before
+                    content: '"'
+                &:after
+                    content: '"'
+                font:
+                    weight: 300
+                    size: 1.44rem
+                    style: italic
+                line-height: 1.1
+            span.attr
+                display: block
+                text-align: right
+                &:before
+                    content: "-"
+
+    article.intro
+        +span-columns(8)
+        ul.past-sponsors
+            padding: 0
+            li
+                +span-columns(2)
+                list-style-type: none
+                div
+                    display: block
+                    width: 100%
+                    height: 4rem
+                    background:
+                        size: contain
+                        position: 50% 50%
+                        repeat: no-repeat
+                    -webkit-filter: grayscale(1)
+                    filter: grayscale(1)
+
+    article.stats
+        +span-columns(4)
+        +omega
+        .whitepaper
+            color: $color-green

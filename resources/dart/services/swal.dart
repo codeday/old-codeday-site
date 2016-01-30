@@ -10,8 +10,7 @@ Future swal({String title, String text, String type, String imageUrl: null}) {
             "text": text,
             "type": type,
             "imageUrl": imageUrl
-        }),
-        allowInterop(onClose.complete)
+        }), onClose.complete
     ]);
 
     return onClose.future;

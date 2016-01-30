@@ -16,8 +16,7 @@
 {% block content %}
     <article class="what-is">
         <section class="video">
-            <iframe src="//fast.wistia.net/embed/iframe/r4avh9mp2g?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" id="splash-video" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="360"></iframe>
-            <script src="//fast.wistia.net/assets/external/iframe-api-v1.js"></script>
+            <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_n6xc4pm90n videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
         </section>
         <section class="details">
             <h3>Have fun, make friends, build something awesome.</h3>
@@ -30,8 +29,11 @@
     </article>
 
     <article class="cities">
+        <section class="cta">
+            <a href="/{{ nearest_event.webname }}">Get more info about<br />CodeDay {{ nearest_event.region_name }}</a>
+            <span class="details">Or select from the list of cities</span>
+        </section>
         <section class="list">
-            <h3>Select your nearest city for more information.</h3>
             <section>
                 <h4>Pacific</h4>
                 <ul>
@@ -65,7 +67,6 @@
                 </ul>
             </section>
         </section>
-        <img src="/assets/img/code.jpg" alt="" />
     </article>
 
     <article class="sponsors">
