@@ -1404,7 +1404,7 @@ body > header {
         height: 20px;
         width: 100px;
         display: block;
-        text-indent: 3000px; }
+        text-indent: -3000px; }
     body > header section.site-title > a {
       text-decoration: none;
       color: inherit !important;
