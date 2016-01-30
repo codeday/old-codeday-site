@@ -1071,8 +1071,7 @@ body.event.index article.faq {
         font-size: 1.2rem; }
 body.event.index article.map > div {
   width: 100%;
-  height: 20rem;
-  z-index: -1000; }
+  height: 20rem; }
 body.event.index article.schedule .day {
   float: left;
   display: block;
@@ -1179,8 +1178,7 @@ body.event.register .info {
     margin-right: 0; }
   body.event.register .info .event #map {
     width: 100%;
-    height: 15rem;
-    z-index: -1000; }
+    height: 15rem; }
   body.event.register .info .time, body.event.register .info .address {
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 0.833rem;
