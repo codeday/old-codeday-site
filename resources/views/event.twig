@@ -4,7 +4,7 @@
 
 {% block hero %}
     <article class="details">
-        <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}:</span>
+        <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>
         <span class="time">noon to noon</span>
     </article>
     <article class="lead">
@@ -201,20 +201,25 @@
     <script src="/assets/js/typed.min.js"></script>
     <script>
       $(document).ready(function(){
-        $("#typed").typed({
-          strings: [
-            "fun",
-            "useful",
-            "entertaining",
-            "inspiring",
-            "unique",
-            "amazing",
-            "g^100r^100e^100a^100t"
-          ],
-          backDelay: 1500,
-          typeSpeed: 50,
-          showCursor: false
-        });
+        if($(".lead").width() < 952){
+            // so it doesn't jerk around
+            $("#typed").text("great");
+        }else{
+            $("#typed").typed({
+              strings: [
+                "fun",
+                "useful",
+                "entertaining",
+                "inspiring",
+                "unique",
+                "amazing",
+                "g^100r^100e^100a^100t"
+              ],
+              backDelay: 1500,
+              typeSpeed: 50,
+              showCursor: false
+            });
+        }
       });
     </script>
 {% endblock %}

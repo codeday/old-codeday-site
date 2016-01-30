@@ -14,14 +14,14 @@
             {% endif %}
             <div id="map"></div>
             <section class="address">
-                {{ event.venue.name }}<br />
-                {{ event.venue.address.line_1 }}<br />
-                {% if event.venue.address.line_2 %}
-                    {{ event.venue.address.line_2 }}<br />
-                {% endif %}
-                {{ event.venue.address.city }}, {{ event.venue.address.state }} {{ event.venue.address.postal }}
-                <br/><br/>
-                <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank">Get Directions</a>
+                <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank">
+                    {{ event.venue.name }}<br />
+                    {{ event.venue.address.line_1 }}<br />
+                    {% if event.venue.address.line_2 %}
+                        {{ event.venue.address.line_2 }}<br />
+                    {% endif %}
+                    {{ event.venue.address.city }}, {{ event.venue.address.state }} {{ event.venue.address.postal }}
+                </a>
             </section>
             <section class="time">
                 {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />

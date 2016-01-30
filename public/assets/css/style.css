@@ -779,7 +779,7 @@ body.global article.cities .cta {
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 1.2rem;
     font-weight: 700; }
-  body.global article.cities .cta span {
+  body.global article.cities .cta span:not(.nearest_event_name) {
     display: block;
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 0.8833rem; }
@@ -929,8 +929,12 @@ body.event.index section.hero {
   text-align: center; }
   body.event.index section.hero article.details {
     text-transform: uppercase;
+    margin-bottom: 0.5rem;
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 1.2rem; }
+    body.event.index section.hero article.details .date {
+      display: block;
+      font-size: 1.7rem; }
   body.event.index section.hero article.lead {
     margin-bottom: 2rem; }
     body.event.index section.hero article.lead h2 {
