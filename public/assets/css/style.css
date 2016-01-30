@@ -632,6 +632,9 @@ html {
 .wrap {
   width: 100%; }
 
+* * {
+  outline: none; }
+
 html, html > body {
   margin: 0;
   padding: 0;
@@ -692,18 +695,20 @@ body.global section.hero {
       font-size: 3.583rem;
       font-weight: 700;
       margin: 0; }
-    body.global section.hero article.lead .map path {
-      fill: none; }
-      body.global section.hero article.lead .map path.land {
-        stroke: rgba(255, 255, 255, 0.15); }
-      body.global section.hero article.lead .map path.state-boundary {
-        stroke: rgba(255, 255, 255, 0.1); }
-    body.global section.hero article.lead .map circle {
-      fill: rgba(255, 255, 255, 0.25); }
-      body.global section.hero article.lead .map circle.city {
-        cursor: pointer; }
-        body.global section.hero article.lead .map circle.city.nearest {
-          fill: #fff; }
+    body.global section.hero article.lead .map {
+      z-index: 2; }
+      body.global section.hero article.lead .map path {
+        fill: none; }
+        body.global section.hero article.lead .map path.land {
+          stroke: rgba(255, 255, 255, 0.15); }
+        body.global section.hero article.lead .map path.state-boundary {
+          stroke: rgba(255, 255, 255, 0.1); }
+      body.global section.hero article.lead .map circle {
+        fill: rgba(255, 255, 255, 0.25); }
+        body.global section.hero article.lead .map circle.city {
+          cursor: pointer; }
+          body.global section.hero article.lead .map circle.city.nearest {
+            fill: #fff; }
   body.global section.hero article.cta {
     clear: both;
     text-transform: uppercase; }
@@ -925,13 +930,11 @@ body.event.index section.hero {
   body.event.index section.hero article.details {
     text-transform: uppercase;
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    font-size: 1rem; }
-    body.event.index section.hero article.details span.date:after {
-      content: "-"; }
+    font-size: 1.2rem; }
   body.event.index section.hero article.lead {
     margin-bottom: 2rem; }
     body.event.index section.hero article.lead h2 {
-      font-size: 2.986rem;
+      font-size: 2.5rem;
       font-weight: 700;
       margin: 0; }
     body.event.index section.hero article.lead p {
@@ -1169,6 +1172,18 @@ body.event.index article.sponsors ul {
       background-position: 50% 50%;
       background-repeat: no-repeat; }
 
+body.event.register .red-button, body.event.register .registration .add-attendee, body.event.register .registration .remove-attendee {
+  display: inline-block;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.833rem;
+  background-color: #cb7972;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
+  body.event.register .red-button.remove-attendee, body.event.register .registration .remove-attendee {
+    background-color: #AAA;
+    display: none; }
 body.event.register .info {
   float: left;
   display: block;
@@ -1250,17 +1265,6 @@ body.event.register .registration {
         margin-left: 5%;
         margin-bottom: 1rem;
         border-top-width: 0; }
-  body.event.register .registration .add-attendee, body.event.register .registration .remove-attendee {
-    display: inline-block;
-    padding: 0.4rem 0.6rem;
-    font-size: 0.833rem;
-    background-color: #cb7972;
-    color: #fff;
-    cursor: pointer;
-    font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
-    body.event.register .registration .add-attendee.remove-attendee, body.event.register .registration .remove-attendee.remove-attendee {
-      background-color: #AAA;
-      display: none; }
 body.event.register .payment {
   float: left;
   display: block;
@@ -1279,6 +1283,8 @@ body.event.register .payment {
     body.event.register .payment .card label, body.event.register .payment .card input {
       font-family: "ocraregular", "OCR A Std", "OCR A", Courier, "Courier New", monospace;
       width: 100%; }
+    body.event.register .payment .card #card_number {
+      margin-bottom: 3px; }
     body.event.register .payment .card .exp {
       display: block; }
       body.event.register .payment .card .exp::after {
@@ -1290,6 +1296,7 @@ body.event.register .payment {
         display: block;
         margin-right: 2.35765%;
         width: 65.88078%;
+        margin-top: 3px;
         text-align: right; }
         body.event.register .payment .card .exp label:last-child {
           margin-right: 0; }
@@ -1337,7 +1344,7 @@ body.event.register .payment {
       font-weight: 700; }
     body.event.register .payment .price .promo.link {
       cursor: pointer;
-      font-size: 0.694rem;
+      font-size: 1.1rem;
       color: #AAA;
       display: inline-block; }
     body.event.register .payment .price .promo-picker {

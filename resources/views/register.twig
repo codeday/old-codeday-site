@@ -20,6 +20,8 @@
                     {{ event.venue.address.line_2 }}<br />
                 {% endif %}
                 {{ event.venue.address.city }}, {{ event.venue.address.state }} {{ event.venue.address.postal }}
+                <br/><br/>
+                <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank">Get Directions</a>
             </section>
             <section class="time">
                 {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />
@@ -80,7 +82,7 @@
             <span class="promo link">Have a promo code?</span>
             <div class="promo-picker">
                 <input type="text" name="promo" id="promo" placeholder="Code" />
-                <button>Apply</button>
+                <button class="red-button">Apply</button>
             </div>
         </section>
         <section class="finalize">

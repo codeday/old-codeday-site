@@ -4,11 +4,11 @@
 
 {% block hero %}
     <article class="details">
-        <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>
+        <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}:</span>
         <span class="time">noon to noon</span>
     </article>
     <article class="lead">
-        <h2>Build something fun at CodeDay {{ event.region_name }}.</h2>
+        <h2>Build something <span id="typed"></span><noscript>fun</noscript> at CodeDay {{ event.region_name }}.</h2>
         <p>At CodeDay {{ event.region_name }}, student programmers and artists get together to build awesome games and
            apps in 24 hours. You're invited to join us, no matter what your previous experience.</p>
     </article>
@@ -64,7 +64,7 @@
         </section>
     </article>
 
-   
+
     <article class="how-works">
         <h3>How It Works</h3>
         <ul>
@@ -147,8 +147,9 @@
         <article class="map">
             <h3>Hosted at {{ event.venue.name }}:
                 <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank"
-                >{{ event.venue.address.line_1 }}{% if event.venue.address.line_2 %},{{ event.venue.address.line_2 }}{% endif %},
+                >{{ event.venue.address.line_1 }}{% if event.venue.address.line_2 %}, {{ event.venue.address.line_2 }}{% endif %},
                 {{ event.venue.address.city }}</a></h3>
+            <br/>
             <div id="map"></div>
         </article>
     {% endif %}
@@ -197,4 +198,22 @@
 {% endblock %}
 {% block scripts %}
     {% include "parts/map.twig" %}
+    <script src="/assets/js/typed.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#typed").typed({
+          strings: [
+            "fun",
+            "useful",
+            "entertaining",
+            "inspiring",
+            "unique",
+            "amazing",
+            "g^100r^100e^100a^100t"
+          ],
+          backDelay: 1000,
+          showCursor: false
+        });
+      });
+    </script>
 {% endblock %}
