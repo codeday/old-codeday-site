@@ -1052,6 +1052,8 @@ body.event.index article.how-works ul {
     width: 23.23176%; }
     body.event.index article.how-works ul li:last-child {
       margin-right: 0; }
+    body.event.index article.how-works ul li:nth-child(4n) {
+      margin-right: 0; }
     body.event.index article.how-works ul li img {
       width: 100%;
       height: auto; }
@@ -1383,6 +1385,25 @@ body.event.register form > .success {
   display: none; }
   body.event.register form > .success:last-child {
     margin-right: 0; }
+
+body.rules .rules {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  body.rules .rules:last-child {
+    margin-right: 0; }
+body.rules .award-rules {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  margin-right: 0; }
+  body.rules .award-rules:last-child {
+    margin-right: 0; }
+body.rules h4 {
+  font-weight: 700;
+  font-size: 1.1rem; }
 
 body > header {
   display: block;
