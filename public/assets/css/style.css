@@ -1043,6 +1043,7 @@ body.event.index article.what-is section.video {
   body.event.index article.what-is section.video:last-child {
     margin-right: 0; }
 body.event.index article.how-works ul {
+  margin-top: 0;
   padding: 0; }
   body.event.index article.how-works ul li {
     list-style-type: none;
