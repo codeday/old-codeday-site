@@ -1049,10 +1049,12 @@ body.event.index article.how-works ul {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 23.23176%; }
+    width: 48.82117%;
+    width: 50%;
+    margin-right: 0;
+    font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-weight: 500; }
     body.event.index article.how-works ul li:last-child {
-      margin-right: 0; }
-    body.event.index article.how-works ul li:nth-child(4n) {
       margin-right: 0; }
     body.event.index article.how-works ul li img {
       width: 100%;
