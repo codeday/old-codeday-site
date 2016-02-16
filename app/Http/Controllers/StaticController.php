@@ -50,6 +50,11 @@ class StaticController extends Controller {
         return \View::make('sponsor');
     }
 
+    public function getVolunteer()
+    {
+        return \View::make('volunteer');
+    }
+
     public function getRules()
     {
         return \View::make('rules');

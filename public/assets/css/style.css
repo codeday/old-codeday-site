@@ -1408,6 +1408,70 @@ body.rules h4 {
   font-weight: 700;
   font-size: 1.1rem; }
 
+body.volunteer h3 {
+  font-size: 1.44rem; }
+body.volunteer > header {
+  background-color: #72CB99; }
+body.volunteer section.hero {
+  padding: 2rem 0;
+  text-align: center;
+  background-color: #72CB99;
+  color: #fff; }
+  body.volunteer section.hero article.lead h2 {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 82.94039%;
+    margin-left: 8.5298%;
+    font-size: 2.986rem;
+    font-weight: 700;
+    margin-bottom: 0; }
+    body.volunteer section.hero article.lead h2:last-child {
+      margin-right: 0; }
+  body.volunteer section.hero article.lead p {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 65.88078%;
+    margin-left: 17.05961%; }
+    body.volunteer section.hero article.lead p:last-child {
+      margin-right: 0; }
+  body.volunteer section.hero article.cta {
+    clear: both;
+    padding-top: 1.5rem; }
+    body.volunteer section.hero article.cta a {
+      padding: 1.25rem 3rem;
+      background-color: #fff;
+      border-radius: 3px;
+      color: #72CB99;
+      display: inline-block;
+      text-decoration: none;
+      font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700; }
+body.volunteer article.mentor, body.volunteer article.staff {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  body.volunteer article.mentor:last-child, body.volunteer article.staff:last-child {
+    margin-right: 0; }
+  body.volunteer article.mentor h4, body.volunteer article.staff h4 {
+    margin-bottom: -0.5rem; }
+  body.volunteer article.mentor .cta, body.volunteer article.staff .cta {
+    text-align: center;
+    padding-top: 1rem; }
+    body.volunteer article.mentor .cta a, body.volunteer article.staff .cta a {
+      padding: 1.25rem 3rem;
+      background-color: #72CB99;
+      border-radius: 3px;
+      color: #fff;
+      display: inline-block;
+      text-decoration: none;
+      font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700; }
+
 body > header {
   display: block;
   background-color: #cb7972;

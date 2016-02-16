@@ -78,14 +78,20 @@
                         {% endif %}
                     {% endif %}
                     {% set skipSponsor = false %}
+                    {% set skipVolunteer = false %}
                     {% for link in event.special_links %}
                         {% if link.location == 'header' %}
                             {% if link.name == 'Sponsor' %}
                                 {% set skipSponsor = true %}
+                            {% elseif link.name == 'Volunteer' %}
+                                {% set skipVolunteer = true %}
                             {% endif %}
                             <li><a href="{{ link.url }}"{% if link.new_window %} target="_blank"{% endif %}>{{ link.name }}</a></li>
                         {% endif %}
                     {% endfor %}
+                    {% if not skipVolunteer %}
+                        <li {%if block('section') == 'volunteer' %}class="active"{% endif %}><a href="/volunteer">Volunteer</a></li>
+                    {% endif %}
                     {% if not skipSponsor %}
                         <li {% if block('section') == 'sponsor' %}class="active"{% endif %}"><a href="/sponsor">Sponsor</a></li>
                     {% endif %}
