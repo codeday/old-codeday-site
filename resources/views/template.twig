@@ -96,6 +96,9 @@
                         <li {% if block('section') == 'sponsor' %}class="active"{% endif %}"><a href="/sponsor">Sponsor</a></li>
                     {% endif %}
                     <li><a href="/press" target="_blank">Press Kit</a></li>
+                    {% if not event %}
+                        <li><a href="https://studentrnd.org/donate" target="_blank">Donate</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div></div>
