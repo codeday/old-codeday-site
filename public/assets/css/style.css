@@ -1453,9 +1453,13 @@ body.volunteer article.mentor, body.volunteer article.staff {
   float: left;
   display: block;
   margin-right: 2.35765%;
-  width: 48.82117%; }
+  width: 48.82117%;
+  padding-top: 1.5rem; }
   body.volunteer article.mentor:last-child, body.volunteer article.staff:last-child {
     margin-right: 0; }
+  body.volunteer article.mentor img, body.volunteer article.staff img {
+    width: 100%;
+    height: auto; }
   body.volunteer article.mentor h4, body.volunteer article.staff h4 {
     margin-bottom: -0.5rem; }
   body.volunteer article.mentor .cta, body.volunteer article.staff .cta {
@@ -1751,6 +1755,16 @@ body > footer {
     body.sponsor.index section.lead article.intro ul.past-sponsors li:last-child {
       margin-right: 0; }
     body.sponsor.index section.lead article.intro ul.past-sponsors li:nth-child(2n) {
+      margin-right: 0; }
+  body.volunteer.index .hero .cta a {
+    margin-bottom: 1rem; }
+  body.volunteer.index article.mentor, body.volunteer.index article.staff {
+    float: left;
+    display: block;
+    margin-right: 7.42297%;
+    width: 100%;
+    margin-right: 0; }
+    body.volunteer.index article.mentor:last-child, body.volunteer.index article.staff:last-child {
       margin-right: 0; } }
 
 /*# sourceMappingURL=style.css.map */
