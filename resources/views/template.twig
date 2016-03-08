@@ -136,8 +136,32 @@
     <script>try{Typekit.load({ async: true });}catch(e){}</script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/assets/js/sweet-alert.min.js"></script>
-    {{ block('scripts') }}
+    <script type="text/javascript">
+        window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+        d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+        _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+        $.src="//v2.zopim.com/?1R6S6EzSmHx69lhNeJVbghkeEbFsB1xZ";z.t=+new Date;$.
+        type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+    </script>
     {#<script src="http://d.codeday.dev/resources/dart/web/main.dart" type="application/dart"></script>#}
     <script src="/assets/js/app.js"></script>
+    <script type="text/javascript">
+        !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.1.0";
+            analytics.load("NOoRcUYjAGROMV3zHOXPLhdBSrxu5uSe");
+            analytics.page();
+        }}();
+        analytics.page('{{ block('section')|escape('js') }}', '{{ block('page')|escape('js') }}');
+        
+        window._wq = window._wq || [];
+        _wq.push({ "_all": function(video) {
+            video.bind('play', function(){
+                analytics.track('Played video');
+            });
+        }});
+    </script>
+    <script src="//fast.wistia.net/assets/external/E-v1.js" async></script>
+    {{ block('track') }}
+    <script src="//fast.wistia.net/labs/fresh-url/v1.js" async></script>
+    {{ block('scripts') }}
 </body>
 </html>
