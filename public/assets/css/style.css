@@ -1449,6 +1449,16 @@ body.volunteer section.hero {
       font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
       font-size: 1.2rem;
       font-weight: 700; }
+body.volunteer article.video {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 65.88078%;
+  margin-left: 17.05961%;
+  margin-right: 0;
+  padding-top: 0; }
+  body.volunteer article.video:last-child {
+    margin-right: 0; }
 body.volunteer article.mentor, body.volunteer article.staff {
   float: left;
   display: block;
