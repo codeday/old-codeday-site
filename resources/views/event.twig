@@ -143,6 +143,17 @@
         </ul>
     </article>
 
+    {% if event.hashtag and event.photos|length > 0 %}
+        <article class="photos">
+            <h3>Previous Events</h3>
+            <div class="slideshow">
+                {% for photo in event.photos %}
+                    <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
+                {% endfor %}
+            </div>
+        </article>
+    {% endif %}
+
     {% if event.venue and event.venue.name != "TBA" %}
         <article class="map">
             <h3>Hosted at {{ event.venue.name }}:
@@ -221,5 +232,25 @@
             });
         }
       });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
+    <script src="/assets/js/jquery.slides.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".photos").each(function(){
+                $(this).css('display', 'block');
+                $(this).find('.slideshow').slidesjs({
+                    height: (($(this).width()/9)*4),
+                    play: {
+                        active: true,
+                        effect: "fade",
+                        auto: true,
+                        interval: 4000,
+                        swap: true,
+                        restartDelay: 4000
+                    }
+                });
+            });
+        });
     </script>
 {% endblock %}

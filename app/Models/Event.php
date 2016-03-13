@@ -26,4 +26,28 @@ class Event extends ClearModel {
             return null;
         }
     }
+
+    public function photos()
+    {
+        if (!\Cache::has('flickr.'.$this->hashtag) || \Config::get('app.debug')) {
+            try {
+                $query = [
+                    'api_key' => \Config::get('flickr.key'),
+                    'group_id' => \Config::get('flickr.group'),
+                    'tags' => $this->hashtag,
+                    'format' => 'json',
+                    'nojsoncallback' => 1,
+                    'method' => 'flickr.groups.pools.getPhotos',
+                    'per_page' => 10
+                ];
+                $url = 'https://api.flickr.com/services/rest/?'.http_build_query($query);
+                $response = file_get_contents($url);
+                $obj = json_decode($response)->photos->photo;
+
+                \Cache::put('flickr.'.$this->hashtag, $obj, 60);
+            } catch (\Exception $ex) {}
+        }
+
+        return \Cache::get('flickr.'.$this->hashtag, []);
+    }
 } 
