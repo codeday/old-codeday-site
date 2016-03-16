@@ -790,10 +790,10 @@ body.global article.sponsors ul {
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 31.76157%; }
+    width: 23.23176%; }
     body.global article.sponsors ul li:last-child {
       margin-right: 0; }
-    body.global article.sponsors ul li:nth-child(3n) {
+    body.global article.sponsors ul li:nth-child(4n) {
       margin-right: 0; }
     body.global article.sponsors ul li span {
       display: block;
