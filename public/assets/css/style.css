@@ -784,13 +784,16 @@ body.global article.cities .cta {
     font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 0.8833rem; }
 body.global article.sponsors ul {
-  padding: 0; }
+  padding: 0;
+  text-align: center; }
   body.global article.sponsors ul li {
     list-style-type: none;
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 23.23176%; }
+    width: 23.23176%;
+    display: inline-block;
+    float: none; }
     body.global article.sponsors ul li:last-child {
       margin-right: 0; }
     body.global article.sponsors ul li:nth-child(4n) {
@@ -1176,16 +1179,19 @@ body.event.index article.schedule .day {
         body.event.index article.schedule .day ul li .task:hover .popup {
           display: block; }
 body.event.index article.sponsors ul {
-  padding: 0; }
+  padding: 0;
+  text-align: center; }
   body.event.index article.sponsors ul li {
     list-style-type: none;
     float: left;
     display: block;
     margin-right: 2.35765%;
-    width: 31.76157%; }
+    width: 23.23176%;
+    float: none;
+    display: inline-block; }
     body.event.index article.sponsors ul li:last-child {
       margin-right: 0; }
-    body.event.index article.sponsors ul li:nth-child(3n) {
+    body.event.index article.sponsors ul li:nth-child(4n) {
       margin-right: 0; }
     body.event.index article.sponsors ul li span {
       display: block;
