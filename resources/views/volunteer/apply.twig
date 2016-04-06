@@ -1,0 +1,27 @@
+{% extends "template.twig" %}
+{% block section %}volunteer{% endblock %}
+{% block page %}index{% endblock %}
+{% block title %}{% if partner %}{{ partner.name }} Volunteer Sign-up {% else %}Volunteer Application{% endif %}{% endblock %}
+{% block content %}
+
+<div id="wufoo-{{ form }}" class="apply-form"></div>
+<script type="text/javascript">
+var form;
+(function(d, t) {
+var s = d.createElement(t), options = {
+'userName':'srnd',
+'formHash':'{{ form }}',
+'autoResize':true,
+'height':'1035',
+'async':true,
+'host':'wufoo.com',
+'header':'show',
+'defaultValues': 'Field{{ partner_field }}={{ partner.id }}',
+'ssl':true};
+s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+s.onload = s.onreadystatechange = function() {
+var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+try { wform = new WufooForm();wform.initialize(options);wform.display(); } catch (e) {}};
+var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+})(document, 'script');</script>
+{% endblock %}

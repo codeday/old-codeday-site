@@ -115,13 +115,24 @@ $media-mobile: new-breakpoint(max-width 700px 4)
                 font-size: 0.844rem
 
         &.sponsor.index
+            section.lead
+                padding-top: 1rem
             section.lead article.intro, section.lead article.stats, article.good, article.for-profit
                 +span-columns(4)
                 +omega
-            section.lead article.stats
+                padding: inherit
+            section.lead img
+                display: none
+            article.stats
                 padding: 0 1rem 2rem
                 border: 3px solid $color-green
                 margin-top: 3rem
+                +span-columns(4)
+                +shift(0)
+                article
+                    +span-columns(4)
+                &:before, &:after
+                    display: none
             section.lead article.intro ul.past-sponsors li
                 +span-columns(2)
                 padding-bottom: 1rem
@@ -130,6 +141,8 @@ $media-mobile: new-breakpoint(max-width 700px 4)
         &.volunteer.index
             .hero .cta a
                 margin-bottom: 1rem
-            article.mentor, article.staff
+            article.mentor, article.staff, article.ask section.positions, article.ask section.regions,
+            article.what-is section.image, article.what-is section.about, article.ask section.positions section,
+            article.staff img, article.staff section.text
                 +span-columns(4)
                 +omega

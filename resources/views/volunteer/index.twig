@@ -1,0 +1,97 @@
+{% extends "template.twig" %}
+{% block section %}volunteer{% endblock %}
+{% block page %}index{% endblock %}
+{% block title %}Volunteer{% endblock %}
+{% block hero %}
+    <article class="lead">
+            <h2>Help students fall in love with code.</h2>
+        {% if partner %}
+            <p>{{ partner.name }} and CodeDay have partnered to get students everywhere excited about code. Now we need
+               your help to make it happen.</p>
+        {% endif %}
+    </article>
+    <article class="cta">
+        <span class="wistia_embed wistia_async_8tq9ww732m popover=true popoverContent=link" style="display:inline"><a href="#">Watch the Volunteer Video</a></span>
+    </article>
+{% endblock %}
+{% block content %}
+    <article class="what-is">
+        <p>CodeDay is a 24-hour, beginner-focused tech education event which gets students coding: 80% of attendees
+           with no prior experience continue programming after.</p>
+        <section class="image">
+            {% if partner and partner.image %}
+                <img src="{{ partner.image }}" />
+                <span class="caption">{{ partner.image_caption }}</span>
+            {% else %}
+                <img src="/assets/img/la-team.jpg" />
+                <span class="caption">CodeDay LA, Winter 2015</span>
+            {% endif %}
+        </section>
+        <section class="about">
+            <p>We created CodeDay to fill the gap between in-school programs, which explain <em>how to code</em> and
+               the eternal question of students: <em>why do I need to know this?</em></p>
+            <p>At CodeDay, students pitch ideas for apps or games they want to see exist, then spend the next 24 hours
+               creating them with the help of staff and mentors.</p>
+            <p>Students regularly tell us CodeDay is one of the most meaningful things they've done. Over 80% of our
+               attendees continue to code after attending, strengthening the local tech community and empowering
+               low-income and minority groups.</p>
+        </section>
+    </article>
+    <article class="ask">
+        <section class="positions">
+            <h3>Mentors and Judges Needed!</h3>
+            <section class="mentor">
+                <h4>Be a Mentor</h4>
+                <ul>
+                    <li>Meet a number of groups, and help them solve problems and build something cool throughout the event.</li>
+                    <li>Time commitment: Flexible, 2+ hours any time on Saturday, {{ loaded_batch.starts_at|date('F j') }}.</li>
+                    <li>Programmers, designers, and project managers are welcome.</li>
+                </ul>
+                <div class="cta">
+                    <a href="/volunteer/apply/mentor{% if partner %}?partner={{ partner.id }}{% endif %}" class="cta">{% if partner %}Sign Up{% else %}Apply{% endif %}</a>
+                </div>
+            </section>
+            <section class="judge">
+                <h4>Be a Judge</h4>
+                <ul>
+                    <li>Help decide the winners: try all the projects, watch the presentations, and decide awards.</li>
+                    <li>Time commitment: 8am-noon on Sunday, {{ loaded_batch.ends_at|date('F j') }}.</li>
+                    <li>No specific experience or skills are required.</li>
+                </ul>
+                <div class="cta">
+                    <a href="/volunteer/apply/judge{% if partner %}?partner={{ partner.id }}{% endif %}" class="cta">{% if partner %}Sign Up{% else %}Apply{% endif %}</a>
+                </div>
+            </section>
+        </section>
+        <section class="regions">
+            <h3>Help Needed in...</h3>
+            {% set regions = {"America/Los_Angeles": "Pacific", "America/Denver": "Mountain", "America/Chicago": "Central", "America/Detroit": "Eastern"} %}
+            {% for tz,name in regions %}
+                <section>
+                    <h4>{{ name }}-Time Cities</h4>
+                    <ul>
+                        {% for region in tz_regions[tz] %}
+                            <li {% if partner and partner.featured and (region.webname in partner.featured) %}class="featured"{% endif %}>{{ region.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            {% endfor %}
+        </section>
+    </article>
+    <article class="staff">
+        <h3>Another Way to Help: Event Staff</h3>
+        <img src="/assets/img/staff.jpg" />
+        <section class="text">
+            <p>Before CodeDay even starts, our event staff are working hard to make sure we have a venue and that
+               local students, teachers, and clubs know about the event.</p>
+            <p>Whether you're a student, teacher, parent, or community member, we need your help. Becoming an event
+               volunteer makes the biggest impact on CodeDay, and only requires a few hours of work each week, and is
+               a rewarding and fun way to network and interact with the community and, for students, learn valuable
+               workplace skills.</p>
+
+            <div class="cta">
+                <a href="/volunteer/apply/staff{% if partner %}?partner={{ partner.id }}{% endif %}" class="cta">{% if partner %}Sign Up{% else %}Apply{% endif %}</a>
+            </div>
+        </section>
+    </article>
+{% endblock %}

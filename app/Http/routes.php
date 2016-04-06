@@ -31,7 +31,11 @@ use CodeDay\Models;
 \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');
 \Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
 \Route::get('/rules', '\CodeDay\Http\Controllers\StaticController@getRules');
-\Route::get('/volunteer', '\CodeDay\Http\Controllers\StaticController@getVolunteer');
+
+\Route::get('/volunteer', '\CodeDay\Http\Controllers\VolunteerController@getIndex');
+\Route::get('/volunteer/apply/mentor', '\CodeDay\Http\Controllers\VolunteerController@getApplyMentor');
+\Route::get('/volunteer/apply/judge', '\CodeDay\Http\Controllers\VolunteerController@getApplyJudge');
+\Route::get('/volunteer/apply/staff', '\CodeDay\Http\Controllers\VolunteerController@getApplyStaff');
 
 \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
 \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
