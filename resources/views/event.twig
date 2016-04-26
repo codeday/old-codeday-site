@@ -8,7 +8,7 @@
         <span class="time">noon to noon</span>
     </article>
     <article class="lead">
-        <h2>Build something <span id="typed"></span><noscript>fun</noscript> at CodeDay {{ event.region_name }}.</h2>
+        <h2>Build something <span id="typed">cool</span> at CodeDay {{ event.region_name }}.</h2>
         <p>At CodeDay {{ event.region_name }}, student programmers and artists get together to build awesome games and
            apps in 24 hours. You're invited to join us, no matter what your previous experience.</p>
     </article>
@@ -209,12 +209,9 @@
 {% block scripts %}
     {% include "parts/map.twig" %}
     <script src="/assets/js/typed.min.js"></script>
-    <script>
+    <script type="text/javascript">
       $(document).ready(function(){
-        if($(".lead").width() < 952){
-            // so it doesn't jerk around
-            $("#typed").text("great");
-        }else{
+        if($(".lead").width() > 900){
             $("#typed").typed({
               strings: [
                 "fun",
@@ -232,7 +229,6 @@
         }
       });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
     <script src="/assets/js/jquery.slides.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
