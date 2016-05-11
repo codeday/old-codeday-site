@@ -1,27 +1,51 @@
-<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
-
+<div id="geocoder" style="display:none"></div>
+<style type="text/css">
+.mapboxgl-ctrl-attrib { display: none }
+</style>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.0.0/mapbox-gl-geocoder.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.18.0/mapbox-gl.css' rel='stylesheet' />
 <script>
-    L.mapbox.accessToken = 'pk.eyJ1IjoidHlsZXJtZW5lemVzIiwiYSI6ImNpangwZm03djBub212M2x6dmZ0MHd4YTkifQ.xq1UxOv7Bujmi43FzHj_pg';
-    var geocoder = L.mapbox.geocoder('mapbox.places');
-    var map = L.mapbox.map('map', 'mapbox.streets', {
-        attributionControl : {compact: true}
+    mapboxgl.accessToken = 'pk.eyJ1IjoidHlsZXJtZW5lemVzIiwiYSI6ImNpangwZm03djBub212M2x6dmZ0MHd4YTkifQ.xq1UxOv7Bujmi43FzHj_pg';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/tylermenezes/cio329x4m0015b4mf591sk9j2',
+        zoom: 14
     });
-    map.dragging.disable();
-    map.touchZoom.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
+    map.scrollZoom.disable();
+    map.boxZoom.disable();
+    map.dragPan.disable();
+    map.dragRotate.disable();
     map.keyboard.disable();
-    if (map.tap) map.tap.disable();
+    map.doubleClickZoom.disable();
+    map.touchZoomRotate.disable();
+    map.on('load', function() {
+        map.addSource('single-point', {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": []
+            }
+        });
 
-    geocoder.query('{{ event.venue.full_address|escape('js') }}', function(err, data) {
-        map.setView(data.latlng, 15);
-        L.marker(new L.LatLng(data.latlng[0], data.latlng[1]), {
-            icon: L.mapbox.marker.icon({
-                'marker-color': 'ff8888'
-            })
-        }).addTo(map).on('click', function(){
-            window.open('https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}');
+        map.addLayer({
+            "id": "point",
+            "source": "single-point",
+            "type": "symbol",
+            "layout": {
+                "icon-image": "marker-codeday",
+                "icon-offset": [0,-13]
+            }
+        });
+
+
+        var geocoder = new mapboxgl.Geocoder({container: 'geocoder'});
+        map.addControl(geocoder);
+        geocoder._geocode('{{ event.venue.full_address|escape('js') }}', function(data) {
+            var place = data[0];
+            map.setCenter(place.center);
+            map.getSource('single-point').setData(place.geometry);
         });
     });
+
 </script>
