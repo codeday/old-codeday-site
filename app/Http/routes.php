@@ -28,6 +28,7 @@ use CodeDay\Models;
 \Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');
 \Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
 
+\Route::get('/arizona', '\CodeDay\Http\Controllers\StaticController@getArizona');
 \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');
 \Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
 \Route::get('/rules', '\CodeDay\Http\Controllers\StaticController@getRules');

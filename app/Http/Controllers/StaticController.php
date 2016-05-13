@@ -23,6 +23,12 @@ class StaticController extends Controller {
             'tz_regions' => $tz_regions
         ]);
     }
+    
+    public function getArizona()
+    {
+        // HACK
+        return \View::make('arizona');
+    }
 
     public function postSwag()
     {
