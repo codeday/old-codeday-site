@@ -22,15 +22,14 @@ class SplunkController extends Controller {
             exit;
         }
 
-        $username = preg_replace('/[^a-zA-Z0-9\s]/', '-', $email);
-        $username .= '-' . str_random(4);
+        $username = preg_replace('/[^a-zA-Z0-9\s]/', '_', $email);
+        $username .= '_' . str_random(4);
         $password = str_random(10);
 
-        $splunkAuth = \Config::get('splunk.admin.username').":".\Config::get('splunk.admin.password');
         $sshCommand = "ssh ".\Config::get('splunk.server.username')."@".\Config::get('splunk.server.host')
             ." -p ".\Config::get('splunk.server.port').' -o StrictHostKeyChecking=no';
         $passCommand = "sshpass -p '".\Config::get('splunk.server.password')."'";
-        $splunkCommand = "sudo /usr/bin/splunk add user '$username' -password '$password' -role user -auth ".$splunkAuth;
+        $splunkCommand = "sudo /opt/splunk-add-user '$username' '$password'";
 
         $command = "$passCommand $sshCommand \"$splunkCommand\"";
 
