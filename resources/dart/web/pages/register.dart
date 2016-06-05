@@ -206,12 +206,19 @@ class RegisterPage {
             swal(
                     title: 'You\'re in!',
                     text: 'You have successfully registered for CodeDay! A receipt has'+
-                            ' been emailed to all ticket holders. You will NOT receive'+
-                            ' a ticket -- we will check you in by name at the door.',
+                            ' been emailed to all ticket holders.',
                     type: 'success'
             );
+            
+            
+
             querySelectorAll('.registration, .payment').style.display = 'none';
             querySelector('form .success').style.display = 'block';
+            querySelectorAll('form .success a.download').forEach((elem) {
+                AnchorElement a = elem as AnchorElement;
+                a.href = a.href+regResponse['ids'].join(',');
+            });
+
         } else {
             error(regResponse['message']);
             enableForm();

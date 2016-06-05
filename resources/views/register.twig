@@ -34,7 +34,7 @@
                 <li>You agree to uphold the
                     <a href="https://studentrnd.org/code-of-conduct">code of conduct</a> and
                     <a href="/rules">rules.</a></li>
-                <li>You can request a refund until
+                <li>Tickets purchased today can be refunded until
                     {% if (event.starts_at - (60*60*24*7)) > null|date('U') %}
                         <a href="https://studentrnd.org/returns" title="That's 7 days before CodeDay."
                         >{{ (event.starts_at - (60*60*24*7))|date('M j') }}.</a>
@@ -96,11 +96,11 @@
     </section>
     <section class="success">
         <h3>You're going to CodeDay!</h3>
-        <p>Your payment was successful, and you're now on the attendees list for CodeDay!</p>
-        <p>In a few minutes, you will receive an email with registration details. Please note, however, that we do not
-           issue actual tickets: we check in all attendees by name at the door.</p>
-        <p>If you can't find your confirmation email, it's possible it made it into your spam folder. If you still
-           can't find it there, you can <a href="mailto:contact@codeday.org">contact us</a>.</p>
+        <p>Your registration was confirmed; we're excited to meet you at CodeDay!</p>
+        <div class="download">
+            <a href="https://clear.codeday.org/e/ticket?r=" class="ticket download" target="_blank">Download your Tickets</a>
+            <a href="https://clear.codeday.org/e/ticket/receipt?r=" class="receipt download" target="_blank">Download your Receipt</a>
+        </div>
     </section>
 </form>
 {% endblock %}

@@ -111,6 +111,7 @@ file:///opt/dart-sdk/lib/core/string_sink.dart
 file:///opt/dart-sdk/lib/core/symbol.dart
 file:///opt/dart-sdk/lib/core/type.dart
 file:///opt/dart-sdk/lib/core/uri.dart
+file:///opt/dart-sdk/lib/dart_client.platform
 file:///opt/dart-sdk/lib/html/dart2js/html_dart2js.dart
 file:///opt/dart-sdk/lib/html/html_common/conversions.dart
 file:///opt/dart-sdk/lib/html/html_common/conversions_dart2js.dart
