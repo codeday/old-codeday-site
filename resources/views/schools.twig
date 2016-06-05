@@ -1,0 +1,59 @@
+{% extends "template.twig" %}
+{% block section %}event{% endblock %}
+{% block page %}register{% endblock %}
+{% block title %}School Registration{% endblock %}
+{% block content %}
+    <article class="what-is">
+        <p>CodeDay is a 24-hour, beginner-focused tech education event which gets students coding: 80% of attendees
+           with no prior experience continue programming after.</p>
+        <section class="image">
+            <img src="/assets/img/la-team.jpg" />
+            <span class="caption">CodeDay LA, Winter 2015</span>
+        </section>
+        <section class="about">
+            <p>We created CodeDay to fill the gap between in-school programs, which explain <em>how to code</em> and
+               the eternal question of students: <em>why do I need to know this?</em></p>
+            <p>At CodeDay, students pitch ideas for apps or games they want to see exist, then spend the next 24 hours
+               creating them with the help of staff and mentors.</p>
+            <p>Students regularly tell us CodeDay is one of the most meaningful things they've done. Over 80% of our
+               attendees continue to code after attending, strengthening enrollment in high school and college CS
+               offerings.</p>
+        </section>
+    </article>
+    <article class="register">
+        <section class="form">
+            <div id="wufoo-m1d2e0uy1b258w8">
+            Fill out the <a href="https://srnd.wufoo.com/forms/m1d2e0uy1b258w8">online form</a>.
+            </div>
+            <script type="text/javascript">var m1d2e0uy1b258w8;(function(d, t) {
+            var s = d.createElement(t), options = {
+            'userName':'srnd',
+            'formHash':'m1d2e0uy1b258w8',
+            'autoResize':true,
+            'height':'684',
+            'async':true,
+            'host':'wufoo.com',
+            'header':'show',
+            'defaultValues': 'Field20={{ event.webname }}',
+           'ssl':true};
+            s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+            s.onload = s.onreadystatechange = function() {
+            var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+            try { m1d2e0uy1b258w8 = new WufooForm();m1d2e0uy1b258w8.initialize(options);m1d2e0uy1b258w8.display(); } catch (e) {}};
+            var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+            })(document, 'script');</script>
+        </section>
+        <section class="info">
+            <h3>Attendee Roster</h3>
+            <p>You'll need to collect some information from all students who will be attending, and submit this
+               information as an Excel spreadsheet (or CSV).</p>
+            <p><a href="/assets/roster.csv">For faster processing, please download and use this roster template when
+               submitting student data.</a></p>
+
+            <h3>Payment and Scholarships</h3>
+            <p>We normally charge school groups $7 per attendee, which covers some of our costs in providing food. We
+               will send you an invoice for this after your registrations are processed. If this is a burden on your
+               school or students, you can request a scholarship on the form.</p>
+        </section>
+    </article>
+{% endblock %}

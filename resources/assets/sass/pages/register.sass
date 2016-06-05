@@ -1,4 +1,66 @@
 body.event.register
+
+    article.what-is
+        & > p
+            text-align: center
+            font-weight: 300
+            font-size: 1.4rem
+            font-style: italic
+            line-height: 1.3
+            margin: -0.5rem 0 2.5rem 0
+        section.image
+            +span-columns(6)
+            padding-bottom: 1rem
+            img
+                width: 100%
+                height: auto
+            .caption
+                font-size: 0.875rem
+                color: $color-gray
+                font-style: italic
+        section.about
+            +span-columns(6)
+            p:first-child
+                margin-top: 0
+            em
+                font-weight: 700
+    article.register
+        &:before
+            content: ""
+            display: block
+            width: 30%
+            margin: 0 auto 4rem auto
+            border-top: 3px solid $color-red
+        h2
+            text-align: center
+        section.form
+            +span-columns(7)
+        section.info
+            +span-columns(5)
+            border: 3px solid $color-gray
+            padding: 0 1rem 1rem 1rem
+            text-align: center
+            section
+                +span-columns(6)
+                &:nth-child(2n)
+                    +omega
+                &:nth-child(2n+2)
+                    clear: both
+                h4
+                    margin-bottom: 0
+                    font-size: 1rem
+                ul
+                    padding: 0
+                    li
+                        list-style-type: none
+                        font-size: 0.875rem
+                        color: $color-gray
+                        &.featured
+                            color: $color-black
+                            font-weight: 700
+
+
+
     .red-button
         display: inline-block
         padding: 0.4rem 0.6rem

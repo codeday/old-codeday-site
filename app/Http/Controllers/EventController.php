@@ -32,6 +32,11 @@ class EventController extends Controller {
         return \View::make('register');
     }
 
+    public function getSchools()
+    {
+        return \View::make('schools');
+    }
+
     public function getPress()
     {
         return \View::make('press');
