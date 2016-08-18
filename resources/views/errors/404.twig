@@ -1,85 +1,11 @@
-<!-- This file should not extend any templates or reference any external scripts/styles! -->
-<html>
-  <head>
-    <title>404 Not Found</title>
-    <style>
-      body{
-        animation: colorpulse 10s infinite;
-        -webkit-animation: colorpulse 10s infinite;
-        -moz-animation: colorpulse 10s infinite;
-        height: 100%;
-        overflow: hidden;
-        margin: 0;
-      }
-
-      @-webkit-keyframes colorpulse{
-        0%{
-          background: rgb(11,192,194);
-        }
-
-        25%{
-          background: rgb(248,99,243);
-        }
-
-        50%{
-          background: rgb(252,88,67);
-        }
-
-        100%{
-          background: rgb(11,192,194);
-        }
-      }
-
-      @keyframes colorpulse{
-        0%{
-          background: rgb(11,192,194);
-        }
-
-        25%{
-          background: rgb(248,99,243);
-        }
-
-        50%{
-          background: rgb(252,88,67);
-        }
-
-        100%{
-          background: rgb(11,192,194);
-        }
-      }
-
-      @moz-keyframes colorpulse{
-        0%{
-          background: rgb(11,192,194);
-        }
-
-        25%{
-          background: rgb(248,99,243);
-        }
-
-        50%{
-          background: rgb(252,88,67);
-        }
-
-        100%{
-          background: rgb(11,192,194);
-        }
-      }
-
-      .message {
-        font-family: "Arial";
-        height: 100%;
-        width: 100%;
-        top: 45%;
-        position: fixed;
-        font-size: 2.5em;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="message">
-      Looks like this page is gone. <a href="/">Go back?</a>
-    </div>
-  </body>
-</html>
+{% extends "template.twig" %}
+{% block section %}error{% endblock %}
+{% block page %}index{% endblock %}
+{% block title %}Page not found{% endblock %}
+{% block content %}
+    <p>Sorry, the page you requested wasn't found.</p>
+    <p>Most commonly, this means we're not hosting a CodeDay in the city you requested this season.</p>
+    <p>Although CodeDay is in over 40 cities nationwide, we aren't able to run a CodeDay in every city for every
+       season. If you'd like to help us bring CodeDay back to your city, please
+       <a href="mailto:contact@codeday.org">contact us.</a></p>
+{% endblock %}

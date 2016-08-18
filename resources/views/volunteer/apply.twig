@@ -2,6 +2,9 @@
 {% block section %}volunteer{% endblock %}
 {% block page %}index{% endblock %}
 {% block title %}{% if partner %}{{ partner.name }} Volunteer Sign-up {% else %}Volunteer Application{% endif %}{% endblock %}
+{% block shortDescription %} {% endblock %}
+{% block veryShortDescription %} {% endblock %}
+{% block meta %}<meta name="robots" content="noindex" />{% endblock %}
 {% block content %}
 
 <div id="wufoo-{{ form }}" class="apply-form"></div>

@@ -1,99 +1,12 @@
-<!-- This file should not extend any templates or reference any external scripts/styles! -->
-<html>
-  <head>
-    <title>500 Internal Server Error</title>
-    <style>
-      body{
-        animation: colorpulse 10s infinite;
-        -webkit-animation: colorpulse 10s infinite;
-        -moz-animation: colorpulse 10s infinite;
-      }
-
-      @-webkit-keyframes colorpulse{
-        0%{
-          background: rgb(11,192,194);
-        }
-
-        25%{
-          background: rgb(248,99,243);
-        }
-
-        50%{
-          background: rgb(252,88,67);
-        }
-
-        100%{
-          background: rgb(11,192,194);
-        }
-      }
-
-      @keyframes colorpulse{
-        0%{
-          background: rgb(11,192,194);
-        }
-
-        25%{
-          background: rgb(248,99,243);
-        }
-
-        50%{
-          background: rgb(252,88,67);
-        }
-
-        100%{
-          background: rgb(11,192,194);
-        }
-      }
-
-      @moz-keyframes colorpulse{
-        0%{
-          background: rgb(11,192,194);
-        }
-
-        25%{
-          background: rgb(248,99,243);
-        }
-
-        50%{
-          background: rgb(252,88,67);
-        }
-
-        100%{
-          background: rgb(11,192,194);
-        }
-      }
-
-      .message {
-        font-family: "Arial", sans-serif;
-        width: 100%;
-        padding-top: 1rem;
-        text-align: center;
-      }
-
-      .tech {
-        font-family: "Arial", sans-serif;
-        width: 100%;
-        padding-top: 1rem;
-        text-align: center;
-      }
-
-      .tech textarea {
-        width: 60%;
-        height: 10rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="message">
-      <h1>Something went wrong with this request.</h1>
-      <a href="mailto:contact@studentrnd.org">Want to report this problem?</a>
-      (If you haven't done anything unusual, chances are good we're already aware of the problem and working on a fix.)
-    </div>
+{% extends "template.twig" %}
+{% block section %}error{% endblock %}
+{% block page %}index{% endblock %}
+{% block title %}Server error{% endblock %}
+{% block content %}
+    <p>Sorry, something's gone wrong and our server experienced an error when trying to load that page. If you'd like
+       to report this problem, please <a href="mailto:contact@codeday.org">email us.</a></p>
     {% if technical_details %}
-      <div class="tech">
         <h2>Technical Details</h2>
         <textarea>{{ technical_details }}</textarea>
-      </div>
     {% endif %}
-  </body>
-</html>
+{% endblock %}

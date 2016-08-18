@@ -2,6 +2,8 @@
 {% block section %}event{% endblock %}
 {% block page %}register{% endblock %}
 {% block title %}Register{% endblock %}
+{% block shortDescription %}Student registration is open for CodeDay {{ event.region_name }}, hosted at {{ event.venue.name }} on {{ event.starts_at|date('F j, Y') }}. Sign up now to learn about code and build something fun.{% endblock %}
+{% block veryShortDescription %}CodeDay {{ event.region_name }}, {{ event.starts_at|date('F jS') }}{% endblock %}
 {% block content %}
 <form>
     <section class="info">

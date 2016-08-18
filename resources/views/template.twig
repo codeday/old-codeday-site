@@ -3,10 +3,14 @@
 <head>
     {% set title = (block('title') ? block('title')~' ~ ' : '')~'CodeDay'~(event ? ' '~event.region_name : '') %}
     {% set shortDescription =
-        (loaded_batch.events|length)~" cities. 24 hours of fun. At CodeDay, student programmers and artists get "
-        ~"together, build cool apps & games, and have a lot of fun. All in 24 hours. No experience is required, and "
-        ~"you can attend alone or with a friend." %}
+        (event ? '' : (loaded_batch.events|length)~" cities. 24 hours of fun. ")~"At CodeDay"
+        ~(event ? ' '~event.region_name : '')~", student programmers and artists build cool apps & games."
+        ~"No experience is needed, and you can join alone or with friends." %}
     {% set veryShortDescription = (loaded_batch.events|length)~" cities. 24 hours of fun."%}
+
+
+    {% if block('shortDescription') %}{% set shortDescription = block('shortDescription') %}{% endif %}
+    {% if block('veryShortDescription') %}{% set veryShortDescription = block('veryShortDescription') %}{% endif %}
 
     {# Meta #}
     <title>{{ title }}</title>
@@ -19,6 +23,7 @@
     <meta property="og:image" content="{{ url('/assets/img/og.jpg') }}" />
     <meta property="og:url" content="{{ url('') }}" />
     <meta property="og:description" name="description" content="{{ shortDescription }}" />
+    {{ block('meta') }}
 
     {# Icons #}
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/img/icon/apple-touch-icon-57x57.png" />
@@ -64,7 +69,7 @@
     <header class="{% if block('hero') %}with-hero{% else %}no-hero{% endif %}{% if event.notice %} with-notice{% endif %}">
         <div class="wrap"><div class="wrap-inner">
             <section class="site-title">
-                <h1><a href="/">CodeDay</a></h1>
+                <h1><a href="/">CodeDay{% if event %} {{ event.region_name }}{% endif %}{% if block('title') %}: {{ block('title') }}{% endif %}</a></h1>
                 <a href="https://srnd.org/" target="_blank">by StudentRND</a>
             </section>
 
