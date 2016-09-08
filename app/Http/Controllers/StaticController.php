@@ -51,6 +51,11 @@ class StaticController extends Controller {
         return \Redirect::to('https://srnd.org/press');
     }
 
+    public function getNew()
+    {
+        return \View::make('new');
+    }
+
     public function getSponsor()
     {
         return \View::make('sponsor');

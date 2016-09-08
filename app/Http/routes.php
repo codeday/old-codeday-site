@@ -33,6 +33,7 @@ use CodeDay\Models;
 \Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
 \Route::get('/rules', '\CodeDay\Http\Controllers\StaticController@getRules');
 
+\Route::get('/new', '\CodeDay\Http\Controllers\StaticController@getNew');
 \Route::get('/volunteer', '\CodeDay\Http\Controllers\VolunteerController@getIndex');
 \Route::get('/volunteer/apply/mentor', '\CodeDay\Http\Controllers\VolunteerController@getApplyMentor');
 \Route::get('/volunteer/apply/judge', '\CodeDay\Http\Controllers\VolunteerController@getApplyJudge');

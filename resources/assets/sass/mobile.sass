@@ -113,7 +113,27 @@ $media-mobile: new-breakpoint(max-width 700px 4)
                     padding: 0.5rem 0.7rem
             section.payment .price .promo.link
                 font-size: 0.844rem
-
+        &.event.school
+            article.what-is section.image, article.what-is section.about, article.quotes section.teacher, article.quotes section.students, article.register section.form, article.register section.info
+                +span-columns(4)
+                +omega
+            article.faq ul li
+                +span-columns(2)
+                +omega-reset(3n)
+                &:nth-child(2n)
+                    +omega
+            article.quotes section.students:before
+                content: ""
+                display: block
+                width: 20%
+                margin: 2rem auto
+                border-top: 3px solid $color-gray
+        &.new.index
+            article.what-it-does section.image, article.what-it-does section.description, article.details section.jobs, article.details section.requirements
+                +span-columns(4)
+                +omega
+            article.details section.requirements
+                padding-top: 3rem
         &.sponsor.index
             section.lead
                 padding-top: 1rem

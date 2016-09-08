@@ -4,7 +4,13 @@
     box-sizing: content-box
     -moz-box-sizing: content-box
 
+@mixin omega-reset($nth)
+    &:nth-child(#{$nth})
+        margin-right: flex-gutter()
+    &:nth-child(#{$nth}+1)
+        clear: none 
+
 @import "style"
-@import "pages/global", "pages/sponsor", "pages/event", "pages/register", "pages/rules", "pages/volunteer", "pages/school", "pages/wufoo"
+@import "pages/global", "pages/sponsor", "pages/event", "pages/register", "pages/rules", "pages/volunteer", "pages/school", "pages/wufoo", "pages/new"
 @import "parts/header", "parts/footer"
 @import "mobile"
