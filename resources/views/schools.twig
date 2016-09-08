@@ -1,18 +1,24 @@
 {% extends "template.twig" %}
 {% block section %}event{% endblock %}
-{% block page %}register{% endblock %}
+{% block page %}school{% endblock %}
 {% block title %}School Registration{% endblock %}
 {% block shortDescription %}CodeDay inspires students to pursue STEM careers and is shown to increase enrollment in STEM courses. Schools and teachers can register students directly.{% endblock %}
 {% block veryShortDescription %}School and teacher registration is available for CodeDay.{% endblock %}
+{% block hero %}
+    <article class="lead">
+            <h2>CodeDay drives interest in CS classes.</h2>
+            <p>CodeDay is a 24-hour, beginner-focused tech education event which gets students coding: 80% of attendees
+               with no prior experience continue programming after.</p>
+    </article>
+{% endblock %}
 {% block content %}
     <article class="what-is">
-        <p>CodeDay is a 24-hour, beginner-focused tech education event which gets students coding: 80% of attendees
-           with no prior experience continue programming after.</p>
         <section class="image">
             <img src="/assets/img/la-team.jpg" />
             <span class="caption">CodeDay LA, Winter 2015</span>
         </section>
         <section class="about">
+            <h2>What is CodeDay?</h2>
             <p>We created CodeDay to fill the gap between in-school programs, which explain <em>how to code</em> and
                the eternal question of students: <em>why do I need to know this?</em></p>
             <p>At CodeDay, students pitch ideas for apps or games they want to see exist, then spend the next 24 hours
@@ -22,8 +28,38 @@
                offerings.</p>
         </section>
     </article>
+    <article class="quotes">
+        <h2>What do prior attendees have to say?</h2>
+        <section class="teacher">
+            <blockquote>
+                <p>The Salinas Valley is known as the “Salad Bowl Capital of the World” due to its amazing agricultural
+                   community. Unfortunately, it is also known as one of the 13 most dangerous cities in California due to
+                   the level of gang violence. My goal as an administrator of Migrant Education Region 16 is to expose my
+                   students to the vast opportunities that exist outside of our valley.</p>
+                <p>CodeDay provided our students with a first stepping-stone into the world of “coders”. Students entered
+                   their first CodeDay with no knowledge of what to expect. They were welcomed with open arms, provided
+                   with mentors, taught basic coding skills, and began to see themselves as capable of being part of this
+                   &ldquo;world.&rdquo;</p>
+                <p>My students are now confident, not just as future &ldquo;coders,&rdquo; but as future participants in
+                   the careers that STEM has to offer!</p>
+            </blockquote>
+            <div class="attr">
+                <span class="name">Summer Prather-Smith</span>
+                <span class="title">Director of Migrant Education Region XVI</span>
+                <span class="org">Monterey County Office of Education</span>
+            </div>
+        </section>
+        <section class="students">
+            <ul>
+                <li><blockquote>&ldquo;It was an amazing journey.&rdquo;</blockquote><span class="attr">High School Freshman</span></li>
+                <li><blockquote>&ldquo;The energy everyone had with each other... it was amazing.&rdquo;</blockquote><span class="attr">High School Freshman</span></li>
+                <li><blockquote>&ldquo;Now I want to keep coding!&rdquo;</blockquote><span class="attr">High School Senior</span></li>
+            </ul>
+        </section>
+    </article>
     <article class="register">
         <section class="form">
+            <h2>Ready to register?</h2>
             <div id="wufoo-m1d2e0uy1b258w8">
             Fill out the <a href="https://srnd.wufoo.com/forms/m1d2e0uy1b258w8">online form</a>.
             </div>
@@ -46,16 +82,87 @@
             })(document, 'script');</script>
         </section>
         <section class="info">
-            <h3>Attendee Roster</h3>
+            <h2>Attendee Roster</h2>
             <p>You'll need to collect some information from all students who will be attending, and submit this
                information as an Excel spreadsheet (or CSV).</p>
             <p><a href="/assets/roster.csv">For faster processing, please download and use this roster template when
                submitting student data.</a></p>
 
-            <h3>Payment and Scholarships</h3>
+            <h2>Payment and Scholarships</h2>
             <p>We normally charge school groups $7 per attendee, which covers some of our costs in providing food. We
                will send you an invoice for this after your registrations are processed. If this is a burden on your
                school or students, you can request a scholarship on the form.</p>
         </section>
+    </article>
+    <article class="faq">
+        <h3>FAQ</h3>
+        <ul>
+            <li>
+                <span class="q">How safe is CodeDay?</span>
+                <p>The venue will be locked down shortly after kickoff until just before presentations, and our trained
+                   event staff carefully supervise the event from beginning to end.</p>
+            </li>
+            <li>
+                <span class="q">Are staff background-checked?</span>
+                <p>Yes, only background-checked staff and volunteers, teachers presenting school ID, and students are
+                   allowed to remain at the event outside of kickoff and presentations.</p>
+            </li>
+            <li>
+                <span class="q">Will students need a waiver?</span>
+                <p>Yes, we require students to complete a waiver. These will be emailed to the parent emails provided
+                   when you register.</p>
+            </li>
+            <li>
+                <span class="q">Who is CodeDay targeted at?</span>
+                <p>CodeDay targets high school students with any interest in making video games. Whether your students
+                   have taken the AP Computer Science exam, or are simply interested in making art for games, they'll
+                   have a great time.</p>
+            </li>
+            <li>
+                <span class="q">What are the prerequisites to attend?</span>
+                <p>Other than being enrolled as a high school or college student, there really are no prerequisites!
+                   CodeDay is one of the most beginner-friendly events available.</p>
+            </li>
+            <li>
+                <span class="q">What will students learn?</span>
+                <p>At the end of the event, students will be able to: work with a team to create specifications for a
+                   project, search online for answers to technical problems, and program a complete and functioning
+                   application or game.</p>
+            </li>
+            <li>
+                <span class="q">What projects will students complete?</span>
+                <p>Because CodeDay is intended to inspire creativity, we do not assign projects. Students will start
+                   the event by pitching ideas for projects they want to create.</p>
+            </li>
+            <li>
+                <span class="q">Must teachers/chaperones attend?</span>
+                <p>Chaperones or teachers are not required to attend, but are recommended for groups of more than 10
+                   students. We will need to either conduct our own background check on attending chaperones, or
+                   you will need to confirm that your school has performed them.</p>
+            </li>
+            <li>
+                <span class="q">Where will our students sleep?</span>
+                <p>Students should bring sleeping bags and toothbrushes, and will generally sleep near their work area.
+                   Students will not be allowed to sleep in isolated areas, they'll need to be in view of our staff,
+                   unless we are able to provide gender-segregated sleeping rooms.</p>
+            </li>
+            <li>
+                <span class="q">Can parents attend?</span>
+                <p>Parents can attend the kickoff (noon on Saturday) and presentations (10am on Sunday) but cannot stay
+                   for the rest of the event. We recommend you invite parents to come for presentations.</p>
+            </li>
+            <li>
+                <span class="q">What do teachers do?</span>
+                <p>Because CodeDay is a self-driven event, teachers function as chaperones and cheerleaders, but not 
+                   instructors. Students are expected to come up with their own ideas, form their own teams, and solve
+                   their own problems.</p>
+            </li>
+            <li>
+                <span class="q">Do we compete as a school team?</span>
+                <p>We encourage students to work with students from other schools in order to build a network. CodeDay
+                   is not heavily competitive, and the awards we do give are small and for effort.</p>
+            </li>
+        </ul>
+        <a href="mailto:schools@studentrnd.org">More questions? Contact us!</a>
     </article>
 {% endblock %}

@@ -1,0 +1,105 @@
+body.event.school
+    section.hero
+        padding: 2rem 0
+        text-align: center
+        background-color: $color-red
+        color: $color-white
+
+        article.lead
+            h2
+                +span-columns(10)
+                +shift(1)
+                font:
+                    size: 2.986rem
+                    weight: 700
+                margin-bottom: 0
+            p
+                +span-columns(8)
+                +shift(2)
+            &:after
+                content: ""
+                clear: both
+                display: block
+
+    article.what-is
+        .image
+            +span-columns(5)
+            img
+                width: 100%
+                height: auto
+            .caption
+                font-size: 0.8rem
+                color: $color-gray
+        .about
+            +span-columns(7)
+            +omega
+            h2
+                margin-top: 0
+                padding-top: 0
+
+    article.quotes
+        .teacher
+            +span-columns(8)
+            blockquote
+                margin: 0
+                padding: 0 0 0 2rem
+                border-left: 3px solid $color-gray
+            .attr
+                text-align: center
+                .name
+                    font-weight: 700
+                    display: block
+                .title
+                    display: none
+                .org
+                    display: block
+
+        .students
+            +span-columns(4)
+            +omega
+            ul
+                padding: 0
+                li
+                    text-align: center
+                    list-style-type: none
+                    blockquote
+                        margin: 0
+                    .attr
+                        &:before
+                            content: "-"
+                            padding-right: 0.25rem
+                        font-weight: 700
+                    &:not(:last-child):after
+                        content: ""
+                        width: 20%
+                        display: block
+                        margin: 2rem auto
+                        border-top: 3px solid $color-gray
+
+    article.register
+        padding-top: 5rem
+        h2:first-child
+            margin-top: 1rem
+        .form
+            +span-columns(8)
+            border: 3px solid $color-red
+            padding: 0 1rem
+        .info
+            +span-columns(4)
+
+    article.faq
+        ul
+            padding: 0
+            li
+                list-style-type: none
+                min-height: 15rem
+                +span-columns(4)
+                &:nth-child(3n)
+                    +omega
+                padding-bottom: 2rem
+                .q
+                    font:
+                        family: $font-family-header
+                        weight: 700
+                        size: 1.2rem
+
