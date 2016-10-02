@@ -1,0 +1,27 @@
+[main]
+host = https://www.transifex.com
+
+[codeday.common]
+file_filter = resources/lang/<lang>/common.php
+minimum_perc = 80
+source_lang = en_US
+type = PHP_ARRAY
+
+[codeday.event]
+file_filter = resources/lang/<lang>/event.php
+minimum_perc = 80
+source_lang = en_US
+type = PHP_ARRAY
+
+[codeday.global]
+file_filter = resources/lang/<lang>/global.php
+minimum_perc = 80
+source_lang = en_US
+type = PHP_ARRAY
+
+[codeday.register]
+file_filter = resources/lang/<lang>/register.php
+minimum_perc = 80
+source_lang = en_US
+type = PHP_ARRAY
+

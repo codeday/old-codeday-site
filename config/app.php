@@ -6,10 +6,10 @@ return [
     'debug' => $config['app']['debug'],
     'url' => $config['app']['url'],
     'timezone' => $config['app']['timezone'],
-    'locale' => 'en',
+    'locale' => 'en_US',
     'cipher' => 'AES-256-CBC',
     'log' => $config['app']['debug'] ? 'single' : 'syslog',
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'en_US',
     'key' => $config['app']['key'],
     'manifest' => storage_path().'/meta',
     'providers' => [

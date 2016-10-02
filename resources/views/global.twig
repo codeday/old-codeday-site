@@ -5,14 +5,13 @@
     <article class="lead">
         <div id="lead-text">
             <span class="date">{{ loaded_batch.starts_at|date('F j') }}-{{ loaded_batch.ends_at|date('j') }}</span>
-            <h2>{{ loaded_batch.events|length }} cities. 24 hours of fun.</h2>
-            <p>At CodeDay, student programmers and artists get together, build cool apps &amp; games, and have a lot of fun.
-               You can attend whether you're a total beginner or very experienced.</p>
+            <h2>{{ i18n('common.cities-hours', {'cities': (loaded_batch.events|length) }) }}</h2>
+            <p>{{ i18n('common.description') }}</p>
         </div>
         <div id="map" class="map"></div>
     </article>
     <article class="cta">
-        Learn more: <a class="nearest_event_name nearest_event_link" href="/{{ nearest_event.webname }}">{{ nearest_event.region_name }}</a>, or click your city on the map above.
+        {{ i18n('global.link', {'link': '<a class="nearest_event_name nearest_event_link" href="'~langPrefix~'/'~nearest_event.webname~'">'~nearest_event.region_name~'</a>'}) }}
     </article>
 {% endblock %}
 {% block content %}
@@ -21,26 +20,23 @@
             <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_n6xc4pm90n videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
         </section>
         <section class="details">
-            <h3>Have fun, make friends, build something awesome.</h3>
-            <p>CodeDay is a nationwide event where student programmers, artists, musicians, actors, and everyone else
-               can get together and build apps &amp; games for 24 hours. Students of all skill levels are
-               welcome&thinsp;&mdash;&thinsp;we have workshops and mentors who can help if you're new!</p>
-            <p>At the beginning of CodeDay, everyone with an idea comes up and pitches it to the group. If you're on
-               your own, or just without an idea, this is the time for you to build whatever you want.</p>
+            <h3>{{ i18n('common.fun-friends-awesome') }}</h3>
+            <p>{{ i18n('common.descr-detail-1') }}</p>
+            <p>{{ i18n('common.descr-detail-2') }}</p>
         </section>
     </article>
 
     <article class="cities">
         <section class="cta">
-            <a class="nearest_event_link" href="/{{ nearest_event.webname }}">Get more info about<br />CodeDay <span class="nearest_event_name">{{ nearest_event.region_name }}</span></a>
-            <span class="details">Or select from the list of cities</span>
+            <a class="nearest_event_link" href="{{ langPrefix }}/{{ nearest_event.webname }}">{{ i18n('global.attend-cta', {'citySpan': '<span class="nearest_event_name">'~nearest_event.region_name~'</span>'}) }}</a>
+            <span class="details">{{ i18n('global.cities-cta') }}</span>
         </section>
         <section class="list">
             <section>
                 <h4>Pacific</h4>
                 <ul>
                     {% for region in tz_regions['America/Los_Angeles'] %}
-                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
+                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
@@ -48,7 +44,7 @@
                 <h4>Mountain</h4>
                 <ul>
                     {% for region in tz_regions['America/Denver'] %}
-                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
+                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
@@ -56,7 +52,7 @@
                 <h4>Central</h4>
                 <ul>
                     {% for region in tz_regions['America/Chicago'] %}
-                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
+                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
@@ -64,16 +60,16 @@
                 <h4>Eastern</h4>
                 <ul>
                     {% for region in tz_regions['America/Detroit'] %}
-                        <li><a href="/{{ region.webname }}">{{ region.name }}</a></li>
+                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
                     {% endfor %}
                 </ul>
             </section>
         </section>
-        <p class="organize-cta">Nothing nearby? <a href="/new">Help organize!</a></p>
+        <p class="organize-cta">{{ i18n('global.organize-cta', {'link': langPrefix~'/new'}) }}</p>
     </article>
 
     <article class="sponsors">
-        <h3>CodeDay is supported nationwide by these sponsors:</h3>
+        <h3>{{ i18n('global.sponsors') }}</h3>
         <ul>
             {% include "parts/national_sponsors.twig" %}
         </ul>

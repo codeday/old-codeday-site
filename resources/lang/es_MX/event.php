@@ -1,0 +1,40 @@
+<?php
+
+return array(
+    'invited'               => "En la :region CodeDay los alumnos, programadores y artistas se reúnen para construir juegos increíbles y aplicaciones en 24 horas. Te invitamos a unirte a nosotros, no importa cuál ha sido tu experiencia previa. ",
+    'cta-ticket-normal'     => "Obtén tu boleto",
+    'cta-ticket-warn'       => "¡Obtén el boleto &mdash;:remaining que queda! ",
+    'cta-ticket-out-near'   => "Lo sentimos, ¡las entradas están agotadas! Regístrese en un próximo evento:",
+    'cta-ticket-out'        => "¡Los sentimos, lugares agotados!",
+    'cta-notify'            => "Los boletos aun no están a la venta. Regístrate para que se te notifique cuando lo estén:",
+    'notify-signup'         => "¡Notifíquenme!",
+    'what-is'               => "¿Qué es CodeDay?",
+    'how-works'             => "Cómo funciona",
+    'how-works-step-1'      => "1. Al llegar haz amigos nuevos",
+    'how-works-step-2'      => "2. Proponga ideas de lo que quiere hacer.",
+    'how-works-step-3'      => "3. Opcional: asistir a talleres.",
+    'how-works-step-4'      => "4. ¡Lógralo! (Con la ayuda de nuestros mentores).
+",
+    'previous-events'       => "Eventos anteriores",
+    'schedule'              => "Agenda",
+    'supported-by'          => "Apoyado por",
+
+    'faq-team-q'            => "¿Es necesario asistir con un equipo?",
+    'faq-team-a'            => "<strong>¡No!</strong> De hecho, ¡la mayoría de las personas no vienen con un equipo! Al inicio del evento, todo el mundo va a proponer ideas sobre lo que quieren construir. Podrá formar un equipo después.",
+    'faq-bring-q'           => "¿Qué debo llevar?",
+    'faq-bring-a'           => "Traiga consigo su laptop y su ratón. La comida está incluida en su boleto. Si tiene pensado dormir, traiga saco de dormir, almohada y cepillo de dientes. Las PC de escritorio y monitores también están permitidos, aunque son menos comunes.",
+    'faq-song-q'            => "¿Me puede hablar sobre CodeDay como si fuera una canción?",
+    'faq-song-a'            => "¡Sí! Esta es la canción de nuestro amigo Matt Farley:",
+    'faq-code-q'            => "¡No sé programar! ¿Realmente puedo asistir?",
+    'faq-code-a'            => "<strong> ¡Sí! </strong> Parte de la diversión es aprender a programar a la hora de trabajar con otras personas. También daremos algunos talleres muy buenos a los que puede asistir. ¡O simplemente puede pasar el rato y divertirse!",
+    'faq-student-q'         => "¿Puedo asistir si no estoy en secundaria o preparatoria?",
+    'faq-student-a'         => "Por favor <a href=\"mailto:contact@codeday.org\">contáctenos</a> antes de registrarse si actualmente no se encuentra en la escuela secundaria o la universidad. Si se registra sin contactarnos, lamentablemente tendremos que pedirle que se retire en la entrada. ",
+    'faq-sleep-q'           => "¿Dónde dormiré?",
+    'faq-sleep-a'           => "Los alumnos que tengan planeado quedarse a dormir (¡lo recomendamos!), podrán hacerlo en cualquier lugar del sitio o en una habitación designada. ¡No olviden empacar una bolsa de dormir y una almohada!",
+    'faq-school-q'          => "Nos gustaría asistir como escuela. ¿Podríamos pagar con un PO?",
+    'faq-school-a'          => "Sí, por favor <a href=\":link\">visita la página de inscripción de nuestra escuela</a> para enviarnos su registro. Haremos un seguimiento para completar el proceso de compra. ",
+    'faq-security-q'        => "¿Cómo es la seguridad en el evento?",
+    'faq-security-a'        => "El lugar del evento se cerrará durante la noche y los estudiantes menores de 18 años no podrán salir sin un padre presente que los recoja.",
+    'faq-parent-q'          => "¿Puedo asistir con mi hijo?",
+    'faq-parent-a'          => "Los padres de familia podrán asistir a la inauguración y a las presentaciones finales, aunque no podrán permanecer durante el evento por motivos de verificación de antecedentes. Los maestros podrán asistir con los alumnos pero deben mostrar su identificación escolar u otra credencial de identidad en la puerta. "
+);

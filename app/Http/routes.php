@@ -22,43 +22,52 @@ use CodeDay\Models;
 \View::share('api_base_public', \Config::get('clear.api_base_public'));
 \View::share('api_access_token', \Config::get('clear.access_token'));
 
+$routes = function() {
+    // Static Routes
+    \Route::get('/', '\CodeDay\Http\Controllers\StaticController@getGlobal');
+    \Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');
+    \Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
 
-// Static Routes
-\Route::get('/', '\CodeDay\Http\Controllers\StaticController@getGlobal');
-\Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');
-\Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
+    \Route::get('/arizona', '\CodeDay\Http\Controllers\StaticController@getArizona');
+    \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');
+    \Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
+    \Route::get('/rules', '\CodeDay\Http\Controllers\StaticController@getRules');
 
-\Route::get('/arizona', '\CodeDay\Http\Controllers\StaticController@getArizona');
-\Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');
-\Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
-\Route::get('/rules', '\CodeDay\Http\Controllers\StaticController@getRules');
+    \Route::get('/new', '\CodeDay\Http\Controllers\StaticController@getNew');
+    \Route::get('/volunteer', '\CodeDay\Http\Controllers\VolunteerController@getIndex');
+    \Route::get('/volunteer/apply/mentor', '\CodeDay\Http\Controllers\VolunteerController@getApplyMentor');
+    \Route::get('/volunteer/apply/judge', '\CodeDay\Http\Controllers\VolunteerController@getApplyJudge');
+    \Route::get('/volunteer/apply/staff', '\CodeDay\Http\Controllers\VolunteerController@getApplyStaff');
 
-\Route::get('/new', '\CodeDay\Http\Controllers\StaticController@getNew');
-\Route::get('/volunteer', '\CodeDay\Http\Controllers\VolunteerController@getIndex');
-\Route::get('/volunteer/apply/mentor', '\CodeDay\Http\Controllers\VolunteerController@getApplyMentor');
-\Route::get('/volunteer/apply/judge', '\CodeDay\Http\Controllers\VolunteerController@getApplyJudge');
-\Route::get('/volunteer/apply/staff', '\CodeDay\Http\Controllers\VolunteerController@getApplyStaff');
+    \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
+    \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
 
-\Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
-\Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
-
-\Route::controller('/phone', '\CodeDay\Http\Controllers\PhoneController');
+    \Route::controller('/phone', '\CodeDay\Http\Controllers\PhoneController');
 
 
-// Event-based Routes
-\Route::bind('event', function($webname) {
-    $event = Models\Region::find(strtolower($webname))->current_event;
-    if ($event->batch['id'] != Models\Batch::current()->id) {
-        return null;
-    }
-    if ($event->webname != $webname) {
-        \App::abort(302, '', ['Location' => '/'.$event->webname]);
-    } else {
-        return $event;
-    }
+    // Event-based Routes
+    \Route::bind('event', function($webname) {
+        $event = Models\Region::find(strtolower($webname))->current_event;
+        if ($event->batch['id'] != Models\Batch::current()->id) {
+            return null;
+        }
+        if ($event->webname != $webname) {
+            \App::abort(302, '', ['Location' => '/'.$event->webname]);
+        } else {
+            return $event;
+        }
+    });
+
+    \Route::get('/{event}/register', '\CodeDay\Http\Controllers\EventController@getRegister');
+    \Route::post('/{event}/register', '\CodeDay\Http\Controllers\EventController@postRegister');
+    \Route::get('/{event}/register/schools', '\CodeDay\Http\Controllers\EventController@getSchools');
+    \Route::get('/{event}', '\CodeDay\Http\Controllers\EventController@getIndex');
+};
+
+\Route::bind('locale', function($locale) {
+    \App::setLocale($locale);
+    \View::share('langPrefix', '/'.$locale); 
+    \View::share('nonLangUri', substr(request()->path(), strlen($locale)));
 });
-
-\Route::get('/{event}/register', '\CodeDay\Http\Controllers\EventController@getRegister');
-\Route::post('/{event}/register', '\CodeDay\Http\Controllers\EventController@postRegister');
-\Route::get('/{event}/register/schools', '\CodeDay\Http\Controllers\EventController@getSchools');
-\Route::get('/{event}', '\CodeDay\Http\Controllers\EventController@getIndex');
+\Route::group(['prefix' => '/{locale?}'], $routes);
+\Route::group(['prefix' => '/'], $routes);

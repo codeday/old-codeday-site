@@ -1,7 +1,7 @@
 {% extends "template.twig" %}
 {% block section %}event{% endblock %}
 {% block page %}register{% endblock %}
-{% block title %}Register{% endblock %}
+{% block title %}{{ i18n('common.nav-register') }}{% endblock %}
 {% block shortDescription %}Student registration is open for CodeDay {{ event.region_name }}, hosted at {{ event.venue.name }} on {{ event.starts_at|date('F j, Y') }}. Sign up now to learn about code and build something fun.{% endblock %}
 {% block veryShortDescription %}CodeDay {{ event.region_name }}, {{ event.starts_at|date('F jS') }}{% endblock %}
 {% block content %}
@@ -10,9 +10,9 @@
         <section class="event" data-remaining="{{ event.registration_info.remaining }}">
             <h3>{{ event.name }}</h3>
             {% if event.registration_info.remaining < (event.registration_info.max * 0.30) %}
-                <p class="last-few">Only {{ event.registration_info.remaining }} tickets left!</p>
+                <p class="last-few">{{ i18n('register.warn-remaining', {'remaining': event.registration_info.remaining}) }}</p>
             {% elseif event.registration_info.is_earlybird_ending %}
-                <p class="last-few">Earlybird discount ends soon!</p>
+                <p class="last-few">{{ i18n('register.warn-earlybird') }}</p>
             {% endif %}
             <div id="map"></div>
             <section class="address">
@@ -27,48 +27,41 @@
             </section>
             <section class="time">
                 {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />
-                noon - noon
+                {{ i18n('common.noon-noon') }}
             </section>
         </section>
         <section class="tos">
-            <h4>Terms</h4>
+            <h4>{{ i18n('register.terms') }}</h4>
             <ul>
-                <li>You agree to uphold the
-                    <a href="https://studentrnd.org/code-of-conduct">code of conduct</a> and
-                    <a href="/rules">rules.</a></li>
-                <li>Tickets purchased today can be refunded until
-                    {% if (event.starts_at - (60*60*24*7)) > null|date('U') %}
-                        <a href="https://studentrnd.org/returns" title="That's 7 days before CodeDay."
-                        >{{ (event.starts_at - (60*60*24*7))|date('M j') }}.</a>
+                <li>{{ i18n('register.term-1', {'link1': 'https://studentrnd.org/code-of-conduct', 'link2': langPrefix~'/rules'}) }}</li>
+                <li>{% if (event.starts_at - (60*60*24*7)) > null|date('U') %}
+                        {{ i18n('register.term-2-early', {'link': 'https://srnd.org/returns', 'time': ((event.starts_at - (60*60*24*7))|date('M j'))}) }}
                     {% else %}
-                        <a href="https://studentrnd.org/returns" title="Limited refunds within 7 days of CodeDay."
-                        >tomorrow evening.</a>
+                        {{ i18n('register.term-2-late', {'link': 'https://srnd.org/returns'}) }}
                     {% endif %}
                 </li>
-                <li>You may be photographed or recorded at CodeDay.</li>
-                <li>We may <a href="https://studentrnd.org/privacy">share your info</a> with
-                    our sponsors.</li>
-                <li>You (or your parents, if you're under 18) will get an email to e-sign a waiver from our friends at
-                    <a href="https://legalesign.com/" target="_blank">Legalesign</a>.
+                <li>{{ i18n('register.term-3') }}</li>
+                <li>{{ i18n('register.term-4', {'link': 'https://studentrnd.org/privacy'}) }}</li>
+                <li>{{ i18n('register.term-5', {'link': 'https://legalesign.com/'}) }}</li>
             </ul>
         </section>
     </section>
 
     <section class="registration">
-        <h3>Student Attendee Info</h3>
+        <h3>{{ i18n('register.attendee-head') }}</h3>
         <section class="attendee">
-            <input type="text" name="first_name" placeholder="First Name" value="" autocomplete="off" required />{#
-            #}<input type="text" name="last_name" placeholder="Last Name" value="" autocomplete="off" required />
-            <input type="email" name="email" placeholder="Email" value="" autocomplete="off" required />
+            <input type="text" name="first_name" placeholder="{{ i18n('common.fname-label') }}" value="" autocomplete="off" required />{#
+            #}<input type="text" name="last_name" placeholder="{{ i18n('common.lname-label') }}" value="" autocomplete="off" required />
+            <input type="email" name="email" placeholder="{{ i18n('common.email-label') }}" value="" autocomplete="off" required />
         </section>
-        <span class="add-attendee">Add Another Attendee</span>
-        <span class="remove-attendee">Remove Last</span>
+        <span class="add-attendee">{{ i18n('register.add-attendee') }}</span>
+        <span class="remove-attendee">{{ i18n('register.rm-attendee') }}</span>
     </section>
 
     <section class="payment" data-default-unit-price="{{ event.cost }}">
-        <h3>Payment</h3>
+        <h3>{{ i18n('register.payment') }}</h3>
         <div class="card" data-stripe-pk="{{ event.stripe_public_key }}">
-            <input id="card_number" placeholder="Card Number" data-stripe="number" type="text" value="" autocomplete="off">
+            <input id="card_number" placeholder="{{ i18n('common.card-label') }}" data-stripe="number" type="text" value="" autocomplete="off">
             <div class="exp">
                 <label for="exp">EXP</label>
                 <input id="exp" placeholder="MM/YYYY" type="text" pattern="\d{1,2} *\/ *\d{2,4}" autocomplete="off" >
@@ -79,29 +72,29 @@
                 <span class="label">Attendee (x1)</span><span class="amount">10.00</span>
             </section>
             <section class="discount">
-                <span class="label">No discount</span><span class="amount">0.00</span>
+                <span class="label">{{ i18n('register.discount-no') }}</span><span class="amount">0.00</span>
             </section>
             <section class="total">
-                <span class="label">Total</span><span class="amount">10.00</span>
+                <span class="label">{{ i18n('register.total') }}</span><span class="amount">10.00</span>
             </section>
-            <span class="promo link">Have a promo code?</span>
+            <span class="promo link">{{ i18n('register.promo-ask') }}</span>
             <div class="promo-picker">
-                <input type="text" name="promo" id="promo" placeholder="Code" />
-                <button class="red-button">Apply</button>
+                <input type="text" name="promo" id="promo" placeholder="{{ i18n('register.promo-label') }}" />
+                <button class="red-button">{{ i18n('common.apply') }}</button>
             </div>
         </section>
         <section class="finalize">
-            <button class="pay" type="submit">Complete Registration</button>
-            <span><a href="mailto:contact@codeday.org">Can't afford a ticket? Contact us.</a></span>
-            <span><a href="/{{ event.webname }}/register/schools">Registering as a school?</a></span>
+            <button class="pay" type="submit">{{ i18n('register.complete') }}</button>
+            <span><a href="mailto:contact@codeday.org">{{ i18n('register.scholarship-ask') }}</a></span>
+            <span><a href="{{ langPrefix }}/{{ event.webname }}/register/schools">{{ i18n('register.school-ask') }}</a></span>
         </section>
     </section>
     <section class="success">
-        <h3>You're going to CodeDay!</h3>
-        <p>Your registration was confirmed; we're excited to meet you at CodeDay!</p>
+        <h3>{{ i18n('register.success-head') }}</h3>
+        <p>{{ i18n('register.success-body') }}</p>
         <div class="download">
-            <a href="https://clear.codeday.org/e/ticket?r=" class="ticket download" target="_blank">Download your Tickets</a>
-            <a href="https://clear.codeday.org/e/ticket/receipt?r=" class="receipt download" target="_blank">Download your Receipt</a>
+            <a href="https://clear.codeday.org/e/ticket?r=" class="ticket download" target="_blank">{{ i18n('register.ticket-download') }}</a>
+            <a href="https://clear.codeday.org/e/ticket/receipt?r=" class="receipt download" target="_blank">{{ i18n('register.receipt-download') }}</a>
         </div>
     </section>
 </form>

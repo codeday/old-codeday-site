@@ -5,44 +5,45 @@
 {% block hero %}
     <article class="details">
         <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>
-        <span class="time">noon to noon</span>
+        <span class="time">{{ i18n('common.noon-noon') }}</span>
     </article>
     <article class="lead">
-        <h2>Build something <span id="typed">cool</span> at CodeDay {{ event.region_name }}.</h2>
-        <p>At CodeDay {{ event.region_name }}, student programmers and artists get together to build awesome games and
-           apps in 24 hours. You're invited to join us, no matter what your previous experience.</p>
+        <h2>{{ i18n('event.build', {'region': event.region_name}) }}</h2>
+        <p>{{ i18n('event.invited', {'region': event.region_name}) }}</p>
     </article>
     <article class="action">
         {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
-            <a href="/{{ event.webname }}/register" class="register">Get your ticket {% if event.registration_info.remaining < (event.registration_info.max * 0.10) %}&mdash;{{ event.registration_info.remaining }} left!{% else %}&raquo;{% endif %}</a>
+            <a href="{{ langPrefix }}/{{ event.webname }}/register" class="register">
+                {% if event.registration_info.remaining < (event.registration_info.max * 0.10) %}
+                    {{ i18n('event.cta-ticket-warn', {'remaining': event.registration_info.remaining}) }}
+                {% else %}
+                    {{ i18n('event.cta-ticket-normal') }}
+                {% endif %}</a>
         {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
             {% if event.related_events %}
-                <span class="sold-out-label">Sorry, we're sold out! Register for a nearby event:</span>
+                <span class="sold-out-label">{{ i18n('event.cta-ticket-out-near') }}</span>
                 {% for related_event in event.related_events %}
-                    <a href="/{{ related_event.webname }}" class="nearby-avail">{{ related_event.region_name }}</a>
+                    <a href="{{ langPrefix }}/{{ related_event.webname }}" class="nearby-avail">{{ related_event.region_name }}</a>
                 {% endfor %}
             {% else %}
-                <span class="sold-out">Sorry, we're sold out!</span>
+                <span class="sold-out">{{ i18n('event.cta-ticket-out') }}</span>
             {% endif %}
         {% else %}
-            <span class="notify-label">Tickets are not yet on sale. Sign up to be notified when they are:</span>
+            <span class="notify-label">{{ i18n('event.cta-notify' ) }}</span>
             <form action="/{{ event.webname }}/notify" method="post" class="notify-signup">
-                <input type="email" name="email" id="email" placeholder="you@email.co" />{#
-                #}<input type="submit" value="Notify me!">
+                <input type="email" name="email" id="email" placeholder="{{ i18n('common.email-sample') }}" />{#
+                #}<input type="submit" value="{{ i18n('event.notify-signup') }}">
             </form>
         {% endif %}
         {% if event.venue %}
-            <span class="venue">
-                Hosted at <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}"
-                         target="_blank">{{ event.venue.name }}</a>
-            </span>
+            <span class="venue">{{ i18n('common.hosted-at', {'link': 'https://www.google.com/maps/place/'~(event.venue.full_address|url_encode), 'name': event.venue.name}) }}</span>
         {% endif %}
 
         {% if event.related_events and not (event.registration_info.is_open and event.registration_info.remaining == 0) %}
             <section class="nearby">
                 <span class="label">Or register for another nearby event:</span>
                 {% for related_event in event.related_events %}
-                    <a href="/{{ related_event.webname }}" class="event">{{ related_event.region_name }}</a>
+                    <a href="{{ langPrefix }}/{{ related_event.webname }}" class="event">{{ related_event.region_name }}</a>
                 {% endfor %}
             </section>
         {% endif %}
@@ -52,12 +53,9 @@
 {% block content %}
     <article class="what-is">
         <section class="details">
-            <h3>What is CodeDay?</h3>
-            <p>CodeDay is a nationwide event where student programmers, artists, musicians, actors, and everyone else
-                can get together and build apps &amp; games for 24 hours. Students of all skill levels are
-                welcome&thinsp;&mdash;&thinsp;we have workshops and mentors who can help if you're new!</p>
-            <p>At the beginning of CodeDay, everyone with an idea comes up and pitches it to the group. If you're on
-                your own, or just without an idea, this is the time for you to build whatever you want.</p>
+            <h3>{{ i18n('event.what-is') }}</h3>
+            <p>{{ i18n('common.descr-detail-1') }}</p>
+            <p>{{ i18n('common.descr-detail-2') }}</p>
         </section>
         <section class="video">
             <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_n6xc4pm90n videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
@@ -66,85 +64,73 @@
 
 
     <article class="how-works">
-        <h3>How It Works</h3>
+        <h3>{{ i18n('event.how-works') }}</h3>
         <ul>
             <li>
-                <img src="/assets/img/friends.jpg" alt="Two CodeDay attendees greeting each other." title="You can make new friends and find a team at CodeDay." />
-                <span class="caption">1. Arrive, make new friends.</span>
+                <img src="/assets/img/friends.jpg" alt="{{ i18n('event.how-works-alt-1') }}" title="{{ i18n('event.how-works-title-1') }}" />
+                <span class="caption">{{ i18n('event.how-works-step-1') }}</span>
             </li>
             <li>
-                <img src="/assets/img/pitch.jpg" alt="A CodeDay attendee pitches an idea for an app or game." title="You don't need a slide deck: just tell us your idea for an app or a game you want to make." />
-                <span class="caption">2. Pitch ideas for what you want to make.</span>
+                <img src="/assets/img/pitch.jpg" alt="{{ i18n('event.how-works-alt-2') }}" title="{{ i18n('event.how-works-title-2') }}" />
+                <span class="caption">{{ i18n('event.how-works-step-2') }}</span>
             </li>
             <li>
-                <img src="/assets/img/workshops.jpg" alt="CodeDay attendees learn at a workshop." title="For beginners, attending a workshop is a great intro to the basics of coding." />
-                <span class="caption">3. Optional: attend workshops.</span>
+                <img src="/assets/img/workshops.jpg" alt="{{ i18n('event.how-works-alt-3') }}" title="{{ i18n('event.how-works-title-3') }}" />
+                <span class="caption">{{ i18n('event.how-works-step-3') }}</span>
             </li>
             <li>
-                <img src="/assets/img/code.jpg" alt="A CodeDay attendee makes something with the help of a mentor." title="CodeDay mentors will help you code something awesome in just 24 hours." />
-                <span class="caption">4. Make it! (With help from our mentors.)</span>
+                <img src="/assets/img/code.jpg" alt="{{ i18n('event.how-works-alt-4') }}" title="{{ i18n('event.how-works-title-4') }}" />
+                <span class="caption">{{ i18n('event.how-works-step-4') }}</span>
             </li>
         </ul>
     </article>
 
     <article class="faq">
-        <h3>FAQ</h3>
+        <h3>{{ i18n('common.faq') }}</h3>
         <ul>
             <li>
-                <span class="q">Do I need to come with a team?</span>
-                <p><strong>No!</strong> In fact, most people don't come with a team! At the beginning of the event,
-                   everyone will pitch ideas for what they want to build. You can form a team then.</p>
+                <span class="q">{{ i18n('event.faq-team-q') }}</span>
+                <p>{{ i18n('event.faq-team-a') }}</p>
             </li>
             <li>
-                <span class="q">What should I bring?</span>
-                <p>Bring your laptop and mouse. Food is included in your ticket. If you're planning on sleeping, bring
-                   a sleeping bag, pillow, and toothbrush. Desktop PCs and monitors are also allowed, although less
-                   common.</p>
+                <span class="q">{{ i18n('event.faq-bring-q') }}</span>
+                <p>{{ i18n('event.faq-bring-a') }}</p>
             </li>
             <li>
-                <span class="q">Can you tell me about CodeDay in the form of a song?</span>
-                <p>Yes! Here's a song from our friend Matt Farley:</p>
+                <span class="q">{{ i18n('event.faq-song-q') }}</span>
+                <p>{{ i18n('event.faq-song-a') }}</p>
                 <audio controls><source src="/assets/mp3/codeday-song.mp3" type="audio/mpeg" /></audio>
             </li>
             <li>
-                <span class="q">I don't know how to code! Can I really come?</span>
-                <p><strong>Yes!</strong> Part of the fun is learning how to program when working with other people.
-                   We'll also provide some great workshops that you can attend. Or you can always just hang out and
-                   have fun!</p>
+                <span class="q">{{ i18n('event.faq-code-q') }}</span>
+                <p>{{ i18n('event.faq-code-a') }}</p>
             </li>
             <li>
-                <span class="q">Can I attend if I'm not in high school or college?</span>
-                <p>Please <a href="mailto:contact@codeday.org">contact us</a> before registering if you are not
-                    currently in high school or college. If you register without contacting us, we will unfortunately
-                    need to turn you away at the door.</p>
+                <span class="q">{{ i18n('event.faq-student-q') }}</span>
+                <p>{{ i18n('event.faq-student-a') }}</p>
             </li>
             <li>
-                <span class="q">Where will I sleep?</span>
-                <p>Students who plan to sleep (we recommend you do!) can sleep anywhere in the venue, or in the
-                   designated sleeping room. Don't forget to pack a sleeping bag and pillow!</p>
+                <span class="q">{{ i18n('event.faq-sleep-q') }}</span>
+                <p>{{ i18n('event.faq-sleep-a') }}</p>
             </li>
             <li>
-                <span class="q">We'd like to attend as a school. Can we pay with a PO?</span>
-                <p>Yes, please <a href="/{{ event.webname }}/register/schools">visit our school registration page</a>
-                   to submit your registration. We will follow up to complete the purchasing process.</p>
+                <span class="q">{{ i18n('event.faq-school-q') }}</span>
+                <p>{{ i18n('event.faq-school-a', {'link': langPrefix~'/'~event.webname~'/register/schools'}) }}</p>
             </li>
             <li>
-                <span class="q">What is security like at the event?</span>
-                <p>The venue will be locked down overnight, and students under 18 will not be able to leave without
-                   an parent there to pick them up.</p>
+                <span class="q">{{ i18n('event.faq-security-q') }}</span>
+                <p>{{ i18n('event.faq-security-a') }}</p>
             </li>
             <li>
-                <span class="q">Can I attend with my student?</span>
-                <p>Parents can attend the Kickoff and final presentations, but cannot stay throughout the event due to
-                   background check requirements. Teachers may attend with students, but must show school ID or other
-                   proof of status at the door.</p>
+                <span class="q">{{ i18n('event.faq-parent-q') }}</span>
+                <p>{{ i18n('event.faq-parent-a') }}</p>
             </li>
         </ul>
     </article>
 
     {% if event.hashtag and event.photos|length > 0 %}
         <article class="photos">
-            <h3>Previous Events</h3>
+            <h3>{{ i18n('event.previous-events') }}</h3>
             <div class="slideshow">
                 {% for photo in event.photos %}
                     <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
@@ -155,7 +141,7 @@
 
     {% if event.venue and event.venue.name != "TBA" %}
         <article class="map">
-            <h3>Hosted at {{ event.venue.name }}:
+            <h3>{{ i18n('common.hosted-at-plain', {'name': event.venue.name}) }}:
                 <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank"
                 >{{ event.venue.address.line_1 }}{% if event.venue.address.line_2 %}, {{ event.venue.address.line_2 }}{% endif %},
                 {{ event.venue.address.city }}</a></h3>
@@ -165,7 +151,7 @@
     {% endif %}
 
     <article class="schedule">
-        <h3>Schedule</h3>
+        <h3>{{ i18n('event.schedule') }}</h3>
         {% for day,entries in event.schedule %}
             <section class="day">
                 <div class="schedule">
@@ -191,7 +177,7 @@
     </article>
 
     <article class="sponsors">
-        <h3>Supported By</h3>
+        <h3>{{ i18n('event.supported-by') }}</h3>
         <ul>
             {% include "parts/national_sponsors.twig" %}
             {% for sponsor in event.sponsors %}

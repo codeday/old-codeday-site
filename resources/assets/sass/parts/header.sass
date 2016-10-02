@@ -50,6 +50,25 @@ body > header
                 &:last-child a
                     padding-right: 0
 
+                ul.lang-switcher
+                    padding-left: 0.5rem
+                    position: absolute
+                    margin-top: -0.65rem
+                    &:hover
+                        li:nth-child(n + 2)
+                            display: block
+                    li
+                        line-height: 0
+                        display: block
+                        &:nth-child(n + 2)
+                            display: none
+                            margin-top: 0.5rem
+                        a, span
+                            line-height: 0
+                            padding: 0
+                            img
+                                margin: 0
+
 body > .notice
     position: fixed
     top: 0
