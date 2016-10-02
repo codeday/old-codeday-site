@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'build'                 => "Build something <span id=\"typed\">cool</span> at CodeDay :region.",
     'invited'               => "En la :region CodeDay los alumnos, programadores y artistas se reúnen para construir juegos increíbles y aplicaciones en 24 horas. Te invitamos a unirte a nosotros, no importa cuál ha sido tu experiencia previa. ",
     'cta-ticket-normal'     => "Obtén tu boleto",
     'cta-ticket-warn'       => "¡Obtén el boleto &mdash;:remaining que queda! ",
@@ -11,10 +12,18 @@ return array(
     'what-is'               => "¿Qué es CodeDay?",
     'how-works'             => "Cómo funciona",
     'how-works-step-1'      => "1. Al llegar haz amigos nuevos",
+    'how-works-alt-1'       => "Dos participantes de CodeDay se conocen.",
+    'how-works-title-1'     => "Puedes hacer nuevos amigos y encontrar un equipo en CodeDay.",
     'how-works-step-2'      => "2. Proponga ideas de lo que quiere hacer.",
+    'how-works-alt-2'       => "Un participante de CodeDay desarrolla una idea para una aplicación o un juego.",
+    'how-works-title-2'     => "No necesitas una presentación: solo dinos tu idea para una aplicación o un juego que quieras crear.",
     'how-works-step-3'      => "3. Opcional: asistir a talleres.",
+    'how-works-alt-3'       => "Los participantes de CodeDay aprende en un taller.",
+    'how-works-title-3'     => "Asistir a un taller es una gran forma de comenzar a aprender los conceptos básicos de programación.",
     'how-works-step-4'      => "4. ¡Lógralo! (Con la ayuda de nuestros mentores).
 ",
+    'how-works-alt-4'       => "Un participante de CodeDay realiza algo con la ayuda de un mentor.",
+    'how-works-title-4'     => "Los mentores de CodeDay te ayudarán a programar algo impresionante en solo 24 horas.",
     'previous-events'       => "Eventos anteriores",
     'schedule'              => "Agenda",
     'supported-by'          => "Apoyado por",

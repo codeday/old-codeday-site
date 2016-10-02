@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'build'                 => "Build something <span id=\"typed\">cool</span> at CodeDay :region.",
     'invited'               => "Au CodeDay :region, les artistes et les programmeurs étudiants se réunissent pour construire des jeux impressionnants et des applications en 24 heures. Vous êtes invité à nous rejoindre, quel que soit votre expérience antérieure.",
     'cta-ticket-normal'     => "Obtenez votre billet",
     'cta-ticket-warn'       => "Obtenez votre billet &mdash;: il en reste seulement quelques-uns !",
@@ -11,9 +12,17 @@ return array(
     'what-is'               => "Qu'est-ce que CodeDay?",
     'how-works'             => "Comment ça marche",
     'how-works-step-1'      => "1. Arrivez, faites-vous de nouveaux amis.",
+    'how-works-alt-1'       => "Deux participants de CodeDay se saluant.",
+    'how-works-title-1'     => "Vous pouvez vous faire de nouveaux amis et trouver une équipe au CodeDay.",
     'how-works-step-2'      => "2. Présentez ce que vous voulez faire.",
+    'how-works-alt-2'       => "Un participant de CodeDay qui présente une idée d'application ou de jeu.",
+    'how-works-title-2'     => "Vous n'avez pas besoin d'un jeu de diapositives : dites-nous seulement l'idée de l'application ou du jeu que vous voulez créer.",
     'how-works-step-3'      => "3. Facultatif : participer à des ateliers.",
+    'how-works-alt-3'       => "Les participants de CodeDay apprenant lors d'un atelier.",
+    'how-works-title-3'     => "Pour les débutants, assister à un atelier est un premier pas dans le monde du codage.",
     'how-works-step-4'      => "4. Faites-le! (Avec l'aide de nos mentors.)",
+    'how-works-alt-4'       => "Un participant de CodeDay réalise quelque chose avec l'aide d'un conseiller.",
+    'how-works-title-4'     => "Les conseillers de CodeDay vous aideront à codifier quelque chose d'incroyable en seulement 24 heures.",
     'previous-events'       => "Événements précédents",
     'schedule'              => "Programme",
     'supported-by'          => "Soutenu par",
