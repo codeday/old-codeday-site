@@ -67,12 +67,19 @@ $routes = function() {
 \View::share('nonLangUri', '/'.request()->path());
 \Route::bind('locale', function($locale) {
     \App::setLocale($locale);
-    \session(['lang' => $locale]);
     \View::share('langPrefix', '/'.$locale); 
     \View::share('nonLangUri', substr(request()->path(), strlen($locale)));
+    \session_start();
+    $_SESSION['lang'] = $locale;
+});
+\Route::any('/en_US', function() {
+    \session_start();
+    $_SESSION['lang'] = '';
+    return \redirect('/');
 });
 \Route::any('/en_US/{rest}', function($rest) {
-    \session(['lang' => '']);
+    \session_start();
+    $_SESSION['lang'] = '';
     return \redirect($rest);
 })->where('rest', '(.*)?');
 \Route::group(['prefix' => '/{locale}'], $routes);

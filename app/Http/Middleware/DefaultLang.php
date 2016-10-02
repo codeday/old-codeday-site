@@ -17,8 +17,9 @@ class DefaultLang
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (session('lang') && substr(request()->path(), 0, strlen(session('lang'))) !== session('lang')) {
-            return redirect('/'.session('lang').'/'.request()->path());
+        \session_start();
+        if ($_SESSION['lang']) {
+            return redirect('/'.$_SESSION['lang'].'/'.request()->path());
         }
 
         return $next($request);
