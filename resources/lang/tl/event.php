@@ -3,7 +3,7 @@
 return array(
     'build'                 => "Gumawa ng isang bagay na cool sa CodeDay :region.",
     'invited'               => "Sa CodeDay :region, ang mga estudyanteng programmer at mga artist ay nagsasama-sama para gumawa ng mga mahuhusay na laro at mga app sa loob ng 24 na oras. Imbitado ka para sumali sa amin, anuman ang iyong dating karanasan.",
-    'cta-ticket-normal'     => "Kunin ang iyong tiket at raquo;",
+    'cta-ticket-normal'     => "Kunin ang iyong tiket at &raquo;",
     'cta-ticket-warn'       => "Kunin ang iyong tiket at &mdash;:remaining na lang!",
     'cta-ticket-out-near'   => "Paumanhin, ubos na! Magrehistro para sa malapit na event:",
     'cta-ticket-out'        => "Paumanhin, ubos na!",
