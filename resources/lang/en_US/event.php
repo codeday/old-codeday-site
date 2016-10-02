@@ -9,6 +9,7 @@ return array(
     'cta-ticket-out'        => "Sorry, we're sold out!",
     'cta-notify'            => "Tickets are not yet on sale. Sign up to be notified when they are:",
     'notify-signup'         => "Notify me!",
+    'nearby'                => "Or register for another nearby event:",
     'what-is'               => "What Is CodeDay?",
     'how-works'             => "How It Works",
     'how-works-step-1'      => "1. Arrive, make new friends.",

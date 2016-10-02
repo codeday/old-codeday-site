@@ -64,10 +64,16 @@ $routes = function() {
     \Route::get('/{event}', '\CodeDay\Http\Controllers\EventController@getIndex');
 };
 
+\View::share('nonLangUri', '/'.request()->path());
 \Route::bind('locale', function($locale) {
     \App::setLocale($locale);
+    \session(['lang' => $locale]);
     \View::share('langPrefix', '/'.$locale); 
     \View::share('nonLangUri', substr(request()->path(), strlen($locale)));
 });
-\Route::group(['prefix' => '/{locale?}'], $routes);
-\Route::group(['prefix' => '/'], $routes);
+\Route::any('/en_US/{rest}', function($rest) {
+    \session(['lang' => '']);
+    return \redirect($rest);
+})->where('rest', '(.*)?');
+\Route::group(['prefix' => '/{locale}'], $routes);
+\Route::group(['prefix' => '/', 'middleware' => 'default-lang'], $routes);

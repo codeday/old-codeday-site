@@ -41,7 +41,7 @@
 
         {% if event.related_events and not (event.registration_info.is_open and event.registration_info.remaining == 0) %}
             <section class="nearby">
-                <span class="label">Or register for another nearby event:</span>
+                <span class="label">{{ i18n('event.nearby') }}</span>
                 {% for related_event in event.related_events %}
                     <a href="{{ langPrefix }}/{{ related_event.webname }}" class="event">{{ related_event.region_name }}</a>
                 {% endfor %}

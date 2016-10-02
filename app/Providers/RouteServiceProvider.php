@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->pattern('locale', '(en_US|es_MX|fr_CA)');
+        $router->pattern('locale', '(es_MX|fr_CA|vi)');
 
         parent::boot($router);
     }
