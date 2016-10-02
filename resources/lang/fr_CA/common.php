@@ -25,6 +25,6 @@ return array(
     'nav-register'          => "Enregistré",
     'nav-volunteer'         => "Bénévole",
     'nav-sponsor'           => "Commanditaire",
-    'nav-press'             => "Trousse d'information",
+    'nav-press'             => "Journalistes",
     'nav-donate'            => "Faire une donation",
 );

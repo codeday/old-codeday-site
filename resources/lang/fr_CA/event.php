@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'build'                 => "Build something <span id=\"typed\">cool</span> at CodeDay :region.",
+    'build'                 => "Construisez quelque chose de génial à CodeDay : région.",
     'invited'               => "Au CodeDay :region, les artistes et les programmeurs étudiants se réunissent pour construire des jeux impressionnants et des applications en 24 heures. Vous êtes invité à nous rejoindre, quel que soit votre expérience antérieure.",
     'cta-ticket-normal'     => "Obtenez votre billet",
     'cta-ticket-warn'       => "Obtenez votre billet &mdash;: il en reste seulement quelques-uns !",
@@ -9,6 +9,7 @@ return array(
     'cta-ticket-out'        => "Désolé, tout a été vendu!",
     'cta-notify'            => "Les billets ne sont pas encore en vente. Inscrivez-vous pour être averti quand ils le seront :",
     'notify-signup'         => "Prévenez-moi!",
+    'nearby'                => "Ou inscrivez-vous pour un autre événement à proximité :",
     'what-is'               => "Qu'est-ce que CodeDay?",
     'how-works'             => "Comment ça marche",
     'how-works-step-1'      => "1. Arrivez, faites-vous de nouveaux amis.",

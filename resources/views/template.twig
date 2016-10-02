@@ -56,7 +56,7 @@
         </style>
     {% endif %}
 </head>
-<body class="{{ block('section') }} {{ block('page') }}"
+<body class="lang-{{lang}} {{ block('section') }} {{ block('page') }}"
       data-api-base="{{ api_base_public }}" data-api-public="{{ api_access_token }}"
       {% if event %}data-event="{{ event.id }}"{% endif %}>
     {% if event.notice %}
@@ -108,7 +108,7 @@
                         <li>
                             <ul class="lang-switcher">
                                 {% if langPrefix == '' %}{% set langPrefix = '/' %}{% endif %}
-                                {% set langs = {"/es_MX": "mx", "/fr_CA": "fr", "/vi": "vi", "/": "us"} %}
+                                {% set langs = {"/es_MX": "mx", "/fr_CA": "fr", "/vi": "vi", "/tl": "tl", "/": "us"} %}
                                 <li><span><img src="/assets/img/i18n-flags/{{ langs[langPrefix] }}.png" /></span></li>
                                 {% for lang,flag in langs %}
                                     {% if lang != langPrefix %}

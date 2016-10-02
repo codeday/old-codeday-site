@@ -67,6 +67,7 @@ $routes = function() {
 \View::share('nonLangUri', '/'.request()->path());
 \Route::bind('locale', function($locale) {
     \App::setLocale($locale);
+    \View::share('lang', $locale); 
     \View::share('langPrefix', '/'.$locale); 
     \View::share('nonLangUri', substr(request()->path(), strlen($locale)));
     \session_start();

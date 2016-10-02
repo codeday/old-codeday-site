@@ -21,10 +21,10 @@ return array(
     'byline'                => "por StudentRND",
     'footer-trademark'      => "CodeDay es una <a href=\":link\" target=\"_blank\">marca registrada</a> de StudentRND.",
 
-    'nav-event'             => "Datos del evento",
+    'nav-event'             => "Evento",
     'nav-register'          => "Registro",
     'nav-volunteer'         => "Voluntario",
     'nav-sponsor'           => "Patrocinador",
-    'nav-press'             => "Kit de prensa",
+    'nav-press'             => "Reporteros",
     'nav-donate'            => "Donar",
 );
