@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'build'                 => "Construisez quelque chose de génial à CodeDay : région.",
+    'build'                 => "Construisez quelque chose de génial à CodeDay :region.",
     'invited'               => "Au CodeDay :region, les artistes et les programmeurs étudiants se réunissent pour construire des jeux impressionnants et des applications en 24 heures. Vous êtes invité à nous rejoindre, quel que soit votre expérience antérieure.",
     'cta-ticket-normal'     => "Obtenez votre billet",
     'cta-ticket-warn'       => "Obtenez votre billet &mdash;: il en reste seulement quelques-uns !",
