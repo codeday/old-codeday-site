@@ -23,7 +23,14 @@ class StaticController extends Controller {
             'tz_regions' => $tz_regions
         ]);
     }
-    
+
+    public function getSchools()
+    {
+        \View::share('event', \Route::input('event'));
+        \View::share('loaded_batch', Models\Batch::current());
+        return \View::make('schools');
+    }
+   
     public function getArizona()
     {
         // HACK

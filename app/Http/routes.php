@@ -58,9 +58,10 @@ $routes = function() {
         }
     });
 
+    \Route::get('/schools', '\CodeDay\Http\Controllers\StaticController@getSchools');
     \Route::get('/{event}/register', '\CodeDay\Http\Controllers\EventController@getRegister');
     \Route::post('/{event}/register', '\CodeDay\Http\Controllers\EventController@postRegister');
-    \Route::get('/{event}/register/schools', '\CodeDay\Http\Controllers\EventController@getSchools');
+    \Route::get('/{event}/register/schools', '\CodeDay\Http\Controllers\StaticController@getSchools');
     \Route::get('/{event}', '\CodeDay\Http\Controllers\EventController@getIndex');
 };
 
