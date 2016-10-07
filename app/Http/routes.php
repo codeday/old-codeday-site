@@ -32,6 +32,7 @@ $routes = function() {
     \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');
     \Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
     \Route::get('/rules', '\CodeDay\Http\Controllers\StaticController@getRules');
+    \Route::get('/evangelist', '\CodeDay\Http\Controllers\StaticController@getEvangelist');
 
     \Route::get('/new', '\CodeDay\Http\Controllers\StaticController@getNew');
     \Route::get('/volunteer', '\CodeDay\Http\Controllers\VolunteerController@getIndex');

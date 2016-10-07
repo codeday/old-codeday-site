@@ -30,6 +30,11 @@ class StaticController extends Controller {
         \View::share('loaded_batch', Models\Batch::current());
         return \View::make('schools');
     }
+
+    public function getEvangelist()
+    {
+        return \View::make('evangelist');
+    }
    
     public function getArizona()
     {
