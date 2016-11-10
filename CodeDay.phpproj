@@ -3686,6 +3686,8 @@
     <Compile Include="app\Http\Controllers\PhoneController.php" />
     <Compile Include="app\Http\Controllers\SplunkController.php" />
     <Compile Include="app\Http\Controllers\StaticController.php" />
+    <Compile Include="app\Http\Controllers\Vip\TicketController.php" />
+    <Compile Include="app\Http\Controllers\Vip\IndexController.php" />
     <Compile Include="app\Http\Controllers\VolunteerController.php" />
     <Compile Include="app\Http\Middleware\Authenticate.php" />
     <Compile Include="app\Http\Middleware\DefaultLang.php" />
@@ -3699,6 +3701,7 @@
     <Compile Include="app\Listeners\.gitkeep" />
     <Compile Include="app\Models\Batch.php" />
     <Compile Include="app\Models\ClearModel.php" />
+    <Compile Include="app\Models\Ticket.php" />
     <Compile Include="app\Models\Event.php" />
     <Compile Include="app\Models\Ip.php" />
     <Compile Include="app\Models\Region.php" />
@@ -3709,7 +3712,6 @@
     <Compile Include="app\Providers\AuthServiceProvider.php" />
     <Compile Include="app\Providers\EventServiceProvider.php" />
     <Compile Include="app\Providers\RouteServiceProvider.php" />
-    <Compile Include="app\User.php" />
     <Compile Include="bootstrap\cache\.gitignore" />
     <Compile Include="bootstrap\cache\services.php" />
     <Compile Include="bootstrap\app.php" />
@@ -4646,6 +4648,7 @@
     <Folder Include="app\Exceptions" />
     <Folder Include="app\Extensions" />
     <Folder Include="app\Http\Controllers" />
+    <Folder Include="app\Http\Controllers\Vip\" />
     <Folder Include="app\Http\Middleware" />
     <Folder Include="app\Http\Requests" />
     <Folder Include="app\Http" />
@@ -4703,6 +4706,7 @@
     <Folder Include="resources\lang\vi" />
     <Folder Include="resources\lang" />
     <Folder Include="resources\views\errors" />
+    <Folder Include="resources\views\vip\" />
     <Folder Include="resources\views\parts" />
     <Folder Include="resources\views\volunteer" />
     <Folder Include="resources\views" />
@@ -4762,5 +4766,16 @@
     <Folder Include="storage\logs" />
     <Folder Include="storage" />
     <Folder Include="tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="public\assets\img\parent.svg" />
+    <Content Include="public\assets\img\right.svg" />
+    <Content Include="public\assets\img\signature.svg" />
+    <Content Include="public\assets\img\survey.svg" />
+    <Content Include="public\assets\img\ticket-apple.png" />
+    <Content Include="public\assets\img\ticket-print.png" />
+    <Content Include="resources\assets\sass\pages\vip.sass" />
+    <Content Include="resources\views\vip\pdf.twig" />
+    <Content Include="resources\views\vip\ticket.twig" />
   </ItemGroup>
 </Project>

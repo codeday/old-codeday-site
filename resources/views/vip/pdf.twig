@@ -1,0 +1,59 @@
+<table>
+    <tr>
+        <td width="30%">&nbsp;</td>
+        <td width="40%" style="text-align: center;font-size:10px;">
+            <br />To speed up checkin, please print this ticket and bring it with you to CodeDay.<br />
+        </td>
+        <td width="30%">&nbsp;</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td width="30%">&nbsp;</td>
+        <td width="40%" style="border: 1px solid #cb7972"><table><tr>
+        <td style="background-color: #fff">
+            <table style="padding: 0 10px;font-size: 8px">
+                <tr style="font-size:4px"><td>&nbsp;</td></tr>
+                <tr><td style="color: #ccc;font-size: 6px">ADMIT ONLY</td></tr>
+                <tr><td style="font-size:12px">{{ registration.name }}</td></tr>
+                <tr style="font-size:4px"><td>&nbsp;</td></tr>
+            </table></td>
+</tr><tr><td style="background-color: #cb7972; color: #d79993; font-size: 6px;text-align:center"> CODEDAY CODEDAY CODEDAY CODEDAY CODEDAY CODEDAY </td></tr>
+                <tr><td style="font-size:8px; background-color: #f7eae9"><br /><br />
+                    <table style="padding:0 10px">
+                        <tr style="color: #d79993;font-size:6px">
+                            <td>DATE</td>
+                            <td>TICKET</td>
+                        </tr>
+                        <tr>
+                            <td>{{ registration.event.batch.starts_at.timestamp|date('F j, Y h:i') }}</td>
+                            <td>{{ registration.type|upper }}<br />${{ registration.amount_paid|number_format(2) }}</td>
+                        </tr>
+                    </table><br /><br /><br /><br /><br />
+                    <table style="padding: 0 10px">
+                        <tr><td style="color: #d79993;font-size:6px">STUDENTRND PRESENTS</td></tr>
+                        <tr><td style="font-size:18px">CodeDay {{ registration.event.name }} {{ registration.event.batch.name }}</td></tr>
+                        <tr><td><br /><br /><br />Hosted at {{ registration.event.venue_name }}<br />{{ registration.event.venue_address_1 }}{% if registration.event.venue_address_2 %}, {{ registration.event.venue_address_2 }}{% endif %}<br />{{ registration.event.venue_city }}, {{ registration.event.venue_state }} {{ registration.venue_postal }}</td></tr>
+                        <tr style="font-size:8px"><td>&nbsp;</td></tr>
+                    </table>
+                </td></tr>
+                <tr style="font-size:4px;background-color:#fff"><td>&nbsp;</td></tr>
+                <tr style="background-color: #fff">
+                    <td style="text-align:center"><img src="{{ barcode }}" /></td>
+                </tr>
+                <tr style="font-size:4px;background-color:#fff"><td>&nbsp;</td></tr>
+            </table>
+        </td>
+        <td width="30%">&nbsp;</td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td width="30%">&nbsp;</td>
+        <td width="40%" style="text-align: center;font-size:9px;">
+            <br /><br />CodeDay is a program of StudentRND and is supported nationwide by
+                        Splunk, LexisNexis Risk Solutions, and Oracle.<br />
+        </td>
+        <td width="30%">&nbsp;</td>
+    </tr>
+</table>

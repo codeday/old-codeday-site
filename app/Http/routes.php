@@ -23,6 +23,15 @@ use CodeDay\Models;
 \View::share('api_access_token', \Config::get('clear.access_token'));
 
 $routes = function() {
+    // Domain Routes
+    \Route::pattern('vip-domain', '(vip.codeday.dev|codeday.vip');
+    \Route::group(['domain' => 'vip.codeday.dev'], function(){
+        \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
+        \Route::Controller('/{ticket}', '\CodeDay\Http\Controllers\Vip\IndexController');
+        \Route::get('/', '\CodeDay\Http\Controllers\Vip\IndexController@getFind');
+        \Route::post('/', '\CodeDay\Http\Controllers\Vip\IndexController@getFind');
+    });
+
     // Static Routes
     \Route::get('/', '\CodeDay\Http\Controllers\StaticController@getGlobal');
     \Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');

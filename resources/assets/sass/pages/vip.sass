@@ -1,0 +1,118 @@
+﻿body.vip
+	&.index
+		.info
+			margin-top: 1rem
+			+span-columns(4)
+			& >.event
+				+span-columns(12)
+				+omega
+				margin-top: 1.5rem
+				#map
+					width: 100%
+					height: 15rem
+				.time, .address
+					font:
+						family: $font-family-header
+						size: 0.833rem
+					color: $color-gray
+					margin-top: 1rem
+					+span-columns(6)
+				.time
+					text-align: right
+			& > .ticket
+				+span-columns(12)
+				+omega
+				span.name
+					font-size: 1.5rem
+				span.type
+					float: right
+					text-transform: uppercase
+					text-align: right
+					vertical-align: bottom
+					font-size: 0.8rem
+					padding-top: 0.45rem
+				span.event
+					display: block
+				span.barcode
+					margin-top: 0.25rem
+					display: block
+					clear: both
+					img
+						width: 100%
+				span.download
+					display: block
+					margin-top: 0.5rem
+					text-align: center
+		.next
+			+span-columns(8)
+			+omega
+			padding-top: 1rem
+			.letter
+				+span-columns(10)
+				+shift(1)
+				padding: 0 2rem 1rem
+				border: 1px solid $color-light-gray
+				border-radius: 2px
+			.actions
+				clear: both
+				text-align: center
+				ul
+					padding: 0
+					li
+						list-style-type: none
+						display: inline-block
+						position: relative
+						&:not(:last-child):after
+							content: ""
+							display: inline-block
+							width: 0.8rem
+							height: 0.8rem
+							position: absolute
+							top: 45%
+							background:
+								image: url(/assets/img/right.svg)
+								position: 50% 50%
+								repeat: no-repeat
+								size: contain
+						a
+							border: 1px solid $color-black
+							border-radius: 2px
+							-moz-border-radius: 2px
+							-webkit-border-radius: 2px
+							display: inline-block
+							width: 7rem
+							height: 7rem
+							padding: 1rem
+							margin: 0 1rem 0 1.7rem
+							text-align: center
+							text-decoration: none
+
+							&[href="#"]
+								border-color: $color-light-gray
+								span.label
+									color: $color-light-gray
+								span.icon
+									opacity: 0.4
+
+							span.icon
+								display: inline-block
+								width: 3rem
+								height: 3rem
+								background:
+									position: 50% 50%
+									repeat: no-repeat
+									size: contain
+
+							span.label
+								display: block
+								font-size: 0.9rem
+								color: $color-black
+
+							&.waiver span.icon
+								background-image: url(/assets/img/signature.svg)
+
+							&.parent span.icon
+								background-image: url(/assets/img/parent.svg)
+
+							&.survey span.icon
+								background-image: url(/assets/img/survey.svg)
