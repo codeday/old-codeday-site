@@ -8,6 +8,9 @@ $media-mobile: new-breakpoint(max-width 700px 4)
                 +span-columns(1)
                 & > a
                     display: none
+            nav
+                +span-columns(3)
+                +omega
             nav ul li a
                 padding-right: 0.5rem !important
         .content
@@ -50,6 +53,10 @@ $media-mobile: new-breakpoint(max-width 700px 4)
                 padding-top: 0
                 padding-bottom: 1rem
 
+        &.vip.index
+            .info, .next
+                +span-columns(4)
+                +omega
         &.event.index
             section.hero
                 margin-top: -7rem

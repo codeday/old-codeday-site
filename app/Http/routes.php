@@ -24,8 +24,7 @@ use CodeDay\Models;
 
 $routes = function() {
     // Domain Routes
-    \Route::pattern('vip-domain', '(vip.codeday.dev|codeday.vip');
-    \Route::group(['domain' => 'vip.codeday.dev'], function(){
+    \Route::group(['domain' => \Request::server("HTTP_HOST") ? 'vip.codeday.dev' : 'codeday.vip'], function(){
         \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
         \Route::Controller('/{ticket}', '\CodeDay\Http\Controllers\Vip\IndexController');
         \Route::get('/', '\CodeDay\Http\Controllers\Vip\IndexController@getFind');
