@@ -26,7 +26,7 @@
                             <td>TICKET</td>
                         </tr>
                         <tr>
-                            <td>{{ registration.event.batch.starts_at.timestamp|date('F j, Y h:i') }}</td>
+                            <td>{{ registration.event.starts_at|date('F j, Y h:i') }}</td>
                             <td>{{ registration.type|upper }}<br />${{ registration.amount_paid|number_format(2) }}</td>
                         </tr>
                     </table><br /><br /><br /><br /><br />
