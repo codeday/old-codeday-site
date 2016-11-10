@@ -26,7 +26,11 @@
                             <td>TICKET</td>
                         </tr>
                         <tr>
-                            <td>{{ registration.event.starts_at|date('F j, Y h:i') }}</td>
+                            {% if registration.type == 'judge' %}
+                                <td>{{ registration.event.ends_at|date('F j, Y') }} 9:00am</td>
+                            {% else %}
+                                <td>{{ registration.event.starts_at|date('F j, Y') }} 12:00pm</td>
+                            {% endif %}
                             <td>{{ registration.type|upper }}<br />${{ registration.amount_paid|number_format(2) }}</td>
                         </tr>
                     </table><br /><br /><br /><br /><br />

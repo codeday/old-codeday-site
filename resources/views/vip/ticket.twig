@@ -34,8 +34,13 @@
                 </a>
             </section>
             <section class="time">
-                {{ ticket.event.starts_at|date('F j') }}-{{ ticket.event.ends_at|date('j') }}<br />
-                {{ i18n('common.noon-noon') }}
+                {% if ticket.type == 'judge' %}
+                    {{ ticket.event.ends_at|date('F j') }}<br />
+                    9am-12pm
+                {% else %}
+                    {{ ticket.event.starts_at|date('F j') }}-{{ ticket.event.ends_at|date('j') }}<br />
+                    {{ i18n('common.noon-noon') }}
+                {% endif %}
             </section>
         </section>
     </section>
