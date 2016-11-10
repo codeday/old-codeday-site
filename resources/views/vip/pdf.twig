@@ -32,8 +32,8 @@
                     </table><br /><br /><br /><br /><br />
                     <table style="padding: 0 10px">
                         <tr><td style="color: #d79993;font-size:6px">STUDENTRND PRESENTS</td></tr>
-                        <tr><td style="font-size:18px">CodeDay {{ registration.event.name }} {{ registration.event.batch.name }}</td></tr>
-                        <tr><td><br /><br /><br />Hosted at {{ registration.event.venue_name }}<br />{{ registration.event.venue_address_1 }}{% if registration.event.venue_address_2 %}, {{ registration.event.venue_address_2 }}{% endif %}<br />{{ registration.event.venue_city }}, {{ registration.event.venue_state }} {{ registration.venue_postal }}</td></tr>
+                        <tr><td style="font-size:18px">{{ registration.event.name }}</td></tr>
+                        <tr><td><br /><br /><br />Hosted at {{ registration.event.venue.name }}<br />{{ registration.event.venue.address.line_1 }}{% if registration.event.venue.address.line_2 %}, {{ registration.event.venue.address.line_2 }}{% endif %}<br />{{ registration.event.venue.address.city }}, {{ registration.event.venue.address.state }} {{ registration.venue.address.postal }}</td></tr>
                         <tr style="font-size:8px"><td>&nbsp;</td></tr>
                     </table>
                 </td></tr>
