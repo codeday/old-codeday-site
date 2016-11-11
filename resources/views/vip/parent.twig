@@ -26,7 +26,7 @@
             <p>If you need to change your age, please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us.</a></p>
         {% else %}
             <h3>Parent Info</h3>
-            {% if age < 14 %}
+            {% if ticket.age < 14 %}
                 <div class="warning">
                     <p><strong>Hey! There might be a problem:</strong> CodeDay is an event for high school and undergraduate students.</p>
                     <p>Before you can attend, we'll need you to <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>
