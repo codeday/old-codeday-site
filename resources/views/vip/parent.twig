@@ -1,0 +1,69 @@
+{% extends "vip/ticket-template.twig" %}
+{% block subpage %}ticket{% endblock %}
+{% block next %}
+    <section class="parent-info">
+        {% if not ticket.age %}
+            <h3>Participant Age</h3>
+            <form method="post">
+                <div class="field">
+                    <label for="age">Participant Age</label>
+                    <input type="number" name="age" id="age" value="{{ ticket.age }}" required />
+                    <span class="help">Your age on {{ ticket.event.starts_at|date('F j, Y') }}.</span>
+                </div>
+                <input type="submit" value="Set My Age" />
+            </form>
+        {% elseif ticket.age >= 18 %}
+            {% if ticket.age >= 24 %}
+                <div class="warning">
+                    <p><strong>Hey! There might be a problem:</strong> CodeDay is an event for high school and college students.</p>
+                    <p>For security reasons, we generally cannot accept people who are outside this age range. Please
+                       <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> if you'd like a refund, or you think there's
+                       a special situation we should allow. Unless you have an email from our support, our event staff will not be able to
+                       let you in.</p>
+                </div>
+            {% endif %}
+            <p>Because you're over 18, we don't need your parent info.</p>
+            <p>If you need to change your age, please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us.</a></p>
+        {% else %}
+            <h3>Parent Info</h3>
+            {% if age < 14 %}
+                <div class="warning">
+                    <p><strong>Hey! There might be a problem:</strong> CodeDay is an event for high school and undergraduate students.</p>
+                    <p>Before you can attend, we'll need you to <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>
+                       for approval. Students who contact us will be approved automatically, but parents should let us know about their
+                       student's pre-established interest in technology.</p>
+                    <p>Without an email from our support, our event staff will not be able to let you in.</p>
+                </div>
+            {% endif %}
+            <form method="post">
+                <div class="field">
+                    <label for="age">Age</label>
+                    <input type="number" name="age" id="age" value="{{ ticket.age }}" disabled />
+                    <span class="help">Your age on {{ ticket.event.starts_at|date('F j, Y') }}. Contact us to change this.</span>
+                </div>
+                <div class="field">
+                    <label for="parent_name">Guardian Name</label>
+                    <input type="text" name="parent_name" id="parent_name" value="{{ ticket.parent_name }}" required />
+                    <span class="help">Your parent's/guardian's first and last name.</span>
+                </div>
+                <div class="field">
+                    <label for="parent_email">Guardian Email</label>
+                    <input type="email" name="parent_email" id="parent_email" value="{{ ticket.parent_email }}" required />
+                    <span class="help">Your parent's/guardian's contact email.</span>
+                </div>
+                <div class="field">
+                    <label for="parent_phone">Guardian Phone</label>
+                    <input type="text" name="parent_phone" id="parent_phone" value="{{ ticket.parent_phone }}" required />
+                    <span class="help">Your parent's/guardian's phone number.</span>
+                </div>
+                <div class="field">
+                    <label for="parent_secondary_phone">Alt. Phone</label>
+                    <input type="text" name="parent_secondary_phone" id="parent_secondary_phone" value="{{ ticket.parent_secondary_phone }}" required />
+                    <span class="help">In case we can't reach them at the above phone number, which number should we call?</span>
+                </div>
+
+                <input type="submit" value="Save" />
+            </form>
+        {% endif %}
+    </section>
+{% endblock %}

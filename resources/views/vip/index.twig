@@ -1,0 +1,18 @@
+{% extends "template.twig" %}
+{% block section %}vip{% endblock %}
+{% block page %}index{% endblock %}
+{% block title %}CodeDay Ticket Search{% endblock %}
+{% block nav %}<nav><ul><li><a href="/">Ticket Lookup</a></li></ul></nav>{% endblock %}
+{% block content %}
+    <h3>Attending CodeDay?</h3>
+    <p>Enter your email and we'll try to find your ticket.</p>
+
+    <form method="post">
+        <input type="email" name="email" id="email" placeholder="you@gmail.com" />
+        <input type="submit" value="Find My Tickets" />
+    </form>
+{% endblock %}
+{% block scripts %}
+    {% set event = ticket.event %}
+    {% include "parts/map.twig" %}
+{% endblock %}

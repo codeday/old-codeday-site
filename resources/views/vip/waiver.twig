@@ -1,0 +1,25 @@
+{% extends "template.twig" %}
+{% block section %}vip{% endblock %}
+{% block page %}waiver{% endblock %}
+{% block title %}Manage Your CodeDay Ticket{% endblock %}
+{% block meta %}
+    <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+{% block nav %}<nav><ul><li><a href="/{{ ticket.id }}">{{ ticket.name }}</a></li></ul></nav>{% endblock %}
+{% block content %}
+    <section class="waiver" id="waiver">
+        <iframe src="{{ url }}?hidenav=1&hidetext=1"></iframe>
+    </section>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        {% if ticket.age < 18 %}alert("Please get your parent to sign this waiver.");{% endif %}
+        window.addEventListener("message", function (event) {
+            var origin = event.origin || event.originalEvent.origin;
+            if (origin !== "https://app.legalesign.com") return;
+            if (event.data != "signed") return;
+            document.getElementById('waiver').innerHTML = "<p>Please wait...</p>";
+            window.location.href = "syncwaiver";
+        }, false);
+    </script>
+{% endblock %}

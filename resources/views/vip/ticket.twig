@@ -1,101 +1,59 @@
-{% extends "template.twig" %}
-{% block section %}vip{% endblock %}
-{% block page %}index{% endblock %}
-{% block title %}Manage Your CodeDay Ticket{% endblock %}
-{% block meta %}
-    <meta name="robots" content="noindex,nofollow" />
-{% endblock %}
-{% block nav %}<nav><ul><li><a href="https://codeday.org/{{ ticket.event.webname }}">Full Event Details</a></li></ul></nav>{% endblock %}
-{% block content %}
-    <section class="info">
-        <section class="ticket">
-            <span class="name">{{ ticket.name }}</span>
-            <span class="type">{{ ticket.type }}</span>
-            <span class="event">{{ ticket.event.name }}</span>
-            <span class="barcode">
-                <img src="/{{ ticket.id }}/ticket/barcode" />
-            </span>
-            <span class="download">
-                <a href="/{{ ticket.id }}/ticket"><img src="/assets/img/ticket-print.png" /></a>
-                <a href="/{{ ticket.id }}/ticket/passbook"><img src="/assets/img/ticket-apple.png" /></a>
-            </span>
-        </section>
-        <section class="event">
-            <h3>About the Event</h3>
-            <div id="map"></div>
-            <section class="address">
-                <a href="https://www.google.com/maps/place/{{ ticket.event.venue.full_address|url_encode }}" target="_blank">
-                    {{ ticket.event.venue.name }}<br />
-                    {{ ticket.event.venue.address.line_1 }}<br />
-                    {% if ticket.event.venue.address.line_2 %}
-                        {{ ticket.event.venue.address.line_2 }}<br />
-                    {% endif %}
-                    {{ ticket.event.venue.address.city }}, {{ ticket.event.venue.address.state }} {{ ticket.event.venue.address.postal }}
-                </a>
-            </section>
-            <section class="time">
-                {% if ticket.type == 'judge' %}
-                    {{ ticket.event.ends_at|date('F j') }}<br />
-                    9am-12pm
+{% extends "vip/ticket-template.twig" %}
+{% block subpage %}ticket{% endblock %}
+{% block next %}
+    {% if ticket.type == 'student' or ticket.type == 'volunteer' %}
+        <section class="actions">
+            <h3>What's Next?</h3>
+            <ul>
+                {% set parent_done = ticket.parent_email or ticket.parent_information_exempt %}
+                {% set waiver_done = ticket.waiver_pdf %}
+                <li><a href="/{{ ticket.id }}/parent" class="parent {% if parent_done %}done{% endif %}"><span class="icon"></span><span class="label">Parent Info</span></a></li>
+                <li><a href="{% if waiver_done %}{{ ticket.waiver_pdf }}{% elseif parent_done %}/{{ ticket.id }}/waiver{% else %}#{% endif %}" class="waiver {% if waiver_done %}done{% endif %}"><span class="icon"></span><span class="label">Sign Waiver</span></a></li>
+                {% if ticket.event.ends_at < (null | date('U')) %}
+                    <li><a href="#" class="survey"><span class="icon"></span><span class="label">Survey</span></a></li>
+                    <li><a href="/{{ ticket.id }}/feedback" class="survey"><span class="icon"></span><span class="label">Feedback</span></a></li>
                 {% else %}
-                    {{ ticket.event.starts_at|date('F j') }}-{{ ticket.event.ends_at|date('j') }}<br />
-                    {{ i18n('common.noon-noon') }}
+                    <li><a href="/{{ ticket.id }}/survey" class="survey {% if not waiver_done %}waiting{% endif %}"><span class="icon"></span><span class="label">Survey</span></a></li>
                 {% endif %}
-            </section>
+            </ul>
         </section>
-    </section>
-    <section class="next">
-        {% if ticket.type == 'student' or ticket.type == 'volunteer' %}
-            <section class="actions">
-                <h3>What's Next?</h3>
-                <ul>
-                    <li><a href="https://clear.codeday.org/e/parent?r={{ ticket.id }}{# /{{ ticket.id }}/parent #}" class="parent"><span class="icon"></span><span class="label">Parent Info</span></a></li>
-                    <li><a href="#{# /{{ ticket.id }}/waiver #}" class="waiver"><span class="icon"></span><span class="label">Sign Waiver</span></a></li>
-                    {# <li><a href="https://google.com/" class="survey"><span class="icon"></span><span class="label">Survey</span></a></li> #}
-                </ul>
-            </section>
+    {% endif %}
+    <section class="letter">
+        <p>{{ ticket.first_name }},</p>
+        {% if ticket.type == 'teacher' %}
+            <p>All of us at StudentRND just wanted to say &ldquo;thank you&rdquo; for registering for CodeDay!</p>
+            <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
+               long-term, to inspire students to continue programming. It means a lot when educators like you take part.</p>
+            <p>Please let me know if you have any thoughts. I can be reached at tylermenezes@srnd.org.</p>
+        {% elseif ticket.type == 'judge' or ticket.type == 'volunteer' or ticket.type == 'mentor' or ticket.type == 'sponsor' %}
+            <p>All of us at StudentRND just wanted to say &ldquo;thank you&rdquo; for helping with CodeDay!</p>
+            <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
+               long-term, to inspire students to continue programming. We can only do that thanks to the support of people
+               like you.</p>
+        {% elseif ticket.type == 'vip' %}
+            <p>I just wanted to take a moment to welcome you to our community.</p>
+            <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
+               long-term, to inspire students to continue programming. It means a lot when people like you take part.</p>
+            <p>After you see what CodeDay is about, please let me know if you have any thoughts. I can be reached at
+               tylermenezes@srnd.org.</p>
+        {% elseif ticket.type == 'press' %}
+            <p>I just wanted to take a moment to thank you for attending CodeDay!</p>
+            <p>CodeDay is a 24-hour programming event for high school and college students across the state. We created
+               CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
+               long-term, to inspire students to continue programming. In just a few short years it's grown to over 40 cities
+               and tens of thousands of students.</p>
+            <p>If you have any questions, please contact me at (206) 739-4741. Thanks.</p>
+        {% else %}
+            <p>All of us at StudentRND just wanted to take a second to say &ldquo;thank you&rdquo; for attending CodeDay!</p>
+            <p>CodeDay is an event about connecting the community. Whether you've never written a line of code in your life,
+               or you've got hundreds of stars on Github, meeting the community can be a little scary.</p>
+            <p>So if you're new here, thanks for giving it a shot! And if you've been here before, thanks for helping welcome
+               others. We're excited to see you on {{ ticket.event.starts_at|date('F j') }}.</p>
         {% endif %}
-        <section class="letter">
-            <p>{{ ticket.first_name }},</p>
-            {% if ticket.type == 'teacher' %}
-                <p>All of us at StudentRND just wanted to say &ldquo;thank you&rdquo; for registering for CodeDay!</p>
-                <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
-                   long-term, to inspire students to continue programming. It means a lot when educators like you take part.</p>
-                <p>Please let me know if you have any thoughts. I can be reached at tylermenezes@srnd.org.</p>
-            {% elseif ticket.type == 'judge' or ticket.type == 'volunteer' or ticket.type == 'mentor' or ticket.type == 'sponsor' %}
-                <p>All of us at StudentRND just wanted to say &ldquo;thank you&rdquo; for helping with CodeDay!</p>
-                <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
-                   long-term, to inspire students to continue programming. We can only do that thanks to the support of people
-                   like you.</p>
-            {% elseif ticket.type == 'vip' %}
-                <p>I just wanted to take a moment to welcome you to our community.</p>
-                <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
-                   long-term, to inspire students to continue programming. It means a lot when people like you take part.</p>
-                <p>After you see what CodeDay is about, please let me know if you have any thoughts. I can be reached at
-                   tylermenezes@srnd.org.</p>
-            {% elseif ticket.type == 'press' %}
-                <p>I just wanted to take a moment to thank you for attending CodeDay!</p>
-                <p>CodeDay is a 24-hour programming event for high school and college students across the state. We created
-                   CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
-                   long-term, to inspire students to continue programming. In just a few short years it's grown to over 40 cities
-                   and tens of thousands of students.</p>
-                <p>If you have any questions, please contact me at (206) 739-4741. Thanks.</p>
-            {% else %}
-                <p>All of us at StudentRND just wanted to take a second to say &ldquo;thank you&rdquo; for attending CodeDay!</p>
-                <p>CodeDay is an event about connecting the community. Whether you've never written a line of code in your life,
-                   or you've got hundreds of stars on Github, meeting the community can be a little scary.</p>
-                <p>So if you're new here, thanks for giving it a shot! And if you've been here before, thanks for helping welcome
-                   others. We're excited to see you on {{ ticket.event.starts_at|date('F j') }}.</p>
-            {% endif %}
-            <p>Best,<br />
-               <img src="/assets/img/tyler-sig.png" /><br />
-               Tyler Menezes<br />
-               Executive Director<br />
-               StudentRND</p>
-        </section>
+        <p>Best,<br />
+           <img src="/assets/img/tyler-sig.png" /><br />
+           Tyler Menezes<br />
+           Executive Director<br />
+           StudentRND</p>
     </section>
-{% endblock %}
-{% block scripts %}
-    {% set event = ticket.event %}
-    {% include "parts/map.twig" %}
 {% endblock %}

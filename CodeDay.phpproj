@@ -4775,7 +4775,13 @@
     <Content Include="public\assets\img\ticket-apple.png" />
     <Content Include="public\assets\img\ticket-print.png" />
     <Content Include="resources\assets\sass\pages\vip.sass" />
+    <Content Include="resources\views\vip\all-tickets.twig" />
+    <Content Include="resources\views\vip\survey.twig" />
+    <Content Include="resources\views\vip\waiver.twig" />
     <Content Include="resources\views\vip\pdf.twig" />
+    <Content Include="resources\views\vip\index.twig" />
+    <Content Include="resources\views\vip\parent.twig" />
+    <Content Include="resources\views\vip\ticket-template.twig" />
     <Content Include="resources\views\vip\ticket.twig" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,52 @@
+{% extends "template.twig" %}
+{% block section %}vip{% endblock %}
+{% block page %}{{ block('subpage') }}{% endblock %}
+{% block title %}Manage Your CodeDay Ticket{% endblock %}
+{% block meta %}
+    <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+{% block nav %}<nav><ul><li><a href="/{{ ticket.id }}">{{ ticket.name }}</a></li></ul></nav>{% endblock %}
+{% block content %}
+    <section class="info">
+        <section class="ticket">
+            <a class="name" href="/{{ ticket.id }}">{{ ticket.name }}</a>
+            <span class="type">{{ ticket.type }}</span>
+            <span class="event">{{ ticket.event.name }}</span>
+            <span class="barcode">
+                <img src="/{{ ticket.id }}/ticket/barcode" />
+            </span>
+            <span class="download">
+                <a href="/{{ ticket.id }}/ticket"><img src="/assets/img/ticket-print.png" /></a>
+                <a href="/{{ ticket.id }}/ticket/passbook"><img src="/assets/img/ticket-apple.png" /></a>
+            </span>
+        </section>
+        <section class="event">
+            <h3>About the Event</h3>
+            <div id="map"></div>
+            <section class="address">
+                <a href="https://www.google.com/maps/place/{{ ticket.event.venue.full_address|url_encode }}" target="_blank">
+                    {{ ticket.event.venue.name }}<br />
+                    {{ ticket.event.venue.address.line_1 }}<br />
+                    {% if ticket.event.venue.address.line_2 %}
+                        {{ ticket.event.venue.address.line_2 }}<br />
+                    {% endif %}
+                    {{ ticket.event.venue.address.city }}, {{ ticket.event.venue.address.state }} {{ ticket.event.venue.address.postal }}
+                </a>
+            </section>
+            <section class="time">
+                {% if ticket.type == 'judge' %}
+                    {{ ticket.event.ends_at|date('F j') }}<br />
+                    9am-12pm
+                {% else %}
+                    {{ ticket.event.starts_at|date('F j') }}-{{ ticket.event.ends_at|date('j') }}<br />
+                    {{ i18n('common.noon-noon') }}
+                {% endif %}
+            </section>
+        </section>
+    </section>
+    <section class="next">
+        {{ block('next') }}
+    </section>
+    {% set event = ticket.event %}
+    {% include "parts/map.twig" %}
+{% endblock %}
