@@ -9,6 +9,17 @@
 {% block content %}
     <section class="waiver" id="waiver">
         <iframe src="{{ url }}?hidenav=1&hidetext=1"></iframe>
+        <section class="notice">
+            <section class="esign">
+                <p>To submit this document online, you must agree to our e-signature policy as follows: This is a legally
+                   binding document. You must be 18 or older to sign, and must be either the attendee, or the attendee's
+                   parent or other legal guardian. We will store this document on our servers for a period of no less
+                   than four years, and email you a copy which you will be responsible for retaining.</p>
+            </section>
+            <section class="powered">
+                <a href="https://legalesign.com/"><img src="/assets/img/legalesign_powered.png" /></a>
+            </section>
+        </section>
     </section>
 {% endblock %}
 {% block scripts %}

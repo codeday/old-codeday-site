@@ -12,6 +12,9 @@ class IndexController extends Controllers\Controller
     {
         if (\Route::input('ticket')) {
             $this->ticket = Models\Ticket::find(\Route::input('ticket'));
+            if (!$this->ticket) {
+                \App::abort(404);
+            }
             \View::share('ticket', $this->ticket);
         }
     }

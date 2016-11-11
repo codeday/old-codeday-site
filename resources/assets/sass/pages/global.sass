@@ -97,9 +97,9 @@ body.global
             text-align: center
 
     article.sponsors
+        text-align: center
         ul
             padding: 0
-            text-align: center
             li
                 list-style-type: none
                 +span-columns(3)
@@ -115,3 +115,11 @@ body.global
                         size: contain
                         position: 50% 50%
                         repeat: no-repeat
+            &.small-sponsors li
+                +span-columns(2)
+                &:nth-child(6n)
+                    +omega
+                display: inline-block
+                float: none
+                span
+                    height: 5rem
