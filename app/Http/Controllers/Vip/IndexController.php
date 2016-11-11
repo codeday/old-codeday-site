@@ -24,7 +24,6 @@ class IndexController extends Controllers\Controller
     public function postFind()
     {
         $tickets = Models\Ticket::findByEmail(\Input::get('email'));
-
         return \View::make('vip/all-tickets', ['email' => \Input::get('email'), 'tickets' => $tickets->all_registrations]);
     }
 

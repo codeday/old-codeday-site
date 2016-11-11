@@ -12,7 +12,7 @@
         <ul class="tickets">
             {% for ticket in tickets %}
                 <li><a href="/{{ ticket.id }}">
-                    {{ ticket.name }} - {{ ticket.registered_at|date('F j, Y') }}
+                    {{ ticket.name }} - {{ ticket.id }}
                 </a></li>
             {% endfor %}
         </ul>
