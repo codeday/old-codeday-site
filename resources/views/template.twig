@@ -55,6 +55,8 @@
             {{ event.custom_css }}
         </style>
     {% endif %}
+
+    {{ block('headscripts') }}
 </head>
 <body class="lang-{{lang}} {{ block('section') }} {{ block('page') }}"
       data-api-base="{{ api_base_public }}" data-api-public="{{ api_access_token }}"
