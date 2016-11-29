@@ -43,10 +43,8 @@
                 <li>{{ i18n('register.term-3') }}</li>
                 <li>{{ i18n('register.term-4', {'link': 'https://studentrnd.org/privacy'}) }}</li>
                 <li>{{ i18n('register.term-5', {'link': 'https://legalesign.com/'}) }}</li>
-                <script language="JavaScript" type="text/javascript">
-                    TrustLogo("https://codeday.org/assets/img/comodo-secure.png", "SC5", "none");
-                </script>
             </ul>
+            <a href="https://ssl.comodo.com/" target="_blank"><img src="https://codeday.org/assets/img/comodo-secure.png" /></a>
         </section>
     </section>
 
@@ -101,13 +99,6 @@
         </div>
     </section>
 </form>
-{% endblock %}
-{% block headscripts %}
-    <script type="text/javascript">//<![CDATA[
-        var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
-        document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-        //]]>
-    </script>
 {% endblock %}
 {% block scripts %}
     {% include "parts/map.twig" %}
