@@ -26,7 +26,7 @@ abstract class ClearModel extends RemoteModel {
         $opts = array('http' =>
             array(
                 'method'  => 'POST',
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'header'  => 'Content-Type: application/x-www-form-urlencoded',
                 'content' => http_build_query($data)
             )
         );
