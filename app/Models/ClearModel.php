@@ -23,17 +23,16 @@ abstract class ClearModel extends RemoteModel {
         $data['access_token'] = \Config::get('clear.access_token');
         $data['secret'] = \Config::get('clear.secret');
         $url = \Config::get('clear.api_base').$endpoint;
-        $opts = array('http' =>
-            array(
-                'method'  => 'POST',
-                'header'  => 'Content-Type: application/x-www-form-urlencoded',
-                'content' => http_build_query($data)
-            )
-        );
+        
+        $ch = curl_init($url);
 
-        $context  = stream_context_create($opts);
-        $result = file_get_contents($url, false, $context);
-        return json_decode($result, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($response, true);
     }
 
     public function __isset($key) {
