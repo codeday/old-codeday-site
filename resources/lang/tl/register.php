@@ -14,7 +14,7 @@ return array(
     'add-attendee'      => "Magdagdag ng Ibang Dadalo",
     'rm-attendee'       => "Alisin ang Huli",
     'payment'           => "Bayad",
-    'earlybird'         => "includes earlybird discount",
+    'earlybird'         => "kasama ang diskuwento sa maaaga",
     'discount-no'       => "Walang diskuwento",
     'total'             => "Kabuuan!",
     'promo-ask'         => "Magkaroon ng code ng promo?",

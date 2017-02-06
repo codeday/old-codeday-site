@@ -14,7 +14,7 @@ return array(
     'add-attendee'      => "Thêm người tham dự khác",
     'rm-attendee'       => "Gỡ bỏ mục cuối cùng",
     'payment'           => "Thanh toán",
-    'earlybird'         => "includes earlybird discount",
+    'earlybird'         => "bao gồm giảm giá đặt sớm",
     'discount-no'       => "Không giảm giá",
     'total'             => "Tổng cộng",
     'promo-ask'         => "Có mã khuyến mãi",

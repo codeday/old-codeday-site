@@ -14,7 +14,7 @@ return array(
     'add-attendee'      => "Ajouter un autre participant",
     'rm-attendee'       => "Retirez le dernier",
     'payment'           => "Paiement",
-    'earlybird'         => "includes earlybird discount",
+    'earlybird'         => "inclut le rabais lève-tôt",
     'discount-no'       => "Pas de réduction",
     'total'             => "Total",
     'promo-ask'         => "Vous avez un code promo?",
