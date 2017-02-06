@@ -42,6 +42,11 @@ class StaticController extends Controller {
         return \View::make('arizona');
     }
 
+    public function getPromo()
+    {
+        return \View::make('promo');
+    }
+
     public function postSwag()
     {
         if (!\Session::get('swag-request')) {

@@ -14,6 +14,7 @@ return array(
     'add-attendee'      => "Añadir otro asistente",
     'rm-attendee'       => "Eliminar lo último",
     'payment'           => "Pagos",
+    'earlybird'         => "incluye descuento por compra anticipada",
     'discount-no'       => "Sin descuento",
     'total'             => "Total",
     'promo-ask'         => "¿Tienes un código promocional?",
@@ -25,6 +26,6 @@ return array(
     'success-body'      => "Tu registro se ha confirmado; 
 ¡Nos dará mucho gusto conocerte en CodeDay!",
     'ticket-download'   => "Descarga tus boletos",
-    'receipt-download'  => "Descarga tu recibo"
+    'receipt-download'  => "Descarga tu recibo",
 
 );

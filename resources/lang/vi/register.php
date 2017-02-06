@@ -14,6 +14,7 @@ return array(
     'add-attendee'      => "Thêm người tham dự khác",
     'rm-attendee'       => "Gỡ bỏ mục cuối cùng",
     'payment'           => "Thanh toán",
+    'earlybird'         => "includes earlybird discount",
     'discount-no'       => "Không giảm giá",
     'total'             => "Tổng cộng",
     'promo-ask'         => "Có mã khuyến mãi",
@@ -24,6 +25,6 @@ return array(
     'success-head'      => "Bạn sẽ đến CodeDay!",
     'success-body'      => "Lượt đăng ký của bạn đã được xác nhận; chúng tôi rất mong được gặp bạn ở CodeDay!",
     'ticket-download'   => "Tải về Vé của bạn",
-    'receipt-download'  => "Tải Hóa đơn của bạn"
+    'receipt-download'  => "Tải Hóa đơn của bạn",
 
 );

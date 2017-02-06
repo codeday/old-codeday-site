@@ -139,18 +139,29 @@ body.event.register
 
                 &.total
                     font-weight: 700
+                    .earlybird
+                        +span-columns(6)
+                        +shift(6)
+                        +omega
+                        font-size: 0.833rem
+                        font-weight: 500
+                        color: $color-red
+                        text-align: left
 
             .promo.link
+                margin-top: 0.5rem
                 cursor: pointer
-                font-size: 1.1rem
+                font-size: 0.833rem
                 color: $color-gray
                 display: inline-block
+                padding: 0.25rem 1rem
+                border: 1px solid $color-gray
             .promo-picker
                 display: none
 
         .finalize
             clear: both
-            padding-top: 1rem
+            padding-top: 0.5rem
             text-align: center
             button
                 padding: 1.25rem 3rem

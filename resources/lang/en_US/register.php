@@ -14,6 +14,7 @@ return array(
     'add-attendee'      => "Add Another Attendee",
     'rm-attendee'       => "Remove Last",
     'payment'           => "Payment",
+    'earlybird'         => "includes earlybird discount",
     'discount-no'       => "No discount",
     'total'             => "Total",
     'promo-ask'         => "Have a promo code?",
@@ -24,6 +25,6 @@ return array(
     'success-head'      => "You're going to CodeDay!",
     'success-body'      => "Your registration was confirmed; we're excited to meet you at CodeDay!",
     'ticket-download'   => "Download your Tickets",
-    'receipt-download'  => "Download your Receipt"
+    'receipt-download'  => "Download your Receipt",
 
 );

@@ -14,6 +14,7 @@ return array(
     'add-attendee'      => "Magdagdag ng Ibang Dadalo",
     'rm-attendee'       => "Alisin ang Huli",
     'payment'           => "Bayad",
+    'earlybird'         => "includes earlybird discount",
     'discount-no'       => "Walang diskuwento",
     'total'             => "Kabuuan!",
     'promo-ask'         => "Magkaroon ng code ng promo?",
@@ -24,6 +25,6 @@ return array(
     'success-head'      => "Pupunta ka sa CodeDay!",
     'success-body'      => "Nakumpirma na ang iyong pagrerehistro; nasasabik kaming makilala ka sa CodeDay!",
     'ticket-download'   => "I-download ang iyong mga Tiket",
-    'receipt-download'  => "I-download ang iyong Resibo"
+    'receipt-download'  => "I-download ang iyong Resibo",
 
 );

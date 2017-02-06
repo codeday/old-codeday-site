@@ -36,6 +36,7 @@ $routes = function() {
     \Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');
     \Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
 
+    \Route::get('/promo', '\CodeDay\Http\Controllers\StaticController@getPromo');
     \Route::get('/arizona', '\CodeDay\Http\Controllers\StaticController@getArizona');
     \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');
     \Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
