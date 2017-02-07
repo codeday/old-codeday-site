@@ -1,17 +1,38 @@
 body.event.index
+    .wistia_responsive_padding
+        display: none
+    
     section.hero, & > header
         background-color: transparent
         color: $color-white
 
+    &.mobile section.hero
+        background-image: url(/assets/img/hero3.jpg)
+
     section.hero
         background:
-            image: url(/assets/img/hero3.jpg)
             size: cover
             position: 50% 50%
             repeat: no-repeat
-        margin-top: -5rem
-        padding: 12rem 1rem 5rem
+        top: -6rem
+        padding: 10rem 1rem 4rem
         text-align: center
+        width: 100%
+        margin-bottom: -6rem
+
+        position: relative
+        overflow: hidden
+
+        video
+            height: 100%
+            width: 240vh
+            min-width: 100%
+            min-height: 41.67vw
+            position: absolute
+            left: 50%
+            top: 50%
+            transform: translate(-50%, -50%)
+            z-index: -1000
 
         article.details
             text-transform: uppercase
@@ -25,19 +46,25 @@ body.event.index
                     size: 1.7rem
 
         article.lead
-            margin-bottom: 2rem
+            margin-bottom: 1rem
             h2
                 font:
                     size: 2.5rem
                     weight: 700
                 margin: 0
-            p
-                +span-columns(8)
-                +shift(2)
+
+        .video-play-link
+            font:
+                family: "foundation-icons"
+                weight: 300
+                size: 6rem
+            text-decoration: none
+            &:hover
+                color: $color-white
 
         article.action
             clear: both
-            padding-top: 2rem
+            padding-top: 1rem
 
             .sold-out-label, .notify-label
                 display: block
@@ -131,9 +158,25 @@ body.event.index
     article.what-is
         section.details
             +span-columns(6)
-        section.video
+        section.picture
             +span-columns(6)
             +omega
+            & > img
+                max-width: 100%
+                height: auto
+            .slideshow
+                padding: 0
+                margin-top: 1rem
+                .photo
+                    width: 100%
+                    height: 100%
+                    background:
+                        repeat: no-repeat
+                        position: 50% 50%
+                        size: cover
+
+            .slidesjs-pagination, .slidesjs-navigation
+                display: none !important
 
     article.how-works
         ul
@@ -169,22 +212,6 @@ body.event.index
                         weight: 700
                         size: 1.2rem
 
-    article.photos
-        display: none
-        padding-top: 1rem
-        .slideshow
-            padding: 0
-            margin-top: 1rem
-            .photo
-                width: 100%
-                height: 100%
-                background:
-                    repeat: no-repeat
-                    position: 50% 50%
-                    size: cover
-
-        .slidesjs-pagination, .slidesjs-navigation
-            display: none !important
     article.map
         & > div
             width: 100%

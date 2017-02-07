@@ -68,7 +68,7 @@
     {% endif %}
 
     {# Top Bar #}
-    <header class="{% if block('hero') %}with-hero{% else %}no-hero{% endif %}{% if event.notice %} with-notice{% endif %}">
+    <header class="{% if block('hero') or block('heroraw') %}with-hero{% else %}no-hero{% endif %}{% if event.notice %} with-notice{% endif %}">
         <div class="wrap"><div class="wrap-inner">
             <section class="site-title">
                 <h1><a href="https://codeday.org{{ langPrefix }}/">CodeDay{% if event %} {{ event.region_name }}{% endif %}{% if block('title') %}: {{ block('title') }}{% endif %}</a></h1>
@@ -133,6 +133,10 @@
             <div class="wrap"><div class="wrap-inner">
                 {{ block('hero') }}
             </div></div>
+        </section>
+    {% elseif block('heroraw') %}
+        <section class="hero">
+            {{ block('heroraw') }}
         </section>
     {% endif %}
 

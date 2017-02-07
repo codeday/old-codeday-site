@@ -4,7 +4,7 @@ return array(
     'cities-hours'          => ":cities cities. 24 hours of fun.",
     'description'           => "At CodeDay, student programmers and artists get together, build cool apps &amp; games, and have a lot of fun. You can attend whether you're a total beginner or very experienced.",
     'descr-detail-1'        => "CodeDay is a nationwide event where student programmers, artists, musicians, actors, and everyone else can get together and build apps &amp; games for 24 hours. Students of all skill levels are welcome&thinsp;&mdash;&thinsp;we have workshops and mentors who can help if you're new!",
-    'descr-detail-2'        => "At the beginning of CodeDay, everyone with an idea comes up and pitches it to the group. If you're on your own, or just without an idea, this is the time for you to build whatever you want.",
+    'descr-detail-2'        => "At the beginning of CodeDay, everyone with an idea comes up and pitches it to the group. If you're on your own, or just without an idea, this is the time for you to find a team.",
     'fun-friends-awesome'   => "Have fun, make friends, build something awesome.",
     'hosted-at'             => "Hosted at <a href=\":link\" target=\"_blank\">:name</a>",
     'hosted-at-plain'       => "Hosted at :name",

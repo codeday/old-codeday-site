@@ -977,17 +977,34 @@ body.sponsor article.stats {
     border-top: 3px solid #AAA;
     margin: 2rem auto; }
 
+body.event.index .wistia_responsive_padding {
+  display: none; }
 body.event.index section.hero, body.event.index > header {
   background-color: transparent;
   color: #fff; }
+body.event.index.mobile section.hero {
+  background-image: url(/assets/img/hero3.jpg); }
 body.event.index section.hero {
-  background-image: url(/assets/img/hero3.jpg);
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  margin-top: -5rem;
-  padding: 12rem 1rem 5rem;
-  text-align: center; }
+  top: -6rem;
+  padding: 10rem 1rem 4rem;
+  text-align: center;
+  width: 100%;
+  margin-bottom: -6rem;
+  position: relative;
+  overflow: hidden; }
+  body.event.index section.hero video {
+    height: 100%;
+    width: 240vh;
+    min-width: 100%;
+    min-height: 41.67vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1000; }
   body.event.index section.hero article.details {
     text-transform: uppercase;
     margin-bottom: 0.5rem;
@@ -997,22 +1014,21 @@ body.event.index section.hero {
       display: block;
       font-size: 1.7rem; }
   body.event.index section.hero article.lead {
-    margin-bottom: 2rem; }
+    margin-bottom: 1rem; }
     body.event.index section.hero article.lead h2 {
       font-size: 2.5rem;
       font-weight: 700;
       margin: 0; }
-    body.event.index section.hero article.lead p {
-      float: left;
-      display: block;
-      margin-right: 2.35765%;
-      width: 65.88078%;
-      margin-left: 17.05961%; }
-      body.event.index section.hero article.lead p:last-child {
-        margin-right: 0; }
+  body.event.index section.hero .video-play-link {
+    font-family: "foundation-icons";
+    font-weight: 300;
+    font-size: 6rem;
+    text-decoration: none; }
+    body.event.index section.hero .video-play-link:hover {
+      color: #fff; }
   body.event.index section.hero article.action {
     clear: both;
-    padding-top: 2rem; }
+    padding-top: 1rem; }
     body.event.index section.hero article.action .sold-out-label, body.event.index section.hero article.action .notify-label {
       display: block;
       margin-bottom: 1rem;
@@ -1095,14 +1111,28 @@ body.event.index article.what-is section.details {
   width: 48.82117%; }
   body.event.index article.what-is section.details:last-child {
     margin-right: 0; }
-body.event.index article.what-is section.video {
+body.event.index article.what-is section.picture {
   float: left;
   display: block;
   margin-right: 2.35765%;
   width: 48.82117%;
   margin-right: 0; }
-  body.event.index article.what-is section.video:last-child {
+  body.event.index article.what-is section.picture:last-child {
     margin-right: 0; }
+  body.event.index article.what-is section.picture > img {
+    max-width: 100%;
+    height: auto; }
+  body.event.index article.what-is section.picture .slideshow {
+    padding: 0;
+    margin-top: 1rem; }
+    body.event.index article.what-is section.picture .slideshow .photo {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: cover; }
+  body.event.index article.what-is section.picture .slidesjs-pagination, body.event.index article.what-is section.picture .slidesjs-navigation {
+    display: none !important; }
 body.event.index article.how-works ul {
   margin-top: 0;
   padding: 0; }
@@ -1142,20 +1172,6 @@ body.event.index article.faq {
         font-family: "proxima-nova", "Proxima Nova", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
         font-weight: 700;
         font-size: 1.2rem; }
-body.event.index article.photos {
-  display: none;
-  padding-top: 1rem; }
-  body.event.index article.photos .slideshow {
-    padding: 0;
-    margin-top: 1rem; }
-    body.event.index article.photos .slideshow .photo {
-      width: 100%;
-      height: 100%;
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
-      background-size: cover; }
-  body.event.index article.photos .slidesjs-pagination, body.event.index article.photos .slidesjs-navigation {
-    display: none !important; }
 body.event.index article.map > div {
   width: 100%;
   height: 20rem; }
@@ -2270,6 +2286,8 @@ body.vip.ticket .next .actions {
           background-image: url(/assets/img/survey.svg); }
 
 body > header {
+  position: relative;
+  z-index: 1000;
   display: block;
   background-color: #cb7972;
   color: #fff; }

@@ -1,53 +1,60 @@
 {% extends "template.twig" %}
 {% block section %}event{% endblock %}
-{% block page %}index{% endblock %}
+{% block page %}index {% if is_mobile %}mobile{% endif %}{% endblock %}
 
-{% block hero %}
-    <article class="details">
-        <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>
-        <span class="time">{{ i18n('common.noon-noon') }}</span>
-    </article>
-    <article class="lead">
-        <h2>{{ i18n('event.build', {'region': event.region_name}) }}</h2>
-        <p>{{ i18n('event.invited', {'region': event.region_name}) }}</p>
-    </article>
-    <article class="action">
-        {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
-            <a href="{{ langPrefix }}/{{ event.webname }}/register" class="register">
-                {% if event.registration_info.remaining < (event.registration_info.max * 0.10) %}
-                    {{ i18n('event.cta-ticket-warn', {'remaining': event.registration_info.remaining}) }}
+{% block heroraw %}
+    {% if not is_mobile %}{# Don't use the bandwidth #}
+        <video class="video-background" preload muted autoplay loop>
+            <source src="/assets/mp4/event-bg.mp4" type="video/mp4" />
+        </video>
+    {% endif %}
+    <div class="wrap"><div class="wrap-inner">
+        <article class="details">
+            <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>
+            <span class="time">{{ i18n('common.noon-noon') }}</span>
+        </article>
+        <article class="lead">
+            <h2>{{ i18n('event.build', {'region': event.region_name}) }}</h2>
+        </article>
+        <span class="wistia_embed wistia_async_n6xc4pm90n popover=true popoverAnimateThumbnail=true popoverContent=link videoFoam=true" style="display:inline"><a href="#" class="video-play-link">&#xf196;</a></span>
+        <article class="action">
+            {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
+                <a href="{{ langPrefix }}/{{ event.webname }}/register" class="register">
+                    {% if event.registration_info.remaining < (event.registration_info.max * 0.10) %}
+                        {{ i18n('event.cta-ticket-warn', {'remaining': event.registration_info.remaining}) }}
+                    {% else %}
+                        {{ i18n('event.cta-ticket-normal') }}
+                    {% endif %}</a>
+            {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
+                {% if event.related_events %}
+                    <span class="sold-out-label">{{ i18n('event.cta-ticket-out-near') }}</span>
+                    {% for related_event in event.related_events %}
+                        <a href="{{ langPrefix }}/{{ related_event.webname }}" class="nearby-avail">{{ related_event.region_name }}</a>
+                    {% endfor %}
                 {% else %}
-                    {{ i18n('event.cta-ticket-normal') }}
-                {% endif %}</a>
-        {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
-            {% if event.related_events %}
-                <span class="sold-out-label">{{ i18n('event.cta-ticket-out-near') }}</span>
-                {% for related_event in event.related_events %}
-                    <a href="{{ langPrefix }}/{{ related_event.webname }}" class="nearby-avail">{{ related_event.region_name }}</a>
-                {% endfor %}
+                    <span class="sold-out">{{ i18n('event.cta-ticket-out') }}</span>
+                {% endif %}
             {% else %}
-                <span class="sold-out">{{ i18n('event.cta-ticket-out') }}</span>
+                <span class="notify-label">{{ i18n('event.cta-notify' ) }}</span>
+                <form action="/{{ event.webname }}/notify" method="post" class="notify-signup">
+                    <input type="email" name="email" id="email" placeholder="{{ i18n('common.email-sample') }}" />{#
+                    #}<input type="submit" value="{{ i18n('event.notify-signup') }}">
+                </form>
             {% endif %}
-        {% else %}
-            <span class="notify-label">{{ i18n('event.cta-notify' ) }}</span>
-            <form action="/{{ event.webname }}/notify" method="post" class="notify-signup">
-                <input type="email" name="email" id="email" placeholder="{{ i18n('common.email-sample') }}" />{#
-                #}<input type="submit" value="{{ i18n('event.notify-signup') }}">
-            </form>
-        {% endif %}
-        {% if event.venue %}
-            <span class="venue">{{ i18n('common.hosted-at', {'link': 'https://www.google.com/maps/place/'~(event.venue.full_address|url_encode), 'name': event.venue.name}) }}</span>
-        {% endif %}
+            {% if event.venue %}
+                <span class="venue">{{ i18n('common.hosted-at', {'link': 'https://www.google.com/maps/place/'~(event.venue.full_address|url_encode), 'name': event.venue.name}) }}</span>
+            {% endif %}
 
-        {% if event.related_events and not (event.registration_info.is_open and event.registration_info.remaining == 0) %}
-            <section class="nearby">
-                <span class="label">{{ i18n('event.nearby') }}</span>
-                {% for related_event in event.related_events %}
-                    <a href="{{ langPrefix }}/{{ related_event.webname }}" class="event">{{ related_event.region_name }}</a>
-                {% endfor %}
-            </section>
-        {% endif %}
-    </article>
+            {% if event.related_events and not (event.registration_info.is_open and event.registration_info.remaining == 0) %}
+                <section class="nearby">
+                    <span class="label">{{ i18n('event.nearby') }}</span>
+                    {% for related_event in event.related_events %}
+                        <a href="{{ langPrefix }}/{{ related_event.webname }}" class="event">{{ related_event.region_name }}</a>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        </article>
+    </div></div>
 {% endblock %}
 
 {% block content %}
@@ -57,8 +64,16 @@
             <p>{{ i18n('common.descr-detail-1') }}</p>
             <p>{{ i18n('common.descr-detail-2') }}</p>
         </section>
-        <section class="video">
-            <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_n6xc4pm90n videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
+        <section class="picture">
+            {% if event.hashtag and event.photos|length > 0 %}
+                <div class="slideshow">
+                    {% for photo in event.photos %}
+                        <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <img src="/assets/img/sf-az-team.jpg" />
+            {% endif %}
         </section>
     </article>
 
@@ -128,17 +143,6 @@
         </ul>
     </article>
 
-    {% if event.hashtag and event.photos|length > 0 %}
-        <article class="photos">
-            <h3>{{ i18n('event.previous-events') }}</h3>
-            <div class="slideshow">
-                {% for photo in event.photos %}
-                    <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
-                {% endfor %}
-            </div>
-        </article>
-    {% endif %}
-
     {% if event.venue and event.venue.name != "TBA" %}
         <article class="map">
             <h3>{{ i18n('common.hosted-at-plain', {'name': event.venue.name}) }}:
@@ -194,44 +198,38 @@
 {% endblock %}
 {% block scripts %}
     {% include "parts/map.twig" %}
-    <script src="/assets/js/typed.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        if($(".lead").width() > 900){
-            $("#typed").typed({
-              strings: [
-                "fun",
-                "useful",
-                "entertaining",
-                "inspiring",
-                "unique",
-                "amazing",
-                "g^100r^100e^100a^100t"
-              ],
-              backDelay: 1500,
-              typeSpeed: 50,
-              showCursor: false
-            });
-        }
-      });
-    </script>
     <script src="/assets/js/jquery.slides.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            $(".photos").each(function(){
+            $(".picture").each(function(){
                 $(this).css('display', 'block');
                 $(this).find('.slideshow').slidesjs({
-                    height: (($(this).width()/9)*4),
+                    height: (($(this).width())),
                     play: {
                         active: true,
                         effect: "fade",
                         auto: true,
-                        interval: 4000,
+                        interval: 10000,
                         swap: true,
-                        restartDelay: 4000
+                        restartDelay: 10000
                     }
                 });
             });
         });
+    </script>
+    <script src="//fast.wistia.com/embed/medias/n6xc4pm90n.jsonp" async></script><script src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"></div></div>
+    <script type="text/javascript">
+        window._wq = window._wq || [];
+        _wq.push({ id: "n6xc4pm90n", onReady: function(video) {
+            video.bind("play", function(){
+                if ($('.video-background')) $('.video-background').get(0).pause();
+            });
+            video.bind("pause", function(){
+                if ($('.video-background')) $('.video-background').get(0).play();
+            });
+            video.bind("end", function(){
+                if ($('.video-background')) $('.video-background').get(0).play();
+            });
+        }});
     </script>
 {% endblock %}
