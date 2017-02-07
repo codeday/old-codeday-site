@@ -3,9 +3,9 @@
 <head>
     {% set title = (block('title') ? block('title')~' ~ ' : '')~'CodeDay'~(event ? ' '~event.region_name : '') %}
     {% set shortDescription =
-        (event ? '' : (loaded_batch.events|length)~" cities. 24 hours of fun. ")~"At CodeDay"
-        ~(event ? ' '~event.region_name : '')~", student programmers and artists build cool apps & games. "
-        ~"No experience is needed, and you can join alone or with friends." %}
+        (event or (not loaded_batch.events|length > 0)? '' : (loaded_batch.events|length)~" cities. 24 hours of fun. ")
+        ~"At CodeDay"~(event ? ' '~event.region_name : '')~", student programmers and artists build cool apps & games."
+        ~" No experience is needed, and you can join alone or with friends." %}
     {% set veryShortDescription = (loaded_batch.events|length)~" cities. 24 hours of fun."%}
 
 
