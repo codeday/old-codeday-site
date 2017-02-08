@@ -988,11 +988,11 @@ body.event.index section.hero {
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  top: -6rem;
-  padding: 10rem 1rem 4rem;
+  top: -5rem;
+  padding: 9rem 1rem 3rem;
   text-align: center;
   width: 100%;
-  margin-bottom: -6rem;
+  margin-bottom: -5rem;
   position: relative;
   overflow: hidden; }
   body.event.index section.hero video {
@@ -2494,22 +2494,25 @@ body > footer {
     body.vip .info:last-child, body.vip .next:last-child {
       margin-right: 0; }
   body.event.index section.hero {
-    margin-top: -7rem; }
+    top: -10rem;
+    margin-bottom: -10rem; }
   body.event.index article.what-is {
     padding-top: 0; }
-    body.event.index article.what-is section.details, body.event.index article.what-is section.video {
+    body.event.index article.what-is section.details {
       float: left;
       display: block;
       margin-right: 7.42297%;
       width: 100%;
       display: block;
       margin-right: 0; }
-      body.event.index article.what-is section.details:last-child, body.event.index article.what-is section.video:last-child {
+      body.event.index article.what-is section.details:last-child {
         margin-right: 0; }
-      body.event.index article.what-is section.details::after, body.event.index article.what-is section.video::after {
+      body.event.index article.what-is section.details::after {
         clear: both;
         content: "";
         display: table; }
+    body.event.index article.what-is section.video {
+      display: none; }
   body.event.index article.how-works {
     padding-top: 0; }
     body.event.index article.how-works ul li {

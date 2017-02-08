@@ -59,13 +59,16 @@ $media-mobile: new-breakpoint(max-width 700px 4)
                 +omega
         &.event.index
             section.hero
-                margin-top: -7rem
+                top: -10rem
+                margin-bottom: -10rem
             article.what-is
                 padding-top: 0
-                section.details, section.video
+                section.details
                     +span-columns(4)
                     +row
                     +omega
+                section.video
+                    display: none
             article.how-works
                 padding-top: 0
                 ul li
