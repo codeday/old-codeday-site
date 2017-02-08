@@ -24,6 +24,11 @@ class EventController extends Controller {
         ]);
     }
 
+    public function getDisambiguation()
+    {
+        return \View::make('disambiguation');
+    }
+
     public function getRegister()
     {
         $event = \Route::input('event');

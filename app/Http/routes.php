@@ -37,7 +37,6 @@ $routes = function() {
     \Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
 
     \Route::get('/promo', '\CodeDay\Http\Controllers\StaticController@getPromo');
-    \Route::get('/arizona', '\CodeDay\Http\Controllers\StaticController@getArizona');
     \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');
     \Route::get('/sponsor', '\CodeDay\Http\Controllers\StaticController@getSponsor');
     \Route::get('/rules', '\CodeDay\Http\Controllers\StaticController@getRules');
@@ -69,6 +68,7 @@ $routes = function() {
     });
 
     \Route::get('/schools', '\CodeDay\Http\Controllers\StaticController@getSchools');
+    \Route::get('/disambiguation/{event}', '\CodeDay\Http\Controllers\EventController@getDisambiguation');
     \Route::get('/{event}/register', '\CodeDay\Http\Controllers\EventController@getRegister');
     \Route::post('/{event}/register', '\CodeDay\Http\Controllers\EventController@postRegister');
     \Route::get('/{event}/register/schools', '\CodeDay\Http\Controllers\StaticController@getSchools');

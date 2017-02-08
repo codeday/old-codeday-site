@@ -1,6 +1,22 @@
 {% extends 'template.twig' %}
 {% block section %}global{% endblock %}
 {% block page %}index{% endblock %}
+{% import _self as m %}
+{% macro link_for(event) %}
+{% if event.current_event %}{% set event = event.current_event %}{% endif %}
+{% if event.has_related_events %}{{ langPrefix }}/disambiguation/{{ event.webname }}{% else %}{{ langPrefix }}/{{ event.webname }}{% endif %}
+{% endmacro %}
+{% macro tz_list(name, regions) %}
+    {% import _self as m %}
+    <section>
+        <h4>{{ name }}</h4>
+        <ul>
+            {% for region in regions %}
+                <li><a href="{{ m.link_for(region) }}">{{ region.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endmacro %}
 {% block hero %}
     <article class="lead">
         <div id="lead-text">
@@ -11,7 +27,7 @@
         <div id="map" class="map"></div>
     </article>
     <article class="cta">
-        {{ i18n('global.link', {'link': '<a class="nearest_event_name nearest_event_link" href="'~langPrefix~'/'~nearest_event.webname~'">'~nearest_event.region_name~'</a>'}) }}
+        {{ i18n('global.link', {'link': '<a class="nearest_event_name nearest_event_link" href="'~m.link_for(nearest_event)~'">'~nearest_event.region_name~'</a>'}) }}
     </article>
 {% endblock %}
 {% block content %}
@@ -28,42 +44,14 @@
 
     <article class="cities">
         <section class="cta">
-            <a class="nearest_event_link" href="{{ langPrefix }}/{{ nearest_event.webname }}">{{ i18n('global.attend-cta', {'citySpan': '<span class="nearest_event_name">'~nearest_event.region_name~'</span>'}) }}</a>
+            <a class="nearest_event_link" href="{{ m.link_for(nearest_event) }}">{{ i18n('global.attend-cta', {'citySpan': '<span class="nearest_event_name">'~nearest_event.region_name~'</span>'}) }}</a>
             <span class="details">{{ i18n('global.cities-cta') }}</span>
         </section>
         <section class="list">
-            <section>
-                <h4>Pacific</h4>
-                <ul>
-                    {% for region in tz_regions['America/Los_Angeles'] %}
-                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section>
-            <section>
-                <h4>Mountain</h4>
-                <ul>
-                    {% for region in tz_regions['America/Denver'] %}
-                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section>
-            <section>
-                <h4>Central</h4>
-                <ul>
-                    {% for region in tz_regions['America/Chicago'] %}
-                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section>
-            <section>
-                <h4>Eastern</h4>
-                <ul>
-                    {% for region in tz_regions['America/Detroit'] %}
-                        <li><a href="{{ langPrefix }}/{{ region.webname }}">{{ region.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </section>
+            {{ m.tz_list('Pacific', tz_regions['America/Los_Angeles']) }}
+            {{ m.tz_list('Mountain', tz_regions['America/Denver']) }}
+            {{ m.tz_list('Central', tz_regions['America/Chicago']) }}
+            {{ m.tz_list('Eastern', tz_regions['America/Detroit']) }}
         </section>
         <p class="organize-cta">{{ i18n('global.organize-cta', {'link': langPrefix~'/new'}) }}</p>
     </article>

@@ -1,0 +1,14 @@
+{% extends "template.twig" %}
+{% block section %}disamb{% endblock %}
+{% block page %}index{% endblock %}
+{% block title %}Choose a CodeDay{% endblock %}
+{% set all_events = [ event ]|merge(event.related_events) %}
+{% set event = null %}
+{% block content %}
+<h2>We have a few CodeDays in your area. Which is closest?</h2>
+<ul>
+    {% for event in all_events %}
+        <li><a href="{{ langPrefix }}/{{ event.webname }}">{{ event.region_name }}{% if event.venue %} (hosted at {{ event.venue.name }} in {{ event.venue.address.city }}){% endif %}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
