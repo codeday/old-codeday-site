@@ -101,7 +101,7 @@
                         <li {%if block('section') == 'volunteer' %}class="active"{% endif %}><a href="{{ langPrefix }}/volunteer">{{ i18n('common.nav-volunteer') }}</a></li>
                     {% endif %}
                     {% if not skipSponsor %}
-                        <li {% if block('section') == 'sponsor' %}class="active"{% endif %}"><a href="{{ langPrefix }}/sponsor">{{ i18n('common.nav-sponsor') }}</a></li>
+                        <li {% if block('section') == 'sponsor' %}class="active"{% endif %}><a href="{{ langPrefix }}/sponsor">{{ i18n('common.nav-sponsor') }}</a></li>
                     {% endif %}
                     <li><a href="{{ langPrefix }}/press" target="_blank">{{ i18n('common.nav-press') }}</a></li>
                     {% if not event %}
