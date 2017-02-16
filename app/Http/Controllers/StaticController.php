@@ -24,6 +24,21 @@ class StaticController extends Controller {
         ]);
     }
 
+    public function getGlobalJson()
+    {
+        $visitor_info = Models\Ip::find(\Request::getClientIp());
+        $current_regions = iterator_to_array(Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true));
+        $with_event = array_filter($current_regions, function($x) { return isset($x->current_event); });
+
+        return json_encode(array_map(function($x){ return (object)[
+            'id' => $x->current_event->id,
+            'webname' => $x->current_event->webname,
+            'name' => $x->current_event->region_name,
+            'time' => $x->timezone
+        ]; }, $with_event));
+
+    }
+
     public function getSchools()
     {
         \View::share('event', \Route::input('event'));

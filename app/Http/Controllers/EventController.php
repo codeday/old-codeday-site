@@ -24,6 +24,11 @@ class EventController extends Controller {
         ]);
     }
 
+    public function getSchedule()
+    {
+        return json_encode(\Route::input('event')->schedule);
+    }
+
     public function getDisambiguation()
     {
         return \View::make('disambiguation');

@@ -33,6 +33,7 @@ $routes = function() {
 
     // Static Routes
     \Route::get('/', '\CodeDay\Http\Controllers\StaticController@getGlobal');
+    \Route::get('/index.json', '\CodeDay\Http\Controllers\StaticController@getGlobalJson');
     \Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');
     \Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
 
@@ -72,6 +73,7 @@ $routes = function() {
     \Route::get('/disambiguation/{event}', '\CodeDay\Http\Controllers\EventController@getDisambiguation');
     \Route::get('/{event}/register', '\CodeDay\Http\Controllers\EventController@getRegister');
     \Route::post('/{event}/register', '\CodeDay\Http\Controllers\EventController@postRegister');
+    \Route::get('/{event}/schedule.json', '\CodeDay\Http\Controllers\EventController@getSchedule');
     \Route::get('/{event}/register/schools', '\CodeDay\Http\Controllers\StaticController@getSchools');
     \Route::get('/{event}', '\CodeDay\Http\Controllers\EventController@getIndex');
 };
