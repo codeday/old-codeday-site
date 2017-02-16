@@ -13,9 +13,9 @@
                 <input type="submit" value="Set My Age" />
             </form>
         {% elseif ticket.age >= 18 %}
-            {% if ticket.age >= 24 %}
+            {% if ticket.age > 25 %}
                 <div class="warning">
-                    <p><strong>Hey! There might be a problem:</strong> CodeDay is an event for high school and college students.</p>
+                    <p><strong>Hey! There might be a problem:</strong> CodeDay is an event for high school and younger college students.</p>
                     <p>For security reasons, we generally cannot accept people who are outside this age range. Please
                        <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> if you'd like a refund, or you think there's
                        a special situation we should allow. Unless you have an email from our support, our event staff will not be able to
