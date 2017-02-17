@@ -181,10 +181,14 @@
     </script>
     <script src="//fast.wistia.net/assets/external/E-v1.js" async></script>
     <script src="//fast.wistia.net/labs/fresh-url/v1.js" async></script>
+    {% set cdate = (null|date('U')) + (60*60*12) %}
+    {% if (event and event.starts_at > cdate)
+       or (loaded_batch and loaded_batch.starts_at > cdate) %}
     <script>
       (function(t,a,l,k,u,s,e){if(!t[u]){t[u]=function(){(t[u].q=t[u].q||[]).push(arguments)},t[u].l=1*new Date();s=a.createElement(l),e=a.getElementsByTagName(l)[0];s.async=1;s.src=k;e.parentNode.insertBefore(s,e)}})(window,document,'script','//www.talkus.io/plugin.beta.js','talkus');
       talkus('init', 'DptgxkJDNvbkLB2mX');
     </script>
+    {% endif %}
     {{ block('track') }}
     {{ block('scripts') }}
 </body>
