@@ -3,18 +3,21 @@
 {% block page %}index{% endblock %}
 {% block title %}HPCC{% endblock %}
 {% block content %}
-    {% if username %}
-        <p>Your login details are:</p>
-        <p>Username: <input type="text" value="{{ username }}" readonly onfocus="this.select();" onmouseup="return false;" style="display: inline;width: 50%;"/><br />
-           Password: <input type="text" value="{{ password }}" readonly onfocus="this.select();" onmouseup="return false;" style="display: inline;width: 50%;" /><br />
-           URL: <a href="http://hpcc.srnd.org/" target="_new">hpcc.srnd.org</a></p>
-    {% else %}
-        <p>During CodeDay, you have access to a cloud-hosted instance of HPCC Systems to help you make your
-           projects better. Please enter your email to get an HPCC login.</p>
-
-        <form method="post" style="margin-top:2rem;">
-            <input type="email" name="email" placeholder="Your Email Address" required />
-            <input type="submit" value="Create my account" />
-        </form>
+    <p>Welcome to the HPCC Systems workshop! Your HPCC instance is available at:</p>
+    <p>
+        {% if twitter %}
+            <strong>Tweets:</strong> <a href="/hpcc/tweets">Download @{{ twitter }}</a><br /><br />
+        {% else %}
+            <strong>Tweets:</strong> <a href="/hpcc/oauthstart">Sign In With Twitter</a><br /><br />
+        {% endif %}
+        <strong>Editor:</strong> <a href="https://hpccsystems.com/download/developer-tools/ecl-ide" target="_blank">Download</a><br />
+        <strong>Server:</strong> <a href="http://hpcc.srnd.org:8010/" target="_blank">hpcc.srnd.org</a><br />
+        <strong>Editor Username:</strong> hpccdemo<br />
+        <strong>Editor Password:</strong> hpccdemo<br />
+    </p>
+    {% if not twitter %}
+        <p><a href="/hpcc/oauthstart">Have a Twitter account? Sign in</a> and we'll download a copy of your tweets to
+           analyze in the workshop. (We'll never post, and will only access your tweets when you press the button.)</p>
+        <p>No Twitter account? <a href="/assets/csv/sample_tweets.csv">Download some sample Tweets.</a></p>
     {% endif %}
 {% endblock %}
