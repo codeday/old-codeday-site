@@ -49,9 +49,9 @@ $routes = function() {
     \Route::get('/volunteer/apply/judge', '\CodeDay\Http\Controllers\VolunteerController@getApplyJudge');
     \Route::get('/volunteer/apply/staff', '\CodeDay\Http\Controllers\VolunteerController@getApplyStaff');
 
+    \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
+    \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
     \Route::group(['middleware' => ['web']], function(){
-        \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
-        \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
         \Route::controller('/hpcc', '\CodeDay\Http\Controllers\HpccController');
     });
 
