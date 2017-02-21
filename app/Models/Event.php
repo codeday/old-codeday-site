@@ -34,7 +34,7 @@ class Event extends ClearModel {
                 $query = [
                     'api_key' => \Config::get('flickr.key'),
                     'group_id' => \Config::get('flickr.group'),
-                    'tags' => preg_replace('/[^a-zA-Z0-9]/', '', $this->webname),
+                    'tags' => $this->webname,
                     'format' => 'json',
                     'nojsoncallback' => 1,
                     'method' => 'flickr.groups.pools.getPhotos',
@@ -57,7 +57,7 @@ class Event extends ClearModel {
         $all = $this->photos();
         $bestOfPhotos = array_filter($all, function($x) { return in_array('bestof', explode(' ', $x->tags)); });
         
-        if (count($bestOfPhotos) < 7) {
+        if (count($bestOfPhotos) < 3) {
             $bestOfPhotos = $all;
         }
 
