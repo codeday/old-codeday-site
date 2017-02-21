@@ -29,7 +29,7 @@ class Event extends ClearModel {
 
     public function photos()
     {
-        if (!\Cache::has('flickr.'.$this->hashtag) || \Config::get('app.debug')) {
+        if (!\Cache::has('flickr.'.$this->webname) || \Config::get('app.debug')) {
             try {
                 $query = [
                     'api_key' => \Config::get('flickr.key'),
