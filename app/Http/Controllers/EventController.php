@@ -24,6 +24,11 @@ class EventController extends Controller {
         ]);
     }
 
+    public function getPhotos()
+    {
+        return \View::make('photos');
+    }
+
     public function getSchedule()
     {
         return json_encode(\Route::input('event')->schedule);

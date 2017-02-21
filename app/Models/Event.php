@@ -34,11 +34,12 @@ class Event extends ClearModel {
                 $query = [
                     'api_key' => \Config::get('flickr.key'),
                     'group_id' => \Config::get('flickr.group'),
-                    'tags' => $this->hashtag,
+                    'tags' => preg_replace('/[^a-zA-Z0-9]/', '', $this->webname),
                     'format' => 'json',
                     'nojsoncallback' => 1,
                     'method' => 'flickr.groups.pools.getPhotos',
-                    'per_page' => 10
+                    'extras' => 'tags',
+                    'per_page' => 200
                 ];
                 $url = 'https://api.flickr.com/services/rest/?'.http_build_query($query);
                 $response = file_get_contents($url);
@@ -49,5 +50,25 @@ class Event extends ClearModel {
         }
 
         return \Cache::get('flickr.'.$this->hashtag, []);
+    }
+
+    public function photosFeatured()
+    {
+        $all = $this->photos();
+        $bestOfPhotos = array_filter($all, function($x) { return in_array('bestof', explode(' ', $x->tags)); });
+        
+        if (count($bestOfPhotos) < 7) {
+            $bestOfPhotos = $all;
+        }
+
+        foreach ($bestOfPhotos as $photo) { // More recent photos will be sorted closer to the top
+            $recencyFactor = 0.2;
+            $entropy = 10;
+            $photo->sort = intval(((time() - $photo->dateadded)/60*60*24*(1/$recencyFactor)) * rand(0,$entropy));
+        }
+
+        usort($bestOfPhotos, function($x, $y) { return $x->sort - $y->sort; });
+
+        return $bestOfPhotos;
     }
 } 

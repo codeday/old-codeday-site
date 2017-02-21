@@ -28,6 +28,10 @@ return array(
     'schedule'              => "Schedule",
     'supported-by'          => "Supported By",
 
+    'past-photos'           => "See more past photos from CodeDay :region",
+    'past-photos-title'     => "Past photos from CodeDay :region",
+    'return'                => "Back to the main page",
+
     'faq-team-q'            => "Do I need to come with a team?",
     'faq-team-a'            => "<strong>No!</strong> In fact, most people don't come with a team! At the beginning of the event, everyone will pitch ideas for what they want to build. You can form a team then.",
     'faq-bring-q'           => "What should I bring?",
