@@ -38,7 +38,7 @@ class Event extends ClearModel {
                     'format' => 'json',
                     'nojsoncallback' => 1,
                     'method' => 'flickr.groups.pools.getPhotos',
-                    'extras' => 'tags',
+                    'extras' => 'tags,o_dims,o_width,o_height,url_o',
                     'per_page' => 200
                 ];
                 $url = 'https://api.flickr.com/services/rest/?'.http_build_query($query);
@@ -60,6 +60,9 @@ class Event extends ClearModel {
         if (count($bestOfPhotos) < 3) {
             $bestOfPhotos = $all;
         }
+
+
+        $bestOfPhotos = array_filter($bestOfPhotos, function($x) { return isset($x->width_o) && isset($x->height_o) && $x->width_o > $x->height_o; });
 
         foreach ($bestOfPhotos as $photo) { // More recent photos will be sorted closer to the top
             $recencyFactor = 0.2;
