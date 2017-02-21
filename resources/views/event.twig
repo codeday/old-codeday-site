@@ -66,12 +66,14 @@
         </section>
         <section class="picture">
             {% if event.photosFeatured|length > 0 %}
-                <div class="slideshow">
-                    {% for photo in event.photosFeatured|slice(0,12) %}
-                        <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
-                    {% endfor %}
-                </div>
-                <a href="/{{ event.webname }}/photos">{{ i18n('event.past-photos', {'region': event.region_name}) }}</a>
+                <a href="/{{ event.webname }}/photos">
+                    <div class="slideshow">
+                        {% for photo in event.photosFeatured|slice(0,12) %}
+                            <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
+                        {% endfor %}
+                    </div>
+                    {{ i18n('event.past-photos', {'region': event.region_name}) }}
+                </a>
             {% else %}
                 <img src="/assets/img/sf-az-team.jpg" />
             {% endif %}

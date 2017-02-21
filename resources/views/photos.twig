@@ -4,7 +4,7 @@
 {% block title %}Past Photos{% endblock %}
 {% block content %}
     <h2>{{ i18n('event.past-photos-title', {'region': event.region_name }) }}</h2>
-    <p><a href="/{{ event.webname }}">&laquo; {{ i18n('event.return') }}</a></p>
+    <p class="back"><a href="/{{ event.webname }}">&laquo; {{ i18n('event.return') }}</a></p>
     <ul>
         {% for photo in event.photos %}
             <li><a href="https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg" target="_blank">
@@ -12,4 +12,5 @@
             </a></li>
         {% endfor %}
     </ul>
+    <p class="license">Press: StudentRND photos are licensed CC-BY: you can use the photos if you provide attribution. All pictured students have waived rights for use of these photos.</p>
 {% endblock %}

@@ -28,7 +28,7 @@ return array(
     'schedule'              => "Schedule",
     'supported-by'          => "Supported By",
 
-    'past-photos'           => "See more past photos from CodeDay :region",
+    'past-photos'           => "More photos from CodeDay :region",
     'past-photos-title'     => "Past photos from CodeDay :region",
     'return'                => "Back to the main page",
 
