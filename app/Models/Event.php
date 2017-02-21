@@ -45,11 +45,11 @@ class Event extends ClearModel {
                 $response = file_get_contents($url);
                 $obj = json_decode($response)->photos->photo;
 
-                \Cache::put('flickr.'.$this->hashtag, $obj, 60);
+                \Cache::put('flickr.'.$this->webname, $obj, 60);
             } catch (\Exception $ex) {}
         }
 
-        return \Cache::get('flickr.'.$this->hashtag, []);
+        return \Cache::get('flickr.'.$this->webname, []);
     }
 
     public function photosFeatured()
