@@ -50,12 +50,6 @@ class StaticController extends Controller {
     {
         return \View::make('evangelist');
     }
-   
-    public function getArizona()
-    {
-        // HACK
-        return \View::make('arizona');
-    }
 
     public function getPromo()
     {
@@ -96,6 +90,11 @@ class StaticController extends Controller {
     public function getRules()
     {
         return \View::make('rules');
+    }
+
+    public function getEsignatures()
+    {
+        return \View::make('esignatures');
     }
 
     public function getVideo()
