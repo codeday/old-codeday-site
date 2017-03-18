@@ -20,14 +20,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
 
-    <meta property="secret" content="yes.I.can" />
-
     <meta property="og:image" content="{{ url('/assets/img/og.jpg') }}" />
     <meta property="og:url" content="{{ url('') }}" />
     <meta property="og:description" name="description" content="{{ shortDescription }}" />
     {{ block('meta') }}
 
-    {# Icons #}
+    {# Style #}
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/img/icon/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/icon/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/icon/apple-touch-icon-72x72.png" />
@@ -42,12 +40,18 @@
     <link rel="icon" type="image/png" href="/assets/img/icon/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="/assets/img/icon/favicon-128.png" sizes="128x128" />
     <meta name="application-name" content="CodeDay"/>
-    <meta name="msapplication-TileColor" content="#CA7872" />
+    <meta name="msapplication-TileColor" content="#cb7972" />
     <meta name="msapplication-TileImage" content="/assets/img/icon/mstile-144x144.png" />
     <meta name="msapplication-square70x70logo" content="/assets/img/icon/mstile-70x70.png" />
     <meta name="msapplication-square150x150logo" content="/assets/img/icon/mstile-150x150.png" />
     <meta name="msapplication-wide310x150logo" content="/assets/img/icon/mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="/assets/img/icon/mstile-310x310.png" />
+    {% if block('section') == "vip" %}
+        <meta name="theme-color" content="#333333" />
+    {% else %}
+        <meta name="theme-color" content="#cb7972" />
+    {% endif %}
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     {# Styling #}
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
