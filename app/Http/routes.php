@@ -61,7 +61,6 @@ $routes = function() {
 
     // Event-based Routes
     \Route::bind('event', function($webname) {
-        if ($webname == 'jersey') { return Models\Event::find('rxdF6ixgWwea'); } // Hack
         $event = Models\Region::find(strtolower($webname))->current_event;
         if ($event->batch['id'] != Models\Batch::current()->id) {
             return null;
