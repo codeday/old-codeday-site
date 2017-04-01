@@ -71,7 +71,7 @@
         <div class="notice">
             {{ event.notice }}
         </div>
-    {% elseif (null|date('m-d-Y')) == '04-01-2017' %}
+    {% elseif (((null|date('U'))-(60*60*8))|date('m-d-Y')) == '04-01-2017' %}
         <div class="notice">
             <a href="https://fortnight.codeday.org/">Announcing our newest program, CodeFortnight.</a>
         </div>
