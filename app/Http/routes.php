@@ -72,6 +72,7 @@ $routes = function() {
         }
     });
 
+    \Route::get('/groups', '\CodeDay\Http\Controllers\StaticController@getGroups');
     \Route::get('/schools', '\CodeDay\Http\Controllers\StaticController@getSchools');
     \Route::get('/disambiguation/{event}', '\CodeDay\Http\Controllers\EventController@getDisambiguation');
     \Route::get('/{event}/register', '\CodeDay\Http\Controllers\EventController@getRegister');

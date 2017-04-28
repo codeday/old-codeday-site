@@ -1,0 +1,56 @@
+{% extends "template.twig" %}
+{% block section %}event{% endblock %}
+{% block page %}groups{% endblock %}
+{% block title %}Group Registration{% endblock %}
+{% block hero %}
+    <article class="lead">
+            <h2>Meet friends, have fun, and build something awesome.</h2>
+            <p>CodeDay is a 24-hour, beginner-focused tech education event which gets students coding: 80% of attendees
+               with no prior experience continue programming after.</p>
+    </article>
+{% endblock %}
+{% block content %}
+    <article class="what-is">
+        <section class="image">
+            <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_n6xc4pm90n videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
+            <span class="caption">Click play to watch a video about CodeDay.</span>
+        </section>
+        <section class="about">
+            <h3>{{ i18n('event.what-is') }}</h3>
+            <p>{{ i18n('common.descr-detail-1') }}</p>
+            <p>{{ i18n('common.descr-detail-2') }}</p>
+        </section>
+    </article>
+    <article class="register">
+        <section class="form">
+            <h2>Ready to register?</h2>
+            <div id="wufoo-q1dtpqab0e3bspq">
+            Fill out my <a href="https://srnd.wufoo.com/forms/q1dtpqab0e3bspq">online form</a>.
+            </div>
+            <script type="text/javascript">var q1dtpqab0e3bspq;(function(d, t) {
+            var s = d.createElement(t), options = {
+            'userName':'srnd',
+            'formHash':'q1dtpqab0e3bspq',
+            'autoResize':true,
+            'height':'621',
+            'async':true,
+            'host':'wufoo.com',
+            'header':'show',
+            'defaultValues': 'Field20={{ event.webname }}',
+            'ssl':true};
+            s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+            s.onload = s.onreadystatechange = function() {
+            var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+            try { q1dtpqab0e3bspq = new WufooForm();q1dtpqab0e3bspq.initialize(options);q1dtpqab0e3bspq.display(); } catch (e) {}};
+            var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+            })(document, 'script');</script>
+        </section>
+        <section class="info">
+            <h2>Attendee Roster</h2>
+            <p>You'll need to collect some information from all students who will be attending, and submit this
+               information as an Excel spreadsheet (or CSV).</p>
+            <p><a href="/assets/roster.csv">For faster processing, please download and use this roster template when
+               submitting student data.</a></p>
+        </section>
+    </article>
+{% endblock %}
