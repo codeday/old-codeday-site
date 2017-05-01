@@ -16,7 +16,11 @@
             <span class="caption">Click play to watch a video about CodeDay.</span>
         </section>
         <section class="about">
-            <h3>{{ i18n('event.what-is') }}</h3>
+            {% if partner_name %}
+                <h3>Hi {{ partner_name }}! Thanks for your interest in CodeDay.</h3>
+            {% else %}
+                <h3>{{ i18n('event.what-is') }}</h3>
+            {% endif %}
             <p>{{ i18n('common.descr-detail-1') }}</p>
             <p>You can <a href="https://clear.codeday.org/e/flyer/poster">download a poster</a> or
                <a href="/video">play a video</a> to promote it to your group.</p>
