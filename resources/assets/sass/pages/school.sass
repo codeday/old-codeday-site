@@ -36,6 +36,19 @@ body.event.school, body.event.groups
             h2
                 margin-top: 0
                 padding-top: 0
+    
+    article.promote
+        text-align: center
+        h3
+            margin-bottom: 1rem
+        img
+            border: 2px solid $color-gray
+        section
+            &.poster
+                +span-columns(4)
+                +shift(1)
+            &.video
+                +span-columns(6)
 
     article.quotes
         .teacher
