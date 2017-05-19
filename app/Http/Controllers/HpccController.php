@@ -89,6 +89,7 @@ class HpccController extends Controller {
                 substr($x->id, 6),
                 date('Ymd', strtotime($x->created_at)),
                 $x->in_reply_to_screen_name,
+                $x->retweet_count + $x->favorite_count,
                 preg_replace("/[^A-Za-z0-9\.\,\!\?\:\/\-\_\'\[\]\(\)\@ ]/", '', $x->text)
             ];
         }, $statuses);
