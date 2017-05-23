@@ -303,18 +303,50 @@ body.event.index
                         position: 50% 50%
                         repeat: no-repeat
 
-body.event.photos
+body.event.past
     section.content
         h2
             margin-bottom: 0
         p.back
             margin-top: 0.5rem
             margin-bottom: 2rem
-        ul
-            padding: 0
-            li
-                list-style-type: none
-                display: inline
-        p.license
-            font-size: 0.875rem
-            color: $color-gray
+        .photos
+            +span-columns(4)
+            ul
+                padding: 0
+                +row
+                li
+                    list-style-type: none
+                    display: inline
+                    +span-columns(3)
+                    &:nth-child(4n)
+                        +omega
+                    img
+                        width: 100%
+                        height: auto
+            p.license
+                font-size: 0.875rem
+                color: $color-gray
+        .projects
+            +span-columns(8)
+            ul
+                +row
+                padding: 0
+                li
+                    list-style-type: none
+                    +span-columns(4)
+                    &:nth-child(3n)
+                        +omega
+                    .thumbnail
+                        display: block
+                        height: 7rem
+                        background:
+                            size: cover
+                            position: 50% 25%
+                            repeat: no-repeat
+                    .name
+                        display: block
+                        font-weight: 700
+                    .description
+                        display: block
+                        height: 4.5rem

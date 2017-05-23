@@ -27,6 +27,19 @@ class Event extends ClearModel {
         }
     }
 
+    public function teams()
+    {
+        if (!\Cache::has('teams.'.$this->webname) || \Config::get('app.debug')) {
+            try {
+                $response = file_get_contents('https://showcase.codeday.org/api/event/'.$this->webname);
+                $obj = json_decode($response);
+                \Cache::put('teams.'.$this->webname, $obj, 600);
+            } catch (\Exception $ex) {}
+        }
+
+        return \Cache::get('teams.'.$this->webname, []);
+    }
+
     public function photos()
     {
         if (!\Cache::has('flickr.'.$this->webname) || \Config::get('app.debug')) {
@@ -45,7 +58,7 @@ class Event extends ClearModel {
                 $response = file_get_contents($url);
                 $obj = json_decode($response)->photos->photo;
 
-                \Cache::put('flickr.'.$this->webname, $obj, 60);
+                \Cache::put('flickr.'.$this->webname, $obj, 600);
             } catch (\Exception $ex) {}
         }
 

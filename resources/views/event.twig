@@ -66,13 +66,18 @@
         </section>
         <section class="picture">
             {% if event.photosFeatured|length > 0 %}
-                <a href="/{{ event.webname }}/photos">
+                <a href="/{{ event.webname }}/past">
                     <div class="slideshow">
                         {% for photo in event.photosFeatured|slice(0,12) %}
                             <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
                         {% endfor %}
                     </div>
-                    {{ i18n('event.past-photos', {'region': event.region_name}) }}
+                    {{ i18n('event.past-link', {'region': event.region_name}) }} &rarr;
+                </a>
+            {% elseif event.teams|length > 0 %}
+                <a href="/{{ event.webname }}/past">
+                    <img src="/assets/img/sf-az-team.jpg" />
+                    {{ i18n('event.past-link', {'region': event.region_name}) }} &rarr;
                 </a>
             {% else %}
                 <img src="/assets/img/sf-az-team.jpg" />
@@ -128,34 +133,11 @@
                 <p>{{ i18n('event.faq-student-a') }}</p>
             </li>
             <li>
-                <span class="q">{{ i18n('event.faq-sleep-q') }}</span>
-                <p>{{ i18n('event.faq-sleep-a') }}</p>
-            </li>
-            <li>
                 <span class="q">{{ i18n('event.faq-school-q') }}</span>
                 <p>{{ i18n('event.faq-school-a', {'link': langPrefix~'/'~event.webname~'/register/schools'}) }}</p>
             </li>
-            <li>
-                <span class="q">{{ i18n('event.faq-security-q') }}</span>
-                <p>{{ i18n('event.faq-security-a') }}</p>
-            </li>
-            <li>
-                <span class="q">{{ i18n('event.faq-parent-q') }}</span>
-                <p>{{ i18n('event.faq-parent-a') }}</p>
-            </li>
         </ul>
     </article>
-
-    {% if event.venue and event.venue.name != "TBA" %}
-        <article class="map">
-            <h3>{{ i18n('common.hosted-at-plain', {'name': event.venue.name}) }}:
-                <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank"
-                >{{ event.venue.address.line_1 }}{% if event.venue.address.line_2 %}, {{ event.venue.address.line_2 }}{% endif %},
-                {{ event.venue.address.city }}</a></h3>
-            <br/>
-            <div id="map"></div>
-        </article>
-    {% endif %}
 
     <article class="schedule">
         <h3>{{ i18n('event.schedule') }}</h3>

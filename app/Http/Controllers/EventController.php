@@ -24,9 +24,9 @@ class EventController extends Controller {
         ]);
     }
 
-    public function getPhotos()
+    public function getPast()
     {
-        return \View::make('photos');
+        return \View::make('past');
     }
 
     public function getSchedule()

@@ -1,0 +1,35 @@
+{% extends "template.twig" %}
+{% block section %}event{% endblock %}
+{% block page %}past{% endblock %}
+{% block title %}Past Events{% endblock %}
+{% block content %}
+    <h2>{{ i18n('event.past-title', {'region': event.region_name }) }}</h2>
+    <p class="back"><a href="/{{ event.webname }}">&laquo; {{ i18n('event.return') }}</a></p>
+    <section class="photos">
+        <h3>{{ i18n('event.past-photos') }}</h3>
+        <ul>
+            {% for photo in event.photos %}
+                <li><a href="https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg" target="_blank">
+                    <img src="https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_q.jpg" />
+                </a></li>
+            {% endfor %}
+        </ul>
+        <p class="license">Press: StudentRND photos are licensed CC-BY: you can use the photos if you provide attribution. All pictured students have waived rights for use of these photos.</p>
+    </section>
+    <section class="projects">
+        <h3>{{ i18n('event.past-projects') }}</h3>
+        <ul>
+            {% for team in event.teams %}
+                <li>
+                    {% if team.urls.team_photo.exists %}
+                        <span class="thumbnail" style="background-image: url('{{ team.urls.team_photo.medium }}')"></span>
+                    {% else %}
+                        <span class="thumbnail" style="background-image: url('/assets/img/team-photo-missing.jpg')"></span>
+                    {% endif %}
+                    <span class="name">{{ team.name }}</span>
+                    <span class="description">{{ team.description_short }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

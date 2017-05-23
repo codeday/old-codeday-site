@@ -28,8 +28,11 @@ return array(
     'schedule'              => "Schedule",
     'supported-by'          => "Supported By",
 
-    'past-photos'           => "More photos from CodeDay :region",
+    'past-title'            => "Previously at CodeDay :region:",
+    'past-photos'           => "Photos",
+    'past-link'             => "See what happened last time at CodeDay :region",
     'past-photos-title'     => "Past photos from CodeDay :region",
+    'past-projects'         => "Projects",
     'return'                => "Back to the main page",
 
     'faq-team-q'            => "Do I need to come with a team?",
