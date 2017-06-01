@@ -18,8 +18,8 @@ return array(
     'apply'                 => "Đăng ký",
 
     'faq'                   => "Câu hỏi thường gặp",
-    'byline'                => "bởi StudentRND",
-    'footer-trademark'      => "CodeDay là <a href=\":link\" target=\"_blank\">thương hiệu đã đăng ký</a> của StudentRND.",
+    'byline'                => "bởi srnd.org",
+    'footer-trademark'      => "CodeDay là <a href=\":link\" target=\"_blank\">thương hiệu đã đăng ký</a> của srnd.org.",
 
     'nav-event'             => "Thông tin sự kiện",
     'nav-register'          => "Đăng ký",

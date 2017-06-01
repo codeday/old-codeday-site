@@ -18,8 +18,8 @@ return array(
     'apply'                 => "Mag-apply",
 
     'faq'                   => "FAQ",
-    'byline'                => "Gawa ng StudentRND",
-    'footer-trademark'      => "Ang CodeDay ay ang <a href=\":link\" target=\"_blank\">nakarehistrong trademark</a> ng StudentRND.",
+    'byline'                => "Gawa ng srnd.org",
+    'footer-trademark'      => "Ang CodeDay ay ang <a href=\":link\" target=\"_blank\">nakarehistrong trademark</a> ng srnd.org.",
 
     'nav-event'             => "Event",
     'nav-register'          => "Magrehistro",

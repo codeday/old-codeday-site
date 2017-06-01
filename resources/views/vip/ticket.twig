@@ -21,12 +21,12 @@
     <section class="letter">
         <p>{{ ticket.first_name }},</p>
         {% if ticket.type == 'teacher' %}
-            <p>All of us at StudentRND just wanted to say &ldquo;thank you&rdquo; for registering for CodeDay!</p>
+            <p>All of us at srnd.org just wanted to say &ldquo;thank you&rdquo; for registering for CodeDay!</p>
             <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
                long-term, to inspire students to continue programming. It means a lot when educators like you take part.</p>
             <p>Please let me know if you have any thoughts. I can be reached at tylermenezes@srnd.org.</p>
         {% elseif ticket.type == 'judge' or ticket.type == 'volunteer' or ticket.type == 'mentor' or ticket.type == 'sponsor' %}
-            <p>All of us at StudentRND just wanted to say &ldquo;thank you&rdquo; for helping with CodeDay!</p>
+            <p>All of us at srnd.org just wanted to say &ldquo;thank you&rdquo; for helping with CodeDay!</p>
             <p>We created CodeDay to bring students together for a weekend of coding and fun with new friends and, in the
                long-term, to inspire students to continue programming. We can only do that thanks to the support of people
                like you.</p>
@@ -44,7 +44,7 @@
                and tens of thousands of students.</p>
             <p>If you have any questions, please contact me at (206) 739-4741. Thanks.</p>
         {% else %}
-            <p>All of us at StudentRND just wanted to take a second to say &ldquo;thank you&rdquo; for attending CodeDay!</p>
+            <p>All of us at srnd.org just wanted to take a second to say &ldquo;thank you&rdquo; for attending CodeDay!</p>
             <p>CodeDay is an event about connecting the community. Whether you've never written a line of code in your life,
                or you've got hundreds of stars on Github, meeting the community can be a little scary.</p>
             <p>So if you're new here, thanks for giving it a shot! And if you've been here before, thanks for helping welcome
@@ -54,6 +54,6 @@
            <img src="/assets/img/tyler-sig.png" /><br />
            Tyler Menezes<br />
            Executive Director<br />
-           StudentRND</p>
+           srnd.org</p>
     </section>
 {% endblock %}

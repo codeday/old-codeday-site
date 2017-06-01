@@ -18,8 +18,8 @@ return array(
     'apply'                 => "Apply",
 
     'faq'                   => "FAQ",
-    'byline'                => "by StudentRND",
-    'footer-trademark'      => "CodeDay is a <a href=\":link\" target=\"_blank\">registered trademark</a> of StudentRND.",
+    'byline'                => "by srnd.org",
+    'footer-trademark'      => "CodeDay is a <a href=\":link\" target=\"_blank\">registered trademark</a> of srnd.org.",
 
     'nav-event'             => "Event Info",
     'nav-register'          => "Register",
