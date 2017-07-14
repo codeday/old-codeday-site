@@ -6,5 +6,6 @@ return [
     'fetch' => \PDO::FETCH_CLASS,
     'default' => 'mysql',
     'migrations' => 'migrations',
-    'connections' => $config['database']['connections']
+    'connections' => $config['database']['connections'],
+    'redis' => $config['redis']
 ];
