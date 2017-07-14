@@ -13,7 +13,7 @@ abstract class ClearModel extends RemoteModel {
 
         if (!static::$cache || is_null(json_decode($cacheData))) {
             $cacheData = file_get_contents($url);
-            \Cache::put('clearmodel.urlcache.'.hash('md5', $url), $cacheData, 1);
+            \Cache::put('clearmodel.urlcache.'.hash('md5', $url), $cacheData, 60);
         }
         return json_decode($cacheData, true);
     }
