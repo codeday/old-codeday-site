@@ -22,6 +22,10 @@ use CodeDay\Models;
 \View::share('api_base_public', \Config::get('clear.api_base_public'));
 \View::share('api_access_token', \Config::get('clear.access_token'));
 
+\View::share('facebook_app_id', \Config::get('facebook.app_id'));
+\View::share('facebook_page_id', \Config::get('facebook.page_id'));
+\View::share('site_base_url', \Config::get('app.url'));
+
 $routes = function() {
     // Domain Routes
     \Route::group(['domain' => isset($_SERVER["HTTP_HOST"]) && $_SERVER['HTTP_HOST'] == 'vip.codeday.dev' ? 'vip.codeday.dev' : 'codeday.vip'], function(){

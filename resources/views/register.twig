@@ -90,6 +90,14 @@
         </section>
         <section class="finalize">
             <button class="pay" type="submit">{{ i18n('register.complete') }}</button>
+            <div class="fb-messenger-checkbox"  
+                origin="{{ site_base_url }}"
+                page_id="{{ facebook_page_id }}"
+                messenger_app_id="{{ facebook_app_id }}"
+                user_ref="{{ userRef }}" 
+                prechecked="true" 
+                allow_login="true" 
+                size="large"></div>
             <span><a href="mailto:contact@codeday.org">{{ i18n('register.scholarship-ask') }}</a></span>
             <span><a href="{{ langPrefix }}/{{ event.webname }}/register/schools">{{ i18n('register.school-ask') }}</a></span>
         </section>
@@ -112,5 +120,24 @@
         // ## Auto format the card number
         $('#card_number').payment('formatCardNumber');
         $('#exp').payment('formatCardExpiry');
+    </script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : '{{ facebook_app_id }}',
+            xfbml      : true,
+            version    : 'v2.6'
+            });
+
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk')
+        );
     </script>
 {% endblock %}

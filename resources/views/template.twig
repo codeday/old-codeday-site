@@ -1,3 +1,13 @@
+{% set userRef = [] %}
+{% for i in 1..20 %}
+    {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+    {% set alphaUpper = alpha|upper %}
+    {% set numbers = '0123456789' %}
+    {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+    {% set userRef = userRef|merge([randomCharacter]) %}
+{% endfor %}
+{% set userRef = userRef|join %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -66,7 +76,11 @@
 </head>
 <body class="lang-{{lang}} {{ block('section') }} {{ block('page') }}"
       data-api-base="{{ api_base_public }}" data-api-public="{{ api_access_token }}"
-      {% if event %}data-event="{{ event.id }}"{% endif %}>
+      {% if event %}data-event="{{ event.id }}"{% endif %}
+      data-user-ref="{{ userRef }}"
+      data-facebook-app-id="{{ facebook_app_id }}"
+      data-facebook-page-id="{{ facebook_page_id }}"
+      data-site-base-url="{{ site_base_url }}">
     {% if event.notice %}
         <div class="notice">
             {{ event.notice }}

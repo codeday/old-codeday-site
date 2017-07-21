@@ -41,4 +41,5 @@ packages:
     description: string_scanner
     source: hosted
     version: "0.1.4+1"
-sdk: ">=1.13.0 <2.0.0"
+sdks:
+  dart: ">=1.13.0 <2.0.0"

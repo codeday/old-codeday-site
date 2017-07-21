@@ -18,7 +18,6 @@ class Api {
      * Registers the specified attendees for the event.
      */
     Future Register({List<Registration> registrations, String stripeToken, num quotedPrice, String promoCode: null}) {
-
         return Request('register/'+Event+'/register', 'POST', {
             'card_token': stripeToken,
             'quoted_price': quotedPrice,

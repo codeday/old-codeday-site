@@ -209,8 +209,17 @@ class RegisterPage {
                             ' been emailed to all ticket holders.',
                     type: 'success'
             );
-            
-            
+
+            var params = new JsObject.jsify({
+                'app_id': querySelector('body').dataset['facebookAppId'],
+                'page_id': querySelector('body').dataset['facebookPageId'],
+                'ref': regResponse['ids'][0],
+                'user_ref': querySelector('body').dataset['userRef']
+            });
+
+            context['FB']['AppEvents'].callMethod("logEvent", ['MessengerCheckboxUserConfirmation', null, params]);
+
+            // context['console'].callMethod("log", [querySelector('body').dataset['facebookAppId'], querySelector('body').dataset['facebookPageId'], regResponse['ids'][0], querySelector('body').dataset['userRef']]);
 
             querySelectorAll('.registration, .payment').style.display = 'none';
             querySelector('form .success').style.display = 'block';
