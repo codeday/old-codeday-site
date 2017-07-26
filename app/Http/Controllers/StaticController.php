@@ -96,7 +96,7 @@ class StaticController extends Controller {
 
     public function getSponsor()
     {
-        return \View::make('sponsor');
+        return \Redirect::to('https://srnd.org/sponsor');
     }
 
     public function getRules()
