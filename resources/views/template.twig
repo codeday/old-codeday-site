@@ -74,7 +74,7 @@
 
     {{ block('headscripts') }}
 </head>
-<body class="lang-{{lang}} {{ block('section') }} {{ block('page') }}"
+<body class="lang-{{lang}} {{ block('section') }} {{ block('page') }} {% if event.notice or event %}with-notice{% endif %}"
       data-api-base="{{ api_base_public }}" data-api-public="{{ api_access_token }}"
       {% if event %}data-event="{{ event.id }}"{% endif %}
       data-user-ref="{{ userRef }}"
@@ -85,9 +85,9 @@
         <div class="notice">
             {{ event.notice }}
         </div>
-    {% elseif (((null|date('U'))-(60*60*8))|date('m-d-Y')) == '04-01-2017' %}
+    {% elseif event %}
         <div class="notice">
-            <a href="https://fortnight.codeday.org/">Announcing our newest program, CodeFortnight.</a>
+            <a href="/new">We need your help to make CodeDay happen this season.</a>
         </div>
     {% endif %}
 

@@ -254,19 +254,6 @@
             }
         };
 
-        if(navigator.geolocation){
-          navigator.geolocation.getCurrentPosition(function(data){
-            var nearest_event = LocationTools.nearestRegion(batch_regions, data.coords.latitude, data.coords.longitude);
-            for(i in batch_regions){
-              batch_regions[i].nearest = false;
-            }
-            batch_regions[batch_regions.indexOf(nearest_event)].nearest = true;
-            update();
-            $(".nearest_event_link").attr("href", "/" + nearest_event.id);
-            $(".nearest_event_name").text(nearest_event.name);
-          });
-        }
-
         update();
         $(window).on('resize', update);
 
