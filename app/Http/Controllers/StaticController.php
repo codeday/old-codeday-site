@@ -58,6 +58,12 @@ class StaticController extends Controller {
         return \View::make('groups', ['partner_name' => 'Hack Club Organizers']);
     }
 
+    public function getShare()
+    {
+        \View::share('loaded_batch', Models\Batch::current());
+        return \View::make('share', ['staff' => \Input::get('staff') !== null]);
+    }
+
     public function getEvangelist()
     {
         return \View::make('evangelist');

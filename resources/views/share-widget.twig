@@ -1,0 +1,96 @@
+<div class="codeday-filter">
+    <h2>Code-ify Your Profile Picture</h2>
+    <div class="configure">
+        <div class="picker">
+            <h3>1. Choose a Filter</h3>
+            <img src="/assets/img/filter/john.png" data-fbid="1362636003849790" style="" />
+            <img src="/assets/img/filter/codeday.png" data-fbid="254340998422287" style="" />
+            <img src="/assets/img/filter/heart.png" data-fbid="707501572778399" style="" />
+        </div>
+
+        <div class="uploader">
+            <h3>2. Upload a Photo</h3>
+            <input type="file" style="display:none" />
+            <p>
+                <a class="upload" onClick="document.querySelector('.codeday-filter .uploader input').click();return false;" href="#">Upload</a>
+                or
+                <a class="fb" href="#" target="_blank">Use Facebook</a>
+            </p>
+        </div>
+
+        <div class="save">
+            <h3>3. Save and Set</h3>
+            <p><a href="#" download="codeday.png">Save</a></p>
+        </div>
+    </div>
+    <div class="render">
+        <div class="picture"><img src="/assets/img/noop.png" style="background-image:url(/assets/img/filter/placeholder.png)" /></div>
+    </div>
+    <script src="/assets/js/filter.js"></script>
+    <script>
+        var app = {
+            filter_img: null,
+            filter_fbid: null,
+            img: null,
+
+            render: function() {
+                if (app.filter_img && app.filter_fbid) {
+                    document.querySelector('.codeday-filter .picture img').src = app.filter_img;
+                    document.querySelector('.codeday-filter .uploader a.fb').href = 'https://www.facebook.com/profilepicframes/?selected_overlay_id='+app.filter_fbid;
+                    document.querySelector('.codeday-filter .uploader').style.visibility = "visible";
+                } else {
+                    document.querySelector('.codeday-filter .uploader').style.visibility = "hidden";
+                }
+
+                if (app.img) {
+                    document.querySelector('.codeday-filter .picture img').style.backgroundImage = 'url('+app.img+')';
+                    [].forEach.call(document.querySelectorAll('.codeday-filter .picker img'), function(x) {
+                        x.style.backgroundImage = 'url('+app.img+')';
+                    });
+                }
+
+                if (app.img && app.filter_img && app.filter_fbid) {
+                    document.querySelector('.codeday-filter .save').style.visibility = "visible";
+                    app.updateDownload();
+                } else {
+                    document.querySelector('.codeday-filter .save').style.visibility = "hidden";
+                }
+            },
+
+            setImageFromFile: function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    app.img = e.target.result;
+                    app.render();
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            },
+
+            setFilter: function(e) {
+                app.filter_img = e.target.src;
+                app.filter_fbid = e.target.dataset.fbid;
+                app.render();
+            },
+
+            updateDownload: function() {
+                html2canvas(document.querySelector('.codeday-filter .render img'), {
+                    allowTaint: true,
+                    useCORS: true,
+                    onrendered: function(canvas){
+                        document.querySelector('.codeday-filter .save a').href = Canvas2Image.convertToPNG(canvas).src;
+                    }
+                });
+            },
+
+            start: function() {
+                [].forEach.call(document.querySelectorAll('.codeday-filter .picker img'), function(x) {
+                    x.addEventListener('click', app.setFilter);
+                });
+                document.querySelector('.codeday-filter .uploader input').addEventListener('change', app.setImageFromFile);
+                app.render();
+            }
+        };
+
+        app.start();
+    </script>
+</div>

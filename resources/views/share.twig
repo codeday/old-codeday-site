@@ -1,0 +1,29 @@
+{% extends "template.twig" %}
+{% block section %}promo{% endblock %}
+{% block page %}share{% endblock %}
+{% block title %}Share CodeDay{% endblock %}
+{% block content %}
+    {% if staff %}
+        <h1>Help us get more students to CodeDay!</h1>
+        <p>There's an extra way you can help before CodeDay even starts: post about your participation on social media
+           and help attract more students.</p>
+    {% else %}
+        <h1>You're going to CodeDay! Now bring some friends!</h1>
+        <p>We might be a little biased, but we think CodeDay is pretty fun. We designed it to be fun, in fact. But it's
+           even more fun with friends, so tell a friend about CodeDay and help us help you help us all:</p>
+    {% endif %}
+
+    <a href="https://twitter.com/intent/tweet?button_hashtag=CodeDay&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-size="large" data-text="I&#39;ll be helping at" data-url="https://codeday.org/" data-related="studentrnd" data-dnt="true" data-show-count="false">Tweet #CodeDay</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div class="fb-share-button" data-href="https://codeday.org/" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcodeday.org%2F&amp;src=sdkpreparse">Share</a></div>
+
+    {% include "share-widget.twig" %}
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=134222673401073";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+{% endblock %}

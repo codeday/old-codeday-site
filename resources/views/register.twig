@@ -105,10 +105,7 @@
     <section class="success">
         <h3>{{ i18n('register.success-head') }}</h3>
         <p>{{ i18n('register.success-body') }}</p>
-        <div class="download">
-            <a href="https://clear.codeday.org/e/ticket?r=" class="ticket download" target="_blank">{{ i18n('register.ticket-download') }}</a>
-            <a href="https://clear.codeday.org/e/ticket/receipt?r=" class="receipt download" target="_blank">{{ i18n('register.receipt-download') }}</a>
-        </div>
+        {% include "share-widget.twig" %}
     </section>
 </form>
 {% endblock %}
