@@ -74,7 +74,7 @@
 
     {{ block('headscripts') }}
 </head>
-<body class="lang-{{lang}} {{ block('section') }} {{ block('page') }} {% if event.notice or event %}with-notice{% endif %}"
+<body class="lang-{{lang}} {{ block('section') }} {{ block('page') }} {% if event.notice %}with-notice{% endif %}"
       data-api-base="{{ api_base_public }}" data-api-public="{{ api_access_token }}"
       {% if event %}data-event="{{ event.id }}"{% endif %}
       data-user-ref="{{ userRef }}"
