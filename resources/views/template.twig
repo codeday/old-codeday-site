@@ -36,7 +36,7 @@
         <meta property="og:image" content="{{ url('/assets/img/og.jpg') }}" />
     {% endif %}
 
-    <meta property="og:url" content="{{ url('') }}" />
+    <meta property="og:url" content="{% if nonLangUri ~ langPrefix == '//' %}{{ url('/') }}{% else %}{{ url(langPrefix~nonLangUri) }}{% endif %}" />
     <meta property="og:description" name="description" content="{{ shortDescription }}" />
     {{ block('meta') }}
 
