@@ -84,6 +84,7 @@ $routes = function() {
     \Route::get('/{event}/register', '\CodeDay\Http\Controllers\EventController@getRegister');
     \Route::post('/{event}/register', '\CodeDay\Http\Controllers\EventController@postRegister');
     \Route::get('/{event}/schedule.json', '\CodeDay\Http\Controllers\EventController@getSchedule');
+    \Route::get('/{event}/schedule.ics', '\CodeDay\Http\Controllers\EventController@getIcs');
     \Route::get('/{event}/past', '\CodeDay\Http\Controllers\EventController@getPast');
     \Route::get('/{event}/register/schools', '\CodeDay\Http\Controllers\StaticController@getSchools');
     \Route::get('/{event}', '\CodeDay\Http\Controllers\EventController@getIndex');

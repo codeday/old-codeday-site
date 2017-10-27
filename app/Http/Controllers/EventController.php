@@ -34,6 +34,11 @@ class EventController extends Controller {
         return json_encode(\Route::input('event')->schedule);
     }
 
+    public function getIcs()
+    {
+        return response()->view('event-ics')->header('Content-Type', 'text/plain');
+    }
+
     public function getDisambiguation()
     {
         return \View::make('disambiguation');

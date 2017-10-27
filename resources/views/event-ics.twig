@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//srnd.org//NONSGML CodeDay//EN
+{% for day,entries in event.schedule %}
+{% for entry in entries %}
+BEGIN:VEVENT
+UID:uid1@codeday.org
+DTSTAMP:19970714T170000Z
+ORGANIZER;CN=CodeDay:MAILTO:{{ event.webname }}@codeday.org
+DTSTART:{{ entry.timestamp.date }}
+DTEND:19970715T035959Z
+SUMMARY:{{ entry.title|raw }}
+DESCRIPTION:{{ entry.description|raw }}
+END:VEVENT
+{% endfor %}
+{% endfor %}
+END:VCALENDAR
