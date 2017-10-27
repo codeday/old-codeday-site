@@ -50,3 +50,17 @@
     {% set event = ticket.event %}
     {% include "parts/map.twig" %}
 {% endblock %}
+{% block scripts %}
+    <script>
+        _gs('identify', {
+            name: '{{ ticket.name|escape('js') }}',
+            email: '{{ ticket.email|escape('js') }}',
+
+            custom: {
+                ticket: '{{ ticket.id|escape('js') }}',
+                type: '{{ ticket.type|escape('js') }}',
+                event: '{{ ticket.event.name|escape('js') }}'
+            }
+        });
+    </script>
+{% endblock %}

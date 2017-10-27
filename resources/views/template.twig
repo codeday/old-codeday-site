@@ -206,8 +206,6 @@
     </script>
     <script src="//fast.wistia.net/assets/external/E-v1.js" async></script>
     <script src="//fast.wistia.net/labs/fresh-url/v1.js" async></script>
-    {{ block('track') }}
-    {{ block('scripts') }}
     <script>
         !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
         arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
@@ -215,6 +213,13 @@
         insertBefore(d,q)}(window,document,'script','_gs');
 
         _gs('GSN-894188-A');
+        {% set cdate = (null|date('U')) + (60*60*24) %}
+        {% if (event and event.starts_at < cdate)
+            or (loaded_batch and loaded_batch.starts_at < cdate) %}
+            _gs('set', 'chat', { button: false });
+        {% endif %}
     </script>
+    {{ block('track') }}
+    {{ block('scripts') }}
 </body>
 </html>
