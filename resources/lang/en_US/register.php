@@ -10,7 +10,7 @@ return array(
     'term-3'            => "You may be photographed or recorded.",
     'term-4'            => "We may <a href=\":link\">share your info</a> with our recruiting sponsors.",
     'term-5'            => "You will need to sign a waiver.",
-    'term-6'            => "You must be in high school or college and under 25 to attend, or have special permission.",
+    'term-6'            => "You must be in school and between the ages of 12-25.",
     'attendee-head'     => "Student Attendee Info",                  
     'add-attendee'      => "Add Another Attendee",
     'rm-attendee'       => "Remove Last",

@@ -15,24 +15,28 @@
         {% elseif ticket.age >= 18 %}
             {% if ticket.age > 25 %}
                 <div class="warning">
-                    <p><strong>Hey! There might be a problem:</strong> CodeDay is an event for high school and younger college students.</p>
-                    <p>For security reasons, we generally cannot accept people who are outside this age range. Please
-                       <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> if you'd like a refund, or you think there's
-                       a special situation we should allow. Unless you have an email from our support, our event staff will not be able to
-                       let you in.</p>
+                    <p><strong>Hey! There might be a problem:</strong> CodeDay is mostly targeted to high school students.</p>
+                    <p>For security reasons, we cannot accept attendees who are older than 25. (In the past, older students
+                       generally had a bad time, anyway.)</p>
+                    <p>Please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> for a refund.</p>
                 </div>
             {% endif %}
             <p>Because you're over 18, we don't need your parent info.</p>
             <p>If you need to change your age, please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us.</a></p>
         {% else %}
             <h3>Parent Info</h3>
-            {% if ticket.age < 14 %}
+            {% if ticket.age < 12 %}
                 <div class="warning">
-                    <p><strong>Hey! There might be a problem:</strong> CodeDay is an event for high school and undergraduate students.</p>
-                    <p>Before you can attend, we'll need you to <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>
-                       for approval. Students who contact us will be approved automatically, but parents should let us know about their
-                       student's pre-established interest in technology.</p>
-                    <p>Without an email from our support, our event staff will not be able to let you in.</p>
+                    <p><strong>Hey! There might be a problem:</strong> CodeDay is targeted to older students.</p>
+                    <p>This is a very self-driven event. In the past, successful younger students have been:</p>
+                    <ul>
+                        <li>Already interested in technology, and;</li>
+                        <li>Relatively mature for their age.</li>
+                    </ul>
+                    <p>Please be available to pick up your student in case the event is not for them, particularly
+                       overnight. Also note that parents are not allowed to stay with their student for security reasons.</p>
+                    <p>If you have more questions, or would like a refund, please
+                       <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>.</p>
                 </div>
             {% endif %}
             <form method="post">
