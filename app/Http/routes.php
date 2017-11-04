@@ -28,7 +28,7 @@ use CodeDay\Models;
 
 $routes = function() {
     // Domain Routes
-    \Route::group(['domain' => isset($_SERVER["HTTP_HOST"]) && $_SERVER['HTTP_HOST'] == 'vip.codeday.dev:8080' ? 'vip.codeday.dev' : 'codeday.vip'], function(){
+    \Route::group(['domain' => isset($_SERVER["HTTP_HOST"]) && $_SERVER['HTTP_HOST'] == 'vip.codeday.dev' ? 'vip.codeday.dev' : 'codeday.vip'], function(){
         \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
         \Route::Controller('/{ticket}', '\CodeDay\Http\Controllers\Vip\IndexController');
         \Route::get('/', '\CodeDay\Http\Controllers\Vip\IndexController@getFind');
