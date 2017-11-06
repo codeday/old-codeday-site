@@ -27,14 +27,7 @@
                         {{ i18n('event.cta-ticket-normal') }}
                     {% endif %}</a>
             {% elseif event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
-                {% if event.related_events %}
-                    <span class="sold-out-label">{{ i18n('event.cta-ticket-out-near') }}</span>
-                    {% for related_event in event.related_events %}
-                        <a href="{{ langPrefix }}/{{ related_event.webname }}" class="nearby-avail">{{ related_event.region_name }}</a>
-                    {% endfor %}
-                {% else %}
-                    <span class="sold-out">{{ i18n('event.cta-ticket-out') }}</span>
-                {% endif %}
+                <span class="sold-out">{{ i18n('event.cta-ticket-out')|raw }}</span>
             {% else %}
                 <span class="notify-label">{{ i18n('event.cta-notify' ) }}</span>
                 <form action="/{{ event.webname }}/notify" method="post" class="notify-signup">
@@ -42,13 +35,17 @@
                     #}<input type="submit" value="{{ i18n('event.notify-signup') }}">
                 </form>
             {% endif %}
-            {% if event.venue %}
+            {% if event.venue and event.registration_info.is_open and event.registration_info.remaining > 0 %}
                 <span class="venue">{{ i18n('common.hosted-at', {'link': 'https://www.google.com/maps/place/'~(event.venue.full_address|url_encode), 'name': event.venue.name}) }}</span>
             {% endif %}
 
-            {% if event.related_events and not (event.registration_info.is_open and event.registration_info.remaining == 0) %}
+            {% if event.related_events %}
                 <section class="nearby">
-                    <span class="label">{{ i18n('event.nearby') }}</span>
+                    {% if event and event.registration_info.is_open and event.registration_info.remaining == 0 %}
+                        <span class="sold-out-label">{{ i18n('event.cta-ticket-out-near') }}</span>
+                    {% else %}
+                        <span class="label">{{ i18n('event.nearby') }}</span>
+                    {% endif %}
                     {% for related_event in event.related_events %}
                         <a href="{{ langPrefix }}/{{ related_event.webname }}" class="event">{{ related_event.region_name }}</a>
                     {% endfor %}
