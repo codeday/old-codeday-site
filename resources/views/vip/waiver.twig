@@ -8,6 +8,9 @@
 {% block nav %}<nav><ul><li><a href="/{{ ticket.id }}">{{ ticket.name }}</a></li></ul></nav>{% endblock %}
 {% block content %}
     <section class="waiver" id="waiver">
+        <p>If you have any problems signing your waiver, you can
+            <a href="https://srnd-cdn.net/codeday/waiver.pdf" target="_blank">print and sign,</a> however you will need
+            to use the slow line at check-in.</p>
         <iframe src="{{ url }}?hidenav=1&hidetext=1"></iframe>
         <section class="notice">
             <section class="esign">
