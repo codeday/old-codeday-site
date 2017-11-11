@@ -10,5 +10,6 @@ return [
     'cookie' => $config['session']['cookie'],
     'domain' => null,
     'path' => '/',
-    'secure' => false
+    'secure' => false,
+    'lottery' => [2, 100]
 ];
