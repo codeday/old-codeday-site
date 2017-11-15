@@ -98,6 +98,9 @@ body.global
 
     article.sponsors
         text-align: center
+        p
+            color: $color-gray
+            margin: 2rem 0
         ul
             padding: 0
             li
@@ -115,11 +118,19 @@ body.global
                         size: contain
                         position: 50% 50%
                         repeat: no-repeat
-            &.small-sponsors li
-                +span-columns(2)
-                &:nth-child(6n)
-                    +omega
-                display: inline-block
-                float: none
-                span
-                    height: 5rem
+            &.small-sponsors
+                +span-columns(8)
+                +shift(2)
+                text-align: center
+                li
+                    width: 20%
+                    display: inline-block
+                    float: none
+                    padding-bottom: 4rem
+                    span
+                        height: 3rem
+                        filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale")
+                        filter: gray
+                        -webkit-filter: grayscale(100%)
+                        filter: grayscale(100%)
+                        opacity: 0.45
