@@ -11,9 +11,9 @@ abstract class ClearModel extends RemoteModel {
         $url = \Config::get('clear.api_base').$endpoint.'?'.http_build_query($data);
         $cacheData = \Cache::get('clearmodel.urlcache.'.hash('md5', $url));
 
-        if (!static::$cache || is_null(json_decode($cacheData))) {
+        if (!static::$cache || is_null(json_decode($cacheData)) || \config('app.debug')) {
             $cacheData = file_get_contents($url);
-            \Cache::put('clearmodel.urlcache.'.hash('md5', $url), $cacheData, 60);
+            \Cache::put('clearmodel.urlcache.'.hash('md5', $url), $cacheData, 3);
         }
         return json_decode($cacheData, true);
     }
