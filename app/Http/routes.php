@@ -63,6 +63,8 @@ $routes = function() {
 
     \Route::controller('/phone', '\CodeDay\Http\Controllers\PhoneController');
 
+    \Route::get('/challenge', '\CodeDay\Http\Controllers\ChallengeController@getChallenge');
+
 
     // Event-based Routes
     \Route::bind('event', function($webname) {
