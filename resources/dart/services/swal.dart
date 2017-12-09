@@ -16,6 +16,14 @@ Future swal({String title, String text, String type, String imageUrl: null}) {
     return onClose.future;
 }
 
+Future swalRaw(params) {
+    var onClose = new Completer();
+
+    context.callMethod('swal', [ new JsObject.jsify(params), onClose.complete ]);
+
+    return onClose.future;
+}
+
 Future error(text) {
     return swal(
         title: 'Error',

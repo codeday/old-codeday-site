@@ -15,6 +15,9 @@ class RegisterPage {
     num displayedPrice = 0;
     num remainingCapacity = 100;
 
+    dynamic btcSourceObj = null;
+    Timer btcTimer = null;
+
     bool formDisabled = false;
 
     String promoCode = null;
@@ -35,7 +38,6 @@ class RegisterPage {
         // Set up Stripe
         stripe = new Stripe(querySelector('.card').dataset['stripePk']);
 
-
         // # Button Bindings
         // Bind the "add new attendee" and "remove last attendee" handlers
         querySelector('.add-attendee').onClick.listen((event) {
@@ -53,16 +55,23 @@ class RegisterPage {
             if (formDisabled) return;
             showPromoPicker();
         });
+
         querySelector('.promo-picker button').onClick.listen((event) {
             event.stopPropagation();
             event.preventDefault();
             if (formDisabled) return;
             doApplyPromo();
         });
+
         querySelector('form').onSubmit.listen((event) {
             event.preventDefault();
             if (formDisabled) return;
             doPay();
+        });
+
+        querySelector('.pay-btc').onClick.listen((event) {
+            if (formDisabled) return;
+            doPayWithBtc();
         });
     }
 
@@ -155,6 +164,105 @@ class RegisterPage {
         var promoLinkElem = querySelector('.promo.link');
         promoPickerElem.style.display = 'block';
         promoLinkElem.style.display = 'none';
+    }
+
+    Future doPayWithBtc() async {
+        disableForm();
+
+        var complete = true;
+
+        getRegistrationInputs(true).forEach((elem) {
+            if (elem.id != "card_number" && elem.id != "exp" && (elem.value.trim().length < 1 || !elem.checkValidity())) complete = false;
+        });
+
+        if (!complete) {
+            await swal(
+                title: 'Error',
+                text: 'Please complete all fields.',
+                type: 'error'
+            );
+            enableForm();
+            return;
+        }
+
+        var btcSource = await requestStripeBtcSource();
+        btcSourceObj = btcSource['response'];
+        
+        btcTimer = new Timer.periodic(const Duration(milliseconds: 5000), checkBtcSource);
+
+        var cancelled = await swalRaw({
+            'allowOutsideClick': false,
+            'title': "Complete your bitcoin purchase",
+            'text': "Please send ${btcSourceObj['bitcoin']['amount'] / 100000000} BTC to ${btcSourceObj['bitcoin']['address']}",
+            'imageUrl': "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chld=L|0&chl=${Uri.encodeComponent(btcSourceObj['bitcoin']['uri'])}",
+            'imageSize': "150x150",
+            'confirmButtonText': "Cancel"
+        });
+
+        // everything below here runs if the dialog is cancelled
+        enableForm();
+        btcTimer.cancel();
+        print("timer cancelled");
+    }
+
+    Future finalizePaymentWithBtc() async {
+        return api().RegisterWithSource(
+            registrations: getFilledRegistrations(),
+            stripeSource: btcSourceObj['id'],
+            quotedPrice: displayedPrice,
+            promoCode: promoCode
+        );
+    }
+
+    void checkBtcSource(Timer timer) async {
+        var src = await stripe.CheckBitcoinSource(btcSourceObj['id'], btcSourceObj['client_secret']);
+        var srcObj = src['response'];
+
+        if (srcObj['status'] == 'chargeable') {
+            timer.cancel();
+
+            swalRaw({
+                'allowOutsideClick': false,
+                'title': "Processing transaction",
+                'text': "This should only take a second...",
+                'confirmButtonText': "Cancel"
+            });
+
+            var regResponse = await finalizePaymentWithBtc();
+
+            if (regResponse['status'] == 200) {
+                // Success
+                swal(
+                        title: 'You\'re in!',
+                        text: 'You have successfully registered for CodeDay! A receipt has'+
+                                ' been emailed to all ticket holders.',
+                        type: 'success'
+                );
+
+                var params = new JsObject.jsify({
+                    'app_id': querySelector('body').dataset['facebookAppId'],
+                    'page_id': querySelector('body').dataset['facebookPageId'],
+                    'ref': regResponse['ids'][0],
+                    'user_ref': querySelector('body').dataset['userRef']
+                });
+
+                context['FB']['AppEvents'].callMethod("logEvent", ['MessengerCheckboxUserConfirmation', null, params]);
+
+                // context['console'].callMethod("log", [querySelector('body').dataset['facebookAppId'], querySelector('body').dataset['facebookPageId'], regResponse['ids'][0], querySelector('body').dataset['userRef']]);
+
+                querySelectorAll('.registration, .payment').style.display = 'none';
+                querySelector('form .success').style.display = 'block';
+                querySelectorAll('form .success a.download').forEach((elem) {
+                    AnchorElement a = elem as AnchorElement;
+                    a.href = a.href+regResponse['ids'].join(',');
+                });
+
+            } else {
+                error(regResponse['message']);
+                enableForm();
+                return;
+            }
+        }
     }
 
     /**
@@ -270,12 +378,18 @@ class RegisterPage {
         getRegistrationInputs().forEach((elem) => elem.disabled = false);
     }
 
+    Future requestStripeBtcSource() async {
+        var completer = new Completer();
+        var regs = getFilledRegistrations();
+        completer.complete(await stripe.GetBitcoinSource(displayedPrice * 100, regs.first.Email));
+        return completer.future;
+    }
+
     /**
      * Requests a Stripe token for the card currently displayed on the page.
      */
     Future requestStripeToken() async {
         var completer = new Completer();
-
 
         InputElement cardNumber = querySelector('#card_number');
         InputElement cardExp = querySelector('#exp');
