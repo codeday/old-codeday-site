@@ -19,6 +19,23 @@ class Stripe {
         });
     }
 
+    Future GetBitcoinSource(int amount, String email) {
+        return Request('sources', 'POST', {
+            'type': 'bitcoin',
+            'amount': amount,
+            'currency': 'usd',
+            'owner': {
+                'email': email
+            }
+        });
+    }
+
+    Future CheckBitcoinSource(String sourceId, String secret) {
+        return Request('sources/${sourceId}', 'GET', {
+            'client_secret': secret
+        });
+    }
+
     /**
      * Makes a Stripe request and returns the result
      */

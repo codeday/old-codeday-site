@@ -28,6 +28,17 @@ class Api {
         });
     }
 
+    Future RegisterWithSource({List<Registration> registrations, String stripeSource, num quotedPrice, String promoCode: null}) {
+        return Request('register/'+Event+'/register', 'POST', {
+            'bitcoin_source': stripeSource,
+            'quoted_price': quotedPrice,
+            'first_names': registrations.map((r)=>r.FirstName),
+            'last_names': registrations.map((r)=>r.LastName),
+            'emails': registrations.map((r)=>r.Email),
+            'code': promoCode
+        });
+    }
+
     /**
      * Gets details about the specified promotion code. Returns an object
      * containing { bool expired, num remaining_uses, num cost, num discount }

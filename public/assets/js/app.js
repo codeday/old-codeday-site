@@ -612,7 +612,7 @@
       noSuchMethod$1: ["super$Interceptor$noSuchMethod", function(receiver, invocation) {
         throw H.wrapException(P.NoSuchMethodError$(receiver, invocation.get$memberName(), invocation.get$positionalArguments(), invocation.get$namedArguments(), null));
       }],
-      "%": "Client|DOMError|FileError|MediaError|NavigatorUserMediaError|PositionError|PushMessageData|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString|WindowClient"
+      "%": "DOMError|FileError|MediaError|NavigatorUserMediaError|PositionError|PushMessageData|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString"
     },
     JSBool: {
       "^": "Interceptor;",
@@ -855,6 +855,9 @@
         if (typeof other !== "number")
           throw H.wrapException(H.argumentErrorValue(other));
         return receiver - other;
+      },
+      $div: function(receiver, other) {
+        return receiver / other;
       },
       $tdiv: function(receiver, other) {
         if ((receiver | 0) === receiver)
@@ -1166,6 +1169,11 @@
             throw H.wrapException(new P.ConcurrentModificationError(this));
         }
       },
+      get$first: function(_) {
+        if (this.get$length(this) === 0)
+          throw H.wrapException(H.IterableElementError_noElement());
+        return this.elementAt$1(0, 0);
+      },
       join$1: function(_, separator) {
         var $length, first, t1, i;
         $length = this.get$length(this);
@@ -1474,7 +1482,7 @@
         case "error":
           throw H.wrapException(t1.$index(msg, "msg"));
       }
-    }, null, null, 4, 0, null, 12, 2],
+    }, null, null, 4, 0, null, 12, 3],
     IsolateNatives__log: function(msg) {
       var trace, t1, t2, exception;
       if (init.globalState.isWorker === true) {
@@ -1535,7 +1543,7 @@
       }
     },
     _IsolateContext: {
-      "^": "Object;id,ports,weakPorts,isolateStatics<,controlPort<,pauseCapability,terminateCapability,initialized?,isPaused<,delayedEvents<,pauseTokens,doneHandlers,_scheduledControlEvents,_isExecutingEvent,errorsAreFatal,errorPorts",
+      "^": "Object;id>,ports,weakPorts,isolateStatics<,controlPort<,pauseCapability,terminateCapability,initialized?,isPaused<,delayedEvents<,pauseTokens,doneHandlers,_scheduledControlEvents,_isExecutingEvent,errorsAreFatal,errorPorts",
       addPause$2: function(authentification, resume) {
         if (!this.pauseCapability.$eq(0, authentification))
           return;
@@ -1980,10 +1988,20 @@
           if (t1 == null)
             return;
           --init.globalState.topEventLoop._activeJsAsyncCount;
-          self.clearTimeout(t1);
+          if (this._once)
+            self.clearTimeout(t1);
+          else
+            self.clearInterval(t1);
           this._handle = null;
         } else
           throw H.wrapException(new P.UnsupportedError("Canceling a timer."));
+      },
+      TimerImpl$periodic$2: function(milliseconds, callback) {
+        if (self.setTimeout != null) {
+          ++init.globalState.topEventLoop._activeJsAsyncCount;
+          this._handle = self.setInterval(H.convertDartClosureToJS(new H.TimerImpl$periodic_closure(this, callback), 0), milliseconds);
+        } else
+          throw H.wrapException(new P.UnsupportedError("Periodic timer."));
       },
       TimerImpl$2: function(milliseconds, callback) {
         var t1, t2;
@@ -2008,6 +2026,11 @@
           var t1 = new H.TimerImpl(true, false, null);
           t1.TimerImpl$2(milliseconds, callback);
           return t1;
+        },
+        TimerImpl$periodic: function(milliseconds, callback) {
+          var t1 = new H.TimerImpl(false, false, null);
+          t1.TimerImpl$periodic$2(milliseconds, callback);
+          return t1;
         }
       }
     },
@@ -2024,6 +2047,12 @@
         this.$this._handle = null;
         --init.globalState.topEventLoop._activeJsAsyncCount;
         this.callback.call$0();
+      }, null, null, 0, 0, null, "call"]
+    },
+    TimerImpl$periodic_closure: {
+      "^": "Closure:1;$this,callback",
+      call$0: [function() {
+        this.callback.call$1(this.$this);
       }, null, null, 0, 0, null, "call"]
     },
     CapabilityImpl: {
@@ -4744,14 +4773,14 @@
       }
     },
     _nullDataHandler: [function(value) {
-    }, "call$1", "async___nullDataHandler$closure", 2, 0, 19, 5],
+    }, "call$1", "async___nullDataHandler$closure", 2, 0, 20, 6],
     _nullErrorHandler: [function(error, stackTrace) {
       var t1 = $.Zone__current;
       t1.toString;
       P._rootHandleUncaughtError(null, null, t1, error, stackTrace);
     }, function(error) {
       return P._nullErrorHandler(error, null);
-    }, "call$2", "call$1", "async___nullErrorHandler$closure", 2, 2, 4, 1],
+    }, "call$2", "call$1", "async___nullErrorHandler$closure", 2, 2, 4, 2],
     _nullDoneHandler: [function() {
     }, "call$0", "async___nullDoneHandler$closure", 0, 0, 2],
     _cancelAndError: function(subscription, future, error, stackTrace) {
@@ -4773,9 +4802,24 @@
       }
       return P.Timer__createTimer(duration, t1.bindCallback$2$runGuarded(callback, true));
     },
+    Timer_Timer$periodic: function(duration, callback) {
+      var t1, boundCallback;
+      t1 = $.Zone__current;
+      if (t1 === C.C__RootZone) {
+        t1.toString;
+        return P.Timer__createPeriodicTimer(duration, callback);
+      }
+      boundCallback = t1.bindUnaryCallback$2$runGuarded(callback, true);
+      $.Zone__current.toString;
+      return P.Timer__createPeriodicTimer(duration, boundCallback);
+    },
     Timer__createTimer: function(duration, callback) {
       var milliseconds = C.JSInt_methods._tdivFast$1(duration._duration, 1000);
       return H.TimerImpl$(milliseconds < 0 ? 0 : milliseconds, callback);
+    },
+    Timer__createPeriodicTimer: function(duration, callback) {
+      var milliseconds = C.JSInt_methods._tdivFast$1(duration._duration, 1000);
+      return H.TimerImpl$periodic(milliseconds < 0 ? 0 : milliseconds, callback);
     },
     Zone_current: function() {
       return $.Zone__current;
@@ -4842,7 +4886,7 @@
         f = t1.storedCallback;
         t1.storedCallback = null;
         f.call$0();
-      }, null, null, 2, 0, null, 6, "call"]
+      }, null, null, 2, 0, null, 7, "call"]
     },
     _AsyncRun__initializeScheduleImmediate_closure: {
       "^": "Closure:11;_box_0,div,span",
@@ -4873,19 +4917,19 @@
       "^": "Closure:0;bodyFunction",
       call$1: [function(result) {
         return this.bodyFunction.call$2(0, result);
-      }, null, null, 2, 0, null, 3, "call"]
+      }, null, null, 2, 0, null, 4, "call"]
     },
     _awaitOnObject_closure0: {
       "^": "Closure:12;bodyFunction",
       call$2: [function(error, stackTrace) {
         this.bodyFunction.call$2(1, new H.ExceptionAndStackTrace(error, stackTrace));
-      }, null, null, 4, 0, null, 0, 4, "call"]
+      }, null, null, 4, 0, null, 0, 5, "call"]
     },
     _wrapJsFunctionForAsync_closure: {
       "^": "Closure:13;$protected",
       call$2: [function(errorCode, result) {
         this.$protected(errorCode, result);
-      }, null, null, 4, 0, null, 21, 3, "call"]
+      }, null, null, 4, 0, null, 21, 4, "call"]
     },
     _BroadcastStream: {
       "^": "_ControllerStream;_async$_controller,$ti"
@@ -5117,7 +5161,7 @@
         this._completeError$2(error, stackTrace);
       }, function(error) {
         return this.completeError$2(error, null);
-      }, "completeError$1", "call$2", "call$1", "get$completeError", 2, 2, 4, 1]
+      }, "completeError$1", "call$2", "call$1", "get$completeError", 2, 2, 4, 2]
     },
     _AsyncCompleter: {
       "^": "_Completer;future,$ti",
@@ -5128,7 +5172,7 @@
         t1._asyncComplete$1(value);
       }, function($receiver) {
         return this.complete$1($receiver, null);
-      }, "complete$0", "call$1", "call$0", "get$complete", 0, 2, 14, 1, 5],
+      }, "complete$0", "call$1", "call$0", "get$complete", 0, 2, 14, 2, 6],
       _completeError$2: function(error, stackTrace) {
         this.future._asyncCompleteError$2(error, stackTrace);
       }
@@ -5348,7 +5392,7 @@
         P._Future__propagateToListeners(this, listeners);
       }, function(error) {
         return this._completeError$2(error, null);
-      }, "_completeError$1", "call$2", "call$1", "get$_completeError", 2, 2, 4, 1, 0, 4],
+      }, "_completeError$1", "call$2", "call$1", "get$_completeError", 2, 2, 4, 2, 0, 5],
       _asyncComplete$1: function(value) {
         var t1;
         if (H.checkSubtype(value, "$isFuture", this.$ti, "$asFuture")) {
@@ -5520,7 +5564,7 @@
         var t1 = this.target;
         t1._clearPendingComplete$0();
         t1._complete$1(value);
-      }, null, null, 2, 0, null, 5, "call"]
+      }, null, null, 2, 0, null, 6, "call"]
     },
     _Future__chainForeignFuture_closure0: {
       "^": "Closure:15;target",
@@ -5528,7 +5572,7 @@
         this.target._completeError$2(error, stackTrace);
       }, function(error) {
         return this.call$2(error, null);
-      }, "call$1", null, null, null, 2, 2, null, 1, 0, 4, "call"]
+      }, "call$1", null, null, null, 2, 2, null, 2, 0, 5, "call"]
     },
     _Future__chainForeignFuture_closure1: {
       "^": "Closure:1;target,e,s",
@@ -5604,7 +5648,7 @@
       "^": "Closure:0;originalSource",
       call$1: [function(_) {
         return this.originalSource;
-      }, null, null, 2, 0, null, 6, "call"]
+      }, null, null, 2, 0, null, 7, "call"]
     },
     _Future__propagateToListeners_handleValueCallback: {
       "^": "Closure:2;_box_0,listener,sourceResult",
@@ -5717,7 +5761,7 @@
       "^": "Closure:0;result",
       call$1: [function(e) {
         this.result._completeError$1(e);
-      }, null, null, 2, 0, null, 2, "call"]
+      }, null, null, 2, 0, null, 3, "call"]
     },
     Stream_join_closure0: {
       "^": "Closure:1;result,buffer",
@@ -5730,7 +5774,7 @@
       "^": "Closure:0;_box_0",
       call$1: [function(_) {
         ++this._box_0.count;
-      }, null, null, 2, 0, null, 6, "call"]
+      }, null, null, 2, 0, null, 7, "call"]
     },
     Stream_length_closure0: {
       "^": "Closure:1;_box_0,future",
@@ -6236,7 +6280,7 @@
       }, 10],
       _handleError$2: [function(error, stackTrace) {
         this._stream._handleError$3(error, stackTrace, this);
-      }, "call$2", "get$_handleError", 4, 0, 16, 0, 4],
+      }, "call$2", "get$_handleError", 4, 0, 16, 0, 5],
       _handleDone$0: [function() {
         this._async$_close$0();
       }, "call$0", "get$_handleDone", 0, 0, 2],
@@ -6299,6 +6343,9 @@
         return [$T, $T];
       },
       $asStream: null
+    },
+    Timer: {
+      "^": "Object;"
     },
     AsyncError: {
       "^": "Object;error>,stackTrace<",
@@ -7729,10 +7776,10 @@
     },
     num__returnIntNull: [function(_) {
       return;
-    }, "call$1", "core_num__returnIntNull$closure", 2, 0, 20],
+    }, "call$1", "core_num__returnIntNull$closure", 2, 0, 21],
     num__returnDoubleNull: [function(_) {
       return;
-    }, "call$1", "core_num__returnDoubleNull$closure", 2, 0, 21],
+    }, "call$1", "core_num__returnDoubleNull$closure", 2, 0, 22],
     print: function(object) {
       H.printString(H.S(object));
     },
@@ -7756,7 +7803,7 @@
         if (t3)
           t2 += H.Primitives_stringFromCharCode(byte);
         else
-          t2 = byte === 32 ? t2 + "+" : t2 + "%" + "0123456789ABCDEF"[byte >>> 4 & 15] + "0123456789ABCDEF"[byte & 15];
+          t2 = spaceToPlus && byte === 32 ? t2 + "+" : t2 + "%" + "0123456789ABCDEF"[byte >>> 4 & 15] + "0123456789ABCDEF"[byte & 15];
       }
       return t2.charCodeAt(0) == 0 ? t2 : t2;
     },
@@ -8473,6 +8520,10 @@
       $isInterceptor: 1,
       "%": "CDATASection|Comment|Text;CharacterData"
     },
+    Client: {
+      "^": "Interceptor;id=",
+      "%": "Client|WindowClient"
+    },
     CssStyleDeclaration: {
       "^": "Interceptor_CssStyleDeclarationBase;length=",
       "%": "CSS2Properties|CSSStyleDeclaration|MSStyleCSSProperties"
@@ -8506,7 +8557,7 @@
       "^": "Closure:0;",
       call$1: [function(e) {
         return J.get$style$x(e);
-      }, null, null, 2, 0, null, 2, "call"]
+      }, null, null, 2, 0, null, 3, "call"]
     },
     CssStyleDeclarationBase: {
       "^": "Object;"
@@ -8569,7 +8620,7 @@
       $asIterable: null
     },
     Element: {
-      "^": "Node;style=,_namespaceUri:namespaceURI=",
+      "^": "Node;style=,id=,_namespaceUri:namespaceURI=",
       querySelectorAll$1: function(receiver, selectors) {
         return new W._FrozenElementList(receiver.querySelectorAll(selectors), [null]);
       },
@@ -8609,7 +8660,7 @@
         return receiver.stopPropagation();
       },
       $isEvent: 1,
-      "%": "AnimationEvent|AnimationPlayerEvent|AudioProcessingEvent|AutocompleteErrorEvent|BeforeInstallPromptEvent|BeforeUnloadEvent|BlobEvent|ClipboardEvent|CloseEvent|CompositionEvent|CustomEvent|DeviceMotionEvent|DeviceOrientationEvent|DragEvent|ExtendableEvent|ExtendableMessageEvent|FetchEvent|FocusEvent|FontFaceSetLoadEvent|GamepadEvent|GeofencingEvent|HashChangeEvent|IDBVersionChangeEvent|InstallEvent|KeyboardEvent|MIDIConnectionEvent|MIDIMessageEvent|MediaEncryptedEvent|MediaKeyMessageEvent|MediaQueryListEvent|MediaStreamEvent|MediaStreamTrackEvent|MessageEvent|MouseEvent|NotificationEvent|OfflineAudioCompletionEvent|PageTransitionEvent|PointerEvent|PopStateEvent|PresentationConnectionAvailableEvent|PresentationConnectionCloseEvent|ProgressEvent|PromiseRejectionEvent|PushEvent|RTCDTMFToneChangeEvent|RTCDataChannelEvent|RTCIceCandidateEvent|RTCPeerConnectionIceEvent|RelatedEvent|ResourceProgressEvent|SVGZoomEvent|SecurityPolicyViolationEvent|ServicePortConnectEvent|ServiceWorkerMessageEvent|SpeechRecognitionEvent|SpeechSynthesisEvent|StorageEvent|SyncEvent|TextEvent|TouchEvent|TrackEvent|TransitionEvent|UIEvent|USBConnectionEvent|WebGLContextEvent|WebKitTransitionEvent|WheelEvent;Event|InputEvent"
+      "%": "AnimationEvent|AnimationPlayerEvent|AudioProcessingEvent|AutocompleteErrorEvent|BeforeInstallPromptEvent|BeforeUnloadEvent|BlobEvent|ClipboardEvent|CloseEvent|CompositionEvent|CustomEvent|DeviceMotionEvent|DeviceOrientationEvent|DragEvent|ExtendableEvent|ExtendableMessageEvent|FetchEvent|FocusEvent|FontFaceSetLoadEvent|GamepadEvent|HashChangeEvent|IDBVersionChangeEvent|InstallEvent|KeyboardEvent|MIDIConnectionEvent|MIDIMessageEvent|MediaEncryptedEvent|MediaKeyMessageEvent|MediaQueryListEvent|MediaStreamEvent|MediaStreamTrackEvent|MessageEvent|MouseEvent|NotificationEvent|OfflineAudioCompletionEvent|PageTransitionEvent|PointerEvent|PopStateEvent|PresentationConnectionAvailableEvent|PresentationConnectionCloseEvent|ProgressEvent|PromiseRejectionEvent|PushEvent|RTCDTMFToneChangeEvent|RTCDataChannelEvent|RTCIceCandidateEvent|RTCPeerConnectionIceEvent|RelatedEvent|ResourceProgressEvent|SVGZoomEvent|SecurityPolicyViolationEvent|ServicePortConnectEvent|ServiceWorkerMessageEvent|SpeechRecognitionEvent|SpeechSynthesisEvent|StorageEvent|SyncEvent|TextEvent|TouchEvent|TrackEvent|TransitionEvent|UIEvent|USBConnectionEvent|WebGLContextEvent|WebKitTransitionEvent|WheelEvent;Event|InputEvent"
     },
     EventTarget: {
       "^": "Interceptor;",
@@ -8628,7 +8679,7 @@
         return receiver.removeEventListener(type, H.convertDartClosureToJS(listener, 1), false);
       },
       $isEventTarget: 1,
-      "%": "MediaStream|MessagePort;EventTarget"
+      "%": "MessagePort;EventTarget"
     },
     FieldSetElement: {
       "^": "HtmlElement;disabled},name=",
@@ -8643,6 +8694,10 @@
         return receiver.checkValidity();
       },
       "%": "HTMLFormElement"
+    },
+    GeofencingEvent: {
+      "^": "Event;id=",
+      "%": "GeofencingEvent"
     },
     HttpRequest: {
       "^": "HttpRequestEventTarget;status=",
@@ -8738,6 +8793,10 @@
     MediaElement: {
       "^": "HtmlElement;error=",
       "%": "HTMLAudioElement|HTMLMediaElement|HTMLVideoElement"
+    },
+    MediaStream: {
+      "^": "EventTarget;id=",
+      "%": "MediaStream"
     },
     MenuItemElement: {
       "^": "HtmlElement;disabled}",
@@ -9243,7 +9302,7 @@
       "^": "Closure:0;onData",
       call$1: [function(e) {
         return this.onData.call$1(e);
-      }, null, null, 2, 0, null, 2, "call"]
+      }, null, null, 2, 0, null, 3, "call"]
     },
     _StreamPool: {
       "^": "Object;_controller,_subscriptions,$ti",
@@ -9426,13 +9485,13 @@
       "^": "Closure:0;completer",
       call$1: [function(result) {
         return this.completer.complete$1(0, result);
-      }, null, null, 2, 0, null, 3, "call"]
+      }, null, null, 2, 0, null, 4, "call"]
     },
     convertNativePromiseToDartFuture_closure0: {
       "^": "Closure:0;completer",
       call$1: [function(result) {
         return this.completer.completeError$1(result);
-      }, null, null, 2, 0, null, 3, "call"]
+      }, null, null, 2, 0, null, 4, "call"]
     }
   }], ["dart.dom.indexed_db", "dart:indexed_db",, P, {
     "^": "",
@@ -9485,7 +9544,7 @@
       if (!!t1.$isFunction)
         return P._getJsProxy(o, "$dart_jsFunction", new P._convertToJS_closure());
       return P._getJsProxy(o, "_$dart_jsObject", new P._convertToJS_closure0($.$get$_dartProxyCtor()));
-    }, "call$1", "js___convertToJS$closure", 2, 0, 0, 7],
+    }, "call$1", "js___convertToJS$closure", 2, 0, 0, 8],
     _getJsProxy: function(o, propertyName, createProxy) {
       var jsProxy = P._getOwnProperty(o, propertyName);
       if (jsProxy == null) {
@@ -9516,7 +9575,7 @@
         else
           return P._wrapToDart(o);
       }
-    }, "call$1", "js___convertToDart$closure", 2, 0, 22, 7],
+    }, "call$1", "js___convertToDart$closure", 2, 0, 23, 8],
     _wrapToDart: function(o) {
       if (typeof o == "function")
         return P._getDartProxy(o, $.$get$DART_CLOSURE_PROPERTY_NAME(), new P._wrapToDart_closure());
@@ -9601,7 +9660,7 @@
           return convertedList;
         } else
           return P._convertToJS(o);
-      }, null, null, 2, 0, null, 7, "call"]
+      }, null, null, 2, 0, null, 8, "call"]
     },
     JsFunction: {
       "^": "JsObject;_jsObject"
@@ -9909,6 +9968,10 @@
         var t1 = [H.getRuntimeTypeArgument(registrations, "ListIterable", 0), null];
         return this.Request$3(C.JSString_methods.$add("register/", this.Event) + "/register", "POST", P.LinkedHashMap__makeLiteral(["card_token", stripeToken, "quoted_price", quotedPrice, "first_names", new H.MappedListIterable(registrations, new A.Api_Register_closure(), t1), "last_names", new H.MappedListIterable(registrations, new A.Api_Register_closure0(), t1), "emails", new H.MappedListIterable(registrations, new A.Api_Register_closure1(), t1), "code", promoCode]));
       },
+      RegisterWithSource$4$promoCode$quotedPrice$registrations$stripeSource: function(promoCode, quotedPrice, registrations, stripeSource) {
+        var t1 = [H.getRuntimeTypeArgument(registrations, "ListIterable", 0), null];
+        return this.Request$3(C.JSString_methods.$add("register/", this.Event) + "/register", "POST", P.LinkedHashMap__makeLiteral(["bitcoin_source", stripeSource, "quoted_price", quotedPrice, "first_names", new H.MappedListIterable(registrations, new A.Api_RegisterWithSource_closure(), t1), "last_names", new H.MappedListIterable(registrations, new A.Api_RegisterWithSource_closure0(), t1), "emails", new H.MappedListIterable(registrations, new A.Api_RegisterWithSource_closure1(), t1), "code", promoCode]));
+      },
       Request$3: function(endpoint, method, body) {
         var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$self = this, parts, formData, t1, finalResult, t2, $async$temp1, $async$temp2, $async$temp3;
         var $async$Request$3 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
@@ -9980,19 +10043,37 @@
       "^": "Closure:0;",
       call$1: [function(r) {
         return r.get$FirstName();
-      }, null, null, 2, 0, null, 8, "call"]
+      }, null, null, 2, 0, null, 1, "call"]
     },
     Api_Register_closure0: {
       "^": "Closure:0;",
       call$1: [function(r) {
         return r.get$LastName();
-      }, null, null, 2, 0, null, 8, "call"]
+      }, null, null, 2, 0, null, 1, "call"]
     },
     Api_Register_closure1: {
       "^": "Closure:0;",
       call$1: [function(r) {
         return r.get$Email();
-      }, null, null, 2, 0, null, 8, "call"]
+      }, null, null, 2, 0, null, 1, "call"]
+    },
+    Api_RegisterWithSource_closure: {
+      "^": "Closure:0;",
+      call$1: [function(r) {
+        return r.get$FirstName();
+      }, null, null, 2, 0, null, 1, "call"]
+    },
+    Api_RegisterWithSource_closure0: {
+      "^": "Closure:0;",
+      call$1: [function(r) {
+        return r.get$LastName();
+      }, null, null, 2, 0, null, 1, "call"]
+    },
+    Api_RegisterWithSource_closure1: {
+      "^": "Closure:0;",
+      call$1: [function(r) {
+        return r.get$Email();
+      }, null, null, 2, 0, null, 1, "call"]
     },
     Api_Request_closure: {
       "^": "Closure:3;parts",
@@ -10077,7 +10158,7 @@
   }, 1], ["", "../../../resources/dart/web/pages/register.dart",, R, {
     "^": "",
     RegisterPage: {
-      "^": "Object;stripe,currentPromo,defaultUnitPrice,unitPrice,displayedPrice,remainingCapacity,formDisabled,promoCode,promoRemainingUses",
+      "^": "Object;stripe,currentPromo,defaultUnitPrice,unitPrice,displayedPrice,remainingCapacity,btcSourceObj,btcTimer,formDisabled,promoCode,promoRemainingUses",
       doApplyPromo$0: function() {
         var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, code, details, t1, t2, exception, $async$exception;
         var $async$doApplyPromo$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
@@ -10183,6 +10264,147 @@
         t1 = promoLinkElem.style;
         t1.display = "inline-block";
       },
+      doPayWithBtc$0: function() {
+        var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$self = this, t1, $async$temp1, $async$temp2;
+        var $async$doPayWithBtc$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+          if ($async$errorCode === 1)
+            return P._asyncRethrow($async$result, $async$completer);
+          while (true)
+            switch ($async$goto) {
+              case 0:
+                // Function start
+                t1 = {};
+                $async$self.disableForm$0();
+                t1.complete = true;
+                C.JSArray_methods.forEach$1($async$self.getRegistrationInputs$1(true), new R.RegisterPage_doPayWithBtc_closure(t1));
+                $async$goto = !t1.complete ? 3 : 4;
+                break;
+              case 3:
+                // then
+                $async$goto = 5;
+                return P._asyncAwait(V.swal(null, "Please complete all fields.", "Error", "error"), $async$doPayWithBtc$0);
+              case 5:
+                // returning from await.
+                $async$self.enableForm$0();
+                // goto return
+                $async$goto = 1;
+                break;
+              case 4:
+                // join
+                $async$temp1 = $async$self;
+                $async$temp2 = J;
+                $async$goto = 6;
+                return P._asyncAwait($async$self.requestStripeBtcSource$0(), $async$doPayWithBtc$0);
+              case 6:
+                // returning from await.
+                $async$temp1.btcSourceObj = $async$temp2.$index$asx($async$result, "response");
+                $async$self.btcTimer = P.Timer_Timer$periodic(C.Duration_5000000, $async$self.get$checkBtcSource());
+                $async$goto = 7;
+                return P._asyncAwait(V.swalRaw(P.LinkedHashMap__makeLiteral(["allowOutsideClick", false, "title", "Complete your bitcoin purchase", "text", "Please send " + H.S(J.$div$n(J.$index$asx(J.$index$asx($async$self.btcSourceObj, "bitcoin"), "amount"), 100000000)) + " BTC to " + H.S(J.$index$asx(J.$index$asx($async$self.btcSourceObj, "bitcoin"), "address")), "imageUrl", "https://chart.googleapis.com/chart?cht=qr&chs=200x200&chld=L|0&chl=" + H.S(P._Uri__uriEncode(C.List_KIf, J.$index$asx(J.$index$asx($async$self.btcSourceObj, "bitcoin"), "uri"), C.Utf8Codec_false, false)), "imageSize", "150x150", "confirmButtonText", "Cancel"])), $async$doPayWithBtc$0);
+              case 7:
+                // returning from await.
+                $async$self.enableForm$0();
+                $async$self.btcTimer.cancel$0();
+                P.print("timer cancelled");
+              case 1:
+                // return
+                return P._asyncReturn($async$returnValue, $async$completer);
+            }
+        });
+        return P._asyncStart($async$doPayWithBtc$0, $async$completer);
+      },
+      finalizePaymentWithBtc$0: function() {
+        var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$self = this, t1, t2, t3, t4;
+        var $async$finalizePaymentWithBtc$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+          if ($async$errorCode === 1)
+            return P._asyncRethrow($async$result, $async$completer);
+          while (true)
+            switch ($async$goto) {
+              case 0:
+                // Function start
+                t1 = A.api();
+                t2 = $async$self.getFilledRegistrations$0();
+                t3 = J.$index$asx($async$self.btcSourceObj, "id");
+                t4 = $async$self.displayedPrice;
+                $async$returnValue = t1.RegisterWithSource$4$promoCode$quotedPrice$registrations$stripeSource($async$self.promoCode, t4, t2, t3);
+                // goto return
+                $async$goto = 1;
+                break;
+              case 1:
+                // return
+                return P._asyncReturn($async$returnValue, $async$completer);
+            }
+        });
+        return P._asyncStart($async$finalizePaymentWithBtc$0, $async$completer);
+      },
+      checkBtcSource$1: [function(timer) {
+        var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$self = this, t1, t2, t3, regResponse, t4, t5, params, $async$temp1, $async$temp2, $async$temp3;
+        var $async$checkBtcSource$1 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+          if ($async$errorCode === 1)
+            return P._asyncRethrow($async$result, $async$completer);
+          while (true)
+            switch ($async$goto) {
+              case 0:
+                // Function start
+                t1 = $async$self.stripe;
+                t2 = J.$index$asx($async$self.btcSourceObj, "id");
+                t3 = J.$index$asx($async$self.btcSourceObj, "client_secret");
+                t1.toString;
+                $async$temp1 = J;
+                $async$temp2 = J;
+                $async$temp3 = J;
+                $async$goto = 5;
+                return P._asyncAwait(t1.Request$3("sources/" + H.S(t2), "GET", P.LinkedHashMap__makeLiteral(["client_secret", t3])), $async$checkBtcSource$1);
+              case 5:
+                // returning from await.
+                $async$goto = $async$temp1.$eq$($async$temp2.$index$asx($async$temp3.$index$asx($async$result, "response"), "status"), "chargeable") ? 3 : 4;
+                break;
+              case 3:
+                // then
+                timer.cancel$0();
+                V.swalRaw(P.LinkedHashMap__makeLiteral(["allowOutsideClick", false, "title", "Processing transaction", "text", "This should only take a second...", "confirmButtonText", "Cancel"]));
+                $async$goto = 6;
+                return P._asyncAwait($async$self.finalizePaymentWithBtc$0(), $async$checkBtcSource$1);
+              case 6:
+                // returning from await.
+                regResponse = $async$result;
+                t1 = J.getInterceptor$asx(regResponse);
+                if (J.$eq$(t1.$index(regResponse, "status"), 200)) {
+                  V.swal(null, "You have successfully registered for CodeDay! A receipt has been emailed to all ticket holders.", "You're in!", "success");
+                  t2 = document;
+                  t3 = t2.querySelector("body");
+                  t3.toString;
+                  t3 = t3.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t3))._toHyphenedName$1("facebookAppId"));
+                  t4 = t2.querySelector("body");
+                  t4.toString;
+                  t4 = t4.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t4))._toHyphenedName$1("facebookPageId"));
+                  t1 = J.$index$asx(t1.$index(regResponse, "ids"), 0);
+                  t5 = t2.querySelector("body");
+                  t5.toString;
+                  params = P.JsObject_JsObject$jsify(P.LinkedHashMap__makeLiteral(["app_id", t3, "page_id", t4, "ref", t1, "user_ref", t5.getAttribute("data-" + new W._DataAttributeMap(new W._ElementAttributeMap(t5))._toHyphenedName$1("userRef"))]));
+                  J.$index$asx(J.$index$asx($.$get$context(), "FB"), "AppEvents").callMethod$2("logEvent", ["MessengerCheckboxUserConfirmation", null, params]);
+                  t5 = [null];
+                  W._CssStyleDeclarationSet$(new W._FrozenElementList(t2.querySelectorAll(".registration, .payment"), t5))._setAll$2("display", "none");
+                  t1 = t2.querySelector("form .success").style;
+                  t1.display = "block";
+                  t1 = new W._FrozenElementList(t2.querySelectorAll("form .success a.download"), t5);
+                  t1.forEach$1(t1, new R.RegisterPage_checkBtcSource_closure(regResponse));
+                } else {
+                  V.swal(null, t1.$index(regResponse, "message"), "Error", "error");
+                  $async$self.enableForm$0();
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+              case 4:
+                // join
+              case 1:
+                // return
+                return P._asyncReturn($async$returnValue, $async$completer);
+            }
+        });
+        return P._asyncStart($async$checkBtcSource$1, $async$completer);
+      }, "call$1", "get$checkBtcSource", 2, 0, 19],
       doPay$0: function() {
         var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, t1, stripeToken, tokenResponse, t2, t3, t4, t5, exception, t6, params, $async$exception, $async$temp1;
         var $async$doPay$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
@@ -10324,6 +10546,38 @@
       enableForm$0: function() {
         this.formDisabled = false;
         C.JSArray_methods.forEach$1(this.getRegistrationInputs$0(), new R.RegisterPage_enableForm_closure());
+      },
+      requestStripeBtcSource$0: function() {
+        var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$self = this, t1, regs, t2, t3, t4, $async$temp1;
+        var $async$requestStripeBtcSource$0 = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
+          if ($async$errorCode === 1)
+            return P._asyncRethrow($async$result, $async$completer);
+          while (true)
+            switch ($async$goto) {
+              case 0:
+                // Function start
+                t1 = new P._Future(0, $.Zone__current, null, [null]);
+                regs = $async$self.getFilledRegistrations$0();
+                t2 = $async$self.stripe;
+                t3 = $async$self.displayedPrice;
+                t4 = regs.get$first(regs).get$Email();
+                t2.toString;
+                $async$temp1 = new P._AsyncCompleter(t1, [null]);
+                $async$goto = 3;
+                return P._asyncAwait(t2.Request$3("sources", "POST", P.LinkedHashMap__makeLiteral(["type", "bitcoin", "amount", t3 * 100, "currency", "usd", "owner", P.LinkedHashMap__makeLiteral(["email", t4])])), $async$requestStripeBtcSource$0);
+              case 3:
+                // returning from await.
+                $async$temp1.complete$1(0, $async$result);
+                $async$returnValue = t1;
+                // goto return
+                $async$goto = 1;
+                break;
+              case 1:
+                // return
+                return P._asyncReturn($async$returnValue, $async$completer);
+            }
+        });
+        return P._asyncStart($async$requestStripeBtcSource$0, $async$completer);
       },
       requestStripeToken$0: function() {
         var $async$goto = 0, $async$completer = P.Completer_Completer$sync(), $async$returnValue, $async$handler = 2, $async$currentError, $async$next = [], $async$self = this, completer, cardNumber, expDay, expYear, t1, expParts, t2, t3, t4, exception, $async$exception, $async$temp1, $async$temp2;
@@ -10495,12 +10749,14 @@
         new W._ElementListEventStreamImpl(new W._FrozenElementList(t1.querySelectorAll(".promo.link, .price .discount .label"), [null]), false, "click", [W.MouseEvent]).listen$1(new R.RegisterPage_closure1(this));
         t2 = J.get$onClick$x(t1.querySelector(".promo-picker button"));
         W._EventStreamSubscription$(t2._html$_target, t2._eventType, new R.RegisterPage_closure2(this), false, H.getTypeArgumentByIndex(t2, 0));
-        t1 = J.get$onSubmit$x(t1.querySelector("form"));
-        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new R.RegisterPage_closure3(this), false, H.getTypeArgumentByIndex(t1, 0));
+        t2 = J.get$onSubmit$x(t1.querySelector("form"));
+        W._EventStreamSubscription$(t2._html$_target, t2._eventType, new R.RegisterPage_closure3(this), false, H.getTypeArgumentByIndex(t2, 0));
+        t1 = J.get$onClick$x(t1.querySelector(".pay-btc"));
+        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new R.RegisterPage_closure4(this), false, H.getTypeArgumentByIndex(t1, 0));
       },
       static: {
         RegisterPage$: function() {
-          var t1 = new R.RegisterPage(null, null, 10, 10, 0, 100, false, null, null);
+          var t1 = new R.RegisterPage(null, null, 10, 10, 0, 100, null, null, false, null, null);
           t1.RegisterPage$0();
           return t1;
         }
@@ -10576,6 +10832,42 @@
         if (t1.formDisabled)
           return;
         t1.doPay$0();
+      }
+    },
+    RegisterPage_closure4: {
+      "^": "Closure:0;$this",
+      call$1: function($event) {
+        var t1 = this.$this;
+        if (t1.formDisabled)
+          return;
+        t1.doPayWithBtc$0();
+      }
+    },
+    RegisterPage_doPayWithBtc_closure: {
+      "^": "Closure:0;_box_0",
+      call$1: function(elem) {
+        var t1 = J.getInterceptor$x(elem);
+        if (t1.get$id(elem) !== "card_number")
+          if (t1.get$id(elem) !== "exp")
+            t1 = J.trim$0$s(t1.get$value(elem)).length < 1 || t1.checkValidity$0(elem) !== true;
+          else
+            t1 = false;
+        else
+          t1 = false;
+        if (t1)
+          this._box_0.complete = false;
+      }
+    },
+    RegisterPage_checkBtcSource_closure: {
+      "^": "Closure:0;regResponse",
+      call$1: function(elem) {
+        var t1, t2;
+        H.interceptedTypeCast(elem, "$isAnchorElement");
+        t1 = elem.href;
+        t2 = J.join$1$ax(J.$index$asx(this.regResponse, "ids"), ",");
+        if (t1 == null)
+          return t1.$add();
+        elem.href = J.$add$ns(t1, t2);
       }
     },
     RegisterPage_doPay_closure: {
@@ -10733,6 +11025,13 @@
       onClose = new P._AsyncCompleter(t1, [null]);
       $.$get$context().callMethod$2("swal", [P.JsObject_JsObject$jsify(P.LinkedHashMap__makeLiteral(["title", title, "text", text, "type", type, "imageUrl", imageUrl])), onClose.get$complete(onClose)]);
       return t1;
+    },
+    swalRaw: function(params) {
+      var t1, onClose;
+      t1 = new P._Future(0, $.Zone__current, null, [null]);
+      onClose = new P._AsyncCompleter(t1, [null]);
+      $.$get$context().callMethod$2("swal", [P.JsObject_JsObject$jsify(params), onClose.get$complete(onClose)]);
+      return t1;
     }
   }]];
   setupProgram(dart, 0);
@@ -10872,6 +11171,11 @@
       return receiver + a0;
     return J.getInterceptor$ns(receiver).$add(receiver, a0);
   };
+  J.$div$n = function(receiver, a0) {
+    if (typeof receiver == "number" && typeof a0 == "number")
+      return receiver / a0;
+    return J.getInterceptor$n(receiver).$div(receiver, a0);
+  };
   J.$gt$n = function(receiver, a0) {
     if (typeof receiver == "number" && typeof a0 == "number")
       return receiver > a0;
@@ -10989,6 +11293,7 @@
   C.C__DelayedDone = new P._DelayedDone();
   C.C__RootZone = new P._RootZone();
   C.Duration_0 = new P.Duration(0);
+  C.Duration_5000000 = new P.Duration(5000000);
   C.JS_CONST_0 = function(hooks) {
   if (typeof dartExperimentalFixupGetTag != "function") return hooks;
   hooks.getTag = dartExperimentalFixupGetTag(hooks.getTag);
@@ -11111,6 +11416,7 @@
 };
   C.JsonCodec_null_null = new P.JsonCodec(null, null);
   C.JsonDecoder_null = new P.JsonDecoder(null);
+  C.List_KIf = Isolate.makeConstantList([0, 0, 26498, 1023, 65534, 34815, 65534, 18431]);
   C.List_empty = Isolate.makeConstantList([]);
   C.List_nxB = Isolate.makeConstantList([0, 0, 24576, 1023, 65534, 34815, 65534, 18431]);
   C.List_empty0 = H.setRuntimeTypeInfo(Isolate.makeConstantList([]), [P.Symbol0]);
@@ -11250,8 +11556,8 @@
   }, "_dartProxyCtor"]);
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
-  init.metadata = ["error", null, "e", "result", "stackTrace", "value", "_", "o", "r", "x", "data", "object", "sender", "closure", "isolate", "numberOfArguments", "arg1", "arg2", "arg3", "arg4", "each", "errorCode", "element", "arg", "callback", "captureThis", "self", "arguments", "event", "a", "response"];
-  init.types = [{func: 1, args: [,]}, {func: 1}, {func: 1, v: true}, {func: 1, args: [,,]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [P.String, P.String]}, {func: 1, args: [P.String,,]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, args: [, P.StackTrace]}, {func: 1, args: [P.int,,]}, {func: 1, v: true, opt: [,]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [P.Symbol0,,]}, {func: 1, ret: P.Future, args: [,]}, {func: 1, v: true, args: [P.Object]}, {func: 1, ret: P.int, args: [P.String]}, {func: 1, ret: P.double, args: [P.String]}, {func: 1, ret: P.Object, args: [,]}];
+  init.metadata = ["error", "r", null, "e", "result", "stackTrace", "value", "_", "o", "x", "data", "object", "sender", "closure", "isolate", "numberOfArguments", "arg1", "arg2", "arg3", "arg4", "each", "errorCode", "element", "arg", "callback", "captureThis", "self", "arguments", "event", "a", "response"];
+  init.types = [{func: 1, args: [,]}, {func: 1}, {func: 1, v: true}, {func: 1, args: [,,]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [P.String, P.String]}, {func: 1, args: [P.String,,]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, args: [, P.StackTrace]}, {func: 1, args: [P.int,,]}, {func: 1, v: true, opt: [,]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [P.Symbol0,,]}, {func: 1, ret: P.Future, args: [,]}, {func: 1, v: true, args: [P.Timer]}, {func: 1, v: true, args: [P.Object]}, {func: 1, ret: P.int, args: [P.String]}, {func: 1, ret: P.double, args: [P.String]}, {func: 1, ret: P.Object, args: [,]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }
