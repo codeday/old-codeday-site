@@ -3,13 +3,15 @@
         background-color: $color-black
     div.field
         display: block
-        padding-bottom: 5rem
-        label
+        padding-bottom: 1rem
+        & > label
             +span-columns(4)
             font-family: $font-family-header
             font-size: 1.3rem
             text-align: right
             padding-top: 0.2rem
+        & > .group > label
+            font-size: 1rem
         & > input, & > textarea, & > select, & > .group
             +span-columns(8)
             +omega
@@ -18,11 +20,18 @@
             border-radius: 2px
             -moz-border-radius: 2px
             -webkit-border-radius: 2px
+        & > .group
+            border: none
+            font-size: 1rem
         span.help
             +span-columns(8)
             +shift(4)
             color: $color-gray
             font-size: 0.9rem
+        &:after
+            content: ""
+            display: block
+            clear: both
     form
         input[type="submit"]
             clear: both

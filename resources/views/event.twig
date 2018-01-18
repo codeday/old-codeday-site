@@ -117,11 +117,18 @@
                 <span class="q">{{ i18n('event.faq-bring-q') }}</span>
                 <p>{{ i18n('event.faq-bring-a') }}</p>
             </li>
-            <li>
-                <span class="q">{{ i18n('event.faq-song-q') }}</span>
-                <p>{{ i18n('event.faq-song-a') }}</p>
-                <audio controls><source src="/assets/mp3/codeday-song.mp3" type="audio/mpeg" /></audio>
-            </li>
+            {% if event.loaners.available > 2 %}
+                <li>
+                    <span class="q">{{ i18n('event.faq-loaner-q') }}</span>
+                    <p>{{ i18n('event.faq-loaner-a', {'available': event.loaners.available, 'total': event.loaners.total}) }}</p>
+                </li>
+            {% else %}
+                <li>
+                    <span class="q">{{ i18n('event.faq-song-q') }}</span>
+                    <p>{{ i18n('event.faq-song-a') }}</p>
+                    <audio controls><source src="/assets/mp3/codeday-song.mp3" type="audio/mpeg" /></audio>
+                </li>
+            {% endif %}
             <li>
                 <span class="q">{{ i18n('event.faq-code-q') }}</span>
                 <p>{{ i18n('event.faq-code-a') }}</p>

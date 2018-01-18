@@ -48,7 +48,8 @@ class IndexController extends Controllers\Controller
             return \Redirect::to('/'.$this->ticket->id.'/parent');
         } else {
             $this->ticket->setParentInfo(null, \Input::get('parent_name'), \Input::get('parent_email'),
-                                         \Input::get('parent_phone'), \Input::get('parent_secondary_phone'));
+                                            \Input::get('parent_phone'), \Input::get('parent_secondary_phone'),
+                                            \Input::get('request_loaner'));
             return \Redirect::to('/'.$this->ticket->id);
         }
     }

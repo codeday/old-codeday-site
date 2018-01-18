@@ -39,6 +39,8 @@ return array(
     'faq-team-a'            => "<strong>No!</strong> In fact, most people don't come with a team! At the beginning of the event, everyone will pitch ideas for what they want to build. You can form a team then.",
     'faq-bring-q'           => "What should I bring?",
     'faq-bring-a'           => "Bring your laptop and mouse. Food is included in your ticket. If you're planning on sleeping, bring a sleeping bag, pillow, and toothbrush. Desktop PCs and monitors are also allowed, although less common.",
+    'faq-loaner-q'          => "What if I don't have a computer?",
+    'faq-loaner-a'          => ":available loaner computers are currently available (out of :total total). You can request one when entering your emergency contact information, after you register.",
     'faq-song-q'            => "Can you tell me about CodeDay in the form of a song?",
     'faq-song-a'            => "Yes! Here's a song from our friend Matt Farley:",
     'faq-code-q'            => "Can I really come if I don't code?",

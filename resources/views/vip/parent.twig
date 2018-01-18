@@ -2,44 +2,45 @@
 {% block subpage %}ticket{% endblock %}
 {% block next %}
     <section class="parent-info">
-        {% if not ticket.age %}
-            <h3>Participant Age</h3>
-            <form method="post">
+        <form method="post">
+            {% if not ticket.age %}
+                <form method="post">
+                    <div class="field">
+                        <label for="age">Participant Age</label>
+                        <input type="number" name="age" id="age" value="{{ ticket.age }}" required />
+                        <span class="help">Your age on {{ ticket.event.starts_at|date('F j, Y') }}.</span>
+                    </div>
+            {% elseif ticket.age >= 18 %}
+                {% if ticket.age > 25 %}
+                    <div class="warning">
+                        <p><strong>Hey! There might be a problem:</strong> CodeDay is mostly targeted to high school students.</p>
+                        <p>For security reasons, we cannot accept attendees who are older than 25. (In the past, older students
+                        generally had a bad time, anyway.)</p>
+                        <p>Please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> for a refund.</p>
+                    </div>
+                {% endif %}
                 <div class="field">
-                    <label for="age">Participant Age</label>
-                    <input type="number" name="age" id="age" value="{{ ticket.age }}" required />
-                    <span class="help">Your age on {{ ticket.event.starts_at|date('F j, Y') }}.</span>
+                    <label>Parent Info</label>
+                    <div class="group">
+                        Because you're over 18, we don't need your parent info. If you need to change your age, please
+                        <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us.</a>
+                    </div>
                 </div>
-                <input type="submit" value="Set My Age" />
-            </form>
-        {% elseif ticket.age >= 18 %}
-            {% if ticket.age > 25 %}
-                <div class="warning">
-                    <p><strong>Hey! There might be a problem:</strong> CodeDay is mostly targeted to high school students.</p>
-                    <p>For security reasons, we cannot accept attendees who are older than 25. (In the past, older students
-                       generally had a bad time, anyway.)</p>
-                    <p>Please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> for a refund.</p>
-                </div>
-            {% endif %}
-            <p>Because you're over 18, we don't need your parent info.</p>
-            <p>If you need to change your age, please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us.</a></p>
-        {% else %}
-            <h3>Parent Info</h3>
-            {% if ticket.age < 12 %}
-                <div class="warning">
-                    <p><strong>Hey! There might be a problem:</strong> CodeDay is targeted to older students.</p>
-                    <p>This is a very self-driven event. In the past, successful younger students have been:</p>
-                    <ul>
-                        <li>Already interested in technology, and;</li>
-                        <li>Relatively mature for their age.</li>
-                    </ul>
-                    <p>Please be available to pick up your student in case the event is not for them, particularly
-                       overnight. Also note that parents are not allowed to stay with their student for security reasons.</p>
-                    <p>If you have more questions, or would like a refund, please
-                       <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>.</p>
-                </div>
-            {% endif %}
-            <form method="post">
+            {% else %}
+                {% if ticket.age < 12 %}
+                    <div class="warning">
+                        <p><strong>Hey! There might be a problem:</strong> CodeDay is targeted to older students.</p>
+                        <p>This is a very self-driven event. In the past, successful younger students have been:</p>
+                        <ul>
+                            <li>Already interested in technology, and;</li>
+                            <li>Relatively mature for their age.</li>
+                        </ul>
+                        <p>Please be available to pick up your student in case the event is not for them, particularly
+                        overnight. Also note that parents are not allowed to stay with their student for security reasons.</p>
+                        <p>If you have more questions, or would like a refund, please
+                        <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>.</p>
+                    </div>
+                {% endif %}
                 <div class="field">
                     <label for="age">Age</label>
                     <input type="number" name="age" id="age" value="{{ ticket.age }}" disabled />
@@ -66,8 +67,25 @@
                     <span class="help">In case we can't reach them at the above phone number, which number should we call?</span>
                 </div>
 
-                <input type="submit" value="Save" />
-            </form>
-        {% endif %}
+            {% endif %}
+            {% if ticket.age and ticket.event.loaners.total > 0 %}
+                <div class="field">
+                    <label for="request_loaner_x">No Computer?</label>
+                    <span class="group">
+                        <input type="checkbox" name="request_loaner" id="request_loaner"
+                            {% if ticket.request_loaner %}checked{% endif %}
+                            {% if not ticket.request_loaner and ticket.event.loaners.available == 0 %}disabled{% endif %} />
+                        <label for="request_loaner">I have no computer, and need to borrow one!</label>
+                    </span>
+                    {% if not ticket.request_loaner and ticket.event.loaners.available == 0 %}
+                        <span class="help">Sorry, we are out of loaner computers.</span>
+                    {% else %}
+                        <span class="help">If you need to borrow a computer, check this box. Please only check this box
+                        if you don't have a computer you can bring.</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <input type="submit" value="Save" />
+        </form>
     </section>
 {% endblock %}

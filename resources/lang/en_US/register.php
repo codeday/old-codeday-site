@@ -11,6 +11,7 @@ return array(
     'term-4'            => "We may <a href=\":link\">share your info</a> with our recruiting sponsors.",
     'term-5'            => "You will need to sign a waiver.",
     'term-6'            => "You must be in school and between the ages of 12-25.",
+    'loaners'           => ":count loaner computers are currently available. You can request one after you register.",
     'attendee-head'     => "Student Attendee Info",                  
     'add-attendee'      => "Add Another Attendee",
     'rm-attendee'       => "Remove Last",

@@ -13,14 +13,15 @@ class Ticket extends ClearModel {
         return new self(self::clearGet('/registration/by-email/'.urlencode($email)));
     }
 
-    public function setParentInfo($age = null, $name = null, $email = null, $phone = null, $secondary_phone = null)
+    public function setParentInfo($age = null, $name = null, $email = null, $phone = null, $secondary_phone = null, $request_loaner = false)
     {
         return self::clearPost('/registration/'.urlencode($this->id).'/parent-info', [
             'age' => $age,
             'parent_name' => $name,
             'parent_email' => $email,
             'parent_phone' => $phone,
-            'parent_secondary_phone' => $secondary_phone
+            'parent_secondary_phone' => $secondary_phone,
+            'request_loaner' => $request_loaner
         ]);
     }
 

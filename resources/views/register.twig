@@ -29,6 +29,9 @@
                 {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />
                 {{ i18n('common.noon-noon') }}
             </section>
+            {% if event.loaners.available > 2 %}
+                <section class="loaners">{{ i18n('register.loaners', {'count': event.loaners.available}) }}</section>
+            {% endif %}
         </section>
         <section class="tos">
             <h4>{{ i18n('register.terms') }}</h4>
