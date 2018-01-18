@@ -130,16 +130,27 @@
                 </li>
             {% endif %}
             <li>
-                <span class="q">{{ i18n('event.faq-code-q') }}</span>
-                <p>{{ i18n('event.faq-code-a') }}</p>
-            </li>
-            <li>
                 <span class="q">{{ i18n('event.faq-student-q') }}</span>
                 <p>{{ i18n('event.faq-student-a') }}</p>
             </li>
             <li>
                 <span class="q">{{ i18n('event.faq-school-q') }}</span>
                 <p>{{ i18n('event.faq-school-a', {'link': langPrefix~'/'~event.webname~'/register/schools'}) }}</p>
+            </li>
+            <li class="ask">
+                <span class="q">
+                    {{ i18n('event.faq-search') }}
+                    <input type="text" id="faq-search" name="faq-search" placeholder="{{ i18n('event.faq-example') }}" />
+                </span>
+                <div class="a">
+                    <svg id="faq-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                        <path stroke="none" d="M10 50A40 40 0 0 0 90 50A40 43 0 0 1 10 50" fill="#cb7972">
+                            <animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 51.5;360 50 51.5" keyTimes="0;1" dur="1.2s" begin="0s" repeatCount="indefinite"></animateTransform>
+                        </path>
+                    </svg>
+                    <p id="faq-a"></p>
+                    <p id="faq-none">{{ i18n('event.faq-none') }}</p>
+                </div>
             </li>
         </ul>
     </article>
@@ -204,6 +215,34 @@
                         restartDelay: 7000
                     }
                 });
+            });
+
+            var faqSearchTimeout = null;
+            var faqSearchRequest = null;
+            $('#faq-search').on('keyup', function(){
+                if (faqSearchRequest !== null) faqSearchRequest.abort();
+                if (faqSearchTimeout !== null) clearTimeout(faqSearchTimeout);
+
+                if ($('#faq-search').val() == '') {
+                    $('#faq-a').text('');
+                    $('#faq-spin').css('display', 'none');
+                    $('#faq-none').css('display', 'none');
+                    return;
+                }
+
+                $('#faq-a').text('');
+                $('#faq-spin').css('display', 'block');
+                $('#faq-none').css('display', 'none');
+                faqSearchTimeout = setTimeout(function() {
+                    faqSearchRequest = $.get('/faq?q='+$('#faq-search').val(), function(result){
+                        faqSearchRequest = null;
+                        faqSearchTimeout = null;
+
+                        $('#faq-spin').css('display', 'none');
+                        if (result == '') $('#faq-none').css('display', 'block');
+                        $('#faq-a').text(result);
+                    });
+                }, 500);
             });
         });
     </script>

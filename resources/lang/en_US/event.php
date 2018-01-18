@@ -54,5 +54,8 @@ return array(
     'faq-security-q'        => "What is security like at the event?",
     'faq-security-a'        => "The venue will be locked down overnight, and students under 18 will not be able to leave without a parent there to pick them up.",
     'faq-parent-q'          => "Can I attend with my student?",
-    'faq-parent-a'          => "Parents can attend the Kickoff and final presentations, but cannot stay throughout the event due to background check requirements. Teachers may attend with students, but must show school ID or other proof of status at the door."
+    'faq-parent-a'          => "Parents can attend the Kickoff and final presentations, but cannot stay throughout the event due to background check requirements. Teachers may attend with students, but must show school ID or other proof of status at the door.",
+    'faq-search'            => "Want to know something else? Just ask:",
+    'faq-example'           => "Where will I sleep?",
+    'faq-none'              => "Sorry, we couldn't find an answer to that question. <a href=\"contact@codeday.org\">Email us.</a>",
 );

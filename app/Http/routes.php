@@ -35,6 +35,8 @@ $routes = function() {
         \Route::post('/', '\CodeDay\Http\Controllers\Vip\IndexController@postFind');
     });
 
+    \Route::Controller('/faq', '\CodeDay\Http\Controllers\FaqController');
+
     // Static Routes
     \Route::get('/', '\CodeDay\Http\Controllers\StaticController@getGlobal');
     \Route::get('/index.json', '\CodeDay\Http\Controllers\StaticController@getGlobalJson');
