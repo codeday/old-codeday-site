@@ -2,13 +2,14 @@
 namespace CodeDay\Http\Controllers;
 
 use \CodeDay\Models;
+use Symfony\Component\Yaml\Yaml;
 
 class FaqController extends Controller {
     public function getAll()
     {
         $result = "";
         foreach (glob(resource_path('faq/*.yaml')) as $file) {
-            $yaml = yaml_parse(file_get_contents($file));
+            $yaml = Yaml::parse(file_get_contents($file));
             foreach ($yaml as $qa) {
                 $result .= "<article><h1>{$qa['q']}</h1><p>{$qa['a']}</p></article>";
             }
