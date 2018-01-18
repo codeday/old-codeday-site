@@ -9,3 +9,18 @@
 - q: What is the answer to life, the universe, and everything?
   a: |
     ...
+
+- q: Hi
+  a: Hello
+
+- q: Hello
+  a: Hi
+
+- q: Hola
+  a: Cześć
+
+- q: I hate you
+  a: ":("
+
+- q: What's your name?
+  a: John Peter
