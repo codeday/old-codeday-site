@@ -134,3 +134,68 @@ body.event.school, body.event.groups
             text-align: center
             clear: both
 
+    article.schedule
+        .day
+            +span-columns(6)
+            h4
+                font:
+                    family: $font-family-header
+                    weight: 700
+                    size: 1.1rem
+            ul
+                padding: 0
+                li
+                    +row
+                    list-style-type: none
+                    padding: 0.5rem
+                    border-bottom: 1px solid $color-gray
+                    span, a
+                        font:
+                            family: $font-family-header
+                            size: 1rem
+                    .time
+                        +span-columns(3)
+                        color: $color-gray
+                        display: inline-block
+                    .task
+                        +span-columns(9)
+                        +omega
+                        position: relative
+                        border-left: 4px solid $color-blue
+                        background-color: lighten($color-blue, 45%)
+                        color: darken($color-blue, 25%)
+                        padding: 0.4rem 0.5rem 0.4rem 0.5rem
+                        width: 60%
+                        display: inline-block
+                        &.event
+                            border-left-color: $color-red
+                            background-color: lighten($color-red, 25%)
+                            color: darken($color-red, 25%)
+
+                        .popup
+                            display: none
+                            position: absolute
+                            left: 102%
+                            top: 50%
+                            width: 12em
+                            padding: 0.5em 1em
+                            z-index: 100
+                            background-color: $color-gray
+                            color: $color-white
+                            &:before
+                                content: ""
+                                width: 0px
+                                height: 0px
+                                border-width: 9px
+                                border-style: solid
+                                border-color: $color-gray transparent transparent
+                                font-size: 0px
+                                line-height: 0
+                                position: absolute
+                                top: 0px
+                                left: -9px
+
+                        &:hover .popup
+                            display: block
+
+

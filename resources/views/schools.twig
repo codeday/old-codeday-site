@@ -108,6 +108,33 @@
             </section>
         </article>
     {% endif %}
+    {% if event %}
+        <article class="schedule">
+            <h3>{{ i18n('event.schedule') }}</h3>
+            {% for day,entries in event.schedule %}
+                <section class="day">
+                    <div class="schedule">
+                        <h4>{{ day }}</h4>
+                        <ul>
+                            {% for entry in entries %}
+                                <li>
+                                    <span class="time">{{ entry.hour }}</span>
+                                    <span class="task {{ entry.type }}">
+                                        {% if entry.url %}<a target="_blank" href="{{ entry.url }}">{% endif %}
+                                        {{ entry.title }}
+                                        {% if entry.url %}</a>{% endif %}
+                                        {% if entry.description %}
+                                            <span class="popup">{{ entry.description }}</span>
+                                        {% endif %}
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+            {% endfor %}
+        </article>
+    {% endif %}
     <article class="faq">
         <h3>FAQ</h3>
         <ul>

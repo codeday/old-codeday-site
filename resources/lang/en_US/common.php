@@ -27,4 +27,5 @@ return [
     'nav-sponsor'           => 'Sponsor',
     'nav-press'             => 'Press Kit',
     'nav-donate'            => 'Donate',
+    'nav-schools'           => 'Schools',
 ];

@@ -70,7 +70,7 @@
 
     {# Styling #}
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
-    <link rel="stylesheet" href="/assets/css/style.css?v=09281985" />
+    <link rel="stylesheet" href="/assets/css/style.css?v=09281999" />
     {% if event and event.custom_css %}
         <style type="text/css">
             {{ event.custom_css }}
@@ -110,24 +110,12 @@
                             <li {% if block('page') == 'register' %}class="active"{% endif %}><a href="{{ langPrefix }}/{{ event.webname }}/register">{{ i18n('common.nav-register') }}</a></li>
                         {% endif %}
                     {% endif %}
-                    {% set skipSponsor = false %}
-                    {% set skipVolunteer = false %}
                     {% for link in event.special_links %}
                         {% if link.location == 'header' %}
-                            {% if link.name == 'Sponsor' %}
-                                {% set skipSponsor = true %}
-                            {% elseif link.name == 'Volunteer' %}
-                                {% set skipVolunteer = true %}
-                            {% endif %}
                             <li><a href="{{ link.url }}"{% if link.new_window %} target="_blank"{% endif %}>{{ link.name }}</a></li>
                         {% endif %}
                     {% endfor %}
-                    {% if not skipVolunteer %}
-                        <li {%if block('section') == 'volunteer' %}class="active"{% endif %}><a href="{{ langPrefix }}/volunteer">{{ i18n('common.nav-volunteer') }}</a></li>
-                    {% endif %}
-                    {% if not skipSponsor %}
-                        <li {% if block('section') == 'sponsor' %}class="active"{% endif %}><a href="{{ langPrefix }}/sponsor">{{ i18n('common.nav-sponsor') }}</a></li>
-                    {% endif %}
+                    <li><a href="{{ langPrefix }}/{{ event.webname }}/schools">{{ i18n('common.nav-schools') }}</a></li>
                     <li><a href="{{ langPrefix }}/press" target="_blank">{{ i18n('common.nav-press') }}</a></li>
                     {% if not event %}
                         <li><a href="https://srnd.org/donate" target="_blank">{{ i18n('common.nav-donate') }}</a></li>
