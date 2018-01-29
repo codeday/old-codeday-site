@@ -6,9 +6,9 @@
 {% block veryShortDescription %}School and teacher registration is available for CodeDay.{% endblock %}
 {% block hero %}
     <article class="lead">
-            <h2>CodeDay drives interest in CS classes.</h2>
-            <p>CodeDay is a 24-hour, beginner-focused tech education event which gets students coding: 80% of attendees
-               with no prior experience continue programming after.</p>
+            <h2>Increasing diverse STEM enrollment.</h2>
+            <p>CodeDay increases the diversity and number of students who register for Computer Science classes in 
+               hundreds of schools across the world.</p>
     </article>
 {% endblock %}
 {% block content %}
@@ -18,87 +18,74 @@
             <span class="caption">Click play to watch a video about CodeDay.</span>
         </section>
         <section class="about">
-            <h2>What is CodeDay?</h2>
-            <p>We created CodeDay to fill the gap between in-school programs, which explain <em>how to code</em> and
-               the eternal question of students: <em>why do I need to know this?</em></p>
-            <p>At CodeDay, students pitch ideas for apps or games they want to see exist, then spend the next 24 hours
-               creating them with the help of staff and mentors.</p>
-            <p>Students regularly tell us CodeDay is one of the most meaningful things they've done. Over 80% of our
-               attendees continue to code after attending, strengthening enrollment in high school and college CS
-               offerings.</p>
+            <h2>CodeDay gets students excited about Computer Science and drives enrollment.</h2>
+            <p>At CodeDay, students pitch ideas for apps or games, then work in teams to create their projects over a
+               weekend. At the end, students present to judges.</p>
+            <p>75% of students register with little-to-no interest in Computer Science, but 71% of these students
+               continue coding for months after the event, 65% register for a CS class, and 48% pursue a CS major in
+               college <a href="https://srnd.org/education">(learn more).</a></p>
         </section>
     </article>
     <article class="quotes">
-        <h2>What do prior attendees have to say?</h2>
-        <section class="teacher">
+    <h2>We work with hundreds of schools and districts to increase CS enrollment.</h2>
+    <div class="quote-block">
+        <div class="quote">
             <blockquote>
-                <p>CodeDay provided our students with a first stepping-stone into the world of “coders”. Students entered
-                   their first CodeDay with no knowledge of what to expect. They were welcomed with open arms, provided
-                   with mentors, taught basic coding skills, and began to see themselves as capable of being part of this
-                   &ldquo;world.&rdquo;</p>
-                <p>My students are now confident, not just as future &ldquo;coders,&rdquo; but as future participants in
-                   the careers that STEM has to offer!</p>
+                <p>[The Salinas Valley] is one of the 13 most dangerous cities in California... My goal is to expose my students to the vast opportunities that exist outside of our valley.</p>
+                <p>Students entered their first CodeDay with no knowledge of what to expect. They were welcomed with open arms, provided with mentors, taught basic coding skills, and began to see themselves as capable of being part of this "world."</p>
             </blockquote>
-            <div class="attr">
-                <span class="name">Summer Prather-Smith</span>
-                <span class="title">Director of Migrant Education Region XVI</span>
-                <span class="org">Monterey County Office of Education</span>
+            <div class="by">
+                <div class="name">Summer Prather-Smith</div>
+                <div class="title">Director, Monterey County Office of Education</div>
             </div>
-        </section>
-        <section class="students">
-            <ul>
-                <li><blockquote>&ldquo;The energy everyone had with each other... it was amazing.&rdquo;</blockquote><span class="attr">High School Freshman</span></li>
-                <li><blockquote>&ldquo;Now I want to keep coding!&rdquo;</blockquote><span class="attr">High School Senior</span></li>
-            </ul>
-        </section>
-    </article>
-    <article class="promote">
-        <h3>Ways to Promote CodeDay</h3>
-        <section class="poster">
-            <a href="https://clear.codeday.org/e/flyer/poster" target="_blank"><img src="https://clear.codeday.org/e/flyer/jpg?r=24" /></a>
-            <p><a href="https://clear.codeday.org/e/flyer/poster" target="_blank">Download a Poster</a></p>
-        </section>
-        <section class="video">
-            <a href="/video" target="_blank"><img src="/assets/img/video-link.png" /></a>
-            <p><a href="/video" target="_blank">Play a Video</a></p>
-        </section>
+        </div>
+        <img src="https://srnd.org/assets/img/monterey-1.jpg">
+    </div>
     </article>
     {% if event %}
-        <article class="register">
-            <section class="form">
-                <h2>Ready to register?</h2>
-                <div id="wufoo-m1d2e0uy1b258w8">
-                Fill out the <a href="https://srnd.wufoo.com/forms/m1d2e0uy1b258w8">online form</a>.
-                </div>
-                <script type="text/javascript">var m1d2e0uy1b258w8;(function(d, t) {
-                var s = d.createElement(t), options = {
-                'userName':'srnd',
-                'formHash':'m1d2e0uy1b258w8',
-                'autoResize':true,
-                'height':'684',
-                'async':true,
-                'host':'wufoo.com',
-                'header':'show',
-                'defaultValues': 'Field20={{ event.webname }}',
-               'ssl':true};
-                s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
-                s.onload = s.onreadystatechange = function() {
-                var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
-                try { m1d2e0uy1b258w8 = new WufooForm();m1d2e0uy1b258w8.initialize(options);m1d2e0uy1b258w8.display(); } catch (e) {}};
-                var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
-                })(document, 'script');</script>
+        <article class="details">
+            <h3>{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}
+                {% if event.venue and event.venue.name != "TBA" %}at {{ event.venue.name }}{% endif %}</h3> <br />
+            <section class="map">
+                {% if event.venue and event.venue.name != "TBA" %}
+                    <div id="map"></div>
+                {% else %}
+                    <img src="/assets/img/codeday-team.jpg" />
+                {% endif %}
             </section>
-            <section class="info">
-                <h2>Attendee Roster</h2>
-                <p>You'll need to collect some information from all students who will be attending, and submit this
-                   information as an Excel spreadsheet (or CSV).</p>
-                <p><a href="/assets/roster.csv">For faster processing, please download and use this roster template when
-                   submitting student data.</a></p>
-
-                <h2>Payment and Scholarships</h2>
-                <p>We normally charge school groups $7 per attendee, which covers some of our costs in providing food. We
-                   will send you an invoice for this after your registrations are processed. If this is a burden on your
-                   school or students, you can request a scholarship on the form.</p>
+            <section class="details">
+                <section class="address">
+                    <h4>Address</h4>
+                    {% if event.venue and event.venue.name != "TBA" %}
+                        <a href="https://www.google.com/maps/place/{{ event.venue.full_address|url_encode }}" target="_blank">
+                            {{ event.venue.name }}<br />
+                            {{ event.venue.address.line_1 }}<br />
+                            {% if event.venue.address.line_2 %}
+                                {{ event.venue.address.line_2 }}<br />
+                            {% endif %}
+                            {{ event.venue.address.city }}, {{ event.venue.address.state }} {{ event.venue.address.postal }}
+                        </a>
+                    {% else %}
+                        <p>TBA</p>
+                    {% endif %}
+                </section>
+                <section class="time">
+                    <h4>Time</h4>
+                    {{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}<br />
+                    {{ i18n('common.noon-noon') }}
+                </section>
+                <section class="cost">
+                    <h4>Cost</h4>
+                    $7 per student<br />
+                    (Scholarships available)
+                </section>
+                <section class="register">
+                    <a class="cta" href="/{{ event.webname }}/schools/register">Promotion Resources</a>
+                    <a class="cta" href="/{{ event.webname }}/schools/register">Registration</a>
+                </section>
+                <section class="questions">
+                    <p>Questions? Email <a href="mailto:schools@srnd.org">schools@srnd.org</a> or call 888-607-7763 ext 3.</p>
+                </section>
             </section>
         </article>
     {% else %}
@@ -159,4 +146,7 @@
         </ul>
         <a href="mailto:schools@codeday.org">More questions? Contact us!</a>
     </article>
+{% endblock %}
+{% block scripts %}
+    {% include "parts/map.twig" %}
 {% endblock %}

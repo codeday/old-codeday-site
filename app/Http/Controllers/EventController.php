@@ -36,6 +36,11 @@ class EventController extends Controller
         return json_encode(\Route::input('event')->schedule);
     }
 
+    public function getSchoolsRegister()
+    {
+        return \View::make('schools-register');
+    }
+
     public function getIcs()
     {
         return response()->view('event-ics')->header('Content-Type', 'text/plain');

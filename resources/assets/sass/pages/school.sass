@@ -51,43 +51,57 @@ body.event.school, body.event.groups
                 +span-columns(6)
 
     article.quotes
-        .teacher
-            +span-columns(8)
+        img
+            +span-columns(5)
+        .quote
+            +span-columns(7)
             blockquote
-                margin: 0
-                padding: 0 0 0 2rem
-                border-left: 3px solid $color-gray
-            .attr
-                text-align: center
-                .name
-                    font-weight: 700
-                    display: block
-                .title
-                    display: none
-                .org
-                    display: block
+                margin-left: 0
+                font-style: italic
+                border-left: 2px solid $color-red
+                padding-left: 1rem
+            .by
+                padding-left: 1rem
+                padding-top: 1rem
+                font-size: 0.9rem
 
-        .students
-            +span-columns(4)
-            +omega
-            ul
-                padding: 0
-                li
-                    text-align: center
-                    list-style-type: none
-                    blockquote
-                        margin: 0
-                    .attr
-                        &:before
-                            content: "-"
-                            padding-right: 0.25rem
-                        font-weight: 700
-                    &:not(:last-child):after
-                        content: ""
-                        width: 20%
-                        display: block
-                        margin: 2rem auto
-                        border-top: 3px solid $color-gray
+    article.details
+        .map
+            +span-columns(5)
+            div
+                height: 20rem
+            img
+                max-width: 100%
+        .details
+            +span-columns(7)
+            h4
+                font-weight: bold
+                margin-top: 0
+            section:not(.register):not(.questions)
+                +span-columns(4)
+                &:nth-child(3n)
+                    +omega
+            .register
+                +span-columns(12)
+                +omega
+                text-align: center
+                margin-top: 3rem
+                a.cta
+                    padding: 1.25rem 3rem
+                    background-color: $color-red
+                    border-radius: 3px
+                    color: $color-white
+                    display: inline-block
+                    text-decoration: none
+                    font:
+                        family: $font-family-header
+                        size: 1.2rem
+                        weight: 700
+            .questions
+                +span-columns(12)
+                +omega
+                text-align: center
+
 
     article.register
         padding-top: 5rem

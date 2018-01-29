@@ -1,0 +1,63 @@
+{% extends "template.twig" %}
+{% block section %}event{% endblock %}
+{% block page %}school{% endblock %}
+{% block title %}School Registration{% endblock %}
+{% block shortDescription %}CodeDay inspires students to pursue STEM careers and is shown to increase enrollment in STEM courses. Schools and teachers can register students directly.{% endblock %}
+{% block veryShortDescription %}School and teacher registration is available for CodeDay.{% endblock %}
+{% block hero %}
+    <article class="lead">
+            <h2>Increasing diverse STEM enrollment.</h2>
+            <p>CodeDay increases the diversity and number of students who register for Computer Science classes in 
+               hundreds of schools across the world.</p>
+    </article>
+{% endblock %}
+{% block content %}
+    <article class="promote">
+        <h3>Ways to Promote CodeDay</h3>
+        <section class="poster">
+            <a href="https://clear.codeday.org/e/flyer/{{ event.webname }}/poster?code=SCHOOL" target="_blank"><img src="https://clear.codeday.org/e/flyer/jpg?r=24" /></a>
+            <p><a href="https://clear.codeday.org/e/flyer/{{ event.webname }}/poster?code=SCHOOL" target="_blank">Download a Poster</a></p>
+        </section>
+        <section class="video">
+            <a href="/video" target="_blank"><img src="/assets/img/video-link.png" /></a>
+            <p><a href="/video" target="_blank">Play a Video</a></p>
+        </section>
+    </article>
+    <article class="register">
+        <section class="form">
+            <h2>Ready to register?</h2>
+            <div id="wufoo-m1d2e0uy1b258w8">
+            Fill out the <a href="https://srnd.wufoo.com/forms/m1d2e0uy1b258w8">online form</a>.
+            </div>
+            <script type="text/javascript">var m1d2e0uy1b258w8;(function(d, t) {
+            var s = d.createElement(t), options = {
+            'userName':'srnd',
+            'formHash':'m1d2e0uy1b258w8',
+            'autoResize':true,
+            'height':'684',
+            'async':true,
+            'host':'wufoo.com',
+            'header':'show',
+            'defaultValues': 'Field20={{ event.webname }}',
+            'ssl':true};
+            s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
+            s.onload = s.onreadystatechange = function() {
+            var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+            try { m1d2e0uy1b258w8 = new WufooForm();m1d2e0uy1b258w8.initialize(options);m1d2e0uy1b258w8.display(); } catch (e) {}};
+            var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+            })(document, 'script');</script>
+        </section>
+        <section class="info">
+            <h2>Attendee Roster</h2>
+            <p>You'll need to collect some information from all students who will be attending, and submit this
+                information as an Excel spreadsheet (or CSV).</p>
+            <p><a href="/assets/roster.csv">For faster processing, please download and use this roster template when
+                submitting student data.</a></p>
+
+            <h2>Payment and Scholarships</h2>
+            <p>We normally charge school groups $7 per attendee, which covers some of our costs in providing food. We
+                will send you an invoice for this after your registrations are processed. If this is a burden on your
+                school or students, you can request a scholarship on the form.</p>
+        </section>
+    </article>
+{% endblock %}
