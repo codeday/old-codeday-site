@@ -15,7 +15,7 @@ use CodeDay\Models;
     '197.234.240.0/22',
     '198.41.128.0/17',
     '162.158.0.0/15',
-    '104.16.0.0/12'
+    '104.16.0.0/12',
 ]);
 
 \View::share('api_base', \Config::get('clear.api_base'));
@@ -26,9 +26,9 @@ use CodeDay\Models;
 \View::share('facebook_page_id', \Config::get('facebook.page_id'));
 \View::share('site_base_url', \Config::get('app.url'));
 
-$routes = function() {
+$routes = function () {
     // Domain Routes
-    \Route::group(['domain' => isset($_SERVER["HTTP_HOST"]) && $_SERVER['HTTP_HOST'] == 'vip.codeday.dev' ? 'vip.codeday.dev' : 'codeday.vip'], function(){
+    \Route::group(['domain' => isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'vip.codeday.dev' ? 'vip.codeday.dev' : 'codeday.vip'], function () {
         \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
         \Route::Controller('/{ticket}', '\CodeDay\Http\Controllers\Vip\IndexController');
         \Route::get('/', '\CodeDay\Http\Controllers\Vip\IndexController@getFind');
@@ -59,7 +59,7 @@ $routes = function() {
 
     \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
     \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
-    \Route::group(['middleware' => ['web']], function(){
+    \Route::group(['middleware' => ['web']], function () {
         \Route::controller('/hpcc', '\CodeDay\Http\Controllers\HpccController');
     });
 
@@ -67,12 +67,11 @@ $routes = function() {
 
     \Route::get('/challenge', '\CodeDay\Http\Controllers\ChallengeController@getChallenge');
 
-
     // Event-based Routes
-    \Route::bind('event', function($webname) {
+    \Route::bind('event', function ($webname) {
         $event = Models\Region::find(strtolower($webname))->current_event;
         if ($event->batch['id'] != Models\Batch::current()->id) {
-            return null;
+            return;
         }
         if ($event->webname != $webname) {
             \App::abort(302, '', ['Location' => '/'.$event->webname]);
@@ -95,22 +94,24 @@ $routes = function() {
 };
 
 \View::share('nonLangUri', '/'.request()->path());
-\Route::bind('locale', function($locale) {
+\Route::bind('locale', function ($locale) {
     \App::setLocale($locale);
-    \View::share('lang', $locale); 
-    \View::share('langPrefix', '/'.$locale); 
+    \View::share('lang', $locale);
+    \View::share('langPrefix', '/'.$locale);
     \View::share('nonLangUri', substr(request()->path(), strlen($locale)));
     \session_start();
     $_SESSION['lang'] = $locale;
 });
-\Route::any('/en_US', function() {
+\Route::any('/en_US', function () {
     \session_start();
     $_SESSION['lang'] = '';
+
     return \redirect('/');
 });
-\Route::any('/en_US/{rest}', function($rest) {
+\Route::any('/en_US/{rest}', function ($rest) {
     \session_start();
     $_SESSION['lang'] = '';
+
     return \redirect($rest);
 })->where('rest', '(.*)?');
 \Route::group(['prefix' => '/{locale}'], $routes);

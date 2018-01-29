@@ -1,9 +1,11 @@
 <?php
+
 namespace CodeDay\Http\Controllers;
 
-use \CodeDay\Models;
+use CodeDay\Models;
 
-class EventController extends Controller {
+class EventController extends Controller
+{
     public function __construct()
     {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
@@ -20,7 +22,7 @@ class EventController extends Controller {
     public function getIndex()
     {
         return \View::make('event', [
-            'is_mobile' => preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"])
+            'is_mobile' => preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER['HTTP_USER_AGENT']),
         ]);
     }
 
@@ -68,4 +70,4 @@ class EventController extends Controller {
     {
         return \View::make('rules');
     }
-} 
+}

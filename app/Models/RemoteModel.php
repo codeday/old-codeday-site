@@ -1,7 +1,9 @@
 <?php
+
 namespace CodeDay\Models;
 
-abstract class RemoteModel {
+abstract class RemoteModel
+{
     protected $remote_data;
 
     protected function __construct($remote_data)
@@ -9,7 +11,8 @@ abstract class RemoteModel {
         $this->remote_data = $remote_data;
     }
 
-    public function __isset($key) {
+    public function __isset($key)
+    {
         return isset($this->remote_data[$key]);
     }
 
@@ -17,4 +20,4 @@ abstract class RemoteModel {
     {
         return $this->remote_data[$key];
     }
-} 
+}

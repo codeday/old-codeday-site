@@ -1,8 +1,11 @@
 <?php
+
 namespace CodeDay\Models;
 
-abstract class ClearModel extends RemoteModel {
+abstract class ClearModel extends RemoteModel
+{
     protected static $cache = true;
+
     protected static function clearGet($endpoint, $data = [])
     {
         $data['access_token'] = \Config::get('clear.access_token');
@@ -15,6 +18,7 @@ abstract class ClearModel extends RemoteModel {
             $cacheData = file_get_contents($url);
             \Cache::put('clearmodel.urlcache.'.hash('md5', $url), $cacheData, 3);
         }
+
         return json_decode($cacheData, true);
     }
 
@@ -23,7 +27,7 @@ abstract class ClearModel extends RemoteModel {
         $data['access_token'] = \Config::get('clear.access_token');
         $data['secret'] = \Config::get('clear.secret');
         $url = \Config::get('clear.api_base').$endpoint;
-        
+
         $ch = curl_init($url);
 
         curl_setopt($ch, CURLOPT_POST, true);
@@ -32,11 +36,12 @@ abstract class ClearModel extends RemoteModel {
 
         $response = curl_exec($ch);
         curl_close($ch);
+
         return json_decode($response, true);
     }
 
-    public function __isset($key) {
-
+    public function __isset($key)
+    {
         return method_exists($this, $key) || isset($this->remote_data[$key]);
     }
 

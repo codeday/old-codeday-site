@@ -1,11 +1,16 @@
 <?php
+
 namespace CodeDay\Http\Controllers;
+
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-class HpccController extends Controller {
+class HpccController extends Controller
+{
     public function getScreenName()
     {
-        if (!\Session::get('oauth_token')) return null;
+        if (!\Session::get('oauth_token')) {
+            return;
+        }
 
         $twitter = new TwitterOAuth(
             \config('twitter.consumer_key'),
@@ -15,7 +20,9 @@ class HpccController extends Controller {
         );
 
         $cred = $twitter->get('account/verify_credentials');
-        if (isset($cred->errors) && count($cred->errors) > 0) return null;
+        if (isset($cred->errors) && count($cred->errors) > 0) {
+            return;
+        }
 
         return $cred->screen_name;
     }
@@ -23,7 +30,7 @@ class HpccController extends Controller {
     public function getIndex()
     {
         return \View::make('hpcc', [
-            'twitter' => $this->getScreenName()
+            'twitter' => $this->getScreenName(),
         ]);
     }
 
@@ -32,14 +39,14 @@ class HpccController extends Controller {
         $twitteroauth = new TwitterOAuth(\config('twitter.consumer_key'), \config('twitter.consumer_secret'));
         $request_token = $twitteroauth->oauth(
             'oauth/request_token', [
-                'oauth_callback' => \url('/hpcc/oauthend')
+                'oauth_callback' => \url('/hpcc/oauthend'),
             ]
         );
         \Session::put('oauth_token', $request_token['oauth_token']);
         \Session::put('oauth_token_secret', $request_token['oauth_token_secret']);
         $url = $twitteroauth->url(
             'oauth/authorize', [
-                'oauth_token' => $request_token['oauth_token']
+                'oauth_token' => $request_token['oauth_token'],
             ]
         );
 
@@ -60,7 +67,7 @@ class HpccController extends Controller {
         );
         $token = $twitteroauth->oauth(
             'oauth/access_token', [
-                'oauth_verifier' => \Input::get('oauth_verifier')
+                'oauth_verifier' => \Input::get('oauth_verifier'),
             ]
         );
 
@@ -79,29 +86,30 @@ class HpccController extends Controller {
             \Session::get('oauth_token_secret')
         );
 
-
         $me = $this->getScreenName();
-        if (!$me) return \Redirect::to('/hpcc/oauthstart');
+        if (!$me) {
+            return \Redirect::to('/hpcc/oauthstart');
+        }
 
         $statuses = $twitter->get('/statuses/user_timeline', ['count' => 200, 'include_rts' => false]);
-        $csv = array_map(function($x){
+        $csv = array_map(function ($x) {
             return [
                 substr($x->id, 6),
                 date('Ymd', strtotime($x->created_at)),
                 $x->in_reply_to_screen_name,
                 $x->retweet_count + $x->favorite_count,
-                preg_replace("/[^A-Za-z0-9\.\,\!\?\:\/\-\_\'\[\]\(\)\@ ]/", '', $x->text)
+                preg_replace("/[^A-Za-z0-9\.\,\!\?\:\/\-\_\'\[\]\(\)\@ ]/", '', $x->text),
             ];
         }, $statuses);
 
-        $stream = fopen('php://memory','r+');
+        $stream = fopen('php://memory', 'r+');
         foreach ($csv as $line) {
             fputcsv($stream, $line);
         }
-        rewind($stream); 
+        rewind($stream);
 
         return (new \Illuminate\Http\Response(stream_get_contents($stream), 200))
             ->header('Content-type', 'text/csv')
             ->header('Content-disposition', 'attachment;filename='.$me.'.csv');
     }
-} 
+}

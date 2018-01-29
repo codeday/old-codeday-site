@@ -1,7 +1,9 @@
 <?php
+
 namespace CodeDay\Models;
 
-class Batch extends ClearModel {
+class Batch extends ClearModel
+{
     public static function current()
     {
         return new self(self::clearGet('/batches/current'));
@@ -16,4 +18,4 @@ class Batch extends ClearModel {
     {
         return strtotime($this->remote_data['ends_at']);
     }
-} 
+}

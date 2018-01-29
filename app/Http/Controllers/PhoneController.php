@@ -1,9 +1,11 @@
 <?php
+
 namespace CodeDay\Http\Controllers;
 
-use \CodeDay\Models;
+use CodeDay\Models;
 
-class PhoneController extends Controller {
+class PhoneController extends Controller
+{
     private function getEventsByTimezone()
     {
         $current_regions = iterator_to_array(Models\Region::nearby(0, 0, null, null, true));
@@ -27,6 +29,7 @@ class PhoneController extends Controller {
 
         $response = \Response::make($xml, 200);
         $response->header('Content-type', 'text/xml');
+
         return $response;
     }
 
@@ -37,6 +40,7 @@ class PhoneController extends Controller {
         if (!$region_index || $region_index > 4) {
             $response = \Response::make('<Response><Say>Sorry, that region does not exist.</Say></Response>', 200);
             $response->header('Content-type', 'text/xml');
+
             return $response;
         }
 
@@ -44,7 +48,7 @@ class PhoneController extends Controller {
             'America/Los_Angeles',
             'America/Denver',
             'America/Chicago',
-            'America/Detroit'
+            'America/Detroit',
         ];
         $region = $this->getEventsByTimezone()[$regions[$region_index - 1]];
 
@@ -66,6 +70,7 @@ class PhoneController extends Controller {
 
         $response = \Response::make($xml, 200);
         $response->header('Content-type', 'text/xml');
+
         return $response;
     }
 
@@ -77,6 +82,7 @@ class PhoneController extends Controller {
         if (!$event_index) {
             $response = \Response::make('<Response><Say>Sorry, that event does not exist.</Say></Response>', 200);
             $response->header('Content-type', 'text/xml');
+
             return $response;
         }
 
@@ -84,7 +90,7 @@ class PhoneController extends Controller {
             'America/Los_Angeles',
             'America/Denver',
             'America/Chicago',
-            'America/Detroit'
+            'America/Detroit',
         ];
         $region = $this->getEventsByTimezone()[$regions[$region_index - 1]];
         $event = $region[$event_index - 1]->current_event;
@@ -95,6 +101,7 @@ class PhoneController extends Controller {
 
         $response = \Response::make($xml, 200);
         $response->header('Content-type', 'text/xml');
+
         return $response;
     }
-} 
+}

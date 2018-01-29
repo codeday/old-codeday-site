@@ -1,9 +1,11 @@
 <?php
 
 namespace CodeDay\Http\Middleware;
+
 use Closure;
 
-class Cors {
+class Cors
+{
     public function handle($request, Closure $next)
     {
         return $next($request)

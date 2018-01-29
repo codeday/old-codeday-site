@@ -2,10 +2,10 @@
 
 return [
     'default' => 'redis',
-    'stores' => [
+    'stores'  => [
         'redis' => [
-            'driver' => 'redis',
+            'driver'     => 'redis',
             'connection' => 'default',
-        ]
-    ]
+        ],
+    ],
 ];

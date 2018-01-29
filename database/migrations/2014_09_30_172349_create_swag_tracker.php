@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSwagTracker extends Migration {
-
+class CreateSwagTracker extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +11,7 @@ class CreateSwagTracker extends Migration {
      */
     public function up()
     {
-        \Schema::create('swag', function($table)
-        {
+        \Schema::create('swag', function ($table) {
             $table->increments('id');
 
             $table->string('name')->nullable();
@@ -36,5 +34,4 @@ class CreateSwagTracker extends Migration {
     {
         \Schema::drop('swag');
     }
-
 }

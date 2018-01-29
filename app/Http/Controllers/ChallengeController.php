@@ -1,16 +1,17 @@
 <?php
+
 namespace CodeDay\Http\Controllers;
 
-use \CodeDay\Models;
+class ChallengeController extends Controller
+{
+    public function getChallenge()
+    {
+        $password = \Request::input('password');
 
-class ChallengeController extends Controller {
-    public function getChallenge() {
-        $password = \Request::input("password");
-        
-        if($password == \Config::get("challenge")) {
-            return response()->download("../resources/assets/challenge.zip");
+        if ($password == \Config::get('challenge')) {
+            return response()->download('../resources/assets/challenge.zip');
         } else {
-            return response("Unauthorized")->header("X-The-Secret-You-Seek", "?password=" . \Config::get("challenge"));
+            return response('Unauthorized')->header('X-The-Secret-You-Seek', '?password='.\Config::get('challenge'));
         }
     }
 }

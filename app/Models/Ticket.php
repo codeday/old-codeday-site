@@ -1,8 +1,11 @@
 <?php
+
 namespace CodeDay\Models;
 
-class Ticket extends ClearModel {
+class Ticket extends ClearModel
+{
     protected static $cache = false;
+
     public static function find($ticketId)
     {
         return new self(self::clearGet('/registration/'.urlencode($ticketId)));
@@ -16,12 +19,12 @@ class Ticket extends ClearModel {
     public function setParentInfo($age = null, $name = null, $email = null, $phone = null, $secondary_phone = null, $request_loaner = false)
     {
         return self::clearPost('/registration/'.urlencode($this->id).'/parent-info', [
-            'age' => $age,
-            'parent_name' => $name,
-            'parent_email' => $email,
-            'parent_phone' => $phone,
+            'age'                    => $age,
+            'parent_name'            => $name,
+            'parent_email'           => $email,
+            'parent_phone'           => $phone,
             'parent_secondary_phone' => $secondary_phone,
-            'request_loaner' => $request_loaner
+            'request_loaner'         => $request_loaner,
         ]);
     }
 
@@ -34,4 +37,4 @@ class Ticket extends ClearModel {
     {
         return self::clearGet('/registration/'.urlencode($this->id).'/sync-waiver');
     }
-} 
+}

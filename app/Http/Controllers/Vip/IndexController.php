@@ -1,4 +1,5 @@
 <?php
+
 namespace CodeDay\Http\Controllers\Vip;
 
 use CodeDay\Http\Controllers;
@@ -27,6 +28,7 @@ class IndexController extends Controllers\Controller
     public function postFind()
     {
         $tickets = Models\Ticket::findByEmail(\Input::get('email'));
+
         return \View::make('vip/all-tickets', ['email' => \Input::get('email'), 'tickets' => $tickets->all_registrations]);
     }
 
@@ -44,12 +46,16 @@ class IndexController extends Controllers\Controller
     {
         if (!isset($this->ticket->age) || !$this->ticket->age) {
             $this->ticket->setParentInfo(\Input::get('age'));
-            if (\Input::get('age') > 18 && \Input::get('age') < 24) return \Redirect::to('/'.$this->ticket->id);
+            if (\Input::get('age') > 18 && \Input::get('age') < 24) {
+                return \Redirect::to('/'.$this->ticket->id);
+            }
+
             return \Redirect::to('/'.$this->ticket->id.'/parent');
         } else {
             $this->ticket->setParentInfo(null, \Input::get('parent_name'), \Input::get('parent_email'),
                                             \Input::get('parent_phone'), \Input::get('parent_secondary_phone'),
                                             \Input::get('request_loaner'));
+
             return \Redirect::to('/'.$this->ticket->id);
         }
     }
@@ -63,9 +69,10 @@ class IndexController extends Controllers\Controller
             'volunteer' => 'rpjcym718b9oig',
             'teacher'   => 'r6ipajq0noogbo',
             'student'   => 'z1y2xzx4017odw2',
-            'sponsor'   => 'rxm2qhh1if32l2'
+            'sponsor'   => 'rxm2qhh1if32l2',
         ];
         $surveyId = $surveyIds[$this->ticket->type] ?? $surveyId;
+
         return \View::make('vip/survey', ['id' => $surveyId]);
     }
 
@@ -80,12 +87,14 @@ class IndexController extends Controllers\Controller
         if ($this->ticket->waiver_pdf !== null) {
             return \Redirect::to('/'.$this->ticket->id);
         }
+
         return \View::make('vip/waiver', ['url' => $url]);
     }
 
     public function getSyncwaiver()
     {
         $this->ticket->syncWaiver();
+
         return \Redirect::to('/'.$this->ticket->id);
     }
 }

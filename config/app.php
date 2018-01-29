@@ -3,16 +3,16 @@
 $config = json_decode(file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'local.json'), true);
 
 return [
-    'debug' => $config['app']['debug'],
-    'url' => $config['app']['url'],
-    'timezone' => $config['app']['timezone'],
-    'locale' => 'en_US',
-    'cipher' => 'AES-256-CBC',
-    'log' => $config['app']['debug'] ? 'single' : 'syslog',
+    'debug'           => $config['app']['debug'],
+    'url'             => $config['app']['url'],
+    'timezone'        => $config['app']['timezone'],
+    'locale'          => 'en_US',
+    'cipher'          => 'AES-256-CBC',
+    'log'             => $config['app']['debug'] ? 'single' : 'syslog',
     'fallback_locale' => 'en_US',
-    'key' => $config['app']['key'],
-    'manifest' => storage_path().'/meta',
-    'providers' => [
+    'key'             => $config['app']['key'],
+    'manifest'        => storage_path().'/meta',
+    'providers'       => [
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -77,6 +77,6 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Input'     => Illuminate\Support\Facades\Input::class
+        'Input'     => Illuminate\Support\Facades\Input::class,
     ],
 ];

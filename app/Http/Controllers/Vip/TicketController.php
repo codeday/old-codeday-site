@@ -1,4 +1,5 @@
 <?php
+
 namespace CodeDay\Http\Controllers\Vip;
 
 use CodeDay\Http\Controllers;
@@ -47,11 +48,11 @@ class TicketController extends Controllers\Controller
         $pdf->SetFont('dejavusans', '', 14, '', true);
 
         $barcodeFile = tempnam(sys_get_temp_dir(), 'clear-barcode').'.png';
-        imagepng($this->generateBarcode(), $barcodeFile); 
+        imagepng($this->generateBarcode(), $barcodeFile);
 
         $pdf->AddPage();
         $html = \View::make('vip/pdf', ['registration' => $this->ticket, 'barcode' => $barcodeFile])->render();
-        $pdf->writeHTMLCell($w=0, $h=0, $x='', $y='', $html);
+        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html);
 
         unlink($barcodeFile);
 
@@ -76,18 +77,19 @@ class TicketController extends Controllers\Controller
         $response->header('Cache-control', 'public,max-age=604800,no-transform');
 
         \imagepng($this->generateBarcode());
+
         return $response;
     }
 
     private function generateBarcode()
     {
-        $im = \imagecreate(287, 95); 
+        $im = \imagecreate(287, 95);
         $black = \imagecolorallocate($im, 0, 0, 0);
-        $white  = \imagecolorallocate($im, 255, 255, 255);
+        $white = \imagecolorallocate($im, 255, 255, 255);
 
         imagefilledrectangle($im, 0, 0, 300, 120, $white);
-        Barcode::gd($im, $black, 37, 37, 0, "datamatrix", $this->ticket->id, 4);
-        Barcode::gd($im, $black, 185, 37, 0, "code128", $this->ticket->id, 1, 70);
+        Barcode::gd($im, $black, 37, 37, 0, 'datamatrix', $this->ticket->id, 4);
+        Barcode::gd($im, $black, 185, 37, 0, 'code128', $this->ticket->id, 1, 70);
         imagestring($im, 5, 63, 78, trim(chunk_split($this->ticket->id, 3, ' ')), $black);
 
         return $im;
@@ -149,7 +151,6 @@ class TicketController extends Controllers\Controller
 
         unlink($outFile);
         rmdir($outDir);
-
 
         return response($out)
             ->header('Content-type', 'application/vnd.apple.pkpass')

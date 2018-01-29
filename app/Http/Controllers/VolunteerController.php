@@ -1,9 +1,11 @@
 <?php
+
 namespace CodeDay\Http\Controllers;
 
-use \CodeDay\Models;
+use CodeDay\Models;
 
-class VolunteerController extends Controller {
+class VolunteerController extends Controller
+{
     public function getIndex()
     {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
@@ -17,35 +19,35 @@ class VolunteerController extends Controller {
 
         return \View::make('volunteer/index', [
             'loaded_batch' => Models\Batch::current(),
-            'partner' => $this->getPartner(),
-            'tz_regions' => $tz_regions
+            'partner'      => $this->getPartner(),
+            'tz_regions'   => $tz_regions,
         ]);
     }
 
     public function getApplyStaff()
     {
         return \View::make('volunteer/apply', [
-            'form' => config('wufoo.staff.form'),
+            'form'          => config('wufoo.staff.form'),
             'partner_field' => config('wufoo.staff.partner_field'),
-            'partner' => $this->getPartner()
+            'partner'       => $this->getPartner(),
         ]);
     }
-    
+
     public function getApplyJudge()
     {
         return \View::make('volunteer/apply', [
-            'form' => config('wufoo.judge.form'),
+            'form'          => config('wufoo.judge.form'),
             'partner_field' => config('wufoo.judge.partner_field'),
-            'partner' => $this->getPartner()
+            'partner'       => $this->getPartner(),
         ]);
     }
 
     public function getApplyMentor()
     {
         return \View::make('volunteer/apply', [
-            'form' => config('wufoo.mentor.form'),
+            'form'          => config('wufoo.mentor.form'),
             'partner_field' => config('wufoo.mentor.partner_field'),
-            'partner' => $this->getPartner()
+            'partner'       => $this->getPartner(),
         ]);
     }
 
@@ -53,4 +55,4 @@ class VolunteerController extends Controller {
     {
         return config('partners.'.\Input::get('partner'));
     }
-} 
+}

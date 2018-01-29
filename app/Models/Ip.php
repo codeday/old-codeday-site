@@ -2,7 +2,8 @@
 
 namespace CodeDay\Models;
 
-class Ip extends RemoteModel{
+class Ip extends RemoteModel
+{
     public static function find($ip)
     {
         $ip_parts = explode('.', $ip);
@@ -18,15 +19,14 @@ class Ip extends RemoteModel{
                 $username = \Config::get('maxmind.user_id');
                 $password = \Config::get('maxmind.license_key');
 
-                $context = stream_context_create(array(
-                    'http' => array(
-                        'header'  => "Authorization: Basic " . base64_encode("$username:$password")
-                    )
-                ));
+                $context = stream_context_create([
+                    'http' => [
+                        'header'  => 'Authorization: Basic '.base64_encode("$username:$password"),
+                    ],
+                ]);
 
                 $json = @file_get_contents($url, false, $context);
                 $user_data = @json_decode($json, true);
-
 
                 if (!isset($user_data['location']['latitude']) || !isset($user_data['location']['longitude'])) {
                     throw new \Exception();
@@ -39,18 +39,18 @@ class Ip extends RemoteModel{
 
                 $user_data['location'] = [
                     'lat' => $user_data['lat'],
-                    'lng' => $user_data['lng']
+                    'lng' => $user_data['lng'],
                 ];
             } catch (\Exception $ex) {
-                return (object)[
+                return (object) [
                     'location' => [
                         'lat' => 47,
-                        'lng' => -122
+                        'lng' => -122,
                     ],
-                    'latitude' => 47,
+                    'latitude'  => 47,
                     'longitude' => -122,
-                    'lat' => 47,
-                    'lng' => -122
+                    'lat'       => 47,
+                    'lng'       => -122,
                 ];
             }
 

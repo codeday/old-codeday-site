@@ -1,7 +1,9 @@
 <?php
+
 namespace CodeDay\Models;
 
-class Region extends ClearModel {
+class Region extends ClearModel
+{
     public static function find($webname)
     {
         return new self(self::clearGet('/region/'.urlencode($webname)));
@@ -37,7 +39,7 @@ class Region extends ClearModel {
         if ($this->remote_data['current_event']) {
             return Event::find($this->remote_data['current_event']['id']);
         } else {
-            return null;
+            return;
         }
     }
-} 
+}
