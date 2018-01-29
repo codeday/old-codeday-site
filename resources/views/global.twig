@@ -74,42 +74,10 @@
     </article>
 {% endblock %}
 {% block scripts %}
-    <script src="/assets/js/d3.v3.min.js"></script>
-    <script src="/assets/js/topojson.v1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
     <script src="/assets/js/d3.tip.js"></script>
     <script>
-
-        // Location
-        var LocationTools = {
-          degToRad: function(deg){
-            return deg * Math.PI / 180;
-          },
-          pythagorasEquirectangular: function(lat, long, lat2, long2){
-            lat = LocationTools.degToRad(lat);
-            lat2 = LocationTools.degToRad(lat2);
-            long = LocationTools.degToRad(long);
-            long2 = LocationTools.degToRad(long2);
-            var R = 6371; // km
-            var x = (long2-long) * Math.cos((lat+lat2)/2);
-            var y = (lat2-lat);
-            var d = Math.sqrt(x*x + y*y) * R;
-            return d;
-          },
-          nearestRegion: function(cities, lat, long){
-            var mindif = 99999;
-            var closest;
-
-            for (index = 0; index < cities.length; ++index) {
-              var dif =  LocationTools.pythagorasEquirectangular(lat, long, cities[index].lat, cities[index].lng);
-              if (dif < mindif){
-                closest = index;
-                mindif = dif;
-              }
-            }
-            return cities[closest];
-          }
-        }
-
         batch_regions = [
             {% set is_first = true %}
             {% for region in batch_regions %}
@@ -124,49 +92,46 @@
             {% endfor %}
         ];
 
-        usCached = null;
+        var redraw = function(geodata) {
+            var map = $('#map').html('<svg></svg>');
+            var width = map.width();
+            var height = map.width() * 0.55 / (width/630);
 
-        var updateMap = function(us){
-          var path = d3.geo.path();
+            //Map projection
+            var projection = d3.geo.mercator()
+                .scale(530 * (width/630))
+                .center([-95,40]) //projection center
+                .translate([width/2,height/2]) //translate to center the map in view
 
-          var map = $('#map').html('<svg></svg>');
-          var width = map.width();
-          var height = map.width() * 0.5;
+            //Generate paths based on projection
+            var path = d3.geo.path()
+                .projection(projection);
 
-          var projection = d3.geo.albersUsa()
-                  .scale((width))
-                  .translate([width / 2, height / 2]);
+            //Create an SVG
+            var svg = d3.select("#map svg")
+                .attr("width", width)
+                .attr("height", height);
 
-          var path = d3.geo.path()
-                  .projection(projection);
+            //Group for the map features
+            var features = svg.append("g")
+                .attr("class","features");
 
-          var svg = d3.select("#map svg")
-                  .attr("width", width)
-                  .attr("height", height);
 
-          var tip = d3.tip()
-                  .attr('class', 'd3-tip')
-                  .offset([-10, 0])
-                  .html(function(d) {
-                      return d.name;
-                  });
-          svg.call(tip);
+            var tip = d3.tip()
+                    .attr('class', 'd3-tip')
+                    .offset([-10, 0])
+                    .html(function(d) {
+                        return d.name;
+                    });
+            svg.call(tip);
 
-          svg.insert("path", ".graticule")
-                  .datum(topojson.feature(us, us.objects.land))
-                  .attr("class", "land")
-                  .attr("d", path);
-
-          svg.insert("clipPath")
-                  .attr("id", "landclip")
-                  .append("path", ".graticule")
-                  .datum(topojson.feature(us, us.objects.land))
-                  .attr("d", path);
-
-          svg.insert("path", ".graticule")
-                  .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-                  .attr("class", "state-boundary")
-                  .attr("d", path);
+            
+            features.selectAll("path")
+                .data(topojson.feature(geodata,geodata.objects.collection).features)
+                .enter()
+                .append("path")
+                .attr("class", "land")
+                .attr("d",path);
 
           svg.selectAll("circle.footprint")
                   .data(batch_regions)
@@ -184,8 +149,8 @@
                           return "city footprint";
                       }
                   });
-
-          svg.selectAll("circle.impact")
+                  
+            svg.selectAll("circle.impact")
                   .data(batch_regions)
                   .enter()
                   .append("circle")
@@ -201,7 +166,6 @@
                           return "city impact";
                       }
                   });
-
           svg.selectAll("circle.outline")
                   .data(batch_regions)
                   .enter()
@@ -218,7 +182,6 @@
                           return "city outline";
                       }
                   });
-
           svg.selectAll("circle.handle")
                   .data(batch_regions)
                   .enter()
@@ -238,44 +201,24 @@
                   .on('click', function(d){
                       window.location.href = '/'+ d.id;
                   });
-
           d3.select(self.frameElement).style("height", height + "px");
           map.css('margin-top', '-'+(height/1.5)+'px');
-        };
+        }
 
+        var _geodata = null;
         var update = function() {
-            // Caching the map really makes the load time quicker.
-            if(!usCached){
-              d3.json("/assets/topo/us.json", function(error, us) {
-                usCached = us;
-                updateMap(us);
-              });
-            }else{
-              updateMap(usCached);
+            if (_geodata == null) {
+                d3.json("/assets/topo/us-ca.json",function(error,geodata) {
+                    if (error) return console.log(error);
+                    _geodata = geodata;
+                    redraw(_geodata);
+                });
+            } else {
+                redraw(_geodata);
             }
-        };
+        }
 
         update();
         $(window).on('resize', update);
-
-        // $(".wrap-inner").on("mouseenter", function(){
-        //     $("#lead-text").animate({
-        //         "margin-bottom": "220px"
-        //     });
-        //
-        //     $(".lead").animate({
-        //         "margin-top": "0px"
-        //     });
-        // });
-        //
-        // $(".wrap-inner").on("mouseleave", function(){
-        //     $("#lead-text").animate({
-        //         "margin-bottom": "0px"
-        //     });
-        //
-        //     $(".lead").animate({
-        //         "margin-top": "5rem"
-        //     });
-        // });
     </script>
 {% endblock %}
