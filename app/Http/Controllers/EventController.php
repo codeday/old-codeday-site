@@ -28,7 +28,7 @@ class EventController extends Controller
 
     public function getPast()
     {
-        return \View::make('past');
+        return redirect()->to(config('showcase.api_base').'/region/'.\Route::input('event')->region_id);
     }
 
     public function getSchedule()

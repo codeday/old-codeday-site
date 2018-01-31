@@ -63,11 +63,11 @@
             <p>{{ i18n('common.descr-detail-2') }}</p>
         </section>
         <section class="picture">
-            {% if event.photosFeatured|length > 0 %}
+            {% if event.photos|length > 0 %}
                 <a href="/{{ event.webname }}/past">
                     <div class="slideshow">
-                        {% for photo in event.photosFeatured|slice(0,12) %}
-                            <div class="photo" style="background-image: url(https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg)"></div>
+                        {% for photo in event.photos %}
+                            <div class="photo" style="background-image: url({{photo.UrlMedium}})"></div>
                         {% endfor %}
                     </div>
                     {{ i18n('event.past-link', {'region': event.region_name}) }} &rarr;
