@@ -11,7 +11,7 @@ class ChallengeController extends Controller
         if ($password == \Config::get('challenge')) {
             return response()->download('../resources/assets/challenge.zip');
         } else {
-            return response('Unauthorized')->header('X-The-Secret-You-Seek', '?password='.\Config::get('challenge'));
+            return response('Unauthorized', 401)->header('X-The-Secret-You-Seek', '?password='.\Config::get('challenge'));
         }
     }
 }
