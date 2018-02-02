@@ -47,8 +47,9 @@
                 <li>{{ i18n('register.term-4', {'link': 'https://studentrnd.org/privacy'}) }}</li>
                 <li><a href="/esignatures" target="_blank">{{ i18n('register.term-5') }}</a></li>
                 <li>{{ i18n('register.term-6') }}</li>
+                <li>{{ i18n('register.cards') }}<br />
+                    <img src="/assets/img/cards.png" /></li>
             </ul>
-            <a href="https://ssl.comodo.com/" target="_blank"><img src="https://codeday.org/assets/img/comodo-secure.png" /></a>
         </section>
     </section>
 
@@ -83,7 +84,7 @@
                 <span class="label">{{ i18n('register.discount-no') }}</span><span class="amount">0.00</span>
             </section>
             <section class="total">
-                <span class="label">{{ i18n('register.total') }}</span><span class="amount">10.00</span>
+                <span class="label">{{ i18n('register.total') }}{% if event.currency != 'usd' %} ({{ event.currency|upper }}){% endif %}</span><span class="amount">10.00</span>
                 {% if event.is_early_bird_pricing %}
                     <span class="earlybird">{{ i18n('register.earlybird') }}</span>
                 {% endif %}
