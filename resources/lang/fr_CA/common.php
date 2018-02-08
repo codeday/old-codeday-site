@@ -6,7 +6,7 @@ return [
     'descr-detail-1'        => 'CodeDay est un événement national où des étudiants en programmation, des artistes, des musiciens, des acteurs et tous les autres peuvent se rassembler et créer des applications et des jeux durant 24 heures.  Les étudiants de tous niveaux confondus sont les bienvenus - nous avons des ateliers et des conseillers qui peuvent vous venir en aide si vous êtes nouveau!',
     'descr-detail-2'        => 'Au début de CodeDay, tous ceux qui ont une idée peuvent venir la présenter au groupe. Si vous êtes seul ou n’avez aucune idée, il est grand temps que vous vous trouviez une équipe.',
     'fun-friends-awesome'   => "Amusez-vous, faites-vous des amis, créez quelque chose d'incroyable.",
-    'hosted-at'             => "Lieu de l'événement <a href=\":link\" target=\"_blank\">: name</a>",
+    'hosted-at'             => "Lieu de l'événement <a href=\":link\" target=\"_blank\">:name</a>",
     'hosted-at-plain'       => "Lieu de l'événement :name",
     'noon-noon'             => 'De midi à midi',
 
