@@ -14,7 +14,7 @@ class CertificateController extends Controllers\Controller
         $ticket = Models\Ticket::find(\Route::input('ticket'));
         // TODO(@tylermenezes): We should check if they've checked in, however Clear clears checkin time upon checkout.
         $ends_at = new Carbon($ticket->event['batch']['ends_at']);
-        //if ($ends_at->gte(Carbon::now())) \App::abort(404);
+        if ($ends_at->gte(Carbon::now())) \App::abort(404);
 
 
         $pdf = new \FPDI('L', 'mm', 'Letter');
