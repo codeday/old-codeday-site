@@ -79,12 +79,19 @@
                     $7 per student<br />
                     (Scholarships available)
                 </section>
-                <section class="register">
-                    <a class="cta" href="/{{ event.webname }}/schools/register">Promote to Students</a>
-                    <a class="cta" href="/{{ event.webname }}/schools/register">Register as a Group</a>
-                </section>
+                {% if event.venue and event.registration_info.is_open and event.registration_info.remaining > 0 %}
+                    <section class="register">
+                        <a class="cta" href="/{{ event.webname }}/schools/register">Promote to Students</a>
+                        <a class="cta" href="/{{ event.webname }}/schools/register">Register as a Group</a>
+                    </section>
+                {% else %}
+                    <section class="register">
+                        <p><em>Sorry, ticket sales are not currently open for this event.</em></p>
+                    </section>
+                {% endif %}
                 <section class="questions">
-                    <p>Questions? Email <a href="mailto:schools@srnd.org">schools@srnd.org</a> or call 888-607-7763 ext 3.</p>
+                    <p><strong>Group Submission Deadline: {{ (event.starts_at - (60*60*48))|date('F j') }}</strong><br />
+                        Questions? Email <a href="mailto:schools@srnd.org">schools@srnd.org</a> or call 888-607-7763 ext 3.</p>
                 </section>
             </section>
         </article>
