@@ -43,6 +43,7 @@ $routes = function () {
     \Route::get('/index.json', '\CodeDay\Http\Controllers\StaticController@getGlobalJson');
     \Route::get('/video', '\CodeDay\Http\Controllers\StaticController@getVideo');
     \Route::post('/swag', '\CodeDay\Http\Controllers\StaticController@postSwag');
+    \Route::get('/summer', '\CodeDay\Http\Controllers\StaticController@getSummer');
 
     \Route::get('/promo', '\CodeDay\Http\Controllers\StaticController@getPromo');
     \Route::get('/press', '\CodeDay\Http\Controllers\StaticController@getPress');

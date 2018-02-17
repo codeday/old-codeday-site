@@ -59,6 +59,13 @@ class StaticController extends Controller
         return \View::make('groups');
     }
 
+    public function getSummer()
+    {
+        \View::share('loaded_batch', Models\Batch::current());
+
+        return \View::make('summer');
+    }
+
     public function getHackclub()
     {
         \View::share('loaded_batch', Models\Batch::current());
