@@ -1,0 +1,21 @@
+{% extends "template.twig" %}
+{% block section %}vip{% endblock %}
+{% block page %}utea{% endblock %}
+{% block title %}E-Sign Your Waiver{% endblock %}
+{% block meta %}
+    <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+{% block nav %}<nav><ul><li><a href="/{{ ticket.id }}">{{ ticket.name }}</a></li></ul></nav>{% endblock %}
+{% block content %}
+    <h3>Want to e-sign your waiver?</h3>
+
+    <p>You can save time by e-signing your waiver. Here's some more information on how it works:</p>
+    <div class="esign-consent" style="height: 10rem;border:1px solid gray;padding:1rem;overflow-y:scroll">
+        {% include "parts/esign-consent.twig" %}
+    </div>
+
+    <p>
+        <a href="/{{ticket.id}}/waiver?key={{key}}&consent=yes" class="agree">E-Sign</a>
+    </p>
+    <a href="https://srnd-cdn.net/codeday/waiver-{%if not ticket.is_minor %}non{% endif %}minor.pdf" target="_blank">Print and sign instead.</a>
+{% endblock %}

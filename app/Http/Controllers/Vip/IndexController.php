@@ -86,10 +86,18 @@ class IndexController extends Controllers\Controller
         if ($this->ticket->waiver_pdf !== null) {
             return \Redirect::to($this->ticket->waiver_pdf);
         }
+        $key = hash_hmac('whirlpool', $this->ticket->id.'-'.$this->ticket->age, \Config::get('app.key'));
 
-        $waiverContent = file_get_contents(sprintf('https://srnd-cdn.net/codeday/waiver-%sminor.html', ($this->ticket->is_minor ? '' : 'non')));
-
-        return \View::make('vip/waiver', ['waiver_content' => $waiverContent]);
+        if (\Input::get('key') == $key) {
+            if (\Input::get('consent')) {
+                $waiverContent = file_get_contents(sprintf('https://srnd-cdn.net/codeday/waiver-%sminor.html', ($this->ticket->is_minor ? '' : 'non')));
+                return \View::make('vip/waiver', ['waiver_content' => $waiverContent]);
+            } else {
+                return \View::make('vip/waiver-consent', ['key' => $key]);
+            }
+        } else {
+            return \redirect('/'.$this->ticket->id.'/waiver?key='.$key);
+        }
     }
 
     public function getSyncwaiver()
@@ -97,5 +105,10 @@ class IndexController extends Controllers\Controller
         $this->ticket->syncWaiver();
 
         return \Redirect::to('/'.$this->ticket->id);
+    }
+
+    public function getCognitojs()
+    {
+        return response(file_get_contents('https://services.cognitoforms.com/s/7hYXr3TPxk6yIpJxjqVoFQ'))->header('Content-type', 'text/plain');
     }
 }

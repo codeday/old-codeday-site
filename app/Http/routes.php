@@ -29,6 +29,7 @@ use CodeDay\Models;
 $routes = function () {
     // Domain Routes
     \Route::group(['domain' => isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'vip.x' ? 'vip.x' : 'codeday.vip'], function () {
+        \Route::get('/cognito.js', '\CodeDay\Http\Controllers\Vip\IndexController@getCognitojs');
         \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
         \Route::Controller('/{ticket}/certificate', '\CodeDay\Http\Controllers\Vip\CertificateController');
         \Route::Controller('/{ticket}', '\CodeDay\Http\Controllers\Vip\IndexController');
