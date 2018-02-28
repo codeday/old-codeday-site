@@ -1,0 +1,15 @@
+{% extends "template.twig" %}
+{% block section %}vip{% endblock %}
+{% block page %}venue-agreement{% endblock %}
+{% block title %}Venue Agreement{% endblock %}
+{% block meta %}
+    <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+{% block nav %}<nav><ul><li><a href="/{{ ticket.id }}">{{ ticket.name }}</a></li></ul></nav>{% endblock %}
+{% block content %}
+    <h3>Our venue requires an additional agreement.</h3>
+
+    <p>Please print this PDF, fill it out, and bring it with you to CodeDay:</p>
+    <p><a href="{{ ticket.event.venue_agreement }}" class="download" target="_blank">Download Venue Agreement</a></p>
+    <p><a href="/{{ ticket.id }}">Back to your ticket</a></p>
+{% endblock %}

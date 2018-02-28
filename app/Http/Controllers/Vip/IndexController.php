@@ -42,6 +42,11 @@ class IndexController extends Controllers\Controller
         return \View::make('vip/parent');
     }
 
+    public function getVenue()
+    {
+        return \View::make('vip/venue-agreement');
+    }
+
     public function postParent()
     {
         if (!isset($this->ticket->age) || !$this->ticket->age) {

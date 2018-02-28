@@ -8,11 +8,14 @@
                 {% set parent_done = ticket.parent_email or ticket.parent_information_exempt %}
                 {% set waiver_done = ticket.waiver_pdf %}
                 <li><a href="/{{ ticket.id }}/parent" class="parent {% if parent_done %}done{% endif %}"><span class="icon"></span><span class="label">Parent Info</span></a></li>
-                <li><a href="{% if waiver_done %}{{ ticket.waiver_pdf }}{% elseif parent_done %}/{{ ticket.id }}/waiver{% else %}#{% endif %}" class="waiver {% if waiver_done %}done{% endif %}"><span class="icon"></span><span class="label">Sign Waiver</span></a></li>
+                <li><a href="{% if waiver_done %}{{ ticket.waiver_pdf }}{% elseif parent_done %}/{{ ticket.id }}/waiver{% else %}#{% endif %}" class="waiver {% if waiver_done %}done{% endif %}"><span class="icon"></span><span class="label">Waiver</span></a></li>
                 {% if ticket.event.ends_at < (null | date('U')) %}
-                    <li><a href="#" class="survey"><span class="icon"></span><span class="label">Survey</span></a></li>
                     <li><a href="/{{ ticket.id }}/feedback" class="survey"><span class="icon"></span><span class="label">Feedback</span></a></li>
+                    <li><a href="/{{ ticket.id }}/certificate" class="certificate"><span class="icon"></span><span class="label">Certificate</span></a></li>
                 {% else %}
+                    {% if ticket.event.venue_agreement %}
+                        <li><a href="/{{ ticket.id }}/venue" class="venue-agreement {% if not waiver_done %}waiting{% endif %}"><span class="icon"></span><span class="label">Venue Info</span></a></li>
+                    {% endif %}
                     <li><a href="/{{ ticket.id }}/survey" class="survey {% if not waiver_done %}waiting{% endif %}"><span class="icon"></span><span class="label">Survey</span></a></li>
                 {% endif %}
             </ul>

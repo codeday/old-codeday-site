@@ -114,8 +114,13 @@
                         ExoJQuery(function() {
                             ExoJQuery(document).on('afterSubmit.cognito', function(data) {
                                 document.querySelector(".page").style.display = "none";
+                                document.querySelector(".waiver > h2").style.display = "none";
                                 document.querySelector(".alternative").style.display = "none";
                                 document.querySelector(".success").style.display = "block";
+                                // The waiver takes a few seconds to post to Clear.
+                                setTimeout(function(){
+                                    window.location = '/{{ ticket.id|escape('js') }}';
+                                }, 7000);
                             });
                         });
                     }
@@ -127,7 +132,9 @@
                 <a href="https://srnd-cdn.net/codeday/waiver-{%if not ticket.is_minor %}non{% endif %}minor.pdf" target="_blank">print and sign your waiver.</a></p>
         </div>
         <div class="success" style="display: none">
-            <p>Thanks, your waiver has been successfully signed! You can download a copy at any time from your ticket page. <a href="/{{ticket.id}}">Click here to return to it.</a></p>
+            <p><img src="/assets/img/spinner.gif" /></p>
+            <p><strong><em>Finalizing your waiver. This will take about five seconds.</em></strong></p>
+            <p>You will be able to download your completed waiver from your ticket page, and we will email you a copy.<p>
         </div>
     </section>
 {% endblock %}
