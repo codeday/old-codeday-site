@@ -10,7 +10,7 @@
                         <input type="number" name="age" id="age" value="{{ ticket.age }}" required />
                         <span class="help">Your age on {{ ticket.event.starts_at|date('F j, Y') }}.</span>
                     </div>
-            {% elseif ticket.age >= 18 %}
+            {% elseif not ticket.is_minor %}
                 {% if ticket.age > 25 %}
                     <div class="warning">
                         <p><strong>Hey! There might be a problem:</strong> CodeDay is mostly targeted to high school students.</p>
@@ -18,11 +18,17 @@
                         generally had a bad time, anyway.)</p>
                         <p>Please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> for a refund.</p>
                     </div>
+                {% elseif ticket.age > 22 %}
+                    <div class="warning">
+                        <p><strong>Heads-up:</strong> most CodeDay attendees will be in high school.</p>
+                        <p>You're welcome to attend, and you'll probably still have a good time, just be aware that a
+                           a lot of attendees will be younger than you.</p>
+                    </div>
                 {% endif %}
                 <div class="field">
                     <label>Parent Info</label>
                     <div class="group">
-                        Because you're over 18, we don't need your parent info. If you need to change your age, please
+                        Because you're not a minor, we don't need your parent info. If you need to change your age, please
                         <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us.</a>
                     </div>
                 </div>
@@ -39,6 +45,13 @@
                         overnight. Also note that parents are not allowed to stay with their student for security reasons.</p>
                         <p>If you have more questions, or would like a refund, please
                         <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>.</p>
+                    </div>
+                {% elseif ticket.age < 14 %}
+                    <div class="warning">
+                        <p><strong>Heads-up:</strong></p>
+                        <p>The overnight portion of CodeDay isn't ideal for younger students. We recommend
+                           you pick your student up around 10pm, and drop them back off for presentations at 8am
+                           the next morning.</p>
                     </div>
                 {% endif %}
                 <div class="field">

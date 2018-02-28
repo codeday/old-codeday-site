@@ -8,32 +8,122 @@
 {% block nav %}<nav><ul><li><a href="/{{ ticket.id }}">{{ ticket.name }}</a></li></ul></nav>{% endblock %}
 {% block content %}
     <section class="waiver" id="waiver">
-        <p>If you have any problems signing your waiver, you can
-            <a href="https://srnd-cdn.net/codeday/waiver.pdf" target="_blank">print and sign,</a> however you will need
-            to use the slow line at check-in.</p>
-        <iframe src="{{ url }}?hidenav=1&hidetext=1"></iframe>
-        <section class="notice">
-            <section class="esign">
-                <p>To submit this document online, you must agree to our e-signature policy as follows: This is a legally
-                   binding document. You must be 18 or older to sign, and must be either the attendee, or the attendee's
-                   parent or other legal guardian. We will store this document on our servers for a period of no less
-                   than four years, and email you a copy which you will be responsible for retaining.</p>
-            </section>
-            <section class="powered">
-                <a href="https://legalesign.com/"><img src="/assets/img/legalesign_powered.png" /></a>
-            </section>
-        </section>
+
+        <style>
+            @import url("https://srnd.org/assets/fonts/avenir-next.css");
+            .page {
+                width: 720pt;
+                padding: 0.5in;
+                background-color: $color-white;
+                border: 1px solid gray;
+                font-family: 'Avenir Next', Helvetica, Arial, sans-serif;
+            }
+            .page, .page p, .page li, .page blockquote, .page strong, .page h1, .page h2 {
+                font-size: 12pt;
+                line-height: 18pt;
+            }
+            .page h2 {
+                font-weight: 700;
+                margin-top: 3rem;
+            }
+            .page strong {
+                font-weight: 600;
+            }
+            .page header img {
+                float: left;
+                width: 50pt;
+                height auto;
+            }
+            .page header h1 {
+                float: left;
+                padding-left: 2rem;
+                font-weight: 700;
+                margin-top: 0.2em;
+            }
+            .page header:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+            .c-forms-heading {
+                display: none !important;
+            }
+            .c-forms-form label, .c-forms-form input[type="text"], .c-content {
+                font-family: 'Avenir Next', Helvetica, Arial, sans-serif !important;
+                font-size: 12pt !important;
+                font-weight: 500;
+            }
+            .c-forms-form input[type="text"], .c-content {
+                border-bottom: 1pt solid #ccc !important;
+                font-style: italic !important;
+            }
+            .c-text-singleline input {
+                position: relative;
+                top: -17pt;
+            }
+            .c-calculation-singleline .c-content {
+                position: relative;
+                top: -9pt;
+            }
+            .c-text-singleline label, .c-calculation-singleline label {
+                position: relative;
+                top: 26pt
+            }
+            .c-label:after {
+                display: none !important;
+            }
+            .c-signature .c-editor {
+                position: relative;
+                top: -14pt;
+            }
+            .c-signature label {
+                position: relative;
+                top: 100pt;
+                z-index: 100;
+            }
+            .cognito > div {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+            }
+        </style>
+        <div class="page" style="display:none">
+            <header>
+                <img src="https://srnd.org/assets/img/logo.svg" />
+                <h1>PARTICIPANT AGREEMENT, WAIVER, and RELEASE of LIABILITY</h1>
+            </header>
+            {{ waiver_content|raw }}
+            <div class="cognito">
+                <script src="https://services.cognitoforms.com/s/7hYXr3TPxk6yIpJxjqVoFQ"></script>
+                <script>Cognito.load("forms", { id: "5", entry: {
+                    "Ticket": "{{ ticket.id|escape('js') }}",
+                    "ParticipantName": "{{ ticket.name|escape('js') }}",
+                    "Minor": "{% if ticket.is_minor %}yes{% else %}no{% endif %}",
+                    "EventName": "CodeDay",
+                    "SignerEmail": "{% if ticket.is_minor %}{{ ticket.parent_email|escape("js") }}{% else %}{{ ticket.email|escape("js") }}{% endif %}",
+                    {% if ticket.is_minor %}
+                        "Relationship": "Parent",
+                    {% endif %}
+                }}, {
+                    success: function() {
+                        document.querySelector(".page").style.display = "block";
+                        ExoJQuery(function() {
+                            ExoJQuery(document).on('afterSubmit.cognito', function(data) {
+                                document.querySelector(".page").style.display = "none";
+                                document.querySelector(".alternative").style.display = "none";
+                                document.querySelector(".success").style.display = "block";
+                            });
+                        });
+                    }
+                });</script>
+            </div>
+        </div>
+        <div class="alternative">
+            <p>If you have any problems signing your waiver, you can
+                <a href="https://srnd-cdn.net/codeday/waiver-{%if not ticket.is_minor %}non{% endif %}minor.pdf" target="_blank">print and sign.</a></p>
+        </div>
+        <div class="success" style="display: none">
+            <p>Thanks, your waiver has been successfully signed! You can download a copy at any time from your ticket page. <a href="/{{ticket.id}}">Click here to return to it.</a></p>
+        </div>
     </section>
-{% endblock %}
-{% block scripts %}
-    <script type="text/javascript">
-        {% if ticket.age < 18 %}alert("Please get your parent to sign this waiver.");{% endif %}
-        window.addEventListener("message", function (event) {
-            var origin = event.origin || event.originalEvent.origin;
-            if (origin !== "https://app.legalesign.com") return;
-            if (event.data != "signed") return;
-            document.getElementById('waiver').innerHTML = "<p>Please wait...</p>";
-            window.location.href = "syncwaiver";
-        }, false);
-    </script>
 {% endblock %}

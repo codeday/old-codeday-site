@@ -83,12 +83,13 @@ class IndexController extends Controllers\Controller
 
     public function getWaiver()
     {
-        $url = $this->ticket->getSigningLink();
         if ($this->ticket->waiver_pdf !== null) {
-            return \Redirect::to('/'.$this->ticket->id);
+            return \Redirect::to($this->ticket->waiver_pdf);
         }
 
-        return \View::make('vip/waiver', ['url' => $url]);
+        $waiverContent = file_get_contents(sprintf('https://srnd-cdn.net/codeday/waiver-%sminor.html', ($this->ticket->is_minor ? '' : 'non')));
+
+        return \View::make('vip/waiver', ['waiver_content' => $waiverContent]);
     }
 
     public function getSyncwaiver()
