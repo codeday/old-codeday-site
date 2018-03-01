@@ -52,7 +52,7 @@ return [
     'faq-school-q'          => "We'd 💖 to attend as a 🏫. Can we 💸 with a PO?",
     'faq-school-a'          => '✅, please <a href=":link">visit our 🏫 registration page</a> to submit your registration. We will follow ☝ to complete the purchasing process.',
     'faq-security-q'        => '🔐?',
-    'faq-security-a'        => 'The 🏟 will be locked 👇 overnight, and 🎒 under 🔞 will not be able to 🍃 without a 👪 there to ⛏ them ☝.',
+    'faq-security-a'        => 'The 🚀 will be locked 👇 overnight, and 🎒 under 🔞 will not be able to 🍃 without a 👪 there to ⛏ them ☝.',
     'faq-parent-q'          => 'Can 👪 attend with my 🎒?',
     'faq-parent-a'          => '👪 can attend the Kickoff and final 📊, but cannot stay throughout the 🎫 due to background check requirements. Teachers may attend with 🎒, but must 📺 🎓 🆔 or other proof of status at the 🔑.',
     'faq-search'            => 'Want to know something else? Just ask:',
