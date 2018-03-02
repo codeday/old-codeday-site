@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'warn-remaining'    => '⚠️ :remaining 🎟🔽❗️',
+    'warn-earlybird'    => '🌞🐦 🔚 🔜!',
+    'terms'             => '📜',
+    'term-1'            => '🧒 👍 <a href=":link1">🤬📜</a>➕<a href=":link2">🔢📜</a>',
+    'term-2-early'      => '🎟 <a href=":link">🔙💲</a> :time',
+    'term-2-late'       => '🎟 <a href=":link">🔙💲</a> 2️⃣4️⃣🕐',
+    'term-3'            => '🧒 📸📽',
+    'term-4'            => '🧒 <a href=":link">📦 ℹ️</a> ➡️ 💘💘💘',
+    'term-5'            => '🧒 🚸 📝',
+    'term-6'            => '🧒 ➡️ 🎓❗️ 1️⃣2️⃣ 〰️ 2️⃣5️⃣.❗',
+    'cards'             => '🧒 ➡️ 💸:',
+    'loaners'           => ':count 🎊💻 ✅❗️',
+    'attendee-head'     => '🧒 ℹ️',
+    'add-attendee'      => '➕ 🧒',
+    'rm-attendee'       => '➖ 🧒',
+    'payment'           => '💳',
+    'earlybird'         => '🌞🐦 📉 👏',
+    'discount-no'       => '👎 📈 😭',
+    'total'             => '🤑',
+    'promo-ask'         => '📉❓',
+    'promo-label'       => '📉',
+    'complete'          => '🛒',
+    'scholarship-ask'   => "🤔 ❌💵❓ 📬‼️",
+    'school-ask'        => '🧒🧒🧒🧒🧒🧒🧒🧒🧒 🏫❓',
+    'success-head'      => "🧒 ➡️ 👩‍💻🌞‼️‼️‼️‼️ 💯‼️",
+    'success-body'      => "👀 🧒 🚀❗️",
+    'ticket-download'   => '📥 🎟',
+    'receipt-download'  => '📥 📎',
+
+];
