@@ -2,11 +2,11 @@
 
 return [
     'cities-hours'          => ':cities 🗺❗️ 2️⃣4️⃣ 🕐 🎢❗️',
-    'description'           => "👩‍💻🌞 ➡️ 🧒🧒🧒🧒 🔨 👌 📱➕👾❗️ 👍 💃❗️ 🔰 〰️ 💯❗️",
-    'descr-detail-1'        => "👩‍💻🌞 ➡️ 🌎🌍🌏❗️ 👩‍💻➕🎙➕🔭➕🔮➕🖼 🔨 📱➕👾 ➡️ 2️⃣4️⃣ 🕐❗️ 🎒  🤹‍♀️ 🔰〰️💯 👉 💞❗️ 🆕🔰❓ 👩‍🏫➕👨‍🎓➕🧙‍♀️➕🧟‍♀️ 🆘❗️",
-    'descr-detail-2'        => "🧒 💡 ➡️ 👟 🆙 🎙 ➡️ 👥👥👥👥❗️ ⏳ 🔍 👥❗️",
+    'description'           => '👩‍💻🌞 ➡️ 🧒🧒🧒🧒 🔨 👌 📱➕👾❗️ 👍 💃❗️ 🔰 〰️ 💯❗️',
+    'descr-detail-1'        => '👩‍💻🌞 ➡️ 🌎🌍🌏❗️ 👩‍💻➕🎙➕🔭➕🔮➕🖼 🔨 📱➕👾 ➡️ 2️⃣4️⃣ 🕐❗️ 🎒  🤹‍♀️ 🔰〰️💯 👉 💞❗️ 🆕🔰❓ 👩‍🏫➕👨‍🎓➕🧙‍♀️➕🧟‍♀️ 🆘❗️',
+    'descr-detail-2'        => '🧒 💡 ➡️ 👟 🆙 🎙 ➡️ 👥👥👥👥❗️ ⏳ 🔍 👥❗️',
     'fun-friends-awesome'   => '💃➕👬➕🌈🦄✨',
-    'hosted-at'             => '🏡 <a href=":link" target="_blank">:name</a>',
+    'hosted-at'             => '🏡 <a href=\':link\' target=\'_blank\'>:name</a>',
     'hosted-at-plain'       => '🏡 :name',
     'noon-noon'             => '🕛 👉 🕛',
 
@@ -19,7 +19,7 @@ return [
 
     'faq'                   => '❓❓❓',
     'byline'                => '❤️ 🎓🔍🎨',
-    'footer-trademark'      => '👩‍💻🌞 <a href=":link" target="_blank">™</a> ➡️ srnd.org',
+    'footer-trademark'      => '👩‍💻🌞 <a href=\':link\' target=\'_blank\'>™</a> ➡️ 🎓🔍🎨',
 
     'nav-event'             => '📅 ℹ️',
     'nav-register'          => '🎟',
