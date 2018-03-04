@@ -73,7 +73,7 @@ $routes = function () {
     // Event-based Routes
     \Route::bind('event', function ($webname) {
         $event = Models\Region::find(strtolower($webname))->current_event;
-        if ($event->batch['id'] != Models\Batch::current()->id) {
+        if (!$event->batch['is_loaded']) {
             return;
         }
         if ($event->webname != $webname) {

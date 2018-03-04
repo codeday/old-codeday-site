@@ -11,8 +11,7 @@
     {% endif %}
     <div class="wrap"><div class="wrap-inner">
         <article class="details">
-            {#<span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>#}
-            <span class="date">TBA</span>
+            <span class="date">{{ event.starts_at|date('F j') }}-{{ event.ends_at|date('j') }}</span>
             <span class="time">{{ i18n('common.noon-noon') }}</span>
         </article>
         <article class="lead">
