@@ -20,7 +20,7 @@
         <span class="wistia_embed wistia_async_n6xc4pm90n popover=true popoverAnimateThumbnail=true popoverContent=link videoFoam=true" style="display:inline"><a href="#" class="video-play-link">&#xf196;</a></span>
         <article class="action">
             {% if event and event.registration_info.is_open and event.registration_info.remaining > 0 %}
-                <a href="{{ langPrefix }}/{{ event.webname }}/register" class="register">
+                <a href="{{ langPrefix }}/{{ event.webname }}/register{% if promo_code != null %}?promo={{ promo_code }}{% endif %}" class="register">
                     {% if event.registration_info.remaining < (event.registration_info.max * 0.10) %}
                         {{ i18n('event.cta-ticket-warn', {'remaining': event.registration_info.remaining}) }}
                     {% else %}
