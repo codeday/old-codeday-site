@@ -144,4 +144,10 @@
             }(document, 'script', 'facebook-jssdk')
         );
     </script>
+    {% if promo_code != null %}
+    <script>
+        $("#promo").val("{{ promo_code }}")
+        $(".promo-picker .red-button").click()
+    </script>
+    {% endif %}
 {% endblock %}

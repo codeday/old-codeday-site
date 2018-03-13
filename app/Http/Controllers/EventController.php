@@ -23,6 +23,7 @@ class EventController extends Controller
     {
         return \View::make('event', [
             'is_mobile' => preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER['HTTP_USER_AGENT']),
+            'promo_code' => preg_replace("/[^A-Z0-9]/", "", strtoupper(\Input::get('promo')))
         ]);
     }
 
@@ -58,7 +59,7 @@ class EventController extends Controller
             return \Redirect::to('/'.$event->webname);
         }
 
-        return \View::make('register');
+        return \View::make('register', [ 'promo_code' => preg_replace("/[^A-Z0-9]/", "", strtoupper(\Input::get('promo'))) ]);
     }
 
     public function getPress()
