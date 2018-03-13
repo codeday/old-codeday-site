@@ -8,6 +8,35 @@ class VolunteerController extends Controller
 {
     public function getIndex()
     {
+        return \View::make('volunteer/index', [
+            'loaded_batch' => Models\Batch::current(),
+            'partner'      => $this->getPartner(),
+            'tz_regions'   => $this->getTzList(),
+        ]);
+    }
+
+    public function getApplyStaff()
+    {
+        return $this->getApply('staff');
+    }
+
+    public function getApplyJudge()
+    {
+        return $this->getApply('judge');
+    }
+
+    public function getApplyMentor()
+    {
+        return $this->getApply('mentor');
+    }
+
+    protected function getPartner()
+    {
+        return config('partners.'.\Input::get('partner'));
+    }
+
+    protected function getTzList()
+    {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
         $event = Models\Event::closestNearby($visitor_info->lat, $visitor_info->lng);
         $current_regions = iterator_to_array(Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true));
@@ -17,42 +46,25 @@ class VolunteerController extends Controller
             $tz_regions[$region->timezone][] = $region;
         }
 
-        return \View::make('volunteer/index', [
-            'loaded_batch' => Models\Batch::current(),
-            'partner'      => $this->getPartner(),
-            'tz_regions'   => $tz_regions,
-        ]);
+        return $tz_regions;
     }
 
-    public function getApplyStaff()
+    protected function getApply(string $type)
     {
-        return \View::make('volunteer/apply', [
-            'form'          => config('wufoo.staff.form'),
-            'partner_field' => config('wufoo.staff.partner_field'),
-            'partner'       => $this->getPartner(),
-        ]);
-    }
-
-    public function getApplyJudge()
-    {
-        return \View::make('volunteer/apply', [
-            'form'          => config('wufoo.judge.form'),
-            'partner_field' => config('wufoo.judge.partner_field'),
-            'partner'       => $this->getPartner(),
-        ]);
-    }
-
-    public function getApplyMentor()
-    {
-        return \View::make('volunteer/apply', [
-            'form'          => config('wufoo.mentor.form'),
-            'partner_field' => config('wufoo.mentor.partner_field'),
-            'partner'       => $this->getPartner(),
-        ]);
-    }
-
-    protected function getPartner()
-    {
-        return config('partners.'.\Input::get('partner'));
+        if (\Input::get('region')) {
+            return \View::make('volunteer/apply', [
+                'form'          => config('wufoo.'.$type.'.form'),
+                'partner_field' => config('wufoo.'.$type.'.partner_field'),
+                'partner'       => $this->getPartner(),
+                'region'        => \Input::get('region'),
+            ]);
+        } else {
+            return \View::make('volunteer/pick-region', [
+                'loaded_batch' => Models\Batch::current(),
+                'partner'      => $this->getPartner(),
+                'tz_regions'   => $this->getTzList(),
+                'type'         => $type,
+            ]);
+        }
     }
 }
