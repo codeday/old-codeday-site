@@ -188,9 +188,9 @@
             {% for sponsor in event.sponsors %}
                 <li>
                     {% if sponsor.url %}
-                        <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" target="_blank"><span style="background-image: url('{{ sponsor.logo }}');" title="{{ sponsor.name }}"></span></a>
+                        <a href="{{ sponsor.url }}" title="{{ sponsor.name }}" target="_blank"><img src="url('{{ sponsor.logo }}');" alt="{{ sponsor.name }}"></a>
                     {% else %}
-                        <span style="background-image: url('{{ sponsor.logo }}');" title="{{ sponsor.name }}"></span>
+                        <img src="url('{{ sponsor.logo }}');" alt="{{ sponsor.name }}">
                     {% endif %}
                 </li>
             {% endfor %}
