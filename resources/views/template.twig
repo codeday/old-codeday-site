@@ -180,37 +180,23 @@
     <script type="text/javascript" src="/assets/js/sweet-alert.min.js"></script>
     {#<script src="http://d.codeday.dev/resources/dart/web/main.dart" type="application/dart"></script>#}
     <script src="/assets/js/app.js?v3"></script>
-    <script type="text/javascript">
-        !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.1.0";
-            analytics.load("NOoRcUYjAGROMV3zHOXPLhdBSrxu5uSe");
-            analytics.page();
-        }}();
-        analytics.page('{{ block('section')|escape('js') }}', '{{ block('page')|escape('js') }}');
-
-        window._wq = window._wq || [];
-        _wq.push({ "_all": function(video) {
-            video.bind('play', function(){
-                analytics.track('Played video');
-            });
-        }});
-
-        console.log("Hey, you! Yes, you. Up for a challenge? First step: aHR0cHM6Ly9jb2RlZGF5Lm9yZy9jaGFsbGVuZ2U=");
-    </script>
     <script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
-    <script>
-        !function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(
-        arguments)};d=s.createElement(q);q=s.getElementsByTagName(q)[0];
-        d.src='//d1l6p2sc9645hc.cloudfront.net/tracker.js';q.parentNode.
-        insertBefore(d,q)}(window,document,'script','_gs');
-
-        _gs('GSN-894188-A');
-        {% set cdate = (null|date('U')) + (60*60*24) %}
-        {% if (event and event.starts_at < cdate)
-            or (loaded_batch and loaded_batch.starts_at < cdate) %}
-            _gs('set', 'chat', { button: false });
-        {% endif %}
+    <script type="text/javascript">
+    var _paq = _paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setCookieDomain", "*.codeday.org"]);
+    _paq.push(["setDomains", ["*.codeday.org","*.codeday.ca","*.codeday.es","*.codeday.vip"]]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+        var u="//data.srnd.org/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', '2']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
     </script>
-    {{ block('track') }}
     {{ block('scripts') }}
 </body>
 </html>
