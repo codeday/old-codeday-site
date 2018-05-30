@@ -14,6 +14,9 @@
             {% for region in regions %}
                 <li><a href="{{ m.link_for(region) }}">{{ region.name }}</a></li>
             {% endfor %}
+            {% if name == 'Pacific' %}
+                <li><a href="/seattle-eastside">Seattle Eastside</a></li>
+            {% endif %}
         </ul>
     </section>
 {% endmacro %}
