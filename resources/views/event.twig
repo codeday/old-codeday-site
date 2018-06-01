@@ -35,7 +35,7 @@
                     #}<input type="submit" value="{{ i18n('event.notify-signup') }}">
                 </form>
             {% endif %}
-            {% if event.venue and event.registration_info.is_open and event.registration_info.remaining > 0 %}
+            {% if event.venue %}
                 <span class="venue">{{ i18n('common.hosted-at', {'link': 'https://www.google.com/maps/place/'~(event.venue.full_address|url_encode), 'name': event.venue.name}) }}</span>
             {% endif %}
 
