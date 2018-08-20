@@ -23,10 +23,10 @@ return [
     'promo-ask'         => '有促销码吗？',
     'promo-label'       => '促销码',
     'complete'          => '完成注册',
-    'scholarship-ask'   => "无法承担票价？别担心，联系我们。",
+    'scholarship-ask'   => '无法承担票价？别担心，联系我们。',
     'school-ask'        => '为您的学校注册？',
-    'success-head'      => "大功告成！我们CodeDay见。",
-    'success-body'      => "我们已经等不及要见到您了！",
+    'success-head'      => '大功告成！我们CodeDay见。',
+    'success-body'      => '我们已经等不及要见到您了！',
     'ticket-download'   => '下载您的入场券',
     'receipt-download'  => '下载您的收据',
 

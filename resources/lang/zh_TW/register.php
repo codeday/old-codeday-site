@@ -23,10 +23,10 @@ return [
     'promo-ask'         => '持有促銷碼嗎？',
     'promo-label'       => '促銷碼',
     'complete'          => '完成註冊',
-    'scholarship-ask'   => "無法承擔票價？別擔心，聯繫我們。",
+    'scholarship-ask'   => '無法承擔票價？別擔心，聯繫我們。',
     'school-ask'        => '為您的學校註冊？',
-    'success-head'      => "大功告成！我們Cod​​eDay見。",
-    'success-body'      => "我們已經等不及要見到您了！",
+    'success-head'      => '大功告成！我們Cod​​eDay見。',
+    'success-body'      => '我們已經等不及要見到您了！',
     'ticket-download'   => '下載您的入場券',
     'receipt-download'  => '下載您的收據',
 
