@@ -124,7 +124,7 @@
                         <li>
                             <ul class="lang-switcher">
                                 {% if langPrefix == '' %}{% set langPrefix = '/' %}{% endif %}
-                                {% set langs = {"/es_MX": "mx", "/fr_CA": "fr", "/vi": "vi", "/tl": "tl", "/": "us"} %}
+                                {% set langs = {"/es_MX": "mx", "/fr_CA": "fr", "/vi": "vi", "/tl": "tl", "/": "us", "/zh_CN": "cn", "/zh_TW": "tw"} %}
                                 <li><span><img src="/assets/img/i18n-flags/{{ langs[langPrefix] }}.png" /></span></li>
                                 {% for lang,flag in langs %}
                                     {% if lang != langPrefix %}
