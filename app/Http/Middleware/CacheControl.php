@@ -12,19 +12,19 @@ class CacheControl
         $cacheRemote = 0;
         $public = true;
 
-        if ($request->is('splunk')) {
+        if ($request->is('/splunk')) {
             $public = false;
             $cacheLocal = 0;
             $cacheRemote = 0;
         } elseif ($request->is('*/register')) {
             $cacheLocal = 0;
             $cacheRemote = 30;
-        } elseif ($request->is('seattle')) {
+        } elseif ($request->path() === '/') {
+            $cacheLocal = 3600;
+            $cacheRemote = 3600;
+        } elseif (preg_match('/^[a-zA-Z-_0-9]+$/', $request->path())) {
             $cacheLocal = 300;
             $cacheRemote = 900;
-        } elseif ($request->is('')) {
-            $cacheLocal = 1800;
-            $cacheRemote = 1800;
         }
 
         return $next($request)
