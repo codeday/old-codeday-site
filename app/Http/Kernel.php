@@ -25,6 +25,9 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
+        ],
+
+        'sess' => [
             \CodeDay\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
@@ -49,6 +52,5 @@ class Kernel extends HttpKernel
         'auth.basic'   => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest'        => \CodeDay\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle'     => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'default-lang' => \CodeDay\Http\Middleware\DefaultLang::class,
     ];
 }

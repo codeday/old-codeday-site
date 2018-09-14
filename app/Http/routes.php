@@ -28,7 +28,7 @@ use CodeDay\Models;
 
 $routes = function () {
     // Domain Routes
-    \Route::group(['domain' => isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'vip.x' ? 'vip.x' : 'codeday.vip'], function () {
+    \Route::group(['domain' => isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'vip.x' ? 'vip.x' : 'codeday.vip', 'middleware' => ['sess']], function () {
         \Route::get('/cognito.js', '\CodeDay\Http\Controllers\Vip\IndexController@getCognitojs');
         \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
         \Route::Controller('/{ticket}/certificate', '\CodeDay\Http\Controllers\Vip\CertificateController');
@@ -60,9 +60,9 @@ $routes = function () {
     \Route::get('/volunteer/apply/judge', '\CodeDay\Http\Controllers\VolunteerController@getApplyJudge');
     \Route::get('/volunteer/apply/staff', '\CodeDay\Http\Controllers\VolunteerController@getApplyStaff');
 
-    \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
-    \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
-    \Route::group(['middleware' => ['web']], function () {
+    \Route::group(['middleware' => ['sess', 'web']], function() {
+        \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
+        \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
         \Route::controller('/hpcc', '\CodeDay\Http\Controllers\HpccController');
     });
 
@@ -104,20 +104,12 @@ $routes = function () {
     \View::share('lang', $locale);
     \View::share('langPrefix', '/'.$locale);
     \View::share('nonLangUri', substr(request()->path(), strlen($locale)));
-    \session_start();
-    $_SESSION['lang'] = $locale;
 });
 \Route::any('/en_US', function () {
-    \session_start();
-    $_SESSION['lang'] = '';
-
     return \redirect('/');
 });
 \Route::any('/en_US/{rest}', function ($rest) {
-    \session_start();
-    $_SESSION['lang'] = '';
-
     return \redirect($rest);
 })->where('rest', '(.*)?');
 \Route::group(['prefix' => '/{locale}'], $routes);
-\Route::group(['prefix' => '/', 'middleware' => 'default-lang'], $routes);
+\Route::group(['prefix' => '/'], $routes);
