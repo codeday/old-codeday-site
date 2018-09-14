@@ -36,7 +36,7 @@
         <section class="tos">
             <h4>{{ i18n('register.terms') }}</h4>
             <ul>
-                <li>{{ i18n('register.term-1', {'link1': 'https://studentrnd.org/code-of-conduct', 'link2': langPrefix~'/rules'}) }}</li>
+                <li>{{ i18n('register.term-1', {'link1': 'https://srnd.org/conduct', 'link2': langPrefix~'/rules'}) }}</li>
                 <li>{% if (event.starts_at - (60*60*24*7)) > null|date('U') %}
                         {{ i18n('register.term-2-early', {'link': 'https://srnd.org/returns', 'time': ((event.starts_at - (60*60*24*7))|date('M j'))}) }}
                     {% else %}
@@ -44,7 +44,7 @@
                     {% endif %}
                 </li>
                 <li>{{ i18n('register.term-3') }}</li>
-                <li>{{ i18n('register.term-4', {'link': 'https://studentrnd.org/privacy'}) }}</li>
+                <li>{{ i18n('register.term-4', {'link': 'https://srnd.org/privacy'}) }}</li>
                 <li><a href="/esignatures" target="_blank">{{ i18n('register.term-5') }}</a></li>
                 <li>{{ i18n('register.term-6') }}</li>
                 <li>{{ i18n('register.cards') }}<br />
