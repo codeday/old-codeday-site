@@ -10,6 +10,6 @@ class CacheControl
     {
         return $next($request)
             ->header('Cache-Control', 'max-age='.(60*2))
-            ->header('Surrogate-Control', 'max-age='.(60*5);
+            ->header('Surrogate-Control', 'max-age='.(60*5));
     }
 }
