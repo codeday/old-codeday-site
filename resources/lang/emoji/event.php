@@ -57,5 +57,5 @@ return [
     'faq-parent-a'          => '👪 💔 🧒❗️ 👨‍🏫 ❤️ 🧒 ⚠️🆔❗️ 👪 ❤️ ➡️ 🧒 👞➕🎞❗️',
     'faq-search'            => '💭💭💭',
     'faq-example'           => '❓',
-    'faq-none'              => '⚠️ 🤷‍♂️❗️ <a href=\'contact@codeday.org\'>📧 ▶️</a>',
+    'faq-none'              => '⚠️ 🤷‍♂️❗️ <a href=\'contact@srnd.org\'>📧 ▶️</a>',
 ];
