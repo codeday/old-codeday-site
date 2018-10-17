@@ -196,6 +196,14 @@
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/'; s.parentNode.insertBefore(g,s);
     })();
     </script>
+    <script type="text/javascript">
+    (function(w, d, s, u) {
+        w.RocketChat = function(c) { w.RocketChat._.push(c) }; w.RocketChat._ = []; w.RocketChat.url = u;
+        var h = d.getElementsByTagName(s)[0], j = d.createElement(s);
+        j.async = true; j.src = 'https://chat.srnd.org/packages/rocketchat_livechat/assets/rocketchat-livechat.min.js?_=201702160944';
+        h.parentNode.insertBefore(j, h);
+    })(window, document, 'script', 'https://chat.srnd.org/livechat');
+    </script>
     {{ block('scripts') }}
 </body>
 </html>
