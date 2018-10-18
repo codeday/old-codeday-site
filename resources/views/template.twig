@@ -203,6 +203,7 @@
         j.async = true; j.src = 'https://chat.srnd.org/packages/rocketchat_livechat/assets/rocketchat-livechat.min.js?_=201702160944';
         h.parentNode.insertBefore(j, h);
     })(window, document, 'script', 'https://chat.srnd.org/livechat');
+    var rcDepartment = setInterval(function() { if (typeof(RocketChat.livechat) !== 'undefined') { RocketChat.livechat.setDepartment("CodeDay"); clearInterval(rcDepartment); }}, 1000); 
     </script>
     {{ block('scripts') }}
 </body>

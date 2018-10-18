@@ -54,15 +54,13 @@
 {% endblock %}
 {% block scripts %}
     <script>
-        _gs('identify', {
-            name: '{{ ticket.name|escape('js') }}',
-            email: '{{ ticket.email|escape('js') }}',
-
-            custom: {
-                ticket: '{{ ticket.id|escape('js') }}',
-                type: '{{ ticket.type|escape('js') }}',
-                event: '{{ ticket.event.name|escape('js') }}'
-            }
-        });
+        var rcInfo = setInterval(function() { if (typeof(RocketChat.livechat) !== 'undefined') {
+            clearInterval(rcDepartment);
+            RocketChat.livechat.setGuestName("{{ ticket.name|escape('js') }}");
+            RocketChat.livechat.setGuestEmail("{{ ticket.email|escape('js') }}");
+            RocketChat.livechat.setCustomField("ticket", "{{ ticket.id|escape('js') }}");
+            RocketChat.livechat.setCustomField("type", "{{ ticket.type|escape('js') }}");
+            RocketChat.livechat.setCustomField("event", "{{ ticket.event.name|escape('js') }}");
+        }}, 1000); 
     </script>
 {% endblock %}
