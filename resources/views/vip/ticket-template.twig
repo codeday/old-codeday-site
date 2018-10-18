@@ -55,7 +55,7 @@
 {% block scripts %}
     <script>
         var rcInfo = setInterval(function() { if (typeof(RocketChat.livechat) !== 'undefined') {
-            clearInterval(rcDepartment);
+            clearInterval(rcInfo);
             RocketChat.livechat.setGuestName("{{ ticket.name|escape('js') }}");
             RocketChat.livechat.setGuestEmail("{{ ticket.email|escape('js') }}");
             RocketChat.livechat.setCustomField("ticket", "{{ ticket.id|escape('js') }}");
