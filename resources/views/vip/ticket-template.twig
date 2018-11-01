@@ -52,15 +52,3 @@
     {% set event = ticket.event %}
     {% include "parts/map.twig" %}
 {% endblock %}
-{% block scripts %}
-    <script>
-        var rcInfo = setInterval(function() { if (typeof(RocketChat.livechat) !== 'undefined') {
-            clearInterval(rcInfo);
-            RocketChat.livechat.setGuestName("{{ ticket.name|escape('js') }}");
-            RocketChat.livechat.setGuestEmail("{{ ticket.email|escape('js') }}");
-            RocketChat.livechat.setCustomField("ticket", "{{ ticket.id|escape('js') }}");
-            RocketChat.livechat.setCustomField("type", "{{ ticket.type|escape('js') }}");
-            RocketChat.livechat.setCustomField("event", "{{ ticket.event.name|escape('js') }}");
-        }}, 1000); 
-    </script>
-{% endblock %}
