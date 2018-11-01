@@ -28,6 +28,12 @@ class Ticket extends ClearModel
         ]);
     }
 
+    public function getSignedEmail()
+    {
+        $hmac_key = \config('front.livechat_secret');
+        return hash_hmac('sha256', $this->email, $hmac_key);
+    }
+
     public function getSigningLink()
     {
         return self::clearGet('/registration/'.urlencode($this->id).'/sign')['url'];
