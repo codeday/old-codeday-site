@@ -17,17 +17,17 @@ class VolunteerController extends Controller
 
     public function getApplyStaff()
     {
-        return $this->getApply('staff');
+        return \redirect()->to('/volunteer');
     }
 
     public function getApplyJudge()
     {
-        return $this->getApply('judge');
+        return \redirect()->to('/volunteer');
     }
 
     public function getApplyMentor()
     {
-        return $this->getApply('mentor');
+        return \redirect()->to('/volunteer');
     }
 
     protected function getPartner()
@@ -49,13 +49,10 @@ class VolunteerController extends Controller
         return $tz_regions;
     }
 
-    protected function getApply(string $type)
+    protected function getApply()
     {
         if (\Input::get('region')) {
             return \View::make('volunteer/apply', [
-                'form'          => config('wufoo.'.$type.'.form'),
-                'partner_field' => config('wufoo.'.$type.'.partner_field'),
-                'partner'       => $this->getPartner(),
                 'region'        => \Input::get('region'),
             ]);
         } else {
@@ -63,7 +60,6 @@ class VolunteerController extends Controller
                 'loaded_batch' => Models\Batch::current(),
                 'partner'      => $this->getPartner(),
                 'tz_regions'   => $this->getTzList(),
-                'type'         => $type,
             ]);
         }
     }

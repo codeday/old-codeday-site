@@ -6,25 +6,8 @@
 {% block veryShortDescription %} {% endblock %}
 {% block meta %}<meta name="robots" content="noindex" />{% endblock %}
 {% block content %}
-
-<div id="wufoo-{{ form }}" class="apply-form"></div>
-<script type="text/javascript">
-var form;
-(function(d, t) {
-var s = d.createElement(t), options = {
-'userName':'srnd',
-'formHash':'{{ form }}',
-'autoResize':true,
-'height':'1035',
-'async':true,
-'host':'wufoo.com',
-'header':'show',
-'defaultValues': 'Field{{ partner_field }}={{ partner.id }}&Field418={{ region }}',
-'ssl':true};
-s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
-s.onload = s.onreadystatechange = function() {
-var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
-try { wform = new WufooForm();wform.initialize(options);wform.display(); } catch (e) {}};
-var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
-})(document, 'script');</script>
+<div class="cognito">
+<script src="https://services.cognitoforms.com/s/7hYXr3TPxk6yIpJxjqVoFQ"></script>
+<script>Cognito.load("forms", { id: "27", entry: {Region: "{{ region|escape('js') }}"} });</script>
+</div>
 {% endblock %}
