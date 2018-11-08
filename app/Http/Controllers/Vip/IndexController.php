@@ -67,23 +67,12 @@ class IndexController extends Controllers\Controller
 
     public function getFeedback()
     {
-        $surveyId = 'r1jqi4o91s9dh5y';
-        $surveyIds = [
-            'judge'     => 'r102046d1g4b10v',
-            'mentor'    => 'r1e4qtd71ums611',
-            'volunteer' => 'rpjcym718b9oig',
-            'teacher'   => 'r6ipajq0noogbo',
-            'student'   => 'z1y2xzx4017odw2',
-            'sponsor'   => 'rxm2qhh1if32l2',
-        ];
-        $surveyId = $surveyIds[$this->ticket->type] ?? $surveyId;
-
-        return \View::make('vip/survey', ['id' => $surveyId]);
+        return \View::make('vip/survey', ['id' => $this->ticket->type == 'student' ? 28 : 29]);
     }
 
     public function getSurvey()
     {
-        return \View::make('vip/survey', ['id' => 'mhft44g178lpcj']);
+        return \View::make('vip/survey', ['id' => 2]);
     }
 
     public function getWaiver()
