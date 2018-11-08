@@ -26,26 +26,10 @@
     <article class="register">
         <section class="form">
             <h2>Ready to register?</h2>
-            <div id="wufoo-m1d2e0uy1b258w8">
-            Fill out the <a href="https://srnd.wufoo.com/forms/m1d2e0uy1b258w8">online form</a>.
+            <div class="cognito">
+            <script src="https://services.cognitoforms.com/s/7hYXr3TPxk6yIpJxjqVoFQ"></script>
+            <script>Cognito.load("forms", { id: "30", entry: {Region: "{{ event.webname|escape('js') }}"} });</script>
             </div>
-            <script type="text/javascript">var m1d2e0uy1b258w8;(function(d, t) {
-            var s = d.createElement(t), options = {
-            'userName':'srnd',
-            'formHash':'m1d2e0uy1b258w8',
-            'autoResize':true,
-            'height':'684',
-            'async':true,
-            'host':'wufoo.com',
-            'header':'show',
-            'defaultValues': 'Field20={{ event.webname }}',
-            'ssl':true};
-            s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'www.wufoo.com/scripts/embed/form.js';
-            s.onload = s.onreadystatechange = function() {
-            var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
-            try { m1d2e0uy1b258w8 = new WufooForm();m1d2e0uy1b258w8.initialize(options);m1d2e0uy1b258w8.display(); } catch (e) {}};
-            var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
-            })(document, 'script');</script>
         </section>
         <section class="info">
             <h2>Attendee Roster</h2>
