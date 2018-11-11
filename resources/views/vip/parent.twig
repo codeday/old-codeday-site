@@ -36,21 +36,14 @@
                 {% if ticket.age < 12 %}
                     <div class="warning">
                         <p><strong>Hey! There might be a problem:</strong> CodeDay is targeted to older students.</p>
-                        <p>This is a very self-driven event. In the past, successful younger students have been:</p>
-                        <ul>
-                            <li>Already interested in technology, and;</li>
-                            <li>Relatively mature for their age.</li>
-                        </ul>
-                        <p>Please be available to pick up your student in case the event is not for them, particularly
-                        overnight. Also note that parents are not allowed to stay with their student for security reasons.</p>
-                        <p>If you have more questions, or would like a refund, please
-                        <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a>.</p>
+                        <p>Please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> to discuss
+                           whether this opportunity is appropriate for your student.</p>
                     </div>
                 {% elseif ticket.age < 14 %}
                     <div class="warning">
                         <p><strong>Heads-up:</strong></p>
-                        <p>The overnight portion of CodeDay isn't ideal for younger students. We recommend
-                           you pick your student up around 10pm, and drop them back off for presentations at 8am
+                        <p>The overnight portion of CodeDay isn't appropriate for younger students. We recommend
+                           you pick your student up around 8pm, and drop them back off for presentations at 8am
                            the next morning.</p>
                     </div>
                 {% endif %}
