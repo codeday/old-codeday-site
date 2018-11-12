@@ -10,7 +10,7 @@ return [
     'term-3'            => 'You may be photographed or recorded.',
     'term-4'            => 'We may <a href=":link">share your info</a> with our recruiting sponsors.',
     'term-5'            => 'You will need to sign a waiver.',
-    'term-6'            => 'You must be in high school or college and under 25. Middle school students can attend until 8pm.',
+    'term-6'            => 'You must be in high school or college and 21 or younger. Middle school students can attend until 8pm.',
     'cards'             => 'You can pay with:',
     'loaners'           => ':count loaner computers are currently available. You can request one after you register.',
     'attendee-head'     => 'Student Attendee Info',
