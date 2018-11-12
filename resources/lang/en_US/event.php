@@ -57,5 +57,5 @@ return [
     'faq-parent-a'          => 'Parents can attend the Kickoff and final presentations, but cannot stay throughout the event due to background check requirements. Teachers may attend with students, but must show school ID or other proof of status at the door.',
     'faq-search'            => 'Want to know something else? Just ask:',
     'faq-example'           => 'Where will I sleep?',
-    'faq-none'              => "Sorry, we couldn't find an answer to that question. <a href=\"contact@srnd.org\">Email us.</a>",
+    'faq-none'              => "Sorry, we couldn't find an answer to that question. <a href=\"mailto:codeday@srnd.org\">Email us.</a>",
 ];
