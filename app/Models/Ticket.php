@@ -30,7 +30,7 @@ class Ticket extends ClearModel
 
     public function getIdentJwt()
     {
-        $hmac_key = \config('front.livechat_secret');
+        $hmac_key = \config('micro.identify_key');
         $head = json_encode(['alg' => 'HS256', 'typ' => 'JWT']);
         $payload = json_encode(['aud' => 'micro.srnd.org/identify', 'iss' => 'srnd.org', 'iat' => time(),
             'firstName' => $this->first_name,
