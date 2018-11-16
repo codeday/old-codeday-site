@@ -200,7 +200,7 @@
     <script>
         window.sid = window.sid || []; var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.async=true; g.defer=true; g.src='//f1.srnd.org/sid.js'; s.parentNode.insertBefore(g,s);
         {% if ticket %}
-            sid.push(['set', '{{ ticket.identjwt }}', resolve]);
+            sid.push(['set', '{{ ticket.identjwt }}', function() {}]);
         {% endif %}
         window.zESettings = {
             webWidget: {
