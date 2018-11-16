@@ -28,10 +28,19 @@ class Ticket extends ClearModel
         ]);
     }
 
-    public function getSignedEmail()
+    public function getIdentJwt()
     {
         $hmac_key = \config('front.livechat_secret');
-        return hash_hmac('sha256', $this->email, $hmac_key);
+        $head = json_encode(['alg' => 'HS256', 'typ' => 'JWT']);
+        $payload = json_encode(['aud' => 'micro.srnd.org/identify', 'iss' => 'srnd.org', 'iat' => time(),
+            'firstName' => $this->first_name,
+            'lastName' => $this->last_name,
+            'email' => $this->email,
+        ]);
+
+        $content = self::base64UrlEncode($head).'.'.self::base64UrlEncode($payload);
+        $hash = self::base64UrlEncode(hash_hmac('sha256', $content, $hmac_key, true));
+        return $content.'.'.$hash;
     }
 
     public function getSigningLink()
@@ -43,4 +52,11 @@ class Ticket extends ClearModel
     {
         return self::clearGet('/registration/'.urlencode($this->id).'/sync-waiver');
     }
+
+    private static function base64UrlEncode($data)
+    {
+        $urlSafeData = strtr(base64_encode($data), '+/', '-_');
+    
+        return rtrim($urlSafeData, '='); 
+    } 
 }
