@@ -46,7 +46,7 @@ return [
     'faq-code-q'            => "Can I really come if I don't code?",
     'faq-code-a'            => "<strong>Yes!</strong> Part of the fun is learning how to program when working with other people. We'll also provide some great workshops that you can attend. Or you can always just hang out and have fun!",
     'faq-student-q'         => 'What ages are allowed?',
-    'faq-student-a'         => 'You must be in high school or college, and 21 or younger. Middle school students may attend until 8pm.',
+    'faq-student-a'         => 'You must be in high school or college, and 25 or younger. Middle school students may attend until 8pm.',
     'faq-sleep-q'           => 'Where will I sleep?',
     'faq-sleep-a'           => "Students who plan to sleep (we recommend you do!) can sleep anywhere in the venue, or in the designated sleeping room. Don't forget to pack a sleeping bag and pillow!",
     'faq-school-q'          => "We'd like to attend as a school. Can we pay with a PO?",
