@@ -51,9 +51,15 @@ class VolunteerController extends Controller
 
     protected function getApply()
     {
+        $manager_username = null;
+        try {
+            $manager_username = Models\Event::find(Models\Region::find(\Input::get('region'))->current_event->id)->manager['username'];
+        } catch (\Exception $ex) {}
+
         if (\Input::get('region')) {
             return \View::make('volunteer/apply', [
                 'region'        => \Input::get('region'),
+                'manager'       => $manager_username
             ]);
         } else {
             return \View::make('volunteer/pick-region', [

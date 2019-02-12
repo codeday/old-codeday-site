@@ -8,6 +8,6 @@
 {% block content %}
 <div class="cognito">
 <script src="https://services.cognitoforms.com/s/7hYXr3TPxk6yIpJxjqVoFQ"></script>
-<script>Cognito.load("forms", { id: "27", entry: {Region: "{{ region|escape('js') }}", Manager: "{{ region.current_event.manager.username|escape('js') }}"} });</script>
+<script>Cognito.load("forms", { id: "27", entry: {Region: "{{ region|escape('js') }}", Manager: "{{ manager|escape('js') }}"} });</script>
 </div>
 {% endblock %}
