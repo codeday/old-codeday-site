@@ -1,7 +1,7 @@
 import "../models/registration.dart";
 import "dart:html";
 import 'dart:async';
-import 'dart:convert' show JSON;
+import 'dart:convert';
 
 class Stripe {
     final String Base = 'https://api.stripe.com/v1';
@@ -36,10 +36,10 @@ class Stripe {
         });
     }
 
-    /**
+    /*
      * Makes a Stripe request and returns the result
      */
-    Future Request(String endpoint, String method, var body) async {
+    Future Request(String endpoint, String method, Map body) async {
         body['key'] = Public;
         body['payment_user_agent'] = 'stripe.js/c180728';
 
@@ -79,7 +79,7 @@ class Stripe {
 
         var completeNormal = (response) {
             if (response == null || response.response == null) return;
-            finalResult.complete({'status': response.status, 'response': JSON.decode(response.response)});
+            finalResult.complete({'status': response.status, 'response': jsonDecode(response.response)});
         };
 
         if (method.toUpperCase() == 'GET') {

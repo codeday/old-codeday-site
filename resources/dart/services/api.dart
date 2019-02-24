@@ -1,7 +1,7 @@
 import "../models/registration.dart";
 import "dart:html";
 import 'dart:async';
-import 'dart:convert' show JSON;
+import 'dart:convert';
 
 class Api {
     String Base;
@@ -14,13 +14,14 @@ class Api {
         Event = querySelector('body').dataset['event'];
     }
 
-    /**
+    /*
      * Registers the specified attendees for the event.
      */
-    Future Register({List<Registration> registrations, String stripeToken, num quotedPrice, String promoCode: null}) {
+    Future Register({List<Registration> registrations, String stripeToken, num quotedPrice, num quotedTax, String promoCode: null}) {
         return Request('register/'+Event+'/register', 'POST', {
             'card_token': stripeToken,
             'quoted_price': quotedPrice,
+            'quoted_tax': quotedTax,
             'first_names': registrations.map((r)=>r.FirstName),
             'last_names': registrations.map((r)=>r.LastName),
             'emails': registrations.map((r)=>r.Email),
@@ -28,10 +29,11 @@ class Api {
         });
     }
 
-    Future RegisterWithSource({List<Registration> registrations, String stripeSource, num quotedPrice, String promoCode: null}) {
+    Future RegisterWithSource({List<Registration> registrations, String stripeSource, num quotedPrice, num quotedTax, String promoCode: null}) {
         return Request('register/'+Event+'/register', 'POST', {
             'bitcoin_source': stripeSource,
             'quoted_price': quotedPrice,
+            'quoted_tax': quotedTax,
             'first_names': registrations.map((r)=>r.FirstName),
             'last_names': registrations.map((r)=>r.LastName),
             'emails': registrations.map((r)=>r.Email),
@@ -39,7 +41,7 @@ class Api {
         });
     }
 
-    /**
+    /*
      * Gets details about the specified promotion code. Returns an object
      * containing { bool expired, num remaining_uses, num cost, num discount }
      */
@@ -49,7 +51,7 @@ class Api {
         });
     }
 
-    /**
+    /*
      * Subscribes to notifications for event registration opening.
      */
     Future NotifySubscribe(String email)
@@ -60,7 +62,7 @@ class Api {
         });
     }
 
-    /**
+    /*
      * Makes an API request and returns the result
      */
     Future Request(String endpoint, String method, var body) async {
@@ -94,14 +96,14 @@ class Api {
             HttpRequest response = await HttpRequest.request(Base+'/'+endpoint+'?'+formData,
                     method: method.toUpperCase()
             );
-            finalResult.complete(JSON.decode(response.response));
+            finalResult.complete(jsonDecode(response.response));
         } else {
             HttpRequest response = await HttpRequest.request(Base+'/'+endpoint,
                     method: method.toUpperCase(),
                     requestHeaders: {"Content-Type": "application/x-www-form-urlencoded"},
                     sendData: formData
             );
-            finalResult.complete(JSON.decode(response.response));
+            finalResult.complete(jsonDecode(response.response));
         }
 
         return finalResult.future;

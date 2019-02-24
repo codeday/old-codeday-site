@@ -64,7 +64,7 @@
         <span class="remove-attendee">{{ i18n('register.rm-attendee') }}</span>
     </section>
 
-    <section class="payment" data-default-unit-price="{{ event.cost }}">
+    <section class="payment" data-default-unit-price="{{ event.cost }}" data-sales-tax-rate="{{ event.sales_tax_rate }}">
         <h3>{{ i18n('register.payment') }}</h3>
         <div class="card" data-stripe-pk="{{ event.stripe_public_key }}">
             <input id="card_number" placeholder="{{ i18n('common.card-label') }}" data-stripe="number" type="text" value="" autocomplete="off">
@@ -83,8 +83,11 @@
             <section class="discount">
                 <span class="label">{{ i18n('register.discount-no') }}</span><span class="amount">0.00</span>
             </section>
+            <section class="tax">
+                <span class="label">{{ i18n('register.tax') }}{% if event.currency != 'usd' %} ({{ event.currency|upper }}){% endif %}</span><span class="amount">{{ (event.cost * event.sales_tax_rate)|number_format(2) }}</span>
+            </section>
             <section class="total">
-                <span class="label">{{ i18n('register.total') }}{% if event.currency != 'usd' %} ({{ event.currency|upper }}){% endif %}</span><span class="amount">10.00</span>
+                <span class="label">{{ i18n('register.total') }}{% if event.currency != 'usd' %} ({{ event.currency|upper }}){% endif %}</span><span class="amount">{{ (event.cost*(1+event.sales_tax_rate))|number_format(2) }}</span>
                 {% if event.is_early_bird_pricing %}
                     <span class="earlybird">{{ i18n('register.earlybird') }}</span>
                 {% endif %}

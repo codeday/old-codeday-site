@@ -19,6 +19,7 @@ return [
     'payment'           => 'Payment',
     'earlybird'         => 'includes earlybird discount',
     'discount-no'       => 'No discount',
+    'tax'               => 'Tax',
     'total'             => 'Total',
     'promo-ask'         => 'Have a promo code?',
     'promo-label'       => 'Promo Code',

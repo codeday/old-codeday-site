@@ -10,9 +10,11 @@ import "../../models/registration.dart";
 class RegisterPage {
     Stripe stripe;
     String currentPromo = null;
+    num salesTaxRate = 0;
     num defaultUnitPrice = 10;
     num unitPrice = 10;
     num displayedPrice = 0;
+    num displayedTax = 0;
     num remainingCapacity = 100;
 
     dynamic btcSourceObj = null;
@@ -23,13 +25,14 @@ class RegisterPage {
     String promoCode = null;
     num promoRemainingUses = null;
 
-    /**
+    /*
      * Binds all handlers to page elements and loads data from the page.
      */
     RegisterPage(){
         // Get the default (no-promos-applied) price for the event, and update the display
         defaultUnitPrice = num.parse(querySelector('.payment').dataset['defaultUnitPrice']);
         unitPrice = defaultUnitPrice;
+        salesTaxRate = num.parse(querySelector('.payment').dataset['salesTaxRate']);
         refreshDisplayedPrice();
 
         // Get the remaining event capacity
@@ -75,7 +78,7 @@ class RegisterPage {
         });
     }
 
-    /**
+    /*
      * Applies a promo code.
      */
     Future doApplyPromo() async {
@@ -143,7 +146,7 @@ class RegisterPage {
 
     }
 
-    /**
+    /*
      * Hides the promo code picker input, and clears the field.
      */
     void hidePromoPicker() {
@@ -156,7 +159,7 @@ class RegisterPage {
         promoLinkElem.style.display = 'inline-block';
     }
 
-    /**
+    /*
      * Shows the promo code picker input.
      */
     void showPromoPicker() {
@@ -210,6 +213,7 @@ class RegisterPage {
             registrations: getFilledRegistrations(),
             stripeSource: btcSourceObj['id'],
             quotedPrice: displayedPrice,
+            quotedTax: displayedTax,
             promoCode: promoCode
         );
     }
@@ -265,7 +269,7 @@ class RegisterPage {
         }
     }
 
-    /**
+    /*
      * Process to be completed when the user clicks the "Pay" button -- gets a
      * card token from Stripe (if the cost is above zero), then submits the
      * registration to Clear. Finally, if everything was successful, updates
@@ -343,7 +347,7 @@ class RegisterPage {
         }
     }
 
-    /**
+    /*
      * Gets a list of all inputs involved in the registration process, for
      * checking if the form is complete, or for disabling during processing.
      */
@@ -362,7 +366,7 @@ class RegisterPage {
         return elements;
     }
 
-    /**
+    /*
      * Disables editing and submission of the form.
      */
     void disableForm() {
@@ -370,7 +374,7 @@ class RegisterPage {
         getRegistrationInputs().forEach((elem) => elem.disabled = true);
     }
 
-    /**
+    /*
      * Enables editing and submission of the form.
      */
     void enableForm() {
@@ -385,7 +389,7 @@ class RegisterPage {
         return completer.future;
     }
 
-    /**
+    /*
      * Requests a Stripe token for the card currently displayed on the page.
      */
     Future requestStripeToken() async {
@@ -418,7 +422,7 @@ class RegisterPage {
         return completer.future;
     }
 
-    /**
+    /*
      * Submits a request to Clear to process the registration with the
      * information currently shown on the page.
      */
@@ -427,11 +431,12 @@ class RegisterPage {
             registrations: getFilledRegistrations(),
             stripeToken: stripeToken,
             quotedPrice: displayedPrice,
+            quotedTax: displayedTax,
             promoCode: promoCode
         );
     }
 
-    /**
+    /*
      * Adds an attendee to the page.
      */
     void addAttendee() {
@@ -453,7 +458,7 @@ class RegisterPage {
             return;
         }
 
-        var attendeeTemplate = querySelector('.attendee').clone(true);
+        Element attendeeTemplate = querySelector('.attendee').clone(true);
         ElementList<InputElement> fields = attendeeTemplate.querySelectorAll('input');
         fields.forEach((InputElement)=>InputElement.value = '');
 
@@ -465,7 +470,7 @@ class RegisterPage {
         }
     }
 
-    /**
+    /*
      * Removes the last attendee from the page.
      */
     void removeAttendee()
@@ -478,7 +483,7 @@ class RegisterPage {
         }
     }
 
-    /**
+    /*
      * Gets a List containing Registration objects for all registrations listed
      * on the page.
      */
@@ -495,10 +500,10 @@ class RegisterPage {
                     lnElem.value,
                     emElem.value
             );
-        });
+        }).toList();
     }
 
-    /**
+    /*
      * Syncs the price displayed on the page with the current unit price and
      * number of tickets, and updates the displayedPrice property (which is sent
      * with the registration request to ensure the user isn't overcharged.)
@@ -508,6 +513,7 @@ class RegisterPage {
         var regCount = getFilledRegistrations().length;
         var subtotal = regCount * defaultUnitPrice;
         displayedPrice = regCount * unitPrice;
+        displayedTax = displayedPrice * salesTaxRate;
 
         var subtotalLabelElem = querySelector('.price .subtotal .label');
         var subtotalElem = querySelector('.price .subtotal .amount');
@@ -515,6 +521,9 @@ class RegisterPage {
         var discountContainerElem = querySelector('.price .discount');
         var discountLabelElem = querySelector('.price .discount .label');
         var discountElem = querySelector('.price .discount .amount');
+
+        var taxContainerElem = querySelector('.price .tax');
+        var taxElem = querySelector('.price .tax .amount');
 
         var totalElem = querySelector('.price .total .amount');
 
@@ -531,7 +540,15 @@ class RegisterPage {
             discountContainerElem.style.display = 'none';
         }
 
-        totalElem.text = displayedPrice.toStringAsFixed(2);
+        if (displayedTax > 0.005) {
+            taxElem.text = displayedTax.toStringAsFixed(2);
+            taxContainerElem.style.display = 'block';
+        } else {
+            taxElem.text = "0.00";
+            taxContainerElem.style.display = 'none';
+        }
+
+        totalElem.text = (displayedPrice + displayedTax).toStringAsFixed(2);
 
         var cardElem = querySelector('.card');
         if (displayedPrice == 0) {
