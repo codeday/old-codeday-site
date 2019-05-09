@@ -196,34 +196,23 @@
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'js/'; s.parentNode.insertBefore(g,s);
     })();
     </script>
-    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=cb3940b1-e50f-49b7-99bb-83a15a4db6a7"></script>
     <script>
         window.sid = window.sid || []; var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.async=true; g.defer=true; g.src='//f1.srnd.org/sid.js'; s.parentNode.insertBefore(g,s);
         {% if ticket %}
             sid.push(['set', '{{ ticket.identjwt }}', function() {}]);
         {% endif %}
-        window.zESettings = {
-            webWidget: {
-                authenticate: {
-                    chat: {
-                        jwtFn: function(callback) {
-                            sid.push(['get', function() { callback(info.zendesk); }]);
-                        }
-                    } 
-                }
-            }
-        };
-        var _z = setInterval(function() {
-            if (typeof($zopim) === 'undefined') return;
-            clearTimeout(_z);
-            $zopim(function(){ 
-                $zopim.livechat.authenticate({
-                    jwtFn: function(callback) {
-                        sid.push(['get', function(info) { callback(info.zendesk); }]);
-                    }
-                });
-            });
-        }, 100);
+
+
+        (function(d, w, c) {
+            w.ChatraID = '5wsfeENwi3WqHrn3n';
+            var s = d.createElement('script');
+            w[c] = w[c] || function() {
+                (w[c].q = w[c].q || []).push(arguments);
+            };
+            s.async = true;
+            s.src = 'https://call.chatra.io/chatra.js';
+            if (d.head) d.head.appendChild(s);
+        })(document, window, 'Chatra');
 
     </script>
     {{ block('scripts') }}
