@@ -51,7 +51,7 @@
             {{ m.tz_list('Pacific', tz_regions['America/Los_Angeles']) }}
             {{ m.tz_list('Mountain', tz_regions['America/Denver']) }}
             {{ m.tz_list('Central', tz_regions['America/Chicago']) }}
-            {{ m.tz_list('Eastern', tz_regions['America/Detroit']) }}
+            {{ m.tz_list('Eastern', tz_regions['America/Detroit']|merge(tz_regions['other']) }}
         </section>
         <p class="organize-cta">{{ i18n('global.organize-cta', {'link': langPrefix~'/new'}) }}</p>
     </article>

@@ -12,9 +12,10 @@ class StaticController extends Controller
         $event = Models\Event::closestNearby($visitor_info->lat, $visitor_info->lng);
         $current_regions = iterator_to_array(Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true));
 
-        $tz_regions = ['America/Los_Angeles' => [], 'America/Denver' => [], 'America/Chicago' => [], 'America/Detroit' => []];
+        $tz_regions = ['America/Los_Angeles' => [], 'America/Denver' => [], 'America/Chicago' => [], 'America/Detroit' => [], 'other' => []];
         foreach ($current_regions as $region) {
-            $tz_regions[$region->timezone][] = $region;
+            $key = isset($tz_regions[$region->timezone]) ? $region->timezone : 'other';
+            $tz_regions[$key][] = $region;
         }
 
         return \View::make('global', [
