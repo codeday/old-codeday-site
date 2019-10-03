@@ -26,16 +26,17 @@ class FaqController extends Controller
             return;
         }
 
+        $host = \Config::get('azqna.host');
         $kb = \Config::get('azqna.kb');
         $key = \Config::get('azqna.key');
 
-        $url = "https://westus.api.cognitive.microsoft.com/qnamaker/v1.0/knowledgebases/$kb/generateAnswer";
+        $url = "https://$host.azurewebsites.net/qnamaker/knowledgebases/$kb/generateAnswer";
 
         $opts = ['http' => [
                 'method'  => 'POST',
                 'header'  => [
                     'Content-type: application/json',
-                    "Ocp-Apim-Subscription-Key: $key",
+                    "Authorization: EndpointKey $key",
                     'Cache-Control: no-cache',
                 ],
                 'content' => json_encode(['question' => $q]),
@@ -44,7 +45,7 @@ class FaqController extends Controller
 
         $context = stream_context_create($opts);
 
-        $answer = json_decode(file_get_contents($url, false, $context));
+        $answer = json_decode(file_get_contents($url, false, $context))->answers[0];
         if ($answer->score == 0) {
             return;
         }
