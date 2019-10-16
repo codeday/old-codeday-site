@@ -11,10 +11,10 @@
                         <span class="help">Your age on {{ ticket.event.starts_at|date('F j, Y') }}.</span>
                     </div>
             {% elseif not ticket.is_minor %}
-                {% if ticket.age > 21 %}
+                {% if ticket.age > 25 %}
                     <div class="warning">
                         <p><strong>Hey! There might be a problem:</strong> CodeDay is mostly targeted to high school students.</p>
-                        <p>For security reasons, we cannot accept attendees who are older than 21. (In the past, older students
+                        <p>For security reasons, we cannot accept attendees who are older than 25. (In the past, older students
                         generally had a bad time, anyway.)</p>
                         <p>Please <a href="mailto:{{ ticket.event.webname }}@codeday.org">contact us</a> for a refund.</p>
                     </div>
