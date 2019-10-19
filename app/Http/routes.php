@@ -55,6 +55,7 @@ $routes = function () {
     \Route::get('/evangelist', '\CodeDay\Http\Controllers\StaticController@getEvangelist');
 
     \Route::get('/new', '\CodeDay\Http\Controllers\StaticController@getNew');
+    \Route::get('/organize', '\CodeDay\Http\Controllers\StaticController@getNew');
     \Route::get('/share', '\CodeDay\Http\Controllers\StaticController@getShare');
     \Route::get('/volunteer', '\CodeDay\Http\Controllers\VolunteerController@getIndex');
     \Route::get('/volunteer/apply', '\CodeDay\Http\Controllers\VolunteerController@getApply');
