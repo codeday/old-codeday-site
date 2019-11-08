@@ -3,21 +3,18 @@
 {% block page %}index{% endblock %}
 {% block title %}HPCC{% endblock %}
 {% block content %}
-    <p>Welcome to the HPCC Systems workshop! Your HPCC instance is available at:</p>
-    <p>
-        {% if twitter %}
-            <strong>Tweets:</strong> <a href="/hpcc/tweets">Download @{{ twitter }}</a><br /><br />
-        {% else %}
-            <strong>Tweets:</strong> <a href="/hpcc/oauthstart">Sign In With Twitter</a><br /><br />
-        {% endif %}
-        <strong>Editor:</strong> <a href="https://hpccsystems.com/download/developer-tools/ecl-ide" target="_blank">Download</a><br />
-        <strong>Server:</strong> <a href="http://hpcc.srnd.org:8010/" target="_blank">hpcc.srnd.org</a><br />
-        <strong>Editor Username:</strong> HPCCDemo<br />
-        <strong>Editor Password:</strong> HPCCDemo<br />
-    </p>
-    {% if not twitter %}
-        <p><a href="/hpcc/oauthstart">Have a Twitter account? Sign in</a> and we'll download a copy of your tweets to
-           analyze in the workshop. (We'll never post, and will only access your tweets when you press the button.)</p>
-        <p>No Twitter account? <a href="/assets/csv/sample_tweets.csv">Download some sample Tweets.</a></p>
-    {% endif %}
+    <p>Welcome to the LexisNexis Risk Solutions Big Data Challenge!</p>
+    <p><a href="https://f1.srnd.org/workshops/bigdatachallenge/2019questions.pdf" target="_blank">Challenge Questions</a></li>
+
+    <h2>Datasets:</h2>
+    <ul>
+        <li>Spotify Dataset: <a href="https://ide.hpccsystems.com/workspaces/share/62846edf-c1da-42b4-b783-6668b7cd1a15" target="_blank">cloud</a></li>
+        <li>Gaming Dataset: <a href="https://ide.hpccsystems.com/workspaces/share/4a59d008-c6a1-43c2-8bbd-7ea6437b8e61" target="_blank">cloud</a></li>
+    </ul>
+
+    <h2>More Resources:</h2>
+    <ul>
+        <li><a href="https://f1.srnd.org/workshops/bigdatachallenge/2019questions.pdf" target="_blank">Cheatsheet</a></li>
+        <li><a href="https://f1.srnd.org/workshops/bigdatachallenge/presentation.pptx" target="_blank">Presentation</a></li>
+    </ul>
 {% endblock %}
