@@ -202,7 +202,9 @@
             sid.push(['set', '{{ ticket.identjwt }}', function() {}]);
         {% endif %}
 
-
+        {% set cdate = (null|date('U')) + (60*60*36) %}
+        {% if (event and event.starts_at > cdate) 
+            or (loaded_batch and loaded_batch.starts_at > cdate) %}
         (function(d, w, c) {
             w.ChatraID = '5wsfeENwi3WqHrn3n';
             var s = d.createElement('script');
@@ -213,6 +215,7 @@
             s.src = 'https://call.chatra.io/chatra.js';
             if (d.head) d.head.appendChild(s);
         })(document, window, 'Chatra');
+        {% endif %}
 
     </script>
     {{ block('scripts') }}
