@@ -26,6 +26,8 @@ use CodeDay\Models;
 \View::share('facebook_page_id', \Config::get('facebook.page_id'));
 \View::share('site_base_url', \Config::get('app.url'));
 
+\View::share('client_ip', \Request::getClientIp());
+
 $routes = function () {
     // Domain Routes
     \Route::group(['domain' => isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'vip.x' ? 'vip.x' : 'codeday.vip', 'middleware' => ['sess']], function () {
