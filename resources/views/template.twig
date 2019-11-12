@@ -203,8 +203,7 @@
         {% endif %}
 
         {% set cdate = (null|date('U')) + (60*60*36) %}
-        {% if client_ip != "209.175.44.38" and ((event and event.starts_at > cdate) 
-            or (loaded_batch and loaded_batch.starts_at > cdate)) %}
+        {% if client_ip != "209.175.44.38" and event and event.starts_at > cdate and event.registration_info.is_open %}
         (function(d, w, c) {
             w.ChatraID = '5wsfeENwi3WqHrn3n';
             var s = d.createElement('script');
