@@ -1,7 +1,6 @@
 <?php
 
 namespace CodeDay\Http\Controllers;
-
 use CodeDay\Models;
 
 class StaticController extends Controller
