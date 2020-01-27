@@ -1,0 +1,20 @@
+{% extends "template.twig" %}
+{% block section %}splunk{% endblock %}
+{% block page %}index{% endblock %}
+{% block title %}Splunk{% endblock %}
+{% block content %}
+    {% if username %}
+        <p>Your login details are:</p>
+        <p>Username: <input type="text" value="{{ username }}" readonly onfocus="this.select();" onmouseup="return false;" style="display: inline;width: 50%;"/><br />
+           Password: <input type="text" value="{{ password }}" readonly onfocus="this.select();" onmouseup="return false;" style="display: inline;width: 50%;" /><br />
+           URL: <a href="http://splunk.srnd.org/" target="_new">splunk.srnd.org</a></p>
+    {% else %}
+        <p>During CodeDay, you have access to a cloud-hosted instance of Splunk to help you make your
+           projects better. Please enter your email to get a Splunk login.</p>
+
+        <form method="post" style="margin-top:2rem;">
+            <input type="email" name="email" placeholder="Your Email Address" required />
+            <input type="submit" value="Create my account" />
+        </form>
+    {% endif %}
+{% endblock %}

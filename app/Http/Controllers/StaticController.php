@@ -77,6 +77,16 @@ class StaticController extends Controller
         return \View::make('promo');
     }
 
+    public function getLaptop()
+    {
+        return \View::make('laptop');
+    }
+
+    public function getUber()
+    {
+        return \View::make('uber');
+    }
+
     public function postSwag()
     {
         if (!\Session::get('swag-request')) {
