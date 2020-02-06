@@ -71,6 +71,7 @@ $routes = function () {
         \Route::get('/splunk', '\CodeDay\Http\Controllers\SplunkController@getIndex');
         \Route::post('/splunk', '\CodeDay\Http\Controllers\SplunkController@postIndex');
         \Route::controller('/hpcc', '\CodeDay\Http\Controllers\HpccController');
+        \Route::controller('/bigdata', '\CodeDay\Http\Controllers\HpccController');
     });
 
     \Route::controller('/phone', '\CodeDay\Http\Controllers\PhoneController');
