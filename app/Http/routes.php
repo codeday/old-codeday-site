@@ -32,10 +32,10 @@ $routes = function () {
     // Domain Routes
     \Route::group(['domain' => isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'vip.x' ? 'vip.x' : 'codeday.vip', 'middleware' => ['sess']], function () {
         \Route::get('/cognito.js', '\CodeDay\Http\Controllers\Vip\IndexController@getCognitojs');
+        \Route::get('/feedback', '\CodeDay\Http\Controllers\StaticController@getFeedback');
         \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
         \Route::Controller('/{ticket}/certificate', '\CodeDay\Http\Controllers\Vip\CertificateController');
         \Route::Controller('/{ticket}', '\CodeDay\Http\Controllers\Vip\IndexController');
-        \Route::get('/feedback', '\CodeDay\Http\Controllers\StaticController@getFeedback');
         \Route::get('/', '\CodeDay\Http\Controllers\Vip\IndexController@getFind');
         \Route::post('/', '\CodeDay\Http\Controllers\Vip\IndexController@postFind');
     });
