@@ -35,6 +35,7 @@ $routes = function () {
         \Route::Controller('/{ticket}/ticket', '\CodeDay\Http\Controllers\Vip\TicketController');
         \Route::Controller('/{ticket}/certificate', '\CodeDay\Http\Controllers\Vip\CertificateController');
         \Route::Controller('/{ticket}', '\CodeDay\Http\Controllers\Vip\IndexController');
+        \Route::get('/feedback', '\CodeDay\Http\Controllers\StaticController@getFeedback');
         \Route::get('/', '\CodeDay\Http\Controllers\Vip\IndexController@getFind');
         \Route::post('/', '\CodeDay\Http\Controllers\Vip\IndexController@postFind');
     });
