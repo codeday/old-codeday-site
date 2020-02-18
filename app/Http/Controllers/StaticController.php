@@ -86,6 +86,11 @@ class StaticController extends Controller
         return \View::make('uber');
     }
 
+    public function getFeedback()
+    {
+        return \View::make('survey');
+    }
+
     public function postSwag()
     {
         if (!\Session::get('swag-request')) {

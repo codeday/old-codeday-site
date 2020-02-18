@@ -57,6 +57,7 @@ $routes = function () {
     \Route::get('/evangelist', '\CodeDay\Http\Controllers\StaticController@getEvangelist');
     \Route::get('/laptop', '\CodeDay\Http\Controllers\StaticController@getLaptop');
     \Route::get('/uber', '\CodeDay\Http\Controllers\StaticController@getUber');
+    \Route::get('/feedback', '\CodeDay\Http\Controllers\StaticController@getFeedback');
 
     \Route::get('/new', '\CodeDay\Http\Controllers\StaticController@getNew');
     \Route::get('/organize', '\CodeDay\Http\Controllers\StaticController@getNew');
