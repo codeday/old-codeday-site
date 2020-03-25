@@ -11,9 +11,7 @@ class Region extends ClearModel
 
     public static function all()
     {
-        foreach (self::clearGet('/regions') as $event) {
-            yield new self($event);
-        }
+        return array_map(function($region) { return new self($region); }, self::clearGet('/regions'));
     }
 
     public static function nearby($lat, $lng, $radius = null, $limit = null, $with_current_event = false)
@@ -29,9 +27,7 @@ class Region extends ClearModel
             $query['with_current_event'] = '1';
         }
 
-        foreach (self::clearGet('/regions/nearby', $query) as $nearby) {
-            yield new self($nearby);
-        }
+        return array_map(function($nearby) { return new self($nearby); }, self::clearGet('/regions/nearby', $query));
     }
 
     public function current_event()

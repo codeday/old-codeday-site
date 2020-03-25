@@ -1,16 +1,14 @@
 <?php
 
-$config = json_decode(file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'local.json'), true);
-
 return [
-    'debug'           => $config['app']['debug'],
-    'url'             => $config['app']['url'],
-    'timezone'        => $config['app']['timezone'],
+    'debug'           => env('APP_DEBUG', false),
+    'url'             => env('APP_URL'),
+    'timezone'        => env('APP_TIMEZONE'),
     'locale'          => 'en_US',
     'cipher'          => 'AES-256-CBC',
-    'log'             => $config['app']['debug'] ? 'single' : 'syslog',
+    'log'             => env('APP_DEBUG', false) ? 'single' : 'errorlog',
     'fallback_locale' => 'en_US',
-    'key'             => $config['app']['key'],
+    'key'             => env('APP_KEY'),
     'manifest'        => storage_path().'/meta',
     'providers'       => [
         Illuminate\Auth\AuthServiceProvider::class,

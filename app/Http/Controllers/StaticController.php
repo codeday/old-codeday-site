@@ -9,7 +9,7 @@ class StaticController extends Controller
     {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
         $event = Models\Event::closestNearby($visitor_info->lat, $visitor_info->lng);
-        $current_regions = iterator_to_array(Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true));
+        $current_regions = Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true);
 
         $tz_regions = ['America/Los_Angeles' => [], 'America/Denver' => [], 'America/Chicago' => [], 'America/Detroit' => [], 'other' => []];
         foreach ($current_regions as $region) {
@@ -29,7 +29,7 @@ class StaticController extends Controller
     public function getGlobalJson()
     {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
-        $current_regions = iterator_to_array(Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true));
+        $current_regions = Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true);
         $with_event = array_filter($current_regions, function ($x) {
             return isset($x->current_event);
         });

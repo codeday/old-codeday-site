@@ -1,7 +1,6 @@
 {% extends "template.twig" %}
 {% block section %}event{% endblock %}
 {% block page %}index {% if is_mobile %}mobile{% endif %}{% endblock %}
-{% block og_image %}{% if event.photosFeatured|length > 0 %}{% set photo = event.photosFeatured[0] %}https://farm{{ photo.farm }}.staticflickr.com/{{ photo.server }}/{{ photo.id }}_{{ photo.secret }}_b.jpg{% endif %}{% endblock %}
 
 {% block heroraw %}
     {% if not is_mobile %}{# Don't use the bandwidth #}

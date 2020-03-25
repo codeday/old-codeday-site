@@ -1,0 +1,6 @@
+.sass-cache/*
+.tx/*
+storage/*
+vendor/*
+.env
+.env*

@@ -8,7 +8,7 @@ class PhoneController extends Controller
 {
     private function getEventsByTimezone()
     {
-        $current_regions = iterator_to_array(Models\Region::nearby(0, 0, null, null, true));
+        $current_regions = Models\Region::nearby(0, 0, null, null, true);
         $tz_regions = ['America/Los_Angeles' => [], 'America/Denver' => [], 'America/Chicago' => [], 'America/Detroit' => []];
         foreach ($current_regions as $region) {
             $tz_regions[$region->timezone][] = $region;

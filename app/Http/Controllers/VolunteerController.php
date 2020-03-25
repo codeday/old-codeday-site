@@ -10,7 +10,6 @@ class VolunteerController extends Controller
     {
         return \View::make('volunteer/index', [
             'loaded_batch' => Models\Batch::current(),
-            'partner'      => $this->getPartner(),
             'tz_regions'   => $this->getTzList(),
         ]);
     }
@@ -30,16 +29,11 @@ class VolunteerController extends Controller
         return \redirect()->to('/volunteer');
     }
 
-    protected function getPartner()
-    {
-        return config('partners.'.\Input::get('partner'));
-    }
-
     protected function getTzList()
     {
         $visitor_info = Models\Ip::find(\Request::getClientIp());
         $event = Models\Event::closestNearby($visitor_info->lat, $visitor_info->lng);
-        $current_regions = iterator_to_array(Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true));
+        $current_regions = Models\Region::nearby($visitor_info->lat, $visitor_info->lng, null, null, true);
 
         $tz_regions = ['America/Los_Angeles' => [], 'America/Denver' => [], 'America/Chicago' => [], 'America/Detroit' => [], 'other' => []];
         foreach ($current_regions as $region) {

@@ -1,0 +1,43 @@
+version: 2.1
+workflows:
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+          context: Docker Hub
+  build_test:
+    jobs:
+      - build_test:
+          filters:
+            branches:
+              ignore: master
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          TAG=$CIRCLE_SHA1
+          DOCKER_REPO=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          docker build -t $DOCKER_REPO:$TAG .
+          docker tag $DOCKER_REPO:$TAG $DOCKER_REPO:latest
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push $DOCKER_REPO:$TAG
+          docker push $DOCKER_REPO:latest
+
+  build_test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          TAG=$CIRCLE_SHA1
+          DOCKER_REPO=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+          docker build -t $DOCKER_REPO:$TAG .

@@ -11,9 +11,7 @@ class Event extends ClearModel
 
     public static function all()
     {
-        foreach (self::clearGet('/events/') as $event) {
-            yield new self($event);
-        }
+        return array_map(function($event) { return new self($event); }, self::clearGet('/events/'));
     }
 
     public static function closestNearby($lat, $lng)
@@ -24,7 +22,7 @@ class Event extends ClearModel
                 $closest_region->next();
             }
 
-            return $closest_region->current()->current_event;
+            return $closest_region[0]->current_event;
         } else {
             return;
         }
