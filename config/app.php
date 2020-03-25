@@ -3,7 +3,7 @@
 return [
     'debug'           => env('APP_DEBUG', false),
     'url'             => env('APP_URL'),
-    'timezone'        => env('APP_TIMEZONE'),
+    'timezone'        => env('APP_TIMEZONE', 'UTC'),
     'locale'          => 'en_US',
     'cipher'          => 'AES-256-CBC',
     'log'             => env('APP_DEBUG', false) ? 'single' : 'errorlog',
