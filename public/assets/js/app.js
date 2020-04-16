@@ -8355,7 +8355,7 @@
       t2 = H.getTypeArgumentByIndex(registrations, 0);
       t3 = {func: 1, ret: t1, args: [t2]};
       t2 = [t2, t1];
-      return this.Request$3(C.JSString_methods.$add("register/", this.Event) + "/register", "POST", P.LinkedHashMap_LinkedHashMap$_literal(["card_token", stripeToken, "quoted_price", quotedPrice, "quoted_tax", quotedTax, "first_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_Register_closure(), t3), t2), "last_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_Register_closure0(), t3), t2), "emails", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_Register_closure1(), t3), t2), "code", promoCode], t1, P.Object));
+      return this.Request$3(C.JSString_methods.$add("register/", this.Event) + "/register", "POST", P.LinkedHashMap_LinkedHashMap$_literal(["card_token", stripeToken, "quoted_price", quotedPrice, "quoted_tax", quotedTax, "first_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_Register_closure(), t3), t2), "last_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_Register_closure0(), t3), t2), "emails", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_Register_closure1(), t3), t2), "promo", promoCode], t1, P.Object));
     },
     RegisterWithSource$5$promoCode$quotedPrice$quotedTax$registrations$stripeSource: function(promoCode, quotedPrice, quotedTax, registrations, stripeSource) {
       var t1, t2, t3;
@@ -8364,7 +8364,7 @@
       t2 = H.getTypeArgumentByIndex(registrations, 0);
       t3 = {func: 1, ret: t1, args: [t2]};
       t2 = [t2, t1];
-      return this.Request$3(C.JSString_methods.$add("register/", this.Event) + "/register", "POST", P.LinkedHashMap_LinkedHashMap$_literal(["bitcoin_source", stripeSource, "quoted_price", quotedPrice, "quoted_tax", quotedTax, "first_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_RegisterWithSource_closure(), t3), t2), "last_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_RegisterWithSource_closure0(), t3), t2), "emails", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_RegisterWithSource_closure1(), t3), t2), "code", promoCode], t1, P.Object));
+      return this.Request$3(C.JSString_methods.$add("register/", this.Event) + "/register", "POST", P.LinkedHashMap_LinkedHashMap$_literal(["bitcoin_source", stripeSource, "quoted_price", quotedPrice, "quoted_tax", quotedTax, "first_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_RegisterWithSource_closure(), t3), t2), "last_names", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_RegisterWithSource_closure0(), t3), t2), "emails", new H.MappedListIterable(registrations, H.functionTypeCheck(new A.Api_RegisterWithSource_closure1(), t3), t2), "promo", promoCode], t1, P.Object));
     },
     Request$3: function(endpoint, method, body) {
       var $async$goto = 0,
@@ -8598,7 +8598,7 @@
               t3 = H.stringTypeCheck(code);
               t4 = P.String;
               $async$goto = 7;
-              return P._asyncAwait(t2.Request$3(C.JSString_methods.$add("register/", t2.Event) + "/promotion", "GET", P.LinkedHashMap_LinkedHashMap$_literal(["code", t3], t4, t4)), $async$doApplyPromo$0);
+              return P._asyncAwait(t2.Request$3(C.JSString_methods.$add("register/", t2.Event) + "/promotion", "GET", P.LinkedHashMap_LinkedHashMap$_literal(["promo", t3], t4, t4)), $async$doApplyPromo$0);
             case 7:
               // returning from await.
               details = $async$result;
