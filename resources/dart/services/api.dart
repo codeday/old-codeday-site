@@ -25,7 +25,7 @@ class Api {
             'first_names': registrations.map((r)=>r.FirstName),
             'last_names': registrations.map((r)=>r.LastName),
             'emails': registrations.map((r)=>r.Email),
-            'code': promoCode
+            'promo': promoCode
         });
     }
 
@@ -37,7 +37,7 @@ class Api {
             'first_names': registrations.map((r)=>r.FirstName),
             'last_names': registrations.map((r)=>r.LastName),
             'emails': registrations.map((r)=>r.Email),
-            'code': promoCode
+            'promo': promoCode
         });
     }
 
@@ -47,7 +47,7 @@ class Api {
      */
     Future GetPromotionDetails(String code) {
         return Request('register/'+Event+'/promotion', 'GET', {
-            'code': code
+            'promo': code
         });
     }
 
