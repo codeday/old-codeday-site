@@ -8,10 +8,13 @@ class VolunteerController extends Controller
 {
     public function getIndex()
     {
+      return \View::make('volunteer/covid');
+      /*
         return \View::make('volunteer/index', [
             'loaded_batch' => Models\Batch::current(),
             'tz_regions'   => $this->getTzList(),
         ]);
+        */
     }
 
     public function getApplyStaff()
