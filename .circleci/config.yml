@@ -29,6 +29,9 @@ jobs:
           echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push $DOCKER_REPO:$TAG
           docker push $DOCKER_REPO:latest
+      - slack/status:
+          webhook: ${DISCORD_WEBHOOK}
+
 
   build_test:
     docker:
@@ -41,3 +44,6 @@ jobs:
           TAG=$CIRCLE_SHA1
           DOCKER_REPO=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
           docker build -t $DOCKER_REPO:$TAG .
+
+orbs:
+  slack: circleci/slack@3.4.2
