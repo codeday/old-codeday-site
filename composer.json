@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "rcrowe/twigbridge": "0.9.1",
-        "twig/twig": "1.30.0",
+        "twig/twig": "1.38.0",
         "abraham/twitteroauth": "^0.7.2",
         "predis/predis": "^1.1",
         "setasign/fpdi": "1.6.1",
